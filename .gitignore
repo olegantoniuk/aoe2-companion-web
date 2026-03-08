@@ -1,0 +1,28 @@
+# composer vendor dir
+/vendor
+
+# Yii2 runtime
+/runtime
+
+# Yii2 compiled assets
+/web/assets
+
+# Images (copied to server manually)
+/web/images/units
+/web/images/civs
+/web/images/buildings
+/web/images/techs
+/web/images/resources
+
+# Mac DS_Store
+.DS_Store
+
+# composer itself
+composer.phar
+
+# IDE files
+.idea
+.vscode
+
+# environment
+.env
