@@ -11,6 +11,16 @@ class ImportController extends Controller
 {
     public $dataDir;
 
+    /**
+     * Maps alternative civilization names (used in unit JSON files)
+     * to canonical names (used in civilization JSON files).
+     * E.g. wiki uses "Mayans" but the civ is stored as "Maya".
+     */
+    private $civAliases = [
+        'Mayans' => 'Maya',
+        'Incas' => 'Inca',
+    ];
+
     public function init()
     {
         parent::init();
@@ -136,6 +146,7 @@ class ImportController extends Controller
             $civId = null;
             if (!empty($data['civilization'])) {
                 $civName = is_array($data['civilization']) ? $data['civilization'][0] : $data['civilization'];
+                $civName = $this->resolveCivName($civName);
                 $civId = $civMap[$civName] ?? null;
             }
 
@@ -303,7 +314,8 @@ class ImportController extends Controller
             }
 
             foreach ($data['civilization_availability'] as $civName => $value) {
-                $civId = $civMap[$civName] ?? null;
+                $resolvedName = $this->resolveCivName($civName);
+                $civId = $civMap[$resolvedName] ?? null;
                 if (!$civId) {
                     continue;
                 }
@@ -398,6 +410,14 @@ class ImportController extends Controller
         }
 
         $this->stdout("Updated $count unit images\n", Console::FG_GREEN);
+    }
+
+    /**
+     * Resolve a civilization name to its canonical form using aliases.
+     */
+    private function resolveCivName($name)
+    {
+        return $this->civAliases[$name] ?? $name;
     }
 
     private function slugify($name)
