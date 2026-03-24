@@ -33,8 +33,8 @@ class m260324_120000_fix_maya_inca_availability extends Migration
         // Insert availability records from parsed data
         $availability = $this->getAvailabilityData();
 
-        foreach ($availability as $civName => $civId) {
-            foreach ($availability[$civName] as $unitSlug => $available) {
+        foreach ($availability as $civId => $units) {
+            foreach ($units as $unitSlug => $available) {
                 $unitId = $this->db->createCommand(
                     'SELECT id FROM unit WHERE slug = :slug', [':slug' => $unitSlug]
                 )->queryScalar();
