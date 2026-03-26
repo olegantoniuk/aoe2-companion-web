@@ -30,9 +30,9 @@ $this->title = $categoryName;
                         <th>Unit</th>
                         <th>Classes</th>
                         <th>Age</th>
-                        <th><img src="/images/stats/hit_points.png" alt="HP" class="stat-icon" title="Hit Points"></th>
-                        <th><img src="/images/stats/melee_attack.png" alt="Atk" class="stat-icon" title="Attack"></th>
-                        <th><img src="/images/stats/melee_armor.png" alt="Armor" class="stat-icon" title="Armor"></th>
+                        <th>HP</th>
+                        <th>Atk</th>
+                        <th>Armor</th>
                         <th>Cost</th>
                     </tr>
                 </thead>
@@ -60,9 +60,9 @@ $this->title = $categoryName;
                                     <span class="badge badge-age age-<?= strtolower(explode(' ', $unit->age)[0]) ?>"><?= Html::encode($unit->age) ?></span>
                                 <?php endif; ?>
                             </td>
-                            <td><?= $unit->hit_points ?? '-' ?></td>
-                            <td><?= $unit->melee_attack ?? $unit->pierce_attack ?? '-' ?></td>
-                            <td><?= $unit->armorString ?></td>
+                            <td><img src="/images/stats/hit_points.png" alt="" class="stat-icon"> <?= $unit->hit_points ?? '-' ?></td>
+                            <td><img src="/images/stats/<?= $unit->pierce_attack && !$unit->melee_attack ? 'pierce_attack' : 'melee_attack' ?>.png" alt="" class="stat-icon"> <?= $unit->melee_attack ?? $unit->pierce_attack ?? '-' ?></td>
+                            <td><img src="/images/stats/melee_armor.png" alt="" class="stat-icon"> <?= $unit->armorString ?></td>
                             <td><small><?= $unit->costHtml ?></small></td>
                         </tr>
                     <?php endforeach; ?>
