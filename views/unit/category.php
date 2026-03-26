@@ -30,9 +30,9 @@ $this->title = $categoryName;
                         <th>Unit</th>
                         <th>Classes</th>
                         <th>Age</th>
-                        <th>HP</th>
-                        <th>Atk</th>
-                        <th>Armor</th>
+                        <th><img src="/images/stats/hit_points.png" alt="HP" class="stat-icon" title="Hit Points"></th>
+                        <th><img src="/images/stats/melee_attack.png" alt="Atk" class="stat-icon" title="Attack"></th>
+                        <th><img src="/images/stats/melee_armor.png" alt="Armor" class="stat-icon" title="Armor"></th>
                         <th>Cost</th>
                     </tr>
                 </thead>
