@@ -73,7 +73,7 @@ class UnitController extends Controller
         }
 
         $cat = $categories[$slug];
-        $query = Unit::find()->orderBy(['name' => SORT_ASC]);
+        $query = Unit::find()->with('armorClasses')->orderBy(['name' => SORT_ASC]);
 
         if (isset($cat['armorClassNames'])) {
             // Broad category — filter by armor class

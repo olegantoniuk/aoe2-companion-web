@@ -712,6 +712,14 @@ ul.pagination > li.page-item.disabled .page-link {
     margin-right: 2px;
 }
 
+/* ── Resource Icons ── */
+.resource-icon {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+    vertical-align: middle;
+}
+
 /* ── Class Cards ── */
 .class-card-link {
     text-decoration: none;

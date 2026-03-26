@@ -72,6 +72,19 @@ class Unit extends ActiveRecord
         return implode(', ', $parts) ?: 'Free';
     }
 
+    public function getCostHtml()
+    {
+        $parts = [];
+        $icon = function ($res) {
+            return '<img src="/images/resources/' . $res . '.png" alt="' . $res . '" class="resource-icon">';
+        };
+        if ($this->cost_food) $parts[] = $icon('Food') . ' ' . $this->cost_food;
+        if ($this->cost_wood) $parts[] = $icon('Wood') . ' ' . $this->cost_wood;
+        if ($this->cost_gold) $parts[] = $icon('Gold') . ' ' . $this->cost_gold;
+        if ($this->cost_stone) $parts[] = $icon('Stone') . ' ' . $this->cost_stone;
+        return $parts ? implode('&nbsp; ', $parts) : 'Free';
+    }
+
     public function getArmorString()
     {
         $m = $this->melee_armor ?? 0;

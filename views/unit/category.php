@@ -28,7 +28,7 @@ $this->title = $categoryName;
                     <tr>
                         <th style="width: 40px"></th>
                         <th>Unit</th>
-                        <th>Type</th>
+                        <th>Classes</th>
                         <th>Age</th>
                         <th>HP</th>
                         <th>Atk</th>
@@ -50,7 +50,11 @@ $this->title = $categoryName;
                                     <span class="badge bg-warning badge-sm ms-1">Unique</span>
                                 <?php endif; ?>
                             </td>
-                            <td><span class="badge bg-secondary badge-sm"><?= Html::encode($unit->armorClassGroup) ?></span></td>
+                            <td>
+                                <?php foreach ($unit->displayArmorClasses as $ac): ?>
+                                    <span class="badge bg-secondary badge-sm"><?= Html::encode($ac->name) ?></span>
+                                <?php endforeach; ?>
+                            </td>
                             <td>
                                 <?php if ($unit->age): ?>
                                     <span class="badge badge-age age-<?= strtolower(explode(' ', $unit->age)[0]) ?>"><?= Html::encode($unit->age) ?></span>
@@ -59,7 +63,7 @@ $this->title = $categoryName;
                             <td><?= $unit->hit_points ?? '-' ?></td>
                             <td><?= $unit->melee_attack ?? $unit->pierce_attack ?? '-' ?></td>
                             <td><?= $unit->armorString ?></td>
-                            <td><small><?= Html::encode($unit->costString) ?></small></td>
+                            <td><small><?= $unit->costHtml ?></small></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
