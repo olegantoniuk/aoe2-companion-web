@@ -28,6 +28,7 @@ $this->title = $categoryName;
                     <tr>
                         <th style="width: 40px"></th>
                         <th>Unit</th>
+                        <th>Civilization</th>
                         <th>Classes</th>
                         <th>Age</th>
                         <th>HP</th>
@@ -48,6 +49,15 @@ $this->title = $categoryName;
                                 <?= Html::a(Html::encode($unit->name), ['unit/view', 'slug' => $unit->slug], ['class' => 'fw-medium']) ?>
                                 <?php if ($unit->is_unique): ?>
                                     <span class="badge bg-warning badge-sm ms-1">Unique</span>
+                                <?php endif; ?>
+                            </td>
+                            <td>
+                                <?php if ($unit->is_unique && $unit->civilization): ?>
+                                    <?php $civ = $unit->civilization; ?>
+                                    <?php if ($civ->emblemUrl): ?>
+                                        <img src="<?= Html::encode($civ->emblemUrl) ?>" alt="" class="civ-emblem-sm">
+                                    <?php endif; ?>
+                                    <?= Html::a(Html::encode($civ->name), ['civilization/view', 'slug' => $civ->slug]) ?>
                                 <?php endif; ?>
                             </td>
                             <td>
