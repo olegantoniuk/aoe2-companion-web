@@ -36,6 +36,7 @@ NavBar::begin([
 $menuItems = [
     ['label' => 'Civilizations', 'url' => ['/civilization/index']],
     ['label' => 'Units', 'url' => ['/unit/index']],
+    ['label' => 'Classes', 'url' => ['/unit/classes']],
     ['label' => 'Matchup', 'url' => ['/matchup/index']],
 ];
 

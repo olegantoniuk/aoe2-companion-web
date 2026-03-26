@@ -48,7 +48,7 @@ $collectCounters = function ($counterList) use (&$popupUnits, $formatType) {
             usort($bonuses, function ($a, $b) { return $b['bonus'] - $a['bonus']; });
             $popupUnits[$cu->id] = [
                 'name' => $cu->name,
-                'type' => $formatType($cu->type),
+                'type' => $cu->armorClassGroup,
                 'icon' => $cu->iconUrl,
                 'hp' => (int)$cu->hit_points,
                 'attack' => (int)($cu->melee_attack ?: $cu->pierce_attack),
@@ -61,7 +61,7 @@ $collectCounters = function ($counterList) use (&$popupUnits, $formatType) {
                 'strong' => $strong ? array_slice($strong, 0, 4) : [],
                 'weak' => $weak ? array_slice($weak, 0, 4) : [],
                 'bonuses' => array_slice($bonuses, 0, 6),
-                'isNaval' => $cu->typeGroup === 'Naval',
+                'isNaval' => $cu->isNaval,
             ];
         }
     }
@@ -94,7 +94,7 @@ $renderCounterLink = function ($cu, $enemyIds = [], $counterBonuses = []) {
             break;
         }
     }
-    $navalClass = ($cu->typeGroup === 'Naval') ? ' counter-naval' : '';
+    $navalClass = ($cu->isNaval) ? ' counter-naval' : '';
     return '<a href="' . Url::to(['unit/view', 'slug' => $cu->slug]) . '" class="counter-unit-link' . $extraClass . $navalClass . '" data-unit-id="' . $cu->id . '">'
         . $icon . Html::encode($cu->name) . $bonusBadge . '</a>';
 };
@@ -109,7 +109,7 @@ $renderBuildingCounterLink = function ($cu) use ($buildingCounters) {
         $bonusBadge = ' <span class="counter-bonus-badge">+' . $b['bonus'] . '</span>';
         $extraClass = ' counter-has-bonus';
     }
-    $navalClass = ($cu->typeGroup === 'Naval') ? ' counter-naval' : '';
+    $navalClass = ($cu->isNaval) ? ' counter-naval' : '';
     return '<a href="' . Url::to(['unit/view', 'slug' => $cu->slug]) . '" class="counter-unit-link' . $extraClass . $navalClass . '" data-unit-id="' . $cu->id . '">'
         . $icon . Html::encode($cu->name) . $bonusBadge . '</a>';
 };
@@ -249,8 +249,8 @@ $renderBuildingCounterLink = function ($cu) use ($buildingCounters) {
                                         <span class="badge bg-warning badge-sm ms-1">Unique</span>
                                     <?php endif; ?>
                                 <?php endif; ?>
-                                <?php if ($lastUnit->type): ?>
-                                    <br><small class="text-muted"><?= Html::encode($formatType($lastUnit->type)) ?></small>
+                                <?php if ($lastUnit->armorClassGroup !== 'Other'): ?>
+                                    <br><small class="text-muted"><?= Html::encode($lastUnit->armorClassGroup) ?></small>
                                 <?php endif; ?>
                             </td>
                             <td>
@@ -313,8 +313,8 @@ $renderBuildingCounterLink = function ($cu) use ($buildingCounters) {
                                         <?= Html::encode($lastUnit->name) ?>
                                     </a>
                                 <?php endif; ?>
-                                <?php if ($lastUnit->type): ?>
-                                    <br><small class="text-muted"><?= Html::encode($formatType($lastUnit->type)) ?></small>
+                                <?php if ($lastUnit->armorClassGroup !== 'Other'): ?>
+                                    <br><small class="text-muted"><?= Html::encode($lastUnit->armorClassGroup) ?></small>
                                 <?php endif; ?>
                             </td>
                             <td>
@@ -364,8 +364,8 @@ $renderBuildingCounterLink = function ($cu) use ($buildingCounters) {
                                     <?php if ($eu->is_unique): ?>
                                         <span class="badge bg-warning badge-sm ms-1">Unique</span>
                                     <?php endif; ?>
-                                    <?php if ($eu->type): ?>
-                                        <br><small class="text-muted"><?= Html::encode($formatType($eu->type)) ?></small>
+                                    <?php if ($eu->armorClassGroup !== 'Other'): ?>
+                                        <br><small class="text-muted"><?= Html::encode($eu->armorClassGroup) ?></small>
                                     <?php endif; ?>
                                 </td>
                                 <td>
@@ -394,8 +394,8 @@ $renderBuildingCounterLink = function ($cu) use ($buildingCounters) {
                                         <a href="<?= Url::to(['unit/view', 'slug' => $eu->slug]) ?>" class="enemy-unit-hover" data-unit-id="<?= $eu->id ?>" style="font-weight: 600;">
                                             <?= Html::encode($eu->name) ?>
                                         </a>
-                                        <?php if ($eu->type): ?>
-                                            <br><small class="text-muted"><?= Html::encode($formatType($eu->type)) ?></small>
+                                        <?php if ($eu->armorClassGroup !== 'Other'): ?>
+                                            <br><small class="text-muted"><?= Html::encode($eu->armorClassGroup) ?></small>
                                         <?php endif; ?>
                                     </td>
                                     <td>
@@ -492,11 +492,11 @@ $this->registerJs(<<<JS
         // Stats grid (2 columns)
         h += '<div class="unit-popup-body">';
         h += '<div class="unit-popup-stats-grid">';
-        h += '<div class="unit-popup-stat"><span class="stat-label">HP</span><span class="stat-value">' + u.hp + '</span></div>';
-        h += '<div class="unit-popup-stat"><span class="stat-label">Atk</span><span class="stat-value">' + u.attack + ' <small>' + u.attackType[0] + '</small></span></div>';
-        h += '<div class="unit-popup-stat"><span class="stat-label">Armor</span><span class="stat-value">' + u.meleeArmor + '/' + u.pierceArmor + '</span></div>';
-        if (u.range) h += '<div class="unit-popup-stat"><span class="stat-label">Range</span><span class="stat-value">' + u.range + '</span></div>';
-        else if (u.speed) h += '<div class="unit-popup-stat"><span class="stat-label">Speed</span><span class="stat-value">' + u.speed + '</span></div>';
+        h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/hit_points.png" alt="" class="stat-icon"> HP</span><span class="stat-value">' + u.hp + '</span></div>';
+        h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/' + (u.attackType === 'Melee' ? 'melee_attack' : 'pierce_attack') + '.png" alt="" class="stat-icon"> Atk</span><span class="stat-value">' + u.attack + ' <small>' + u.attackType[0] + '</small></span></div>';
+        h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/melee_armor.png" alt="" class="stat-icon"> Armor</span><span class="stat-value">' + u.meleeArmor + '/' + u.pierceArmor + '</span></div>';
+        if (u.range) h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/range.png" alt="" class="stat-icon"> Range</span><span class="stat-value">' + u.range + '</span></div>';
+        else if (u.speed) h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/movement_speed.png" alt="" class="stat-icon"> Speed</span><span class="stat-value">' + u.speed + '</span></div>';
         h += '</div>';
         // Attack bonuses
         if (u.bonuses && u.bonuses.length) {

@@ -36,14 +36,16 @@ class CivilizationController extends Controller
         $availableUnits = Unit::find()
             ->innerJoin('unit_availability ua', 'ua.unit_id = unit.id')
             ->where(['ua.civilization_id' => $civ->id, 'ua.available' => 1, 'unit.is_unique' => 0])
-            ->orderBy(['unit.type' => SORT_ASC, 'unit.name' => SORT_ASC])
+            ->with('armorClasses')
+            ->orderBy(['unit.name' => SORT_ASC])
             ->all();
 
         // Get unavailable shared units
         $unavailableUnits = Unit::find()
             ->innerJoin('unit_availability ua', 'ua.unit_id = unit.id')
             ->where(['ua.civilization_id' => $civ->id, 'ua.available' => 0, 'unit.is_unique' => 0])
-            ->orderBy(['unit.type' => SORT_ASC, 'unit.name' => SORT_ASC])
+            ->with('armorClasses')
+            ->orderBy(['unit.name' => SORT_ASC])
             ->all();
 
         return $this->render('view', [

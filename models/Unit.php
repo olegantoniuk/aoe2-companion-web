@@ -89,31 +89,66 @@ class Unit extends ActiveRecord
         return $this->image_sprite ? '/images/units/' . basename($this->image_sprite) : null;
     }
 
-    public function getTypeGroup()
+    /**
+     * Get armor class group for this unit (armor-class-based replacement for typeGroup).
+     * Priority order determines which group is "primary".
+     */
+    public function getArmorClassGroup()
     {
-        $t = $this->type ?? '';
-        if (strpos($t, 'Cavalry') !== false || strpos($t, 'Mounted archer') !== false || $t === 'Ranged cavalry') {
-            return 'Cavalry';
+        static $groupOrder = [
+            'Infantry', 'Cavalry', 'Archers', 'Cavalry Archers',
+            'Siege Weapons', 'Ships', 'Ship', 'Long-range warship',
+            'Monks', 'Gunpowder Units',
+        ];
+        static $displayMap = [
+            'Infantry' => 'Infantry',
+            'Cavalry' => 'Cavalry',
+            'Archers' => 'Archers',
+            'Cavalry Archers' => 'Cav Archers',
+            'Siege Weapons' => 'Siege',
+            'Ships' => 'Naval',
+            'Ship' => 'Naval',
+            'Long-range warship' => 'Naval',
+            'Monks' => 'Monks',
+            'Gunpowder Units' => 'Gunpowder',
+        ];
+        if ($this->isRelationPopulated('armorClasses')) {
+            $names = array_map(function ($ac) { return $ac->name; }, $this->armorClasses);
+        } else {
+            $names = [];
         }
-        if (strpos($t, 'Infantry') !== false) {
-            return 'Infantry';
-        }
-        if (strpos($t, 'Foot archer') !== false || $t === 'ArcherGunpowder unit') {
-            return 'Archer';
-        }
-        if (strpos($t, 'Siege weapon') !== false || strpos($t, 'Siege unit') !== false || $t === 'Cavalry siege unit') {
-            return 'Siege';
-        }
-        if (strpos($t, 'Ship') !== false || strpos($t, 'ship') !== false || strpos($t, 'Siege ship') !== false || $t === 'Gunpowder siege ship') {
-            return 'Naval';
-        }
-        if (strpos($t, 'Monk') !== false || strpos($t, 'Religious') !== false) {
-            return 'Monk';
-        }
-        if ($t === 'Gunpowder unit' || $t === 'Mounted gunpowder unit') {
-            return 'Gunpowder';
+        foreach ($groupOrder as $ac) {
+            if (in_array($ac, $names)) {
+                return $displayMap[$ac];
+            }
         }
         return 'Other';
+    }
+
+    /**
+     * Check if unit is naval (armor-class-based).
+     */
+    public function getIsNaval()
+    {
+        if ($this->isRelationPopulated('armorClasses')) {
+            $names = array_map(function ($ac) { return $ac->name; }, $this->armorClasses);
+            return !empty(array_intersect($names, ['Ship', 'Ships', 'Long-range warship']));
+        }
+        return false;
+    }
+
+    /**
+     * Get display-worthy armor class names (excludes Unique Units / Unique unit).
+     */
+    public function getDisplayArmorClasses()
+    {
+        $exclude = ['Unique Units', 'Unique unit'];
+        if ($this->isRelationPopulated('armorClasses')) {
+            return array_filter($this->armorClasses, function ($ac) use ($exclude) {
+                return !in_array($ac->name, $exclude);
+            });
+        }
+        return [];
     }
 
     public function getBuildingGroup()

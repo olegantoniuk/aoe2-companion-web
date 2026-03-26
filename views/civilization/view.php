@@ -72,11 +72,19 @@ $this->title = $civ->name;
                 <div class="card-header"><strong>Unique Technologies</strong></div>
                 <div class="card-content">
                     <?php foreach ($techs as $tech): ?>
-                        <div class="mb-2">
-                            <strong><?= Html::encode($tech->name) ?></strong>
-                            <?php if ($tech->description): ?>
-                                <br><small class="text-muted"><?= Html::encode($tech->description) ?></small>
-                            <?php endif; ?>
+                        <div class="mb-2 d-flex align-items-start gap-2">
+                            <?php
+                            $techFile = str_replace([' ', "'", '*', '(', ')'], '', $tech->name) . '.png';
+                            $techPath = Yii::getAlias('@webroot') . '/images/techs/' . $techFile;
+                            $techSrc = file_exists($techPath) ? '/images/techs/' . $techFile : '/images/techs/UniqueTechCastle.png';
+                            ?>
+                            <img src="<?= Html::encode($techSrc) ?>" alt="" class="tech-icon" style="flex-shrink: 0;">
+                            <div>
+                                <strong><?= Html::encode($tech->name) ?></strong>
+                                <?php if ($tech->description): ?>
+                                    <br><small class="text-muted"><?= Html::encode($tech->description) ?></small>
+                                <?php endif; ?>
+                            </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
@@ -109,9 +117,9 @@ $this->title = $civ->name;
                                         <?php endif; ?>
                                     </div>
                                     <small class="text-muted">
-                                        HP: <?= $unit->hit_points ?? '?' ?>
-                                        | Atk: <?= $unit->melee_attack ?? $unit->pierce_attack ?? '?' ?>
-                                        | Armor: <?= $unit->armorString ?>
+                                        <img src="/images/stats/hit_points.png" alt="" class="stat-icon"> <?= $unit->hit_points ?? '?' ?>
+                                        &nbsp;<img src="/images/stats/melee_attack.png" alt="" class="stat-icon"> <?= $unit->melee_attack ?? $unit->pierce_attack ?? '?' ?>
+                                        &nbsp;<img src="/images/stats/melee_armor.png" alt="" class="stat-icon"> <?= $unit->armorString ?>
                                     </small>
                                 </div>
                             </div>
@@ -128,7 +136,7 @@ $this->title = $civ->name;
             $typeOrder = ['Infantry', 'Cavalry', 'Archer', 'Siege', 'Naval', 'Monk', 'Gunpowder', 'Other'];
             $byType = [];
             foreach ($availableUnits as $unit) {
-                $group = $unit->typeGroup;
+                $group = $unit->armorClassGroup;
                 $byType[$group][] = $unit;
             }
             $byType = array_merge(array_flip($typeOrder), $byType);
@@ -281,9 +289,9 @@ $this->title = $civ->name;
                                             <th>Unit</th>
                                             <th>Class</th>
                                             <th>Age</th>
-                                            <th>HP</th>
-                                            <th>Atk</th>
-                                            <th>Armor</th>
+                                            <th><img src="/images/stats/hit_points.png" alt="HP" class="stat-icon" title="Hit Points"></th>
+                                            <th><img src="/images/stats/melee_attack.png" alt="Atk" class="stat-icon" title="Attack"></th>
+                                            <th><img src="/images/stats/melee_armor.png" alt="Armor" class="stat-icon" title="Armor"></th>
                                         </tr>
                                     </thead>
                                     <?php foreach ($byType as $group => $units): ?>
@@ -299,7 +307,7 @@ $this->title = $civ->name;
                                                         <?php endif; ?>
                                                     </td>
                                                     <td><?= Html::a(Html::encode($unit->name), ['unit/view', 'slug' => $unit->slug]) ?></td>
-                                                    <td><span class="badge bg-secondary badge-sm"><?= Html::encode($unit->typeGroup) ?></span></td>
+                                                    <td><span class="badge bg-secondary badge-sm"><?= Html::encode($unit->armorClassGroup) ?></span></td>
                                                     <td>
                                                         <?php if ($unit->age): ?>
                                                             <span class="badge badge-age age-<?= strtolower(explode(' ', $unit->age)[0]) ?>"><?= Html::encode($unit->age) ?></span>
@@ -328,9 +336,9 @@ $this->title = $civ->name;
                                             <th>Unit</th>
                                             <th>Building</th>
                                             <th>Age</th>
-                                            <th>HP</th>
-                                            <th>Atk</th>
-                                            <th>Armor</th>
+                                            <th><img src="/images/stats/hit_points.png" alt="HP" class="stat-icon" title="Hit Points"></th>
+                                            <th><img src="/images/stats/melee_attack.png" alt="Atk" class="stat-icon" title="Attack"></th>
+                                            <th><img src="/images/stats/melee_armor.png" alt="Armor" class="stat-icon" title="Armor"></th>
                                         </tr>
                                     </thead>
                                     <?php foreach ($byBuilding as $group => $units): ?>
@@ -380,9 +388,9 @@ $this->title = $civ->name;
                                             <th>Unit</th>
                                             <th>Class</th>
                                             <th>Age</th>
-                                            <th>HP</th>
-                                            <th>Atk</th>
-                                            <th>Armor</th>
+                                            <th><img src="/images/stats/hit_points.png" alt="HP" class="stat-icon" title="Hit Points"></th>
+                                            <th><img src="/images/stats/melee_attack.png" alt="Atk" class="stat-icon" title="Attack"></th>
+                                            <th><img src="/images/stats/melee_armor.png" alt="Armor" class="stat-icon" title="Armor"></th>
                                         </tr>
                                     </thead>
                                     <?php foreach ($byAge as $group => $units): ?>
@@ -401,7 +409,7 @@ $this->title = $civ->name;
                                                         <?php endif; ?>
                                                     </td>
                                                     <td><?= Html::a(Html::encode($unit->name), ['unit/view', 'slug' => $unit->slug]) ?></td>
-                                                    <td><span class="badge bg-secondary badge-sm"><?= Html::encode($unit->typeGroup) ?></span></td>
+                                                    <td><span class="badge bg-secondary badge-sm"><?= Html::encode($unit->armorClassGroup) ?></span></td>
                                                     <td>
                                                         <?php if ($unit->age): ?>
                                                             <span class="badge badge-age age-<?= strtolower(explode(' ', $unit->age)[0]) ?>"><?= Html::encode($unit->age) ?></span>
@@ -430,9 +438,9 @@ $this->title = $civ->name;
                                             <th>Unit</th>
                                             <th>Class</th>
                                             <th>Age</th>
-                                            <th>HP</th>
-                                            <th>Atk</th>
-                                            <th>Armor</th>
+                                            <th><img src="/images/stats/hit_points.png" alt="HP" class="stat-icon" title="Hit Points"></th>
+                                            <th><img src="/images/stats/melee_attack.png" alt="Atk" class="stat-icon" title="Attack"></th>
+                                            <th><img src="/images/stats/melee_armor.png" alt="Armor" class="stat-icon" title="Armor"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -444,7 +452,7 @@ $this->title = $civ->name;
                                                     <?php endif; ?>
                                                 </td>
                                                 <td><?= Html::a(Html::encode($unit->name), ['unit/view', 'slug' => $unit->slug]) ?></td>
-                                                <td><span class="badge bg-secondary badge-sm"><?= Html::encode($unit->typeGroup) ?></span></td>
+                                                <td><span class="badge bg-secondary badge-sm"><?= Html::encode($unit->armorClassGroup) ?></span></td>
                                                 <td>
                                                     <?php if ($unit->age): ?>
                                                         <span class="badge badge-age age-<?= strtolower(explode(' ', $unit->age)[0]) ?>"><?= Html::encode($unit->age) ?></span>
@@ -479,7 +487,7 @@ $this->title = $civ->name;
                                         <td>
                                             <?= Html::a(Html::encode($unit->name), ['unit/view', 'slug' => $unit->slug], ['class' => 'text-muted']) ?>
                                         </td>
-                                        <td><?= Html::encode($unit->type) ?></td>
+                                        <td><span class="badge bg-secondary badge-sm"><?= Html::encode($unit->armorClassGroup) ?></span></td>
                                         <td><span class="avail-no">Unavailable</span></td>
                                     </tr>
                                 <?php endforeach; ?>

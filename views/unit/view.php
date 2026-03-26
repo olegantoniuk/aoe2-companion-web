@@ -71,6 +71,43 @@ $resIcons = [
     'Gold' => '/images/resources/Gold.png',
     'Stone' => '/images/resources/Stone.png',
 ];
+
+// Stat icons
+$statIcons = [
+    'hp' => '/images/stats/hit_points.png',
+    'melee_attack' => '/images/stats/melee_attack.png',
+    'pierce_attack' => '/images/stats/pierce_attack.png',
+    'melee_armor' => '/images/stats/melee_armor.png',
+    'pierce_armor' => '/images/stats/pierce_armor.png',
+    'range' => '/images/stats/range.png',
+    'reload_time' => '/images/stats/reload_time.png',
+    'speed' => '/images/stats/movement_speed.png',
+    'blast_radius' => '/images/stats/blast_radius.png',
+    'garrison' => '/images/stats/garrison.png',
+    'line_of_sight' => '/images/stats/line_of_sight.png',
+    'accuracy' => '/images/stats/accuracy.png',
+];
+$si = function ($key) use ($statIcons) {
+    return isset($statIcons[$key]) ? '<img src="' . $statIcons[$key] . '" alt="" class="stat-icon">' : '';
+};
+
+// Civ emblem helper: "Byzantines" → "/images/civs/byzantines.png"
+$civAliases = ['Mayans' => 'Maya', 'Incas' => 'Inca'];
+$civIcon = function ($name) use ($civAliases) {
+    $resolved = $civAliases[$name] ?? $name;
+    return '/images/civs/' . strtolower($resolved) . '.png';
+};
+
+// Tech icon helper: "Blast Furnace" → "/images/techs/BlastFurnace.png"
+// Falls back to generic unique tech icon if specific image not found
+$techIcon = function ($name) {
+    $file = str_replace([' ', "'", '*', '(', ')'], '', $name) . '.png';
+    $path = Yii::getAlias('@webroot') . '/images/techs/' . $file;
+    if (file_exists($path)) {
+        return '/images/techs/' . $file;
+    }
+    return '/images/techs/UniqueTechCastle.png';
+};
 ?>
 
 <nav aria-label="breadcrumb" class="mb-3">
@@ -105,8 +142,23 @@ $resIcons = [
         <div class="admin5-card admin5-card-border">
             <div class="card-header"><strong>General</strong></div>
             <table class="table table-sm stat-table mb-0">
-                <?php if ($unit->type): ?>
-                    <tr><th>Type</th><td><span class="badge bg-secondary badge-sm"><?= Html::encode($unit->type) ?></span></td></tr>
+                <?php
+                $classDefs = \app\controllers\UnitController::getClassDefinitions();
+                $armorToSlug = [];
+                foreach ($classDefs as $s => $def) {
+                    foreach ($def['armorClasses'] as $ac) $armorToSlug[$ac] = $s;
+                }
+                $displayAC = $unit->displayArmorClasses;
+                if ($displayAC): ?>
+                    <tr><th>Classes</th><td>
+                        <?php foreach ($displayAC as $ac): ?>
+                            <?php if (isset($armorToSlug[$ac->name])): ?>
+                                <?= Html::a(Html::encode($ac->name), ['unit/class', 'slug' => $armorToSlug[$ac->name]], ['class' => 'badge bg-info badge-sm me-1']) ?>
+                            <?php else: ?>
+                                <span class="badge bg-secondary badge-sm me-1"><?= Html::encode($ac->name) ?></span>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </td></tr>
                 <?php endif; ?>
                 <?php if ($unit->age): ?>
                     <tr><th>Age</th><td><span class="badge badge-age age-<?= strtolower(explode(' ', $unit->age)[0]) ?>"><?= Html::encode($unit->age) ?></span></td></tr>
@@ -144,25 +196,25 @@ $resIcons = [
         <div class="admin5-card admin5-card-border">
             <div class="card-header"><strong>Combat Stats</strong></div>
             <table class="table table-sm stat-table mb-0">
-                <tr><th>Hit Points</th><td><?= $unit->hit_points ?? '-' ?></td></tr>
+                <tr><th><?= $si('hp') ?> Hit Points</th><td><?= $unit->hit_points ?? '-' ?></td></tr>
                 <?php if ($unit->melee_attack !== null): ?>
-                    <tr><th>Melee Attack</th><td><?= $unit->melee_attack ?></td></tr>
+                    <tr><th><?= $si('melee_attack') ?> Melee Attack</th><td><?= $unit->melee_attack ?></td></tr>
                 <?php endif; ?>
                 <?php if ($unit->pierce_attack !== null): ?>
-                    <tr><th>Pierce Attack</th><td><?= $unit->pierce_attack ?></td></tr>
+                    <tr><th><?= $si('pierce_attack') ?> Pierce Attack</th><td><?= $unit->pierce_attack ?></td></tr>
                 <?php endif; ?>
-                <tr><th>Melee Armor</th><td><?= $unit->melee_armor ?? 0 ?></td></tr>
-                <tr><th>Pierce Armor</th><td><?= $unit->pierce_armor ?? 0 ?></td></tr>
+                <tr><th><?= $si('melee_armor') ?> Melee Armor</th><td><?= $unit->melee_armor ?? 0 ?></td></tr>
+                <tr><th><?= $si('pierce_armor') ?> Pierce Armor</th><td><?= $unit->pierce_armor ?? 0 ?></td></tr>
                 <?php if ($unit->range_val): ?>
-                    <tr><th>Range</th><td><?= $unit->range_val ?></td></tr>
+                    <tr><th><?= $si('range') ?> Range</th><td><?= $unit->range_val ?></td></tr>
                 <?php endif; ?>
                 <?php if ($unit->accuracy): ?>
-                    <tr><th>Accuracy</th><td><?= $unit->accuracy ?>%</td></tr>
+                    <tr><th><?= $si('accuracy') ?> Accuracy</th><td><?= $unit->accuracy ?>%</td></tr>
                 <?php endif; ?>
-                <tr><th>Rate of Fire</th><td><?= $unit->rate_of_fire ?? '-' ?></td></tr>
-                <tr><th>Speed</th><td><?= $unit->speed ?? '-' ?></td></tr>
+                <tr><th><?= $si('reload_time') ?> Rate of Fire</th><td><?= $unit->rate_of_fire ?? '-' ?></td></tr>
+                <tr><th><?= $si('speed') ?> Speed</th><td><?= $unit->speed ?? '-' ?></td></tr>
                 <?php if ($unit->line_of_sight): ?>
-                    <tr><th>Line of Sight</th><td><?= $unit->line_of_sight ?></td></tr>
+                    <tr><th><?= $si('line_of_sight') ?> Line of Sight</th><td><?= $unit->line_of_sight ?></td></tr>
                 <?php endif; ?>
             </table>
         </div>
@@ -256,7 +308,7 @@ $resIcons = [
             }
             $fullCounterUnits = [];
             if ($counterUnitIds) {
-                $fullCounterUnits = \app\models\Unit::find()->where(['id' => $counterUnitIds])->all();
+                $fullCounterUnits = \app\models\Unit::find()->where(['id' => $counterUnitIds])->with('armorClasses')->all();
             }
             foreach ($fullCounterUnits as $cu) {
                 $cost = [];
@@ -275,7 +327,7 @@ $resIcons = [
                 $weak = $cu->weak_against ? json_decode($cu->weak_against, true) : [];
                 $popupUnits[$cu->id] = [
                     'name' => $cu->name,
-                    'type' => $formatType($cu->type),
+                    'type' => $cu->armorClassGroup,
                     'icon' => $cu->iconUrl,
                     'hp' => (int)$cu->hit_points,
                     'attack' => (int)($cu->melee_attack ?: $cu->pierce_attack),
@@ -366,11 +418,11 @@ $resIcons = [
         }
         h += '</div></div><div class="unit-popup-body">';
         h += '<div class="unit-popup-stats-grid">';
-        h += '<div class="unit-popup-stat"><span class="stat-label">HP</span><span class="stat-value">' + u.hp + '</span></div>';
-        h += '<div class="unit-popup-stat"><span class="stat-label">Atk</span><span class="stat-value">' + u.attack + ' <small>' + u.attackType[0] + '</small></span></div>';
-        h += '<div class="unit-popup-stat"><span class="stat-label">Armor</span><span class="stat-value">' + u.meleeArmor + '/' + u.pierceArmor + '</span></div>';
-        if (u.range) h += '<div class="unit-popup-stat"><span class="stat-label">Range</span><span class="stat-value">' + u.range + '</span></div>';
-        else if (u.speed) h += '<div class="unit-popup-stat"><span class="stat-label">Speed</span><span class="stat-value">' + u.speed + '</span></div>';
+        h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/hit_points.png" alt="" class="stat-icon"> HP</span><span class="stat-value">' + u.hp + '</span></div>';
+        h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/' + (u.attackType === 'Melee' ? 'melee_attack' : 'pierce_attack') + '.png" alt="" class="stat-icon"> Atk</span><span class="stat-value">' + u.attack + ' <small>' + u.attackType[0] + '</small></span></div>';
+        h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/melee_armor.png" alt="" class="stat-icon"> Armor</span><span class="stat-value">' + u.meleeArmor + '/' + u.pierceArmor + '</span></div>';
+        if (u.range) h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/range.png" alt="" class="stat-icon"> Range</span><span class="stat-value">' + u.range + '</span></div>';
+        else if (u.speed) h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/movement_speed.png" alt="" class="stat-icon"> Speed</span><span class="stat-value">' + u.speed + '</span></div>';
         h += '</div>';
         if (u.bonuses && u.bonuses.length) {
             h += '<div class="unit-popup-bonuses"><div class="unit-popup-section-title">Attack Bonuses</div>';
@@ -429,25 +481,25 @@ JS
                 <div class="card-header"><strong>Elite Variant: <?= Html::encode($eliteVariant['name'] ?? 'Elite') ?></strong></div>
                 <table class="table table-sm stat-table mb-0">
                     <?php if (isset($eliteVariant['hit_points'])): ?>
-                        <tr><th>Hit Points</th><td><?= $eliteVariant['hit_points'] ?></td></tr>
+                        <tr><th><?= $si('hp') ?> Hit Points</th><td><?= $eliteVariant['hit_points'] ?></td></tr>
                     <?php endif; ?>
                     <?php if (isset($eliteVariant['melee_attack'])): ?>
-                        <tr><th>Melee Attack</th><td><?= $eliteVariant['melee_attack'] ?></td></tr>
+                        <tr><th><?= $si('melee_attack') ?> Melee Attack</th><td><?= $eliteVariant['melee_attack'] ?></td></tr>
                     <?php endif; ?>
                     <?php if (isset($eliteVariant['pierce_attack'])): ?>
-                        <tr><th>Pierce Attack</th><td><?= $eliteVariant['pierce_attack'] ?></td></tr>
+                        <tr><th><?= $si('pierce_attack') ?> Pierce Attack</th><td><?= $eliteVariant['pierce_attack'] ?></td></tr>
                     <?php endif; ?>
                     <?php if (isset($eliteVariant['melee_armor'])): ?>
-                        <tr><th>Melee Armor</th><td><?= $eliteVariant['melee_armor'] ?></td></tr>
+                        <tr><th><?= $si('melee_armor') ?> Melee Armor</th><td><?= $eliteVariant['melee_armor'] ?></td></tr>
                     <?php endif; ?>
                     <?php if (isset($eliteVariant['pierce_armor'])): ?>
-                        <tr><th>Pierce Armor</th><td><?= $eliteVariant['pierce_armor'] ?></td></tr>
+                        <tr><th><?= $si('pierce_armor') ?> Pierce Armor</th><td><?= $eliteVariant['pierce_armor'] ?></td></tr>
                     <?php endif; ?>
                     <?php if (isset($eliteVariant['range'])): ?>
-                        <tr><th>Range</th><td><?= $eliteVariant['range'] ?></td></tr>
+                        <tr><th><?= $si('range') ?> Range</th><td><?= $eliteVariant['range'] ?></td></tr>
                     <?php endif; ?>
                     <?php if (isset($eliteVariant['speed'])): ?>
-                        <tr><th>Speed</th><td><?= $eliteVariant['speed'] ?></td></tr>
+                        <tr><th><?= $si('speed') ?> Speed</th><td><?= $eliteVariant['speed'] ?></td></tr>
                     <?php endif; ?>
                 </table>
             </div>
@@ -464,7 +516,12 @@ JS
                     <tbody>
                         <?php foreach ($techBoosts as $b): ?>
                             <tr>
-                                <td><?= Html::encode($b->name) ?></td>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <img src="<?= Html::encode($techIcon($b->name)) ?>" alt="" class="tech-icon">
+                                        <?= Html::encode($b->name) ?>
+                                    </div>
+                                </td>
                                 <td><small class="text-muted"><?= Html::encode($b->stat) ?></small></td>
                                 <td><?= Html::encode($b->effect) ?></td>
                             </tr>
@@ -485,7 +542,12 @@ JS
                     <tbody>
                         <?php foreach ($civBoosts as $b): ?>
                             <tr>
-                                <td><?= Html::encode($b->name) ?></td>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <img src="<?= Html::encode($civIcon($b->name)) ?>" alt="" class="tech-icon">
+                                        <?= Html::encode($b->name) ?>
+                                    </div>
+                                </td>
                                 <td><small class="text-muted"><?= Html::encode($b->stat) ?></small></td>
                                 <td><?= Html::encode($b->effect) ?></td>
                             </tr>

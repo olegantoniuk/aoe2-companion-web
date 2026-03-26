@@ -50,7 +50,7 @@ $this->title = $categoryName;
                                     <span class="badge bg-warning badge-sm ms-1">Unique</span>
                                 <?php endif; ?>
                             </td>
-                            <td><span class="badge bg-secondary badge-sm"><?= Html::encode($unit->typeGroup) ?></span></td>
+                            <td><span class="badge bg-secondary badge-sm"><?= Html::encode($unit->armorClassGroup) ?></span></td>
                             <td>
                                 <?php if ($unit->age): ?>
                                     <span class="badge badge-age age-<?= strtolower(explode(' ', $unit->age)[0]) ?>"><?= Html::encode($unit->age) ?></span>

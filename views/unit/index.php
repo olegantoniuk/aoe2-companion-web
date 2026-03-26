@@ -22,15 +22,6 @@ $pagination = $dataProvider->getPagination();
                 <input type="text" name="q" class="form-control form-control-sm" value="<?= Html::encode($currentSearch) ?>" placeholder="Unit name...">
             </div>
             <div class="col-md-2">
-                <label class="form-label">Type</label>
-                <select name="type" class="form-select form-select-sm">
-                    <option value="">All types</option>
-                    <?php foreach ($types as $t): ?>
-                        <option value="<?= Html::encode($t) ?>" <?= $currentType === $t ? 'selected' : '' ?>><?= Html::encode($t) ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-            <div class="col-md-2">
                 <label class="form-label">Age</label>
                 <select name="age" class="form-select form-select-sm">
                     <option value="">All ages</option>
@@ -63,12 +54,12 @@ $pagination = $dataProvider->getPagination();
                 <tr>
                     <th style="width: 40px"></th>
                     <th>Name</th>
-                    <th>Type</th>
+                    <th>Class</th>
                     <th>Age</th>
-                    <th>HP</th>
-                    <th>Attack</th>
-                    <th>Armor</th>
-                    <th>Speed</th>
+                    <th><img src="/images/stats/hit_points.png" alt="HP" class="stat-icon" title="Hit Points"></th>
+                    <th><img src="/images/stats/melee_attack.png" alt="Atk" class="stat-icon" title="Attack"></th>
+                    <th><img src="/images/stats/melee_armor.png" alt="Armor" class="stat-icon" title="Armor"></th>
+                    <th><img src="/images/stats/movement_speed.png" alt="Speed" class="stat-icon" title="Speed"></th>
                     <th>Cost</th>
                 </tr>
             </thead>
@@ -86,7 +77,7 @@ $pagination = $dataProvider->getPagination();
                                 <span class="badge bg-warning badge-sm ms-1">Unique</span>
                             <?php endif; ?>
                         </td>
-                        <td><span class="badge bg-secondary badge-sm"><?= Html::encode($unit->type) ?></span></td>
+                        <td><span class="badge bg-secondary badge-sm"><?= Html::encode($unit->armorClassGroup) ?></span></td>
                         <td>
                             <?php if ($unit->age): ?>
                                 <span class="badge badge-age age-<?= strtolower(explode(' ', $unit->age)[0]) ?>"><?= Html::encode($unit->age) ?></span>

@@ -59,7 +59,7 @@ class MatchupController extends Controller
         $landUnits = [];
         $navalUnits = [];
         foreach ($enemyUnits as $u) {
-            if ($u->typeGroup === 'Naval') {
+            if ($u->isNaval) {
                 $navalUnits[] = $u;
             } else {
                 $landUnits[] = $u;
@@ -121,11 +121,13 @@ class MatchupController extends Controller
     {
         $unique = Unit::find()
             ->where(['civilization_id' => $civId, 'is_unique' => 1])
+            ->with('armorClasses')
             ->all();
 
         $shared = Unit::find()
             ->innerJoin('unit_availability ua', 'ua.unit_id = unit.id')
             ->where(['ua.civilization_id' => $civId, 'ua.available' => 1, 'unit.is_unique' => 0])
+            ->with('armorClasses')
             ->all();
 
         return array_merge($unique, $shared);
@@ -307,8 +309,9 @@ class MatchupController extends Controller
      */
     private function unitMatchesCategory($unit, $catDef)
     {
-        if (isset($catDef['typeGroup'])) {
-            return $unit->typeGroup === $catDef['typeGroup'];
+        if (isset($catDef['armorClassNames'])) {
+            $unitAC = array_map(function ($ac) { return $ac->name; }, $unit->armorClasses);
+            return !empty(array_intersect($unitAC, $catDef['armorClassNames']));
         }
         if (isset($catDef['names'])) {
             return in_array($unit->name, $catDef['names']);

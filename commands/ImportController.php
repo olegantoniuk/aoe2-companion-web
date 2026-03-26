@@ -157,7 +157,7 @@ class ImportController extends Controller
                 'name' => $data['name'],
                 'slug' => $slug,
                 'page_title' => $data['page_title'] ?? null,
-                'type' => $data['type'] ?? null,
+                // 'type' column removed — classification uses armor classes now
                 'is_unique' => $data['is_unique'] ? 1 : 0,
                 'age' => $data['age'] ?? null,
                 'training_building' => $data['training_building'] ?? null,

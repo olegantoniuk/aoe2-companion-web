@@ -15,15 +15,13 @@ class UnitController extends Controller
     {
         $query = Unit::find();
 
+        $query->with('armorClasses');
+
         // Filters
-        $type = Yii::$app->request->get('type');
         $age = Yii::$app->request->get('age');
         $unique = Yii::$app->request->get('unique');
         $search = Yii::$app->request->get('q');
 
-        if ($type) {
-            $query->andWhere(['type' => $type]);
-        }
         if ($age) {
             $query->andWhere(['age' => $age]);
         }
@@ -35,20 +33,16 @@ class UnitController extends Controller
         }
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query->orderBy(['type' => SORT_ASC, 'name' => SORT_ASC]),
+            'query' => $query->orderBy(['name' => SORT_ASC]),
             'pagination' => ['pageSize' => 50],
         ]);
 
         // Get filter options
-        $types = Unit::find()->select('type')->distinct()->where(['not', ['type' => null]])->column();
         $ages = Unit::find()->select('age')->distinct()->where(['not', ['age' => null]])->column();
-        sort($types);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-            'types' => $types,
             'ages' => $ages,
-            'currentType' => $type,
             'currentAge' => $age,
             'currentUnique' => $unique,
             'currentSearch' => $search,
@@ -81,13 +75,15 @@ class UnitController extends Controller
         $cat = $categories[$slug];
         $query = Unit::find()->orderBy(['name' => SORT_ASC]);
 
-        if (isset($cat['typeGroup'])) {
-            // Broad category — filter in PHP via typeGroup (computed field)
-            $allUnits = $query->all();
-            $units = array_filter($allUnits, function ($u) use ($cat) {
-                return $u->typeGroup === $cat['typeGroup'];
-            });
-            $units = array_values($units);
+        if (isset($cat['armorClassNames'])) {
+            // Broad category — filter by armor class
+            $unitIds = (new \yii\db\Query())
+                ->select(['unit_id'])
+                ->distinct()
+                ->from('unit_armor_class')
+                ->where(['name' => $cat['armorClassNames']])
+                ->column();
+            $units = $unitIds ? $query->andWhere(['id' => $unitIds])->all() : [];
         } elseif (isset($cat['names'])) {
             // Narrow category — exact unit names
             $units = $query->andWhere(['name' => $cat['names']])->all();
@@ -112,46 +108,46 @@ class UnitController extends Controller
     public static function getCategoryDefinitions()
     {
         return [
-            // Broad categories (by typeGroup)
+            // Broad categories (by armor class)
             'archers' => [
                 'name' => 'Archers',
-                'typeGroup' => 'Archer',
+                'armorClassNames' => ['Archers'],
                 'icon' => 'arbalester',
                 'description' => 'Foot archer units including Crossbowmen, Arbalests, and ranged infantry.',
             ],
             'infantry' => [
                 'name' => 'Infantry',
-                'typeGroup' => 'Infantry',
+                'armorClassNames' => ['Infantry'],
                 'icon' => 'champion',
                 'description' => 'Melee and ranged infantry units trained primarily at the Barracks.',
             ],
             'cavalry' => [
                 'name' => 'Cavalry',
-                'typeGroup' => 'Cavalry',
+                'armorClassNames' => ['Cavalry'],
                 'icon' => 'paladin',
                 'description' => 'Mounted units including Knights, Light Cavalry, and Cavalry Archers.',
             ],
             'siege-weapons' => [
                 'name' => 'Siege Weapons',
-                'typeGroup' => 'Siege',
+                'armorClassNames' => ['Siege Weapons'],
                 'icon' => 'siege-onager',
                 'description' => 'Siege units built at the Siege Workshop.',
             ],
             'naval' => [
                 'name' => 'Naval Units',
-                'typeGroup' => 'Naval',
+                'armorClassNames' => ['Ship', 'Ships', 'Long-range warship'],
                 'icon' => 'galleon',
                 'description' => 'Ships and naval vessels built at the Dock.',
             ],
             'monks' => [
                 'name' => 'Monks',
-                'typeGroup' => 'Monk',
+                'armorClassNames' => ['Monks'],
                 'icon' => 'monk',
                 'description' => 'Religious units that can heal and convert.',
             ],
             'gunpowder' => [
                 'name' => 'Gunpowder Units',
-                'typeGroup' => 'Gunpowder',
+                'armorClassNames' => ['Gunpowder Units'],
                 'icon' => 'hand-cannoneer',
                 'description' => 'Units using gunpowder technology.',
             ],
@@ -205,6 +201,201 @@ class UnitController extends Controller
                 'description' => 'Ram units — effective against buildings.',
             ],
         ];
+    }
+
+    /**
+     * Armor-class-based unit classification definitions.
+     */
+    public static function getClassDefinitions()
+    {
+        return [
+            // Main classes
+            'infantry' => [
+                'name' => 'Infantry',
+                'description' => 'Melee foot soldiers that form the backbone of most armies. Countered by archers and siege.',
+                'armorClasses' => ['Infantry'],
+                'icon' => 'champion',
+                'isMain' => true,
+            ],
+            'cavalry' => [
+                'name' => 'Cavalry',
+                'description' => 'Mounted melee units with high mobility and power. Countered by spearmen and camels.',
+                'armorClasses' => ['Cavalry'],
+                'icon' => 'paladin',
+                'isMain' => true,
+            ],
+            'archers' => [
+                'name' => 'Archers',
+                'description' => 'Ranged units that deal pierce damage from a distance. Countered by skirmishers and siege.',
+                'armorClasses' => ['Archers'],
+                'icon' => 'arbalester',
+                'isMain' => true,
+            ],
+            'cavalry-archers' => [
+                'name' => 'Cavalry Archers',
+                'description' => 'Mounted ranged units combining mobility with ranged firepower. Countered by skirmishers and camels.',
+                'armorClasses' => ['Cavalry Archers'],
+                'icon' => 'heavy-cavalry-archer',
+                'isMain' => true,
+            ],
+            'siege-weapons' => [
+                'name' => 'Siege Weapons',
+                'description' => 'Powerful machines designed to destroy buildings and massed units. Vulnerable to melee cavalry.',
+                'armorClasses' => ['Siege Weapons'],
+                'icon' => 'siege-onager',
+                'isMain' => true,
+            ],
+            'ships' => [
+                'name' => 'Ships',
+                'description' => 'Naval vessels for controlling waterways. Built at the Dock.',
+                'armorClasses' => ['Ship', 'Ships', 'Long-range warship'],
+                'icon' => 'galleon',
+                'isMain' => true,
+            ],
+            'monks' => [
+                'name' => 'Monks',
+                'description' => 'Religious units that can heal allies and convert enemies. Countered by light cavalry.',
+                'armorClasses' => ['Monks'],
+                'icon' => 'monk',
+                'isMain' => true,
+            ],
+            'gunpowder-units' => [
+                'name' => 'Gunpowder Units',
+                'description' => 'Units utilizing gunpowder technology for devastating ranged attacks. Available from Imperial Age.',
+                'armorClasses' => ['Gunpowder Units'],
+                'icon' => 'hand-cannoneer',
+                'isMain' => true,
+            ],
+            // Sub classes
+            'elephant-units' => [
+                'name' => 'Elephant Units',
+                'description' => 'Powerful elephant-mounted units with high HP. Vulnerable to spearmen and monks.',
+                'armorClasses' => ['Elephant Units'],
+                'icon' => 'battle-elephant',
+                'isMain' => false,
+            ],
+            'camel-units' => [
+                'name' => 'Camel Units',
+                'description' => 'Camel riders effective against cavalry. Vulnerable to infantry.',
+                'armorClasses' => ['Camel Units'],
+                'icon' => 'heavy-camel-rider',
+                'isMain' => false,
+            ],
+            'spearmen' => [
+                'name' => 'Spearmen',
+                'description' => 'Anti-cavalry infantry wielding spears, pikes, and halberds.',
+                'armorClasses' => ['Spearmen'],
+                'icon' => 'halberdier',
+                'isMain' => false,
+            ],
+            'skirmishers' => [
+                'name' => 'Skirmishers',
+                'description' => 'Ranged trash units effective against archers. Weak against infantry and cavalry.',
+                'armorClasses' => ['Skirmishers'],
+                'icon' => 'elite-skirmisher',
+                'isMain' => false,
+            ],
+            'rams' => [
+                'name' => 'Rams',
+                'description' => 'Siege units specialized in destroying buildings. High pierce armor.',
+                'armorClasses' => ['Rams'],
+                'icon' => 'siege-ram',
+                'isMain' => false,
+            ],
+            'fire-ships' => [
+                'name' => 'Fire Ships',
+                'description' => 'Close-range naval vessels that set enemy ships ablaze.',
+                'armorClasses' => ['Fire Ships'],
+                'icon' => 'fast-fire-ship',
+                'isMain' => false,
+            ],
+            'shock-infantry' => [
+                'name' => 'Shock Infantry',
+                'description' => 'Fast infantry with high pierce armor — Eagle Scout line.',
+                'armorClasses' => ['Shock infantry'],
+                'icon' => 'elite-eagle-warrior',
+                'isMain' => false,
+            ],
+        ];
+    }
+
+    /**
+     * Classes catalog page.
+     */
+    public function actionClasses()
+    {
+        $classes = self::getClassDefinitions();
+
+        // Compute real unit counts from DB
+        foreach ($classes as $slug => &$def) {
+            $unitIds = (new \yii\db\Query())
+                ->select(['unit_id'])
+                ->distinct()
+                ->from('unit_armor_class')
+                ->where(['name' => $def['armorClasses']])
+                ->column();
+            $def['unitCount'] = count($unitIds);
+        }
+        unset($def);
+
+        // Resolve icon URLs
+        $iconSlugs = array_column($classes, 'icon');
+        $iconUnits = Unit::find()->select(['slug', 'image_icon'])->where(['slug' => $iconSlugs])->all();
+        $iconMap = [];
+        foreach ($iconUnits as $u) {
+            $iconMap[$u->slug] = $u->iconUrl;
+        }
+
+        return $this->render('classes', [
+            'classes' => $classes,
+            'iconMap' => $iconMap,
+        ]);
+    }
+
+    /**
+     * Single class detail page.
+     */
+    public function actionClass($slug)
+    {
+        $classes = self::getClassDefinitions();
+        if (!isset($classes[$slug])) {
+            throw new NotFoundHttpException('Unit class not found.');
+        }
+
+        $classDef = $classes[$slug];
+
+        $unitIds = (new \yii\db\Query())
+            ->select(['unit_id'])
+            ->distinct()
+            ->from('unit_armor_class')
+            ->where(['name' => $classDef['armorClasses']])
+            ->column();
+
+        $units = Unit::find()
+            ->where(['id' => $unitIds])
+            ->orderBy(['name' => SORT_ASC])
+            ->all();
+
+        // Load armor classes for badge display
+        $unitArmorClasses = [];
+        if ($unitIds) {
+            $rows = (new \yii\db\Query())
+                ->select(['unit_id', 'name'])
+                ->from('unit_armor_class')
+                ->where(['unit_id' => $unitIds])
+                ->all();
+            foreach ($rows as $row) {
+                $unitArmorClasses[$row['unit_id']][] = $row['name'];
+            }
+        }
+
+        return $this->render('class', [
+            'classDef' => $classDef,
+            'classSlug' => $slug,
+            'units' => $units,
+            'unitArmorClasses' => $unitArmorClasses,
+            'allClasses' => $classes,
+        ]);
     }
 
     /**

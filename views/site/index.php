@@ -79,10 +79,11 @@ $this->title = 'Home';
         <h3>Quick Links</h3>
         <div class="d-flex flex-column gap-2">
             <?= Html::a('All Units', ['unit/index'], ['class' => 'btn btn-outline-secondary btn-sm']) ?>
-            <?= Html::a('Cavalry Units', ['unit/index', 'type' => 'Cavalry'], ['class' => 'btn btn-outline-secondary btn-sm']) ?>
-            <?= Html::a('Infantry Units', ['unit/index', 'type' => 'Infantry'], ['class' => 'btn btn-outline-secondary btn-sm']) ?>
-            <?= Html::a('Archer Units', ['unit/index', 'type' => 'Archer'], ['class' => 'btn btn-outline-secondary btn-sm']) ?>
-            <?= Html::a('Siege Units', ['unit/index', 'type' => 'Siege'], ['class' => 'btn btn-outline-secondary btn-sm']) ?>
+            <?= Html::a('Unit Classes', ['unit/classes'], ['class' => 'btn btn-outline-secondary btn-sm']) ?>
+            <?= Html::a('Cavalry', ['unit/class', 'slug' => 'cavalry'], ['class' => 'btn btn-outline-secondary btn-sm']) ?>
+            <?= Html::a('Infantry', ['unit/class', 'slug' => 'infantry'], ['class' => 'btn btn-outline-secondary btn-sm']) ?>
+            <?= Html::a('Archers', ['unit/class', 'slug' => 'archers'], ['class' => 'btn btn-outline-secondary btn-sm']) ?>
+            <?= Html::a('Siege', ['unit/class', 'slug' => 'siege-weapons'], ['class' => 'btn btn-outline-secondary btn-sm']) ?>
             <?= Html::a('Unique Units Only', ['unit/index', 'unique' => '1'], ['class' => 'btn btn-outline-secondary btn-sm']) ?>
         </div>
     </div>
