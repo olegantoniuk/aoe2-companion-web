@@ -103,6 +103,15 @@ class Unit extends ActiveRecord
     }
 
     /**
+     * Transparent in-game sprite (from the AoE wiki), if one was downloaded for this unit.
+     */
+    public function getTransparentSpriteUrl()
+    {
+        $url = '/images/sprites/' . $this->slug . '.png';
+        return file_exists(\Yii::getAlias('@webroot') . $url) ? $url : null;
+    }
+
+    /**
      * Get armor class group for this unit (armor-class-based replacement for typeGroup).
      * Priority order determines which group is "primary".
      */

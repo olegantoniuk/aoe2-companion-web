@@ -211,7 +211,19 @@ foreach ($techGroups as $techName => $items) {
     <!-- Left Column -->
     <div class="col-lg-5 mb-4">
         <!-- Unit Image -->
-        <?php if ($unit->iconUrl): ?>
+        <?php if ($unit->transparentSpriteUrl): ?>
+            <?php
+            // Sprites are small (70–500px); scale up to 2x but keep within the portrait area
+            [$spriteW, $spriteH] = getimagesize(Yii::getAlias('@webroot') . $unit->transparentSpriteUrl);
+            $spriteScale = min(2, 200 / $spriteH, 320 / $spriteW);
+            ?>
+            <div class="text-center mb-4">
+                <div class="unit-sprite-card">
+                    <img src="<?= Html::encode($unit->transparentSpriteUrl) ?>" alt="<?= Html::encode($unit->name) ?>"
+                         width="<?= round($spriteW * $spriteScale) ?>" height="<?= round($spriteH * $spriteScale) ?>">
+                </div>
+            </div>
+        <?php elseif ($unit->iconUrl): ?>
             <div class="text-center mb-4">
                 <div class="unit-portrait-card">
                     <img src="<?= Html::encode($unit->iconUrl) ?>" alt="<?= Html::encode($unit->name) ?>" class="unit-image-lg">

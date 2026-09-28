@@ -432,6 +432,18 @@ ul.pagination > li.page-item.disabled .page-link {
     padding: 32px;
 }
 
+.unit-sprite-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 224px;
+}
+
+.unit-sprite-card img {
+    max-width: 100%;
+    height: auto;
+}
+
 .unit-image-lg {
     max-width: 160px;
     max-height: 160px;
