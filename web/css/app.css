@@ -786,8 +786,12 @@ ul.pagination > li.page-item.disabled .page-link {
 .admin5-card .tech-avail-table tbody td {
     padding: 6px;
 }
-.tech-avail-table small {
-    display: block;
+.badge-emblem {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+    vertical-align: -2px;
+    margin-right: 2px;
 }
 .tech-card-effects {
     list-style: none;

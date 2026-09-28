@@ -345,7 +345,12 @@ foreach ($techGroups as $techName => $items) {
                                 <div class="tech-card-name">
                                     <?= Html::encode($techName) ?>
                                     <?php if ($tech && $tech->civilization): ?>
-                                        <span class="badge bg-warning badge-sm ms-1"><?= Html::encode($tech->civilization->name) ?> unique</span>
+                                        <span class="badge bg-secondary badge-sm ms-1">
+                                            <?php if ($tech->civilization->emblemUrl): ?>
+                                                <img src="<?= Html::encode($tech->civilization->emblemUrl) ?>" alt="" class="badge-emblem">
+                                            <?php endif; ?>
+                                            <?= Html::encode($tech->civilization->name) ?> unique
+                                        </span>
                                     <?php endif; ?>
                                 </div>
                                 <?php if ($tech): ?>
@@ -695,7 +700,10 @@ JS
                                     <?php if ($techTableUnique): ?>
                                         <td class="text-nowrap">
                                             <?php foreach ($techTableUnique[$civ->id] ?? [] as $tech): ?>
-                                                <small><?= Html::encode($tech->name) ?></small>
+                                                <small class="d-flex align-items-center gap-1">
+                                                    <img src="<?= Html::encode($techIcon($tech->name)) ?>" alt="" class="tech-icon">
+                                                    <?= Html::encode($tech->name) ?>
+                                                </small>
                                             <?php endforeach; ?>
                                         </td>
                                     <?php endif; ?>
