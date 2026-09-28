@@ -745,6 +745,62 @@ ul.pagination > li.page-item.disabled .page-link {
     border-radius: 2px;
 }
 
+/* ── Tech Cards (unit page) ── */
+.tech-card {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #E1E3E7;
+}
+.tech-card:first-child {
+    padding-top: 0;
+}
+.tech-card:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+.tech-card-icon {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    object-fit: contain;
+    border-radius: 2px;
+}
+.tech-card-body {
+    flex: 1;
+    min-width: 0;
+}
+.tech-card-name {
+    font-weight: 600;
+}
+.tech-card-desc {
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-top: 2px;
+}
+.tech-card-effects {
+    list-style: none;
+    padding: 0;
+    margin: 6px 0 0;
+    font-size: 0.875rem;
+}
+.tech-card-effects li {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 8px;
+    padding: 2px 0;
+}
+.tech-card-stat {
+    font-weight: 600;
+    white-space: nowrap;
+}
+[data-theme="dark"] .tech-card {
+    border-bottom-color: #2a2a4a;
+}
+[data-theme="dark"] .tech-card-desc {
+    color: #8888A0;
+}
+
 /* ── Counter Unit Links ── */
 .counter-unit-link {
     display: inline-flex;

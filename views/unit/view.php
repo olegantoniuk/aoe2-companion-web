@@ -108,6 +108,47 @@ $techIcon = function ($name) {
     }
     return '/images/techs/UniqueTechCastle.png';
 };
+
+// Group technology boosts into one card per technology.
+// Effects limited to one civ ("only") go after the general ones,
+// and technologies whose every effect is civ-limited go last.
+$techDescriptions = \app\controllers\UnitController::getTechnologyDescriptions();
+$techStatLabels = [
+    'hp' => ['Hit Points', 'hp'],
+    'attack' => ['Attack', 'melee_attack'],
+    'armor' => ['Armor', 'melee_armor'],
+    'range' => ['Range', 'range'],
+    'speed' => ['Speed', 'speed'],
+    'rof' => ['Rate of Fire', 'reload_time'],
+    'accuracy' => ['Accuracy', 'accuracy'],
+    'los' => ['Line of Sight', 'line_of_sight'],
+    'conversion' => ['Conversion Resistance', null],
+    'creation' => ['Training Speed', null],
+    'population' => ['Population', null],
+    'projectile' => ['Projectiles', null],
+    'work' => ['Work Rate', null],
+    'resists' => ['Damage Resistance', null],
+    'resistance' => ['Damage Resistance', null],
+];
+$isCivLimited = function ($effect) {
+    return stripos($effect, 'only') !== false;
+};
+// Sort keys pair the civ-limited flag with the original position (PHP 7.4 sorts are not stable)
+$techGroups = [];
+foreach ($techBoosts as $i => $b) {
+    $techGroups[$b->name][] = ['key' => [$isCivLimited($b->effect), $i], 'boost' => $b];
+}
+$techGroupKeys = [];
+foreach ($techGroups as $name => $items) {
+    usort($items, function ($a, $b) {
+        return $a['key'] <=> $b['key'];
+    });
+    $techGroupKeys[$name] = [$items[0]['key'][0], count($techGroupKeys)];
+    $techGroups[$name] = array_column($items, 'boost');
+}
+uksort($techGroups, function ($a, $b) use ($techGroupKeys) {
+    return $techGroupKeys[$a] <=> $techGroupKeys[$b];
+});
 ?>
 
 <nav aria-label="breadcrumb" class="mb-3">
@@ -247,6 +288,38 @@ $techIcon = function ($name) {
                             <?php endif; ?>
                         </div>
                     <?php endif; ?>
+                </div>
+            </div>
+        <?php endif; ?>
+
+        <!-- Technologies -->
+        <?php if ($techGroups): ?>
+            <div class="admin5-card admin5-card-border">
+                <div class="card-header"><strong>Technologies</strong></div>
+                <div class="card-content">
+                    <?php foreach ($techGroups as $techName => $items): ?>
+                        <div class="tech-card">
+                            <img src="<?= Html::encode($techIcon($techName)) ?>" alt="" class="tech-card-icon">
+                            <div class="tech-card-body">
+                                <div class="tech-card-name"><?= Html::encode($techName) ?></div>
+                                <?php if (isset($techDescriptions[$techName])): ?>
+                                    <div class="tech-card-desc"><?= Html::encode($techDescriptions[$techName]) ?></div>
+                                <?php endif; ?>
+                                <ul class="tech-card-effects">
+                                    <?php foreach ($items as $b): ?>
+                                        <?php
+                                        $label = $techStatLabels[$b->stat] ?? [ucfirst($b->stat), null];
+                                        $iconKey = $label[1] ?? null;
+                                        ?>
+                                        <li>
+                                            <span class="tech-card-stat"><?= $iconKey ? $si($iconKey) . ' ' : '' ?><?= Html::encode($label[0]) ?></span>
+                                            <span><?= Html::encode(str_replace('|', ', ', $b->effect)) ?></span>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         <?php endif; ?>
@@ -501,32 +574,6 @@ JS
                     <?php if (isset($eliteVariant['speed'])): ?>
                         <tr><th><?= $si('speed') ?> Speed</th><td><?= $eliteVariant['speed'] ?></td></tr>
                     <?php endif; ?>
-                </table>
-            </div>
-        <?php endif; ?>
-
-        <!-- Technology Boosts -->
-        <?php if ($techBoosts): ?>
-            <div class="admin5-card admin5-card-border">
-                <div class="card-header"><strong>Technology Boosts</strong></div>
-                <table class="table table-striped table-sm mb-0">
-                    <thead>
-                        <tr><th>Technology</th><th>Stat</th><th>Effect</th></tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($techBoosts as $b): ?>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <img src="<?= Html::encode($techIcon($b->name)) ?>" alt="" class="tech-icon">
-                                        <?= Html::encode($b->name) ?>
-                                    </div>
-                                </td>
-                                <td><small class="text-muted"><?= Html::encode($b->stat) ?></small></td>
-                                <td><?= Html::encode($b->effect) ?></td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
                 </table>
             </div>
         <?php endif; ?>

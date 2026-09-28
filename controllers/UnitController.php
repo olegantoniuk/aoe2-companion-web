@@ -448,4 +448,31 @@ class UnitController extends Controller
             'skirmisher' => 'skirmishers',
         ];
     }
+
+    /**
+     * Short "what it does" descriptions for technologies, shown on tech cards.
+     */
+    public static function getTechnologyDescriptions()
+    {
+        return [
+            // Monastery
+            'Sanctity' => 'Gives Monks more hit points.',
+            'Redemption' => 'Lets Monks convert siege weapons and most enemy buildings.',
+            'Atonement' => 'Lets Monks convert enemy Monks.',
+            'Herbal Medicine' => 'Units garrisoned in buildings heal much faster.',
+            'Heresy' => 'Your units die instead of switching sides when an enemy Monk converts them.',
+            'Fervor' => 'Monks move faster.',
+            'Devotion' => 'Makes your Monks harder to convert.',
+            'Faith' => 'Makes your units harder to convert.',
+            'Illumination' => 'Monks regain their faith faster after a conversion.',
+            'Block Printing' => 'Increases the range at which Monks can convert.',
+            'Theocracy' => 'When several Monks convert a unit together, only one of them has to rest afterwards.',
+            // Unique technologies that affect Monks
+            'First Crusade' => 'Sicilian unique technology. Each Town Center spawns a group of Serjeants and your units become harder to convert.',
+            'Hussite Reforms' => 'Bohemian unique technology. Monks and Monastery technologies cost food instead of gold.',
+            'Mahayana' => 'Bengali unique technology. Villagers and Monks take up less population space.',
+            'Bimaristan' => 'Saracen unique technology. Monks heal several nearby units at once on their own.',
+            'Inquisition' => 'Spanish unique technology. Monks convert units and buildings faster.',
+        ];
+    }
 }

@@ -56,6 +56,7 @@ $config = [
             ],
         ],
         'assetManager' => [
+            'appendTimestamp' => true,
             'bundles' => [
                 'yii\bootstrap\BootstrapAsset' => false,
                 'yii\bootstrap\BootstrapPluginAsset' => false,
