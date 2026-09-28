@@ -29,7 +29,7 @@ NavBar::begin([
     'brandLabel' => '<strong>AoE2</strong> Companion',
     'brandUrl' => Yii::$app->homeUrl,
     'options' => [
-        'class' => 'navbar navbar-expand-lg navbar-light bg-white',
+        'class' => 'navbar navbar-expand-lg navbar-light',
     ],
 ]);
 

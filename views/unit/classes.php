@@ -45,7 +45,7 @@ uasort($byCount, function ($a, $b) { return $b['unitCount'] - $a['unitCount']; }
     <div class="tab-content">
         <!-- By Category -->
         <div class="tab-pane fade show active" id="tab-category" role="tabpanel">
-            <div class="admin5-card admin5-card-border" style="border-top: none; border-radius: 0 0 2px 2px;">
+            <div class="admin5-card admin5-card-border admin5-card-attached">
                 <div class="card-content">
                     <h5 class="mb-3">Main Classes</h5>
                     <div class="row g-3 mb-4">
@@ -65,7 +65,7 @@ uasort($byCount, function ($a, $b) { return $b['unitCount'] - $a['unitCount']; }
 
         <!-- Alphabetical -->
         <div class="tab-pane fade" id="tab-alpha" role="tabpanel">
-            <div class="admin5-card admin5-card-border" style="border-top: none; border-radius: 0 0 2px 2px;">
+            <div class="admin5-card admin5-card-border admin5-card-attached">
                 <div class="card-content">
                     <div class="row g-3">
                         <?php foreach ($alpha as $slug => $cls): ?>
@@ -78,7 +78,7 @@ uasort($byCount, function ($a, $b) { return $b['unitCount'] - $a['unitCount']; }
 
         <!-- By Unit Count -->
         <div class="tab-pane fade" id="tab-count" role="tabpanel">
-            <div class="admin5-card admin5-card-border" style="border-top: none; border-radius: 0 0 2px 2px;">
+            <div class="admin5-card admin5-card-border admin5-card-attached">
                 <div class="card-content">
                     <div class="row g-3">
                         <?php foreach ($byCount as $slug => $cls): ?>

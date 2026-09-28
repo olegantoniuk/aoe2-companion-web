@@ -38,7 +38,7 @@ $this->title = 'Matchup Analyzer';
                 </div>
             </div>
 
-            <div class="col-sm-2 text-center" style="font-weight: 700; font-size: 1.25rem; color: #6c757d; padding-bottom: 6px;">
+            <div class="col-sm-2 text-center" style="font-weight: 700; font-size: 1.25rem; color: var(--color-text-muted); padding-bottom: 6px;">
                 vs
             </div>
 

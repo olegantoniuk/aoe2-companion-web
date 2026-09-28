@@ -280,7 +280,7 @@ $this->title = $civ->name;
                 <div class="tab-content">
                     <!-- By Class -->
                     <div class="tab-pane fade show active" id="tab-class" role="tabpanel">
-                        <div class="admin5-card admin5-card-border" style="border-top: none; border-radius: 0 0 2px 2px;">
+                        <div class="admin5-card admin5-card-border admin5-card-attached">
                             <div class="table-responsive">
                                 <table class="table table-sm mb-0">
                                     <thead>
@@ -327,7 +327,7 @@ $this->title = $civ->name;
 
                     <!-- By Building -->
                     <div class="tab-pane fade" id="tab-building" role="tabpanel">
-                        <div class="admin5-card admin5-card-border" style="border-top: none; border-radius: 0 0 2px 2px;">
+                        <div class="admin5-card admin5-card-border admin5-card-attached">
                             <div class="table-responsive">
                                 <table class="table table-sm mb-0">
                                     <thead>
@@ -379,7 +379,7 @@ $this->title = $civ->name;
 
                     <!-- By Age -->
                     <div class="tab-pane fade" id="tab-age" role="tabpanel">
-                        <div class="admin5-card admin5-card-border" style="border-top: none; border-radius: 0 0 2px 2px;">
+                        <div class="admin5-card admin5-card-border admin5-card-attached">
                             <div class="table-responsive">
                                 <table class="table table-sm mb-0">
                                     <thead>
@@ -429,7 +429,7 @@ $this->title = $civ->name;
 
                     <!-- A-Z -->
                     <div class="tab-pane fade" id="tab-az" role="tabpanel">
-                        <div class="admin5-card admin5-card-border" style="border-top: none; border-radius: 0 0 2px 2px;">
+                        <div class="admin5-card admin5-card-border admin5-card-attached">
                             <div class="table-responsive">
                                 <table class="table table-striped table-sm mb-0">
                                     <thead>

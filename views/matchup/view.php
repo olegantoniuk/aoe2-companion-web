@@ -130,7 +130,7 @@ $renderBuildingCounterLink = function ($cu) use ($buildingCounters) {
     <div>
         <h1 class="mb-0" style="font-size: 1.75rem;">
             <a href="<?= Url::to(['civilization/view', 'slug' => $yourCiv->slug]) ?>"><?= Html::encode($yourCiv->name) ?></a>
-            <span style="color: #6c757d; font-weight: 400;"> vs </span>
+            <span style="color: var(--color-text-muted); font-weight: 400;"> vs </span>
             <a href="<?= Url::to(['civilization/view', 'slug' => $enemyCiv->slug]) ?>"><?= Html::encode($enemyCiv->name) ?></a>
         </h1>
         <p class="text-muted mb-0">Your counters against enemy units</p>
@@ -152,7 +152,7 @@ $renderBuildingCounterLink = function ($cu) use ($buildingCounters) {
                     <?php endforeach; ?>
                 </select>
             </div>
-            <div class="col-sm-2 text-center" style="font-weight: 700; font-size: 1.25rem; color: #6c757d; padding-bottom: 6px;">
+            <div class="col-sm-2 text-center" style="font-weight: 700; font-size: 1.25rem; color: var(--color-text-muted); padding-bottom: 6px;">
                 vs
             </div>
             <div class="col-sm-5">
@@ -169,7 +169,7 @@ $renderBuildingCounterLink = function ($cu) use ($buildingCounters) {
 
 <!-- Naval toggle -->
 <div class="mb-3">
-    <label class="form-check-label" style="cursor: pointer; font-size: 14px; font-weight: 500; color: #6c757d;">
+    <label class="form-check-label" style="cursor: pointer; font-size: 14px; font-weight: 500; color: var(--color-text-muted);">
         <input type="checkbox" id="showNaval" class="form-check-input" style="cursor: pointer;">
         Show Naval Units
     </label>
@@ -237,7 +237,7 @@ $renderBuildingCounterLink = function ($cu) use ($buildingCounters) {
                                 <?php if ($isMulti): ?>
                                     <div style="font-weight: 600;">
                                         <?php foreach ($lineUnits as $i => $lu): ?>
-                                            <?php if ($i > 0): ?> <span style="color: #6c757d; font-weight: 400;">&rarr;</span> <?php endif; ?>
+                                            <?php if ($i > 0): ?> <span style="color: var(--color-text-muted); font-weight: 400;">&rarr;</span> <?php endif; ?>
                                             <a href="<?= Url::to(['unit/view', 'slug' => $lu->slug]) ?>" class="enemy-unit-hover" data-unit-id="<?= $lu->id ?>" style="font-weight: 600;"><?= Html::encode($lu->name) ?></a>
                                         <?php endforeach; ?>
                                     </div>
@@ -304,7 +304,7 @@ $renderBuildingCounterLink = function ($cu) use ($buildingCounters) {
                                 <?php if ($isMulti): ?>
                                     <div style="font-weight: 600;">
                                         <?php foreach ($lineUnits as $i => $lu): ?>
-                                            <?php if ($i > 0): ?> <span style="color: #6c757d; font-weight: 400;">&rarr;</span> <?php endif; ?>
+                                            <?php if ($i > 0): ?> <span style="color: var(--color-text-muted); font-weight: 400;">&rarr;</span> <?php endif; ?>
                                             <a href="<?= Url::to(['unit/view', 'slug' => $lu->slug]) ?>" class="enemy-unit-hover" data-unit-id="<?= $lu->id ?>" style="font-weight: 600;"><?= Html::encode($lu->name) ?></a>
                                         <?php endforeach; ?>
                                     </div>
