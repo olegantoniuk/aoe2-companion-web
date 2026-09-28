@@ -112,7 +112,6 @@ $techIcon = function ($name) {
 // Group technology boosts into one card per technology.
 // Effects limited to one civ ("only") go after the general ones,
 // and technologies whose every effect is civ-limited go last.
-$techDescriptions = \app\controllers\UnitController::getTechnologyDescriptions();
 $techStatLabels = [
     'hp' => ['Hit Points', 'hp'],
     'attack' => ['Attack', 'melee_attack'],
@@ -150,6 +149,46 @@ foreach ($techGroups as $name => $items) {
 uksort($techGroups, function ($a, $b) use ($techGroupKeys) {
     return $techGroupKeys[$a] <=> $techGroupKeys[$b];
 });
+
+// Cost, in-game description and civ availability for each technology (from import/technologies)
+$technologies = $techGroups ? \app\models\Technology::find()
+    ->where(['name' => array_keys($techGroups)])
+    ->with(['civilization', 'availableCivs'])
+    ->indexBy('name')
+    ->all() : [];
+$techCostHtml = function ($tech) use ($resIcons) {
+    $parts = [];
+    foreach (['Food' => $tech->cost_food, 'Wood' => $tech->cost_wood, 'Gold' => $tech->cost_gold, 'Stone' => $tech->cost_stone] as $res => $amount) {
+        if ($amount) $parts[] = '<img src="' . $resIcons[$res] . '" alt="' . $res . '" class="res-icon"> ' . $amount;
+    }
+    return $parts ? implode(' &nbsp; ', $parts) : 'Free';
+};
+
+// Technology availability table: rows are civs that can train this unit,
+// columns are shared technologies, unique ones go into a single last column.
+$techTableCivs = [];
+foreach ($availability as $a) {
+    if ($a->available) $techTableCivs[] = $a->civilization;
+}
+if (!$techTableCivs && $unit->civilization) {
+    $techTableCivs[] = $unit->civilization;
+}
+usort($techTableCivs, function ($a, $b) {
+    return $a->name <=> $b->name;
+});
+$techTableShared = [];
+$techTableUnique = [];
+$techCivIds = [];
+foreach ($techGroups as $techName => $items) {
+    if (!isset($technologies[$techName])) continue;
+    $tech = $technologies[$techName];
+    $techCivIds[$techName] = array_flip(array_map(function ($c) { return $c->id; }, $tech->availableCivs));
+    if ($tech->civilization_id) {
+        $techTableUnique[$tech->civilization_id][] = $tech;
+    } else {
+        $techTableShared[] = $tech;
+    }
+}
 ?>
 
 <nav aria-label="breadcrumb" class="mb-3">
@@ -299,12 +338,21 @@ uksort($techGroups, function ($a, $b) use ($techGroupKeys) {
                 <div class="card-header"><strong>Technologies</strong></div>
                 <div class="card-content">
                     <?php foreach ($techGroups as $techName => $items): ?>
+                        <?php $tech = $technologies[$techName] ?? null; ?>
                         <div class="tech-card">
                             <img src="<?= Html::encode($techIcon($techName)) ?>" alt="" class="tech-card-icon">
                             <div class="tech-card-body">
-                                <div class="tech-card-name"><?= Html::encode($techName) ?></div>
-                                <?php if (isset($techDescriptions[$techName])): ?>
-                                    <div class="tech-card-desc"><?= Html::encode($techDescriptions[$techName]) ?></div>
+                                <div class="tech-card-name">
+                                    <?= Html::encode($techName) ?>
+                                    <?php if ($tech && $tech->civilization): ?>
+                                        <span class="badge bg-warning badge-sm ms-1"><?= Html::encode($tech->civilization->name) ?> unique</span>
+                                    <?php endif; ?>
+                                </div>
+                                <?php if ($tech): ?>
+                                    <div class="tech-card-cost"><?= $techCostHtml($tech) ?></div>
+                                    <?php if ($tech->description): ?>
+                                        <div class="tech-card-desc"><?= nl2br(Html::encode($tech->description)) ?></div>
+                                    <?php endif; ?>
                                 <?php endif; ?>
                                 <ul class="tech-card-effects">
                                     <?php foreach ($items as $b): ?>
@@ -602,6 +650,60 @@ JS
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+            </div>
+        <?php endif; ?>
+
+        <!-- Technology Availability -->
+        <?php if ($techTableCivs && ($techTableShared || $techTableUnique)): ?>
+            <div class="admin5-card admin5-card-border">
+                <div class="card-header"><strong>Technology Availability</strong></div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm mb-0 tech-avail-table">
+                        <thead>
+                            <tr>
+                                <th>Civilization</th>
+                                <?php foreach ($techTableShared as $tech): ?>
+                                    <th class="text-center" title="<?= Html::encode($tech->name) ?>">
+                                        <img src="<?= Html::encode($techIcon($tech->name)) ?>" alt="<?= Html::encode($tech->name) ?>" class="tech-icon">
+                                    </th>
+                                <?php endforeach; ?>
+                                <?php if ($techTableUnique): ?>
+                                    <th>Unique</th>
+                                <?php endif; ?>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($techTableCivs as $civ): ?>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-1 text-nowrap">
+                                            <?php if ($civ->emblemUrl): ?>
+                                                <img src="<?= Html::encode($civ->emblemUrl) ?>" alt="" class="civ-emblem-sm">
+                                            <?php endif; ?>
+                                            <?= Html::a(Html::encode($civ->name), ['civilization/view', 'slug' => $civ->slug]) ?>
+                                        </div>
+                                    </td>
+                                    <?php foreach ($techTableShared as $tech): ?>
+                                        <td class="text-center" title="<?= Html::encode($tech->name) ?>">
+                                            <?php if (isset($techCivIds[$tech->name][$civ->id])): ?>
+                                                <span class="avail-yes">&#10003;</span>
+                                            <?php else: ?>
+                                                <span class="avail-no">&#10007;</span>
+                                            <?php endif; ?>
+                                        </td>
+                                    <?php endforeach; ?>
+                                    <?php if ($techTableUnique): ?>
+                                        <td class="text-nowrap">
+                                            <?php foreach ($techTableUnique[$civ->id] ?? [] as $tech): ?>
+                                                <small><?= Html::encode($tech->name) ?></small>
+                                            <?php endforeach; ?>
+                                        </td>
+                                    <?php endif; ?>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         <?php endif; ?>
 

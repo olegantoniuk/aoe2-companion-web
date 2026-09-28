@@ -35,6 +35,7 @@ class ImportController extends Controller
         $this->actionCivilizations();
         $this->actionUnits();
         $this->actionAvailability();
+        $this->actionTechnologies();
         $this->stdout("\nAll imports complete!\n", Console::FG_GREEN);
         return ExitCode::OK;
     }
@@ -410,6 +411,93 @@ class ImportController extends Controller
         }
 
         $this->stdout("Updated $count unit images\n", Console::FG_GREEN);
+    }
+
+    /**
+     * Import technologies (cost, in-game description) and per-civ availability
+     * from aoe2techtree data: data/techtree/data.json + data/techtree/strings.json
+     * (https://github.com/SiegeEngineers/aoe2techtree, data/ and data/locales/en/).
+     * Replaces all existing technology rows.
+     */
+    public function actionTechnologies()
+    {
+        $this->stdout("=== Importing Technologies ===\n", Console::FG_CYAN);
+        $dir = $this->dataDir . '/techtree';
+        $data = json_decode(file_get_contents($dir . '/data.json'), true);
+        $strings = json_decode(file_get_contents($dir . '/strings.json'), true);
+        if (!$data || !$strings) {
+            $this->stderr("Cannot read $dir/data.json or $dir/strings.json\n", Console::FG_RED);
+            return ExitCode::DATAERR;
+        }
+
+        $civMap = [];
+        $civRows = Yii::$app->db->createCommand('SELECT id, name FROM civilization')->queryAll();
+        foreach ($civRows as $row) {
+            $civMap[$row['name']] = $row['id'];
+        }
+
+        // game tech id => [civ ids], only for civs we have
+        $techCivs = [];
+        foreach ($data['civs'] as $civName => $civ) {
+            if ($civ['era'] !== 'base') {
+                continue;
+            }
+            $civId = $civMap[$this->resolveCivName($civName)] ?? null;
+            if (!$civId) {
+                $this->stdout("Skipping unknown civilization: $civName\n", Console::FG_YELLOW);
+                continue;
+            }
+            foreach ($civ['Tech'] as $techId) {
+                $techCivs[$techId][] = $civId;
+            }
+        }
+
+        $db = Yii::$app->db;
+        $transaction = $db->beginTransaction();
+        $db->createCommand()->delete('technology_availability')->execute();
+        $db->createCommand()->delete('technology')->execute();
+
+        $count = 0;
+        foreach ($techCivs as $techId => $civIds) {
+            $tech = $data['data']['Tech'][$techId];
+            // In-game strings: name = LanguageNameId + 10000, help text = LanguageNameId + 21000
+            // Some names carry a line break ("Block<br>\nPrinting")
+            $name = $strings[$tech['LanguageNameId'] + 10000] ?? null;
+            $name = $name ? trim(preg_replace('/\s+/', ' ', str_replace('<br>', ' ', $name))) : null;
+            if (!$name) {
+                continue;
+            }
+            // Help text starts with "Research <b>Name</b> (‹cost›)<br>\n"
+            $help = $strings[$tech['LanguageNameId'] + 21000] ?? '';
+            $help = preg_replace('/^Research <b>.*?<\/b> \(‹cost›\)<br>\n/su', '', $help);
+            $description = trim(strip_tags(str_replace('<br>', '', $help)));
+
+            $cost = $tech['Cost'] ?? [];
+            $db->createCommand()->insert('technology', [
+                'game_id' => $techId,
+                'name' => $name,
+                'description' => $description ?: null,
+                'cost_food' => ($cost['Food'] ?? 0) ?: null,
+                'cost_wood' => ($cost['Wood'] ?? 0) ?: null,
+                'cost_gold' => ($cost['Gold'] ?? 0) ?: null,
+                'cost_stone' => ($cost['Stone'] ?? 0) ?: null,
+                'research_time' => $tech['ResearchTime'] ?? null,
+                'civilization_id' => count($civIds) === 1 ? $civIds[0] : null,
+            ])->execute();
+            $dbTechId = $db->getLastInsertID();
+
+            foreach (array_unique($civIds) as $civId) {
+                $db->createCommand()->insert('technology_availability', [
+                    'technology_id' => $dbTechId,
+                    'civilization_id' => $civId,
+                ])->execute();
+            }
+            $count++;
+        }
+        $transaction->commit();
+
+        $this->stdout("Imported $count technologies\n", Console::FG_GREEN);
+        return ExitCode::OK;
     }
 
     /**

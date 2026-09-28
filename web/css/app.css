@@ -773,10 +773,21 @@ ul.pagination > li.page-item.disabled .page-link {
 .tech-card-name {
     font-weight: 600;
 }
+.tech-card-cost {
+    font-size: 0.875rem;
+    margin-top: 2px;
+}
 .tech-card-desc {
     font-size: 0.875rem;
     color: #6c757d;
     margin-top: 2px;
+}
+.admin5-card .tech-avail-table thead th,
+.admin5-card .tech-avail-table tbody td {
+    padding: 6px;
+}
+.tech-avail-table small {
+    display: block;
 }
 .tech-card-effects {
     list-style: none;
