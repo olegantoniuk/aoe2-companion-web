@@ -131,7 +131,8 @@ $techStatLabels = [
     'resistance' => ['Damage Resistance', null],
 ];
 $isCivLimited = function ($effect) {
-    return stripos($effect, 'only') !== false;
+    // "+5, only for the Aztecs" or "+4 min, +4 max, Sicilians only"
+    return (bool)preg_match('/only for the |\bonly$/i', $effect);
 };
 // Sort keys pair the civ-limited flag with the original position (PHP 7.4 sorts are not stable)
 $techGroups = [];

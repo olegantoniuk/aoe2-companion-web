@@ -785,14 +785,12 @@ ul.pagination > li.page-item.disabled .page-link {
     font-size: 0.875rem;
 }
 .tech-card-effects li {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px 8px;
     padding: 2px 0;
 }
 .tech-card-stat {
     font-weight: 600;
     white-space: nowrap;
+    margin-right: 6px;
 }
 [data-theme="dark"] .tech-card {
     border-bottom-color: #2a2a4a;
