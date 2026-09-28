@@ -450,29 +450,30 @@ class UnitController extends Controller
     }
 
     /**
-     * Short "what it does" descriptions for technologies, shown on tech cards.
+     * In-game technology descriptions (AoE2 DE English help texts), shown on tech cards.
+     * Source: SiegeEngineers/aoe2techtree data/locales/en/strings.json
      */
     public static function getTechnologyDescriptions()
     {
         return [
             // Monastery
-            'Sanctity' => 'Gives Monks more hit points.',
-            'Redemption' => 'Lets Monks convert siege weapons and most enemy buildings.',
-            'Atonement' => 'Lets Monks convert enemy Monks.',
-            'Herbal Medicine' => 'Units garrisoned in buildings heal much faster.',
-            'Heresy' => 'Your units die instead of switching sides when an enemy Monk converts them.',
-            'Fervor' => 'Monks move faster.',
-            'Devotion' => 'Makes your Monks harder to convert.',
-            'Faith' => 'Makes your units harder to convert.',
-            'Illumination' => 'Monks regain their faith faster after a conversion.',
-            'Block Printing' => 'Increases the range at which Monks can convert.',
-            'Theocracy' => 'When several Monks convert a unit together, only one of them has to rest afterwards.',
+            'Sanctity' => 'Monastery Units +15 HP.',
+            'Redemption' => 'Monks can convert enemy Siege Weapons and buildings (except Town Centers, Castles, Monasteries, Farms, Fish Traps, Walls, Gates, and Wonders). Monks can convert most enemy units from a distance, but they must stand adjacent to buildings, rams, and Trebuchets to convert them.',
+            'Atonement' => 'Monks can convert enemy Monastery Units.',
+            'Herbal Medicine' => 'Units garrisoned in buildings heal +500% faster.',
+            'Heresy' => "Units converted by an enemy Monk die instead of changing to the enemy's color.",
+            'Fervor' => 'Monastery Units move +15% faster.',
+            'Devotion' => 'Units are 15% harder for enemy Monks to convert.',
+            'Faith' => 'Units are 50% harder for enemy Monks to convert.',
+            'Illumination' => 'Monastery Units regain their faith +100% faster after a successful conversion.',
+            'Block Printing' => 'Monastery Units +3 conversion range.',
+            'Theocracy' => 'If a group of Monks converts an enemy unit, only one of the Monks must rest afterward.',
             // Unique technologies that affect Monks
-            'First Crusade' => 'Sicilian unique technology. Each Town Center spawns a group of Serjeants and your units become harder to convert.',
-            'Hussite Reforms' => 'Bohemian unique technology. Monks and Monastery technologies cost food instead of gold.',
-            'Mahayana' => 'Bengali unique technology. Villagers and Monks take up less population space.',
-            'Bimaristan' => 'Saracen unique technology. Monks heal several nearby units at once on their own.',
-            'Inquisition' => 'Spanish unique technology. Monks convert units and buildings faster.',
+            'First Crusade' => 'Up to 5 Town Centers spawn 5 Serjeants each; units more resistant to conversion.',
+            'Hussite Reforms' => 'Monks and Monastery technologies gold cost is replaced by food cost.',
+            'Mahayana' => 'Villagers and Monks take -10% population space.',
+            'Bimaristan' => 'Monks passively heal multiple nearby units.',
+            'Inquisition' => 'Monks and Missionaries convert faster; Missionaries +1 range.',
         ];
     }
 }
