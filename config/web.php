@@ -53,6 +53,8 @@ $config = [
                 'units/<slug:[a-z0-9_-]+>' => 'unit/view',
                 'matchup' => 'matchup/index',
                 'matchup/<yourCiv:[a-z0-9_-]+>-vs-<enemyCiv:[a-z0-9_-]+>' => 'matchup/view',
+                'api/civilizations' => 'api/civilizations',
+                'api/matchup' => 'api/matchup',
             ],
         ],
         'assetManager' => [
