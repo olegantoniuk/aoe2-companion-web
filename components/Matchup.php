@@ -150,52 +150,64 @@ class Matchup
         $visited = [];
         $lines = [];
 
+        // A unit can lead back into a line that does not reach it (Fire Ship -> Fast Fire Ship, while Dragon Ship
+        // also comes from Fire Ship): that pass builds the other line, and the next one gives this unit its own.
         foreach ($units as $u) {
-            if (isset($visited[$u->id])) continue;
+            while (!isset($visited[$u->id])) {
+                // Find root of chain (walk back through upgrades_from)
+                $root = $u;
+                while (!empty($root->upgrades_from) && isset($byName[$root->upgrades_from]) && !isset($visited[$byName[$root->upgrades_from]->id])) {
+                    $root = $byName[$root->upgrades_from];
+                }
 
-            // Find root of chain (walk back through upgrades_from)
-            $root = $u;
-            while (!empty($root->upgrades_from) && isset($byName[$root->upgrades_from]) && !isset($visited[$byName[$root->upgrades_from]->id])) {
-                $root = $byName[$root->upgrades_from];
-            }
-
-            // Build chain forward from root
-            $chain = [];
-            $current = $root;
-            while ($current && !isset($visited[$current->id])) {
-                $visited[$current->id] = true;
-                $chain[] = $current;
-                $nextName = $current->upgrades_to;
-                $current = null;
-                if ($nextName) {
-                    if (isset($byName[$nextName])) {
-                        $current = $byName[$nextName];
-                    } else {
-                        // Partial match
-                        foreach ($byName as $n => $unit) {
-                            if (strpos($nextName, $n) === 0 && !isset($visited[$unit->id])) {
+                // Build chain forward from root
+                $chain = [];
+                $current = $root;
+                while ($current && !isset($visited[$current->id])) {
+                    $visited[$current->id] = true;
+                    $chain[] = $current;
+                    $nextName = $current->upgrades_to;
+                    $current = null;
+                    if ($nextName) {
+                        if (isset($byName[$nextName])) {
+                            $current = $byName[$nextName];
+                        } else {
+                            // Partial match
+                            foreach ($byName as $n => $unit) {
+                                if (strpos($nextName, $n) === 0 && !isset($visited[$unit->id])) {
+                                    $current = $unit;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    // A civ's own last step that only the newer unit names (Bombard Cannon -> Houfnice)
+                    if (!$current) {
+                        $last = end($chain);
+                        foreach ($byName as $unit) {
+                            if ($unit->upgrades_from === $last->name && !isset($visited[$unit->id])) {
                                 $current = $unit;
                                 break;
                             }
                         }
                     }
                 }
-            }
 
-            // Merge counters for all units in chain
-            $lineCounters = [];
-            foreach ($chain as $cu) {
-                if (!empty($counters[$cu->id])) {
-                    foreach ($counters[$cu->id] as $counter) {
-                        $lineCounters[$counter->id] = $counter;
+                // Merge counters for all units in chain
+                $lineCounters = [];
+                foreach ($chain as $cu) {
+                    if (!empty($counters[$cu->id])) {
+                        foreach ($counters[$cu->id] as $counter) {
+                            $lineCounters[$counter->id] = $counter;
+                        }
                     }
                 }
-            }
 
-            $lines[] = [
-                'units' => $chain,
-                'counters' => array_values($lineCounters),
-            ];
+                $lines[] = [
+                    'units' => $chain,
+                    'counters' => array_values($lineCounters),
+                ];
+            }
         }
 
         return $lines;
