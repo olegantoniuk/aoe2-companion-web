@@ -94,7 +94,13 @@ class Unit extends ActiveRecord
 
     public function getIconUrl()
     {
-        return $this->image_icon ? '/images/units/' . basename($this->image_icon) : null;
+        if (!$this->image_icon) {
+            return null;
+        }
+        // nginx caches images for a month as immutable, so a redrawn icon needs a new address
+        $url = '/images/units/' . basename($this->image_icon);
+        $mtime = @filemtime(\Yii::getAlias('@webroot') . $url);
+        return $mtime ? "$url?v=$mtime" : $url;
     }
 
     public function getSpriteUrl()
