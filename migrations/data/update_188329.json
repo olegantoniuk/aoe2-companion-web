@@ -1,0 +1,3098 @@
+{
+ "civilizations": [
+  {
+   "name": "Danes",
+   "slug": "danes",
+   "page_title": "Danes (Age of Empires II)",
+   "architecture_set": "Northern European",
+   "continent": "Europe (northern)",
+   "focus": "Infantry, Siege weapons",
+   "summary": "An infantry and siege civilization. Danish Villagers and Fishing Ships drop off 5% more food, and every enemy building they destroy loots 25% of its cost, so raids also bring in resources. Barracks and Siege Workshop technologies cost 66% less gold, and Northmen's Fury makes their siege much stronger against buildings. The unique unit is the Jomsviking, a cheap infantry unit with big bonuses against cavalry that throws torches at buildings and ships.",
+   "intro": "The Jomsviking is named after a sworn brotherhood of mercenaries that, according to the sagas, the Danish king Harald Bluetooth set up in the 10th century at the Jomsborg on the Baltic coast. Danish raids along the coasts of Europe turned into conquest in 865, when the Great Heathen Army landed in England and founded the Danelaw, and in the game Danish units loot a quarter of the cost of every building they destroy. Hamask is the Norse word for working oneself into the battle frenzy of the berserks, and with it Danish infantry hit harder the more wounded they are.",
+   "team_bonus": "Siege weapons +2 line of sight.",
+   "bonuses": [
+    "Villagers and Fishing Ships drop off +5% food.",
+    "Units and buildings loot 25% of the resource cost of every enemy building they destroy.",
+    "Barracks and Siege Workshop technologies cost -66% gold.",
+    "Varangian Guards and Longships move 10% faster."
+   ],
+   "unique_techs": [
+    {
+     "name": "Hamask",
+     "description": "Infantry +1 attack for every 10% of hit points lost (against units and towers).",
+     "age": "Castle Age",
+     "cost": {
+      "food": 250,
+      "wood": 0,
+      "gold": 450,
+      "stone": 0
+     },
+     "research_time": 35
+    },
+    {
+     "name": "Northmen's Fury",
+     "description": "Mangonel line and Catapult Galleons +1 range; siege weapons and siege warships +40% attack vs. buildings.",
+     "age": "Imperial Age",
+     "cost": {
+      "food": 0,
+      "wood": 950,
+      "gold": 900,
+      "stone": 0
+     },
+     "research_time": 40
+    }
+   ],
+   "region": "Central and Northern Europe",
+   "emblem_file": "danes.png"
+  },
+  {
+   "name": "Saxons",
+   "slug": "saxons",
+   "page_title": "Saxons",
+   "architecture_set": "Western European",
+   "continent": "Europe (northwest)",
+   "focus": "Infantry, Defense",
+   "summary": "An infantry and defensive civilization. Saxon Mills, Lumber Camps and Mining Camps give 35 food and 10 stone when built, and their foot soldiers cost 5% less for every Town Center or Castle they control, up to 20%. From the Castle Age their towers and Castles fire twice as many base arrows. The unique unit is the Hearth Troop, a heavily armored infantry unit that throws a javelin before it closes to melee, and Shield Wall gives massed infantry up to +3/+3 armor.",
+   "intro": "In the 9th century the Saxons answered the Viking raids with burhs, fortified towns ringed by ditches and walls that later grew into many English towns, and in the game Saxon towers and Castles fire twice as many arrows. The Hearth Troop is named after the warriors who shared their lord's hearth and hall, the retinue praised in Beowulf and The Battle of Maldon. Saxon rule over England ended in 1066 at Hastings, weeks after the Saxon army had beaten Harald Hardrada at Stamford Bridge.",
+   "team_bonus": "Repairers work 25% faster.",
+   "bonuses": [
+    "Mills, Lumber Camps and Mining Camps provide +35 food and +10 stone when built.",
+    "Foot soldiers cost -5% for each Town Center or Castle controlled (maximum -20%).",
+    "Towers and Castles fire +100% base arrows starting in the Castle Age.",
+    "Longships and Catapult Galleons have +20% hit points."
+   ],
+   "unique_techs": [
+    {
+     "name": "Clerical Recruitment",
+     "description": "Monks +1 conversion range; Monks train 33% faster.",
+     "age": "Castle Age",
+     "cost": {
+      "food": 350,
+      "wood": 0,
+      "gold": 200,
+      "stone": 0
+     },
+     "research_time": 35
+    },
+    {
+     "name": "Shield Wall",
+     "description": "Infantry +1/+1 armor for every 15 infantry nearby, up to +3/+3.",
+     "age": "Imperial Age",
+     "cost": {
+      "food": 525,
+      "wood": 0,
+      "gold": 475,
+      "stone": 0
+     },
+     "research_time": 45
+    }
+   ],
+   "region": "Western Europe",
+   "emblem_file": "saxons.png"
+  },
+  {
+   "name": "Varangians",
+   "slug": "varangians",
+   "page_title": "Varangians",
+   "architecture_set": "Northern European",
+   "continent": "Europe (northern)",
+   "focus": "Cavalry, Naval",
+   "summary": "A cavalry and naval civilization. Varangian shepherds, hunters and fishermen also bring in gold, and Bloodlines and Caravan are 50% stronger, so their Knights and Hussars get 30 extra hit points. Varangian Guards attack 25% faster and earn 50% more gold in battle, and Longships and Catapult Galleons fire 15% faster. The unique unit is the Jarl, a cavalry unit that throws axes and deals bonus damage to infantry, and Vendel Legacy gives the Knight line trample damage.",
+   "intro": "The Varangians were Scandinavians, most of them from what is now Sweden, who took their ships along the rivers of Eastern Europe to trade and settle as far as the Black and Caspian Seas, and the Varangian Castle is modeled on the Golden Gate of Kyiv. Many of them served in the Varangian Guard, the bodyguard Basil II founded for the Byzantine emperors in 988, and Varangian Guards of this civilization attack faster and earn more gold than anyone else's. Gothikon is named after a war dance in animal skins that a Byzantine account says the Varangian mercenaries performed.",
+   "team_bonus": "Knight line +1 attack vs. infantry.",
+   "bonuses": [
+    "Shepherds, hunters and fishermen also generate gold (+10% for Villagers, +5% for Fishing Ships).",
+    "Bloodlines and Caravan effects +50%.",
+    "Varangian Guards attack 25% faster and generate +50% gold.",
+    "Longships and Catapult Galleons attack 15% faster."
+   ],
+   "unique_techs": [
+    {
+     "name": "Vendel Legacy",
+     "description": "Knight line deals 5 trample damage to enemies within 0.5 tiles.",
+     "age": "Castle Age",
+     "cost": {
+      "food": 500,
+      "wood": 0,
+      "gold": 300,
+      "stone": 0
+     },
+     "research_time": 35
+    },
+    {
+     "name": "Gothikon",
+     "description": "Varangian Guards periodically throw axes at range 3 that deal their melee attack.",
+     "age": "Imperial Age",
+     "cost": {
+      "food": 475,
+      "wood": 0,
+      "gold": 400,
+      "stone": 0
+     },
+     "research_time": 50
+    }
+   ],
+   "region": "Eastern Europe",
+   "emblem_file": "varangians.png"
+  }
+ ],
+ "civ_units": [
+  {
+   "name": "Jomsviking",
+   "slug": "jomsviking",
+   "is_unique": 1,
+   "civilization": "Danes",
+   "age": "Castle Age",
+   "training_building": "Castle",
+   "cost": {
+    "food": 65,
+    "wood": 0,
+    "gold": 15,
+    "stone": 0
+   },
+   "training_time": 10,
+   "hit_points": 70,
+   "melee_attack": 8,
+   "pierce_attack": null,
+   "blast_radius": null,
+   "rate_of_fire": 1.8,
+   "range_val": null,
+   "min_range": null,
+   "accuracy": null,
+   "melee_armor": 2,
+   "pierce_armor": 2,
+   "speed": 0.96,
+   "line_of_sight": 5,
+   "garrison_capacity": null,
+   "armor_classes": [
+    {
+     "name": "Unique Units",
+     "modifier": null
+    },
+    {
+     "name": "Infantry",
+     "modifier": null
+    }
+   ],
+   "attack_bonuses": [
+    {
+     "bonus": 10,
+     "vs": "Cavalry",
+     "variant": null
+    },
+    {
+     "bonus": 8,
+     "vs": "Camel Units",
+     "variant": null
+    },
+    {
+     "bonus": 10,
+     "vs": "Elephant Units",
+     "variant": null
+    },
+    {
+     "bonus": 6,
+     "vs": "Standard Buildings",
+     "variant": null
+    },
+    {
+     "bonus": 2,
+     "vs": "Shock infantry",
+     "variant": null
+    }
+   ],
+   "upgrades_from": null,
+   "upgrades_to": "Elite Jomsviking",
+   "upgrade_cost": {
+    "food": 825,
+    "wood": 0,
+    "gold": 825,
+    "stone": 0
+   },
+   "upgrade_time": 45,
+   "elite_variant": {
+    "name": "Elite Jomsviking",
+    "hit_points": 75,
+    "melee_attack": 9,
+    "attack_bonuses": [
+     {
+      "bonus": 15,
+      "vs": "Cavalry",
+      "variant": "Elite"
+     },
+     {
+      "bonus": 12,
+      "vs": "Camel Units",
+      "variant": "Elite"
+     },
+     {
+      "bonus": 15,
+      "vs": "Elephant Units",
+      "variant": "Elite"
+     },
+     {
+      "bonus": 9,
+      "vs": "Standard Buildings",
+      "variant": "Elite"
+     },
+     {
+      "bonus": 2,
+      "vs": "Shock infantry",
+      "variant": "Elite"
+     }
+    ]
+   },
+   "description": "Danish infantry that fights other units with a spear and throws torches when it attacks buildings or ships, so it can burn down structures and ships close to the shore from a short distance. It has large bonuses against cavalry, camels and elephants and costs very little gold, which suits a Danish economy built on food. With the Danish looting bonus, every building a group of Jomsvikings destroys pays back part of its cost. The real Jomsvikings were a sworn brotherhood of mercenaries based at the Jomsborg on the Baltic coast.",
+   "tactics": "## How to use it\n\nSend Jomsvikings into enemy towns. Their torch attack on buildings has a range of 3 and a large bonus against standard buildings, and each building they destroy loots 25% of its cost for the Danes. Against towers and Castles, move them right under the walls to use the minimum range, unless the enemy has Murder Holes.\n\nIn the open they beat Knights and other cavalry, trash units and most shock infantry. Hamask helps them against heavy infantry because their attack rises as they lose hit points, though the extra attack does not add to their bonus against buildings. The low gold cost lets the Danes keep training them late in the game, as long as their Farms can pay the food.\n\n## Counters\n\nLike most infantry they are slow and suffer against ranged units. Hand Cannoneers and mounted archers are the main answers, while Arbalesters without Thumb Ring do less well against their pierce armor. Cataphracts beat them, since Cataphracts resist the bonus against cavalry and deal bonus damage to infantry. Heavy unique infantry such as Teutonic Knights, Samurai, Jaguar Warriors, Urumi Swordsmen, Legionaries, Obuchs and Liao Dao also win the fight.",
+   "strong_against": [
+    "buildings",
+    "cavalry",
+    "Camel Units",
+    "Elephant Units",
+    "Skirmishers",
+    "ships near the shore"
+   ],
+   "weak_against": [
+    "Hand Cannoneers",
+    "mounted archers",
+    "Cataphracts",
+    "Teutonic Knights",
+    "Samurai",
+    "Jaguar Warriors",
+    "Urumi Swordsmen",
+    "Obuchs"
+   ],
+   "available_to": [
+    "Danes"
+   ],
+   "abilities": [
+    "Throws torches at buildings and ships from a range of 3"
+   ],
+   "icon_file": "jomsviking_icon.png",
+   "elite_icon_file": "elite_jomsviking_icon.png",
+   "game_id": 2711,
+   "elite_game_id": 2712
+  },
+  {
+   "name": "Hearth Troop",
+   "slug": "hearth-troop",
+   "is_unique": 1,
+   "civilization": "Saxons",
+   "age": "Castle Age",
+   "training_building": "Castle",
+   "cost": {
+    "food": 0,
+    "wood": 80,
+    "gold": 35,
+    "stone": 0
+   },
+   "training_time": 16,
+   "hit_points": 75,
+   "melee_attack": 9,
+   "pierce_attack": null,
+   "blast_radius": null,
+   "rate_of_fire": 2,
+   "range_val": null,
+   "min_range": null,
+   "accuracy": null,
+   "melee_armor": 1,
+   "pierce_armor": 4,
+   "speed": 0.9,
+   "line_of_sight": 7,
+   "garrison_capacity": null,
+   "armor_classes": [
+    {
+     "name": "Infantry",
+     "modifier": null
+    },
+    {
+     "name": "Unique Units",
+     "modifier": null
+    }
+   ],
+   "attack_bonuses": [
+    {
+     "bonus": 1,
+     "vs": "Shock infantry",
+     "variant": null
+    },
+    {
+     "bonus": 1,
+     "vs": "Standard Buildings",
+     "variant": null
+    }
+   ],
+   "upgrades_from": null,
+   "upgrades_to": "Elite Hearth Troop",
+   "upgrade_cost": {
+    "food": 0,
+    "wood": 750,
+    "gold": 700,
+    "stone": 0
+   },
+   "upgrade_time": 45,
+   "elite_variant": {
+    "name": "Elite Hearth Troop",
+    "hit_points": 85,
+    "melee_attack": 12,
+    "line_of_sight": 8,
+    "training_time": 14,
+    "attack_bonuses": [
+     {
+      "bonus": 1,
+      "vs": "Shock infantry",
+      "variant": "Elite"
+     },
+     {
+      "bonus": 2,
+      "vs": "Standard Buildings",
+      "variant": "Elite"
+     }
+    ]
+   },
+   "description": "Saxon heavy infantry that throws a javelin when it first meets an enemy and then fights in melee until the javelin has recharged. The javelin deals bonus damage to archers, and with its high pierce armor the Hearth Troop counters foot archers while holding up in melee better than the Huskarl or the Ghulam. It costs wood and gold and no food, which makes it easier to pay for in the Castle Age. The name comes from the warriors who shared their lord's hearth and hall, the retinue of poems such as Beowulf and The Battle of Maldon.",
+   "tactics": "## How to use it\n\nUse Hearth Troops against foot archers and other light units. The javelin punishes archers that shoot and fall back, and once it is spent the high pierce armor still lets the Hearth Troops close the distance. The javelin only targets units other than siege weapons and has a minimum range of 1, so it does not fire while the unit is already in melee. Garrisoned in a Castle or tower, Hearth Troops add projectiles the way archers do.\n\nWith Shield Wall and a large group of infantry around them, Hearth Troops reach up to 7 melee and 11 pierce armor, which makes them very hard to kill in a long fight. The Saxon bonus for Town Centers and Castles cuts their cost by up to 20%, and since a Castle is needed to train them, they always get at least 5% off.\n\n## Counters\n\nMounted archers can kite them, and Hand Cannoneers overwhelm their pierce armor. In melee, heavy cavalry, Cataphracts and strong unique infantry such as Samurai, Teutonic Knights and Jaguar Warriors win cost for cost. Shield Wall armor does nothing against units that ignore armor: Leitis, Dravidian infantry with Wootz Steel and Composite Bowmen beat them, and Liao Dao and Tupi archers with Curare wear them down with damage over time.",
+   "strong_against": [
+    "foot archers",
+    "light infantry",
+    "Camel Riders",
+    "Hussite Wagons"
+   ],
+   "weak_against": [
+    "mounted archers",
+    "Hand Cannoneers",
+    "heavy cavalry",
+    "Cataphracts",
+    "Samurai",
+    "Teutonic Knights",
+    "Jaguar Warriors",
+    "Leitis",
+    "Composite Bowmen",
+    "Liao Dao"
+   ],
+   "available_to": [
+    "Saxons"
+   ],
+   "abilities": [
+    "Throws a javelin before melee combat: 6 pierce damage (7 for Elite), +3 vs. Archers (+4 for Elite), range 6, minimum range 1, recharges in about 15 seconds (12 for Elite)"
+   ],
+   "icon_file": "hearth_troop_icon.png",
+   "elite_icon_file": "elite_hearth_troop_icon.png",
+   "game_id": 2705,
+   "elite_game_id": 2706
+  },
+  {
+   "name": "Jarl",
+   "slug": "jarl",
+   "is_unique": 1,
+   "civilization": "Varangians",
+   "age": "Castle Age",
+   "training_building": "Castle",
+   "cost": {
+    "food": 75,
+    "wood": 0,
+    "gold": 55,
+    "stone": 0
+   },
+   "training_time": 23,
+   "hit_points": 65,
+   "melee_attack": 9,
+   "pierce_attack": null,
+   "blast_radius": null,
+   "rate_of_fire": 2,
+   "range_val": 4,
+   "min_range": null,
+   "accuracy": 100,
+   "melee_armor": 2,
+   "pierce_armor": 1,
+   "speed": 1.35,
+   "line_of_sight": 7,
+   "garrison_capacity": null,
+   "armor_classes": [
+    {
+     "name": "Cavalry",
+     "modifier": null
+    },
+    {
+     "name": "Unique Units",
+     "modifier": null
+    }
+   ],
+   "attack_bonuses": [
+    {
+     "bonus": 3,
+     "vs": "Infantry",
+     "variant": null
+    }
+   ],
+   "upgrades_from": null,
+   "upgrades_to": "Elite Jarl",
+   "upgrade_cost": {
+    "food": 825,
+    "wood": 0,
+    "gold": 725,
+    "stone": 0
+   },
+   "upgrade_time": 45,
+   "elite_variant": {
+    "name": "Elite Jarl",
+    "hit_points": 75,
+    "melee_attack": 10,
+    "range": 5,
+    "attack_bonuses": [
+     {
+      "bonus": 4,
+      "vs": "Infantry",
+      "variant": "Elite"
+     }
+    ]
+   },
+   "description": "Varangian cavalry that throws axes from a short range, so its attack counts as melee damage even though it hits from a distance. It deals bonus damage to infantry and hurts any unit with low melee armor, such as archers and siege weapons. Like the Mameluke it can attack and pull back, which keeps it away from slow infantry. Jarls were Scandinavian chieftains whose power could rival that of a king.",
+   "tactics": "## How to use it\n\nUse Jarls with hit and run against infantry: they outpace Pikemen and swordsmen and keep throwing while the enemy chases them. Pikemen are only dangerous if the Jarls stand still. Their melee damage also hurts siege weapons, archers and cavalry with low melee armor, and 16 Elite Jarls kill a Cavalier in one volley. They make good raiders, since Elite Jarls kill a Villager in 3 hits and the stronger Varangian Bloodlines gives them 30 extra hit points.\n\nJarls cost a lot of food and train slowly at the Castle, so Varangian armies usually mix them with Mounted Crossbowmen, which are cheaper to mass, or with Cavaliers that have Vendel Legacy.\n\n## Counters\n\nTheir pierce armor is low for cavalry, so foot archers, mounted archers and towers punish them. Camel Riders, Mamelukes and Genoese Crossbowmen deal bonus damage to cavalry, and Boyars and Monaspas take little damage from them thanks to high melee armor. Monks are a serious threat, because a Jarl needs at least 4 hits to kill a Monk with Sanctity.",
+   "strong_against": [
+    "infantry",
+    "Elite Skirmishers",
+    "siege weapons",
+    "Villagers"
+   ],
+   "weak_against": [
+    "Camel Riders",
+    "Monks",
+    "Mamelukes",
+    "Boyars",
+    "Genoese Crossbowmen",
+    "Monaspas",
+    "foot archers"
+   ],
+   "available_to": [
+    "Varangians"
+   ],
+   "abilities": [
+    "Throws axes that deal melee damage from range"
+   ],
+   "icon_file": "jarl_icon.png",
+   "elite_icon_file": "elite_jarl_icon.png",
+   "game_id": 2708,
+   "elite_game_id": 2709
+  }
+ ],
+ "civ_techs": [
+  {
+   "name": "Hamask",
+   "description": "Infantry +1 attack for every 10% of hit points lost (against units and towers).",
+   "cost": {
+    "food": 250,
+    "wood": 0,
+    "gold": 450,
+    "stone": 0
+   },
+   "research_time": 35,
+   "building": "Castle",
+   "age": "Castle Age",
+   "civilization": "Danes",
+   "available_to": [
+    "Danes"
+   ],
+   "game_id": 1484
+  },
+  {
+   "name": "Northmen's Fury",
+   "description": "Mangonel line and Catapult Galleons +1 range; siege weapons and siege warships +40% attack vs. buildings.",
+   "cost": {
+    "food": 0,
+    "wood": 950,
+    "gold": 900,
+    "stone": 0
+   },
+   "research_time": 40,
+   "building": "Castle",
+   "age": "Imperial Age",
+   "civilization": "Danes",
+   "available_to": [
+    "Danes"
+   ],
+   "game_id": 1483
+  },
+  {
+   "name": "Clerical Recruitment",
+   "description": "Monks +1 conversion range; Monks train 33% faster.",
+   "cost": {
+    "food": 350,
+    "wood": 0,
+    "gold": 200,
+    "stone": 0
+   },
+   "research_time": 35,
+   "building": "Castle",
+   "age": "Castle Age",
+   "civilization": "Saxons",
+   "available_to": [
+    "Saxons"
+   ],
+   "game_id": 1491
+  },
+  {
+   "name": "Shield Wall",
+   "description": "Infantry +1/+1 armor for every 15 infantry nearby, up to +3/+3.",
+   "cost": {
+    "food": 525,
+    "wood": 0,
+    "gold": 475,
+    "stone": 0
+   },
+   "research_time": 45,
+   "building": "Castle",
+   "age": "Imperial Age",
+   "civilization": "Saxons",
+   "available_to": [
+    "Saxons"
+   ],
+   "game_id": 1464
+  },
+  {
+   "name": "Vendel Legacy",
+   "description": "Knight line deals 5 trample damage to enemies within 0.5 tiles.",
+   "cost": {
+    "food": 500,
+    "wood": 0,
+    "gold": 300,
+    "stone": 0
+   },
+   "research_time": 35,
+   "building": "Castle",
+   "age": "Castle Age",
+   "civilization": "Varangians",
+   "available_to": [
+    "Varangians"
+   ],
+   "game_id": 1473
+  },
+  {
+   "name": "Gothikon",
+   "description": "Varangian Guards periodically throw axes at range 3 that deal their melee attack.",
+   "cost": {
+    "food": 475,
+    "wood": 0,
+    "gold": 400,
+    "stone": 0
+   },
+   "research_time": 50,
+   "building": "Castle",
+   "age": "Imperial Age",
+   "civilization": "Varangians",
+   "available_to": [
+    "Varangians"
+   ],
+   "game_id": 1474
+  }
+ ],
+ "civ_availability": {
+  "Danes": {
+   "units": [
+    "Archer",
+    "Battering Ram",
+    "Capped Ram",
+    "Catapult Galleon",
+    "Champion",
+    "Crossbowman",
+    "Elite Skirmisher",
+    "Elite Varangian Guard",
+    "Fast Fire Ship",
+    "Fire Galley",
+    "Fire Ship",
+    "Fishing Ship",
+    "Galleon",
+    "Galley",
+    "Halberdier",
+    "Heavy Mounted Crossbowman",
+    "Heavy Scorpion",
+    "Hulk",
+    "Jomsviking",
+    "King",
+    "Knight",
+    "Light Cavalry",
+    "Long Swordsman",
+    "Longship",
+    "Man-at-Arms",
+    "Mangonel",
+    "Militia",
+    "Monk",
+    "Mounted Crossbowman",
+    "Onager",
+    "Petard",
+    "Pikeman",
+    "Scorpion",
+    "Scout Cavalry",
+    "Siege Onager",
+    "Siege Ram",
+    "Siege Tower",
+    "Skirmisher",
+    "Spearman",
+    "Trade Cart",
+    "Trade Cog",
+    "Transport Ship",
+    "Trebuchet",
+    "Two-Handed Swordsman",
+    "Varangian Guard",
+    "Villager",
+    "War Galley",
+    "War Hulk"
+   ],
+   "techs": [
+    "Arrowslits",
+    "Arson",
+    "Ballistics",
+    "Banking",
+    "Blast Furnace",
+    "Block Printing",
+    "Bloodlines",
+    "Bodkin Arrow",
+    "Bow Saw",
+    "Bracer",
+    "Caravan",
+    "Careening",
+    "Carvel Hull",
+    "Castle Age",
+    "Chain Barding Armor",
+    "Chain Mail Armor",
+    "Chemistry",
+    "Clinker Construction",
+    "Coinage",
+    "Conscription",
+    "Cranequins",
+    "Devotion",
+    "Double-Bit Axe",
+    "Dry Dock",
+    "Fervor",
+    "Feudal Age",
+    "Fishing Lines",
+    "Fletching",
+    "Forging",
+    "Gambesons",
+    "Gillnets",
+    "Gold Mining",
+    "Gold Shaft Mining",
+    "Guard Tower",
+    "Hamask",
+    "Hand Cart",
+    "Heated Shot",
+    "Heavy Plow",
+    "Heavy Warships",
+    "Hoardings",
+    "Horse Collar",
+    "Husbandry",
+    "Illumination",
+    "Imperial Age",
+    "Iron Casting",
+    "Keep",
+    "Leather Archer Armor",
+    "Loom",
+    "Masonry",
+    "Medium Warships",
+    "Murder Holes",
+    "Northmen's Fury",
+    "Padded Archer Armor",
+    "Plate Barding Armor",
+    "Plate Mail Armor",
+    "Redemption",
+    "Ring Archer Armor",
+    "Sanctity",
+    "Scale Barding Armor",
+    "Scale Mail Armor",
+    "Shipwright",
+    "Siege Engineers",
+    "Spies/Treason",
+    "Squires",
+    "Stone Mining",
+    "Stone Shaft Mining",
+    "Theocracy",
+    "Thumb Ring",
+    "Town Patrol",
+    "Town Watch",
+    "Wheelbarrow"
+   ]
+  },
+  "Saxons": {
+   "units": [
+    "Arbalester",
+    "Archer",
+    "Battering Ram",
+    "Capped Ram",
+    "Carrack",
+    "Catapult Galleon",
+    "Cavalier",
+    "Champion",
+    "Crossbowman",
+    "Elite Skirmisher",
+    "Elite Varangian Guard",
+    "Fire Galley",
+    "Fire Ship",
+    "Fishing Ship",
+    "Galleon",
+    "Galley",
+    "Halberdier",
+    "Hearth Troop",
+    "Heavy Mounted Crossbowman",
+    "Heavy Scorpion",
+    "Hulk",
+    "Hussar",
+    "King",
+    "Knight",
+    "Light Cavalry",
+    "Long Swordsman",
+    "Longship",
+    "Man-at-Arms",
+    "Mangonel",
+    "Militia",
+    "Monk",
+    "Mounted Crossbowman",
+    "Onager",
+    "Petard",
+    "Pikeman",
+    "Scorpion",
+    "Scout Cavalry",
+    "Siege Ram",
+    "Siege Tower",
+    "Skirmisher",
+    "Spearman",
+    "Trade Cart",
+    "Trade Cog",
+    "Transport Ship",
+    "Trebuchet",
+    "Two-Handed Swordsman",
+    "Varangian Guard",
+    "Villager",
+    "War Galley",
+    "War Hulk"
+   ],
+   "techs": [
+    "Architecture",
+    "Arrowslits",
+    "Arson",
+    "Atonement",
+    "Ballistics",
+    "Banking",
+    "Block Printing",
+    "Bloodlines",
+    "Bodkin Arrow",
+    "Bow Saw",
+    "Bracer",
+    "Caravan",
+    "Careening",
+    "Castle Age",
+    "Chain Barding Armor",
+    "Chain Mail Armor",
+    "Chemistry",
+    "Clerical Recruitment",
+    "Coinage",
+    "Conscription",
+    "Cranequins",
+    "Crop Rotation",
+    "Devotion",
+    "Double-Bit Axe",
+    "Dry Dock",
+    "Faith",
+    "Feudal Age",
+    "Fishing Lines",
+    "Fletching",
+    "Forging",
+    "Fortified Wall",
+    "Gambesons",
+    "Gillnets",
+    "Gold Mining",
+    "Gold Shaft Mining",
+    "Guard Tower",
+    "Guilds",
+    "Hand Cart",
+    "Heated Shot",
+    "Heavy Plow",
+    "Heavy Warships",
+    "Herbal Medicine",
+    "Heresy",
+    "Hoardings",
+    "Horse Collar",
+    "Husbandry",
+    "Illumination",
+    "Imperial Age",
+    "Iron Casting",
+    "Keep",
+    "Leather Archer Armor",
+    "Loom",
+    "Masonry",
+    "Medium Warships",
+    "Murder Holes",
+    "Padded Archer Armor",
+    "Plate Mail Armor",
+    "Redemption",
+    "Ring Archer Armor",
+    "Sanctity",
+    "Sappers",
+    "Scale Barding Armor",
+    "Scale Mail Armor",
+    "Shield Wall",
+    "Shipwright",
+    "Siege Engineers",
+    "Siphons",
+    "Spies/Treason",
+    "Squires",
+    "Stone Mining",
+    "Theocracy",
+    "Thumb Ring",
+    "Town Patrol",
+    "Town Watch",
+    "Treadmill Crane",
+    "Two-Man Saw",
+    "Wheelbarrow"
+   ]
+  },
+  "Varangians": {
+   "units": [
+    "Archer",
+    "Battering Ram",
+    "Capped Ram",
+    "Carrack",
+    "Catapult Galleon",
+    "Cavalier",
+    "Crossbowman",
+    "Elite Skirmisher",
+    "Elite Varangian Guard",
+    "Fast Fire Ship",
+    "Fire Galley",
+    "Fire Ship",
+    "Fishing Ship",
+    "Galleon",
+    "Galley",
+    "Halberdier",
+    "Heavy Mounted Crossbowman",
+    "Heavy Scorpion",
+    "Hulk",
+    "Hussar",
+    "Jarl",
+    "King",
+    "Knight",
+    "Light Cavalry",
+    "Long Swordsman",
+    "Longship",
+    "Man-at-Arms",
+    "Mangonel",
+    "Militia",
+    "Monk",
+    "Mounted Crossbowman",
+    "Onager",
+    "Petard",
+    "Pikeman",
+    "Scorpion",
+    "Scout Cavalry",
+    "Siege Ram",
+    "Siege Tower",
+    "Skirmisher",
+    "Spearman",
+    "Trade Cart",
+    "Trade Cog",
+    "Transport Ship",
+    "Trebuchet",
+    "Two-Handed Swordsman",
+    "Varangian Guard",
+    "Villager",
+    "War Galley",
+    "War Hulk"
+   ],
+   "techs": [
+    "Architecture",
+    "Arson",
+    "Atonement",
+    "Ballistics",
+    "Banking",
+    "Blast Furnace",
+    "Bloodlines",
+    "Bodkin Arrow",
+    "Bow Saw",
+    "Bracer",
+    "Caravan",
+    "Careening",
+    "Carvel Hull",
+    "Castle Age",
+    "Chain Barding Armor",
+    "Chain Mail Armor",
+    "Chemistry",
+    "Clinker Construction",
+    "Coinage",
+    "Conscription",
+    "Cranequins",
+    "Crop Rotation",
+    "Devotion",
+    "Double-Bit Axe",
+    "Dry Dock",
+    "Faith",
+    "Fervor",
+    "Feudal Age",
+    "Fishing Lines",
+    "Fletching",
+    "Forging",
+    "Fortified Wall",
+    "Gambesons",
+    "Gillnets",
+    "Gold Mining",
+    "Gothikon",
+    "Guard Tower",
+    "Guilds",
+    "Hand Cart",
+    "Heated Shot",
+    "Heavy Plow",
+    "Heavy Warships",
+    "Herbal Medicine",
+    "Horse Collar",
+    "Husbandry",
+    "Illumination",
+    "Imperial Age",
+    "Incendiaries",
+    "Iron Casting",
+    "Leather Archer Armor",
+    "Loom",
+    "Masonry",
+    "Medium Warships",
+    "Murder Holes",
+    "Padded Archer Armor",
+    "Plate Barding Armor",
+    "Plate Mail Armor",
+    "Ring Archer Armor",
+    "Scale Barding Armor",
+    "Scale Mail Armor",
+    "Shipwright",
+    "Siege Engineers",
+    "Siphons",
+    "Spies/Treason",
+    "Squires",
+    "Stone Mining",
+    "Stone Shaft Mining",
+    "Theocracy",
+    "Town Patrol",
+    "Town Watch",
+    "Treadmill Crane",
+    "Two-Man Saw",
+    "Vendel Legacy",
+    "Wheelbarrow"
+   ]
+  }
+ },
+ "shared_units": [
+  {
+   "name": "Hulk",
+   "slug": "hulk",
+   "is_unique": 0,
+   "civilization": null,
+   "age": "Feudal Age",
+   "training_building": "Dock",
+   "cost": {
+    "food": 0,
+    "wood": 75,
+    "gold": 35,
+    "stone": 0
+   },
+   "training_time": 42,
+   "hit_points": 85,
+   "melee_attack": 4,
+   "pierce_attack": null,
+   "blast_radius": null,
+   "rate_of_fire": 1.75,
+   "attack_delay": null,
+   "frame_delay": null,
+   "range_val": 1,
+   "min_range": null,
+   "accuracy": 100,
+   "melee_armor": 3,
+   "pierce_armor": 1,
+   "speed": 1.42,
+   "line_of_sight": 5,
+   "garrison_capacity": null,
+   "armor_classes": [
+    {
+     "name": "Ships",
+     "modifier": null
+    }
+   ],
+   "attack_bonuses": [
+    {
+     "bonus": -3,
+     "vs": "Standard Buildings",
+     "variant": null
+    },
+    {
+     "bonus": 1,
+     "vs": "Fire Ships",
+     "variant": null
+    }
+   ],
+   "upgrades_from": null,
+   "upgrades_to": "War Hulk",
+   "upgrade_cost": {
+    "food": 0,
+    "wood": 150,
+    "gold": 100,
+    "stone": 0
+   },
+   "upgrade_time": 50,
+   "elite_variant": null,
+   "other_forms": null,
+   "description": "The Hulk is a close-combat warship. Its crew throws ropes and hooks onto enemy ships to mimic boarding, so it has to sail right up to its target. It is the counter to Fire Galleys, while Galleys beat it if they keep their distance.",
+   "tactics": "## How to use it\n\nBuild Hulks when the enemy goes for Fire Galleys. A few Galleys struggle to stop them in the Feudal Age, even with careful micro. Hulks can sail inside the minimum range of a Dock, but they deal reduced damage to buildings, so they make poor raiders. Forging, Iron Casting and Blast Furnace raise their attack, and Careening and Dry Dock add pierce armor.\n\n## Counters\n\nGalleys beat Hulks when they keep them at range. Demolition Rafts are a real threat, because a Hulk cannot fight one without taking heavy damage. Towers, Castles and ranged units on the shore also shoot them down.",
+   "strong_against": [
+    "Fire Galleys",
+    "long-range siege ships"
+   ],
+   "weak_against": [
+    "Galleys",
+    "Demolition Rafts",
+    "towers",
+    "Castles",
+    "ranged units on the shoreline"
+   ],
+   "available_to": [
+    "Armenians",
+    "Aztecs",
+    "Bengalis",
+    "Berbers",
+    "Bohemians",
+    "Britons",
+    "Bulgarians",
+    "Burgundians",
+    "Burmese",
+    "Byzantines",
+    "Celts",
+    "Chinese",
+    "Cumans",
+    "Dravidians",
+    "Ethiopians",
+    "Franks",
+    "Georgians",
+    "Goths",
+    "Gurjaras",
+    "Hindustanis",
+    "Huns",
+    "Inca",
+    "Italians",
+    "Japanese",
+    "Jurchens",
+    "Khitans",
+    "Khmer",
+    "Koreans",
+    "Lithuanians",
+    "Magyars",
+    "Malay",
+    "Malians",
+    "Mapuche",
+    "Maya",
+    "Mongols",
+    "Muisca",
+    "Persians",
+    "Poles",
+    "Portuguese",
+    "Romans",
+    "Saracens",
+    "Shu",
+    "Sicilians",
+    "Slavs",
+    "Spanish",
+    "Tatars",
+    "Teutons",
+    "Tupi",
+    "Turks",
+    "Vietnamese",
+    "Vikings",
+    "Wei",
+    "Wu"
+   ],
+   "icon_file": "hulk_icon.png",
+   "game_id": 2626
+  },
+  {
+   "name": "War Hulk",
+   "slug": "war-hulk",
+   "is_unique": 0,
+   "civilization": null,
+   "age": "Castle Age",
+   "training_building": "Dock",
+   "cost": {
+    "food": 0,
+    "wood": 75,
+    "gold": 35,
+    "stone": 0
+   },
+   "training_time": 27,
+   "hit_points": 110,
+   "melee_attack": 4,
+   "pierce_attack": null,
+   "blast_radius": null,
+   "rate_of_fire": 1.5,
+   "attack_delay": null,
+   "frame_delay": null,
+   "range_val": 1,
+   "min_range": null,
+   "accuracy": 100,
+   "melee_armor": 4,
+   "pierce_armor": 1,
+   "speed": 1.42,
+   "line_of_sight": 5,
+   "garrison_capacity": null,
+   "armor_classes": [
+    {
+     "name": "Ships",
+     "modifier": null
+    }
+   ],
+   "attack_bonuses": [
+    {
+     "bonus": -3,
+     "vs": "Standard Buildings",
+     "variant": null
+    },
+    {
+     "bonus": 1,
+     "vs": "Fire Ships",
+     "variant": null
+    }
+   ],
+   "upgrades_from": "Hulk",
+   "upgrades_to": "Carrack",
+   "upgrade_cost": {
+    "food": 0,
+    "wood": 400,
+    "gold": 315,
+    "stone": 0
+   },
+   "upgrade_time": 65,
+   "elite_variant": null,
+   "other_forms": null,
+   "description": "The War Hulk is the upgraded Hulk. It still fights by grappling enemy ships at close range, now with more hit points, more melee armor and a faster attack. It is the answer to Fire Ships, and War Galleys beat it from a distance.",
+   "tactics": "## How to use it\n\nUse War Hulks against Fire Ships and against long-range siege ships, which cannot keep them away once they are close. They train much faster than Hulks, so a lost fleet can be rebuilt quickly. Keep them away from shore defenses, because their attack does little to buildings.\n\n## Counters\n\nWar Galleys win as long as they keep their distance. Demolition Ships, towers, Castles and ranged units on the shoreline are also dangerous.",
+   "strong_against": [
+    "Fire Ships",
+    "long-range siege ships"
+   ],
+   "weak_against": [
+    "War Galleys",
+    "Demolition Ships",
+    "towers",
+    "Castles",
+    "ranged units on the shoreline"
+   ],
+   "available_to": [
+    "Armenians",
+    "Aztecs",
+    "Bengalis",
+    "Berbers",
+    "Bohemians",
+    "Britons",
+    "Bulgarians",
+    "Burgundians",
+    "Burmese",
+    "Byzantines",
+    "Celts",
+    "Chinese",
+    "Cumans",
+    "Dravidians",
+    "Ethiopians",
+    "Franks",
+    "Georgians",
+    "Goths",
+    "Gurjaras",
+    "Hindustanis",
+    "Huns",
+    "Inca",
+    "Italians",
+    "Japanese",
+    "Jurchens",
+    "Khitans",
+    "Khmer",
+    "Koreans",
+    "Lithuanians",
+    "Magyars",
+    "Malay",
+    "Malians",
+    "Mapuche",
+    "Maya",
+    "Mongols",
+    "Muisca",
+    "Persians",
+    "Poles",
+    "Portuguese",
+    "Romans",
+    "Saracens",
+    "Shu",
+    "Sicilians",
+    "Slavs",
+    "Spanish",
+    "Tatars",
+    "Teutons",
+    "Tupi",
+    "Turks",
+    "Vietnamese",
+    "Vikings",
+    "Wei",
+    "Wu"
+   ],
+   "icon_file": "war_hulk_icon.png",
+   "game_id": 2627
+  },
+  {
+   "name": "Carrack",
+   "slug": "carrack",
+   "is_unique": 0,
+   "civilization": null,
+   "age": "Imperial Age",
+   "training_building": "Dock",
+   "cost": {
+    "food": 0,
+    "wood": 75,
+    "gold": 35,
+    "stone": 0
+   },
+   "training_time": 27,
+   "hit_points": 135,
+   "melee_attack": 4,
+   "pierce_attack": null,
+   "blast_radius": null,
+   "rate_of_fire": 1.5,
+   "attack_delay": null,
+   "frame_delay": null,
+   "range_val": 1,
+   "min_range": null,
+   "accuracy": 100,
+   "melee_armor": 6,
+   "pierce_armor": 1,
+   "speed": 1.52,
+   "line_of_sight": 6,
+   "garrison_capacity": null,
+   "armor_classes": [
+    {
+     "name": "Ships",
+     "modifier": null
+    }
+   ],
+   "attack_bonuses": [
+    {
+     "bonus": -3,
+     "vs": "Standard Buildings",
+     "variant": null
+    },
+    {
+     "bonus": 1,
+     "vs": "Fire Ships",
+     "variant": null
+    }
+   ],
+   "upgrades_from": "War Hulk",
+   "upgrades_to": null,
+   "upgrade_cost": null,
+   "upgrade_time": null,
+   "elite_variant": null,
+   "other_forms": null,
+   "description": "The Carrack is the final upgrade of the Hulk line, a close-combat warship that grapples its targets with ropes and hooks. It counters Fast Fire Ships and long-range siege ships, and Galleons beat it at range. Britons, Georgians, Huns, Lithuanians, Mongols, Romans and Tupi cannot get it.",
+   "tactics": "## How to use it\n\nCarracks screen a Galleon fleet against Fast Fire Ships and dive onto long-range siege ships such as Cannon Galleons and Catapult Galleons. They are faster than the Hulk and the War Hulk, which helps them close the gap. Their attack against buildings is weak, so leave the shore to siege ships.\n\n## Counters\n\nGalleons beat Carracks when they keep them at a distance. Heavy Demolition Ships, towers, Castles and ranged units on the shoreline are also dangerous.",
+   "strong_against": [
+    "Fast Fire Ships",
+    "Cannon Galleons",
+    "Catapult Galleons"
+   ],
+   "weak_against": [
+    "Galleons",
+    "Heavy Demolition Ships",
+    "towers",
+    "Castles",
+    "ranged units on the shoreline"
+   ],
+   "available_to": [
+    "Armenians",
+    "Aztecs",
+    "Bengalis",
+    "Berbers",
+    "Bohemians",
+    "Bulgarians",
+    "Burgundians",
+    "Burmese",
+    "Byzantines",
+    "Celts",
+    "Chinese",
+    "Cumans",
+    "Dravidians",
+    "Ethiopians",
+    "Franks",
+    "Goths",
+    "Gurjaras",
+    "Hindustanis",
+    "Inca",
+    "Italians",
+    "Japanese",
+    "Jurchens",
+    "Khitans",
+    "Khmer",
+    "Koreans",
+    "Magyars",
+    "Malay",
+    "Malians",
+    "Mapuche",
+    "Maya",
+    "Muisca",
+    "Persians",
+    "Poles",
+    "Portuguese",
+    "Saracens",
+    "Shu",
+    "Sicilians",
+    "Slavs",
+    "Spanish",
+    "Tatars",
+    "Teutons",
+    "Turks",
+    "Vietnamese",
+    "Vikings",
+    "Wei",
+    "Wu"
+   ],
+   "icon_file": "carrack_icon.png",
+   "game_id": 2628
+  },
+  {
+   "name": "Catapult Galleon",
+   "slug": "catapult-galleon",
+   "is_unique": 0,
+   "civilization": null,
+   "age": "Imperial Age",
+   "training_building": "Dock",
+   "cost": {
+    "food": 0,
+    "wood": 225,
+    "gold": 100,
+    "stone": 0
+   },
+   "training_time": 55,
+   "hit_points": 140,
+   "melee_attack": 30,
+   "pierce_attack": null,
+   "blast_radius": 0.3,
+   "rate_of_fire": 6,
+   "attack_delay": null,
+   "frame_delay": null,
+   "range_val": 12,
+   "min_range": 3,
+   "accuracy": 100,
+   "melee_armor": 0,
+   "pierce_armor": 6,
+   "speed": 1,
+   "line_of_sight": 14,
+   "garrison_capacity": null,
+   "armor_classes": [
+    {
+     "name": "Ships",
+     "modifier": null
+    },
+    {
+     "name": "Long-range warship",
+     "modifier": null
+    }
+   ],
+   "attack_bonuses": [
+    {
+     "bonus": 130,
+     "vs": "All Buildings",
+     "variant": null
+    },
+    {
+     "bonus": 10,
+     "vs": "Siege Weapons",
+     "variant": null
+    }
+   ],
+   "upgrades_from": null,
+   "upgrades_to": null,
+   "upgrade_cost": null,
+   "upgrade_time": null,
+   "elite_variant": null,
+   "other_forms": [
+    "Cannon Galleon",
+    "Dromon",
+    "Lou Chuan"
+   ],
+   "description": "The Catapult Galleon is a siege ship that hurls stones at buildings and shore targets from long range. Civilizations without the Cannon Galleon, Dromon or Lou Chuan get it in their place: the American civilizations, the Cumans and the Vikings. It has no elite upgrade.",
+   "tactics": "## How to use it\n\nThe Catapult Galleon does not need Chemistry, so it can be trained as soon as the Imperial Age arrives, like the Trebuchet or the Dromon. Use it to knock down Docks, towers and Castles near the water while warships keep enemy ships away. It is weaker than the base Cannon Galleon in most respects, but it reloads faster and its shots hit a slightly larger area. Siege Engineers adds range and damage against buildings.\n\n## Counters\n\nIt has a minimum range and no melee armor, so ships that get close sink it quickly: Galleons, Fast Fire Ships and Carracks in particular. Bombard Cannons on the shore and Monks are also a threat.",
+   "strong_against": [
+    "Buildings",
+    "siege weapons on the shoreline"
+   ],
+   "weak_against": [
+    "Galleons",
+    "Fast Fire Ships",
+    "Carracks",
+    "Bombard Cannons",
+    "Monks"
+   ],
+   "available_to": [
+    "Aztecs",
+    "Cumans",
+    "Inca",
+    "Mapuche",
+    "Maya",
+    "Muisca",
+    "Tupi",
+    "Vikings"
+   ],
+   "icon_file": "catapult_galleon_icon.png",
+   "game_id": 2633
+  },
+  {
+   "name": "Mounted Crossbowman",
+   "slug": "mounted-crossbowman",
+   "is_unique": 0,
+   "civilization": null,
+   "age": "Castle Age",
+   "training_building": "Archery Range",
+   "cost": {
+    "food": 0,
+    "wood": 40,
+    "gold": 65,
+    "stone": 0
+   },
+   "training_time": 40,
+   "hit_points": 45,
+   "melee_attack": null,
+   "pierce_attack": 7,
+   "blast_radius": null,
+   "rate_of_fire": 2.5,
+   "attack_delay": 0.91,
+   "frame_delay": 21,
+   "range_val": 4,
+   "min_range": null,
+   "accuracy": 80,
+   "melee_armor": 2,
+   "pierce_armor": 0,
+   "speed": 1.25,
+   "line_of_sight": 6,
+   "garrison_capacity": null,
+   "armor_classes": [
+    {
+     "name": "Archers",
+     "modifier": null
+    },
+    {
+     "name": "Cavalry Archers",
+     "modifier": null
+    },
+    {
+     "name": "Cavalry",
+     "modifier": null
+    }
+   ],
+   "attack_bonuses": [
+    {
+     "bonus": 1,
+     "vs": "Spearmen",
+     "variant": null
+    }
+   ],
+   "upgrades_from": null,
+   "upgrades_to": "Heavy Mounted Crossbowman",
+   "upgrade_cost": {
+    "food": 1000,
+    "wood": 0,
+    "gold": 650,
+    "stone": 0
+   },
+   "upgrade_time": 50,
+   "elite_variant": null,
+   "other_forms": [
+    "Cavalry Archer"
+   ],
+   "description": "The Mounted Crossbowman is a crossbowman on horseback that replaces the Cavalry Archer for many European civilizations. Each bolt hits harder than an arrow and the rider has some melee armor, but it reloads more slowly, rides slower and has a little less health. None of the civilizations that get it have Parthian Tactics; they research Cranequins instead.",
+   "tactics": "## How to use it\n\nThe Mounted Crossbowman plays like a Cavalry Archer: keep it away from melee units, shoot and pull back. It needs the same long list of technologies, from Bloodlines, Thumb Ring and Husbandry to the Fletching line and the archer armor line. In the Imperial Age, Cranequins adds range and bonus damage against infantry. Franks can make it much cheaper in gold with Ordonnance Companies.\n\n## Counters\n\nSkirmishers, Genitours and Camel Archers beat it in a ranged fight, and Mangonels and Scorpions punish clumped groups. It is slower than most cavalry, so Light Cavalry and camel riders can run it down. Infantry with high pierce armor, such as Huskarls and Eagle Warriors, also does well against it.",
+   "strong_against": [
+    "Most infantry",
+    "Spearmen"
+   ],
+   "weak_against": [
+    "Elite Skirmishers",
+    "Genitours",
+    "Camel Archers",
+    "Mangonels",
+    "Scorpions",
+    "Light Cavalry",
+    "camel units",
+    "Huskarls",
+    "Eagle Warriors"
+   ],
+   "available_to": [
+    "Bohemians",
+    "Britons",
+    "Burgundians",
+    "Celts",
+    "Franks",
+    "Italians",
+    "Poles",
+    "Portuguese",
+    "Sicilians",
+    "Spanish",
+    "Teutons",
+    "Vikings"
+   ],
+   "icon_file": "mounted_crossbowman_icon.png",
+   "game_id": 2700
+  },
+  {
+   "name": "Heavy Mounted Crossbowman",
+   "slug": "heavy-mounted-crossbowman",
+   "is_unique": 0,
+   "civilization": null,
+   "age": "Imperial Age",
+   "training_building": "Archery Range",
+   "cost": {
+    "food": 0,
+    "wood": 40,
+    "gold": 65,
+    "stone": 0
+   },
+   "training_time": 30,
+   "hit_points": 55,
+   "melee_attack": null,
+   "pierce_attack": 8,
+   "blast_radius": null,
+   "rate_of_fire": 2.5,
+   "attack_delay": 0.997,
+   "frame_delay": 23,
+   "range_val": 4,
+   "min_range": null,
+   "accuracy": 80,
+   "melee_armor": 2,
+   "pierce_armor": 0,
+   "speed": 1.25,
+   "line_of_sight": 6,
+   "garrison_capacity": null,
+   "armor_classes": [
+    {
+     "name": "Archers",
+     "modifier": null
+    },
+    {
+     "name": "Cavalry Archers",
+     "modifier": null
+    },
+    {
+     "name": "Cavalry",
+     "modifier": null
+    }
+   ],
+   "attack_bonuses": [
+    {
+     "bonus": 1,
+     "vs": "Spearmen",
+     "variant": null
+    }
+   ],
+   "upgrades_from": "Mounted Crossbowman",
+   "upgrades_to": null,
+   "upgrade_cost": null,
+   "upgrade_time": null,
+   "elite_variant": null,
+   "other_forms": [
+    "Heavy Cavalry Archer"
+   ],
+   "description": "The Heavy Mounted Crossbowman is the upgraded Mounted Crossbowman and the regional replacement for the Heavy Cavalry Archer. It has more hit points and a stronger shot than the basic version. Seven civilizations can make the upgrade: Britons, Celts, Franks, Poles, Sicilians, Spanish and Teutons.",
+   "tactics": "## How to use it\n\nUse it the way you would use Heavy Cavalry Archers: a mobile ranged army that picks off infantry and archers and stays out of reach of melee units. With Cranequins it gains range and bonus damage against infantry. Its melee armor helps when cavalry catches it, but its low speed makes kiting harder than with Cavalry Archers.\n\n## Counters\n\nElite Skirmishers, Camel Archers and Genitours beat it at range, and Onagers and Heavy Scorpions punish dense groups. Hussars and Heavy Camel Riders are fast enough to catch it.",
+   "strong_against": [
+    "Slow melee units",
+    "infantry (with Cranequins)"
+   ],
+   "weak_against": [
+    "Elite Skirmishers",
+    "Imperial Skirmishers",
+    "Genitours",
+    "Camel Archers",
+    "Onagers",
+    "Heavy Scorpions",
+    "Hussars",
+    "Heavy Camel Riders"
+   ],
+   "available_to": [
+    "Britons",
+    "Celts",
+    "Franks",
+    "Poles",
+    "Sicilians",
+    "Spanish",
+    "Teutons"
+   ],
+   "icon_file": "heavy_mounted_crossbowman_icon.png",
+   "game_id": 2701
+  }
+ ],
+ "changes": [
+  {
+   "type": "unit",
+   "name": "Man-at-Arms",
+   "field": "attack_bonus vs Shock infantry",
+   "old": 2,
+   "new": 3,
+   "note": "Update 185872 (The Viking Sagas)"
+  },
+  {
+   "type": "unit",
+   "name": "Long Swordsman",
+   "field": "attack_bonus vs Shock infantry",
+   "old": 6,
+   "new": 8,
+   "note": "Update 185872 (The Viking Sagas)"
+  },
+  {
+   "type": "unit",
+   "name": "Two-Handed Swordsman",
+   "field": "attack_bonus vs Shock infantry",
+   "old": 8,
+   "new": 9,
+   "note": "Update 185872 (The Viking Sagas)"
+  },
+  {
+   "type": "unit",
+   "name": "Champion",
+   "field": "attack_bonus vs Shock infantry",
+   "old": 8,
+   "new": 9,
+   "note": "Update 185872 (The Viking Sagas)"
+  },
+  {
+   "type": "unit",
+   "name": "Legionary",
+   "field": "attack_bonus vs Shock infantry",
+   "old": 8,
+   "new": 9,
+   "note": "game data; same bonus as the Champion it replaces (not listed in the patch notes)"
+  },
+  {
+   "type": "unit",
+   "name": "Cataphract",
+   "field": "attack_bonus vs Infantry",
+   "old": 9,
+   "new": 13,
+   "note": "Update 185872 (The Viking Sagas)"
+  },
+  {
+   "type": "unit",
+   "name": "Cataphract",
+   "field": "elite_variant.attack_bonus vs Infantry",
+   "old": 12,
+   "new": 18,
+   "note": "Update 185872 (The Viking Sagas)"
+  },
+  {
+   "type": "unit",
+   "name": "Fire Galley",
+   "field": "attack_bonus vs All Buildings",
+   "old": 1,
+   "new": null,
+   "note": "Update 185872 (The Viking Sagas): bonus vs buildings reduced from 1 to 0, so the row goes"
+  },
+  {
+   "type": "unit",
+   "name": "Longship",
+   "field": "attack_bonus vs Ships",
+   "old": 9,
+   "new": null,
+   "note": "The Last Chieftains naval rework; game data"
+  },
+  {
+   "type": "unit",
+   "name": "Longship",
+   "field": "attack_bonus vs Fishing Ships",
+   "old": 9,
+   "new": null,
+   "note": "The Last Chieftains naval rework; game data"
+  },
+  {
+   "type": "unit",
+   "name": "Longship",
+   "field": "attack_bonus vs All Buildings",
+   "old": 7,
+   "new": null,
+   "note": "The Last Chieftains naval rework; game data"
+  },
+  {
+   "type": "unit",
+   "name": "Longship",
+   "field": "attack_bonus vs Rams",
+   "old": 4,
+   "new": 2,
+   "note": "The Last Chieftains naval rework; game data"
+  },
+  {
+   "type": "unit",
+   "name": "Longship",
+   "field": "attack_bonus vs Long-range warship",
+   "old": null,
+   "new": 1,
+   "note": "The Last Chieftains naval rework; game data"
+  },
+  {
+   "type": "unit",
+   "name": "Longship",
+   "field": "elite_variant.hit_points",
+   "old": 160,
+   "new": 130,
+   "note": "Elite Longship; game data"
+  },
+  {
+   "type": "unit",
+   "name": "Longship",
+   "field": "elite_variant.pierce_armor",
+   "old": 8,
+   "new": 6,
+   "note": "Elite Longship; game data"
+  },
+  {
+   "type": "unit",
+   "name": "Longship",
+   "field": "elite_variant.attack_bonus vs Ships",
+   "old": 10,
+   "new": null,
+   "note": "Elite Longship; game data"
+  },
+  {
+   "type": "unit",
+   "name": "Longship",
+   "field": "elite_variant.attack_bonus vs Fishing Ships",
+   "old": 10,
+   "new": null,
+   "note": "Elite Longship; game data"
+  },
+  {
+   "type": "unit",
+   "name": "Thirisadai",
+   "field": "attack_bonus vs Ships",
+   "old": 9,
+   "new": null,
+   "note": "The Last Chieftains naval rework; game data"
+  },
+  {
+   "type": "unit",
+   "name": "Thirisadai",
+   "field": "attack_bonus vs Fishing Ships",
+   "old": 9,
+   "new": null,
+   "note": "The Last Chieftains naval rework; game data"
+  },
+  {
+   "type": "unit",
+   "name": "Thirisadai",
+   "field": "attack_bonus vs All Buildings",
+   "old": 9,
+   "new": 7,
+   "note": "The Last Chieftains naval rework; game data"
+  },
+  {
+   "type": "unit",
+   "name": "Thirisadai",
+   "field": "attack_bonus vs Long-range warship",
+   "old": null,
+   "new": 7,
+   "note": "The Last Chieftains naval rework; game data"
+  },
+  {
+   "type": "unit",
+   "name": "Galley",
+   "field": "training_time",
+   "old": 36,
+   "new": 45,
+   "note": "game data; the wiki still says 36 (60 before The Last Chieftains). Uncertain"
+  },
+  {
+   "type": "unit",
+   "name": "Dromon",
+   "field": "speed",
+   "old": 1.2,
+   "new": 1.15,
+   "note": "game data; the wiki still says 1.2"
+  },
+  {
+   "type": "unit",
+   "name": "Lou Chuan",
+   "field": "speed",
+   "old": 1.15,
+   "new": 1.1,
+   "note": "game data; the wiki still says 1.15"
+  },
+  {
+   "type": "unit",
+   "name": "Demolition Ship",
+   "field": "upgrade_cost_wood",
+   "old": 200,
+   "new": 250,
+   "note": "game data (Heavy Demolition Ship upgrade 250 wood, 300 gold); the wiki still says 200 wood"
+  },
+  {
+   "type": "technology",
+   "name": "Counter- weights",
+   "field": "renamed",
+   "new": "Counterweights",
+   "note": "stray hyphen and space in the site name; game_id 454"
+  },
+  {
+   "type": "technology",
+   "name": "Circum- navigation",
+   "field": "renamed",
+   "new": "Circumnavigation",
+   "note": "stray hyphen and space in the site name; game_id 1404"
+  }
+ ],
+ "availability_changes": [
+  {
+   "civilization": "Vikings",
+   "kind": "unit",
+   "name": "Cannon Galleon",
+   "available": false
+  },
+  {
+   "civilization": "Armenians",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Aztecs",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Bengalis",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Berbers",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Bohemians",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Bulgarians",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Burgundians",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Burmese",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Byzantines",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Celts",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Chinese",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Cumans",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Dravidians",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Ethiopians",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Franks",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Goths",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Gurjaras",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Hindustanis",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Inca",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Italians",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Japanese",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Jurchens",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Khitans",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Khmer",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Koreans",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Magyars",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Malay",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Malians",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Mapuche",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Maya",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Muisca",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Persians",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Poles",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Portuguese",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Saracens",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Shu",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Sicilians",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Slavs",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Spanish",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Tatars",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Teutons",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Turks",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Vietnamese",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Vikings",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Wei",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Wu",
+   "kind": "unit",
+   "name": "Carrack",
+   "available": true
+  },
+  {
+   "civilization": "Aztecs",
+   "kind": "unit",
+   "name": "Catapult Galleon",
+   "available": true
+  },
+  {
+   "civilization": "Cumans",
+   "kind": "unit",
+   "name": "Catapult Galleon",
+   "available": true
+  },
+  {
+   "civilization": "Inca",
+   "kind": "unit",
+   "name": "Catapult Galleon",
+   "available": true
+  },
+  {
+   "civilization": "Mapuche",
+   "kind": "unit",
+   "name": "Catapult Galleon",
+   "available": true
+  },
+  {
+   "civilization": "Maya",
+   "kind": "unit",
+   "name": "Catapult Galleon",
+   "available": true
+  },
+  {
+   "civilization": "Muisca",
+   "kind": "unit",
+   "name": "Catapult Galleon",
+   "available": true
+  },
+  {
+   "civilization": "Tupi",
+   "kind": "unit",
+   "name": "Catapult Galleon",
+   "available": true
+  },
+  {
+   "civilization": "Vikings",
+   "kind": "unit",
+   "name": "Catapult Galleon",
+   "available": true
+  },
+  {
+   "civilization": "Britons",
+   "kind": "unit",
+   "name": "Cavalry Archer",
+   "available": false
+  },
+  {
+   "civilization": "Burgundians",
+   "kind": "unit",
+   "name": "Cavalry Archer",
+   "available": false
+  },
+  {
+   "civilization": "Celts",
+   "kind": "unit",
+   "name": "Cavalry Archer",
+   "available": false
+  },
+  {
+   "civilization": "Franks",
+   "kind": "unit",
+   "name": "Cavalry Archer",
+   "available": false
+  },
+  {
+   "civilization": "Italians",
+   "kind": "unit",
+   "name": "Cavalry Archer",
+   "available": false
+  },
+  {
+   "civilization": "Poles",
+   "kind": "unit",
+   "name": "Cavalry Archer",
+   "available": false
+  },
+  {
+   "civilization": "Portuguese",
+   "kind": "unit",
+   "name": "Cavalry Archer",
+   "available": false
+  },
+  {
+   "civilization": "Sicilians",
+   "kind": "unit",
+   "name": "Cavalry Archer",
+   "available": false
+  },
+  {
+   "civilization": "Spanish",
+   "kind": "unit",
+   "name": "Cavalry Archer",
+   "available": false
+  },
+  {
+   "civilization": "Teutons",
+   "kind": "unit",
+   "name": "Cavalry Archer",
+   "available": false
+  },
+  {
+   "civilization": "Vikings",
+   "kind": "unit",
+   "name": "Cavalry Archer",
+   "available": false
+  },
+  {
+   "civilization": "Romans",
+   "kind": "unit",
+   "name": "Champion",
+   "available": false
+  },
+  {
+   "civilization": "Romans",
+   "kind": "unit",
+   "name": "Demolition Raft",
+   "available": true
+  },
+  {
+   "civilization": "Romans",
+   "kind": "unit",
+   "name": "Demolition Ship",
+   "available": true
+  },
+  {
+   "civilization": "Vikings",
+   "kind": "unit",
+   "name": "Elite Cannon Galleon",
+   "available": false
+  },
+  {
+   "civilization": "Vikings",
+   "kind": "unit",
+   "name": "Fire Galley",
+   "available": true
+  },
+  {
+   "civilization": "Vikings",
+   "kind": "unit",
+   "name": "Fire Ship",
+   "available": true
+  },
+  {
+   "civilization": "Britons",
+   "kind": "unit",
+   "name": "Heavy Cavalry Archer",
+   "available": false
+  },
+  {
+   "civilization": "Celts",
+   "kind": "unit",
+   "name": "Heavy Cavalry Archer",
+   "available": false
+  },
+  {
+   "civilization": "Chinese",
+   "kind": "unit",
+   "name": "Heavy Cavalry Archer",
+   "available": false
+  },
+  {
+   "civilization": "Franks",
+   "kind": "unit",
+   "name": "Heavy Cavalry Archer",
+   "available": false
+  },
+  {
+   "civilization": "Poles",
+   "kind": "unit",
+   "name": "Heavy Cavalry Archer",
+   "available": false
+  },
+  {
+   "civilization": "Spanish",
+   "kind": "unit",
+   "name": "Heavy Cavalry Archer",
+   "available": false
+  },
+  {
+   "civilization": "Britons",
+   "kind": "unit",
+   "name": "Heavy Mounted Crossbowman",
+   "available": true
+  },
+  {
+   "civilization": "Celts",
+   "kind": "unit",
+   "name": "Heavy Mounted Crossbowman",
+   "available": true
+  },
+  {
+   "civilization": "Franks",
+   "kind": "unit",
+   "name": "Heavy Mounted Crossbowman",
+   "available": true
+  },
+  {
+   "civilization": "Poles",
+   "kind": "unit",
+   "name": "Heavy Mounted Crossbowman",
+   "available": true
+  },
+  {
+   "civilization": "Sicilians",
+   "kind": "unit",
+   "name": "Heavy Mounted Crossbowman",
+   "available": true
+  },
+  {
+   "civilization": "Spanish",
+   "kind": "unit",
+   "name": "Heavy Mounted Crossbowman",
+   "available": true
+  },
+  {
+   "civilization": "Teutons",
+   "kind": "unit",
+   "name": "Heavy Mounted Crossbowman",
+   "available": true
+  },
+  {
+   "civilization": "Armenians",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Aztecs",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Bengalis",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Berbers",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Bohemians",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Britons",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Bulgarians",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Burgundians",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Burmese",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Byzantines",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Celts",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Chinese",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Cumans",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Dravidians",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Ethiopians",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Franks",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Georgians",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Goths",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Gurjaras",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Hindustanis",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Huns",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Inca",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Italians",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Japanese",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Jurchens",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Khitans",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Khmer",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Koreans",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Lithuanians",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Magyars",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Malay",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Malians",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Mapuche",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Maya",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Mongols",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Muisca",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Persians",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Poles",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Portuguese",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Romans",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Saracens",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Shu",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Sicilians",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Slavs",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Spanish",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Tatars",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Teutons",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Tupi",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Turks",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Vietnamese",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Vikings",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Wei",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Wu",
+   "kind": "unit",
+   "name": "Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Lithuanians",
+   "kind": "unit",
+   "name": "Hussar",
+   "available": false
+  },
+  {
+   "civilization": "Poles",
+   "kind": "unit",
+   "name": "Hussar",
+   "available": false
+  },
+  {
+   "civilization": "Bohemians",
+   "kind": "unit",
+   "name": "Mounted Crossbowman",
+   "available": true
+  },
+  {
+   "civilization": "Britons",
+   "kind": "unit",
+   "name": "Mounted Crossbowman",
+   "available": true
+  },
+  {
+   "civilization": "Burgundians",
+   "kind": "unit",
+   "name": "Mounted Crossbowman",
+   "available": true
+  },
+  {
+   "civilization": "Celts",
+   "kind": "unit",
+   "name": "Mounted Crossbowman",
+   "available": true
+  },
+  {
+   "civilization": "Franks",
+   "kind": "unit",
+   "name": "Mounted Crossbowman",
+   "available": true
+  },
+  {
+   "civilization": "Italians",
+   "kind": "unit",
+   "name": "Mounted Crossbowman",
+   "available": true
+  },
+  {
+   "civilization": "Poles",
+   "kind": "unit",
+   "name": "Mounted Crossbowman",
+   "available": true
+  },
+  {
+   "civilization": "Portuguese",
+   "kind": "unit",
+   "name": "Mounted Crossbowman",
+   "available": true
+  },
+  {
+   "civilization": "Sicilians",
+   "kind": "unit",
+   "name": "Mounted Crossbowman",
+   "available": true
+  },
+  {
+   "civilization": "Spanish",
+   "kind": "unit",
+   "name": "Mounted Crossbowman",
+   "available": true
+  },
+  {
+   "civilization": "Teutons",
+   "kind": "unit",
+   "name": "Mounted Crossbowman",
+   "available": true
+  },
+  {
+   "civilization": "Vikings",
+   "kind": "unit",
+   "name": "Mounted Crossbowman",
+   "available": true
+  },
+  {
+   "civilization": "Persians",
+   "kind": "unit",
+   "name": "Paladin",
+   "available": false
+  },
+  {
+   "civilization": "Armenians",
+   "kind": "unit",
+   "name": "Siege Ram",
+   "available": true
+  },
+  {
+   "civilization": "Romans",
+   "kind": "unit",
+   "name": "Two-Handed Swordsman",
+   "available": false
+  },
+  {
+   "civilization": "Armenians",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Aztecs",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Bengalis",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Berbers",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Bohemians",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Britons",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Bulgarians",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Burgundians",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Burmese",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Byzantines",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Celts",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Chinese",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Cumans",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Dravidians",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Ethiopians",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Franks",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Georgians",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Goths",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Gurjaras",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Hindustanis",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Huns",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Inca",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Italians",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Japanese",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Jurchens",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Khitans",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Khmer",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Koreans",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Lithuanians",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Magyars",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Malay",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Malians",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Mapuche",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Maya",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Mongols",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Muisca",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Persians",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Poles",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Portuguese",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Romans",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Saracens",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Shu",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Sicilians",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Slavs",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Spanish",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Tatars",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Teutons",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Tupi",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Turks",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Vietnamese",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Vikings",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Wei",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  },
+  {
+   "civilization": "Wu",
+   "kind": "unit",
+   "name": "War Hulk",
+   "available": true
+  }
+ ],
+ "civ_fixes": [
+  {
+   "name": "Vikings",
+   "architecture_set": "Northern European"
+  }
+ ]
+}

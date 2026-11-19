@@ -6,6 +6,50 @@ use yii\db\ActiveRecord;
 
 class Unit extends ActiveRecord
 {
+    /**
+     * Unique units of every civilization, as [civilization id => Unit[]], sorted by name:
+     * - units marked unique, for their own civilization and for up to three civilizations that can train them
+     *   (the Winged Hussar of the Lithuanians and the Poles);
+     * - units not marked unique that only one civilization can train (Houfnice, Dragon Ship, Imperial Skirmisher).
+     */
+    public static function uniqueByCivilization()
+    {
+        $civsOf = [];
+        foreach ((new \yii\db\Query())->select(['unit_id', 'civilization_id'])->from('unit_availability')
+                     ->where(['available' => 1])->all() as $row) {
+            $civsOf[$row['unit_id']][] = (int)$row['civilization_id'];
+        }
+        $map = [];
+        foreach (self::find()->orderBy(['name' => SORT_ASC])->all() as $u) {
+            $civIds = $civsOf[$u->id] ?? [];
+            if ($u->is_unique) {
+                if (count($civIds) > 3) $civIds = [];
+                if ($u->civilization_id) $civIds[] = (int)$u->civilization_id;
+            } elseif (count($civIds) !== 1) {
+                continue;
+            }
+            foreach (array_unique($civIds) as $cid) {
+                $map[$cid][] = $u;
+            }
+        }
+        return $map;
+    }
+
+    /**
+     * The elite upgrade of a unique unit, kept as elite_variant data rather than as its own unit:
+     * ['name' => 'Elite Samurai', 'hit_points' => 80, ...], or null when there is none
+     * (or when the elite version is a unit of its own in the table).
+     */
+    public function getEliteData()
+    {
+        $ev = $this->elite_variant;
+        if (is_string($ev)) $ev = json_decode($ev, true);
+        if (is_string($ev)) $ev = json_decode($ev, true);
+        if (!is_array($ev) || empty($ev['name'])) return null;
+        if (self::find()->where(['name' => $ev['name']])->exists()) return null;
+        return $ev;
+    }
+
     public static function tableName()
     {
         return 'unit';
@@ -78,11 +122,28 @@ class Unit extends ActiveRecord
         $icon = function ($res) {
             return '<img src="/images/resources/' . $res . '.png" alt="' . $res . '" class="resource-icon">';
         };
-        if ($this->cost_food) $parts[] = $icon('Food') . ' ' . $this->cost_food;
-        if ($this->cost_wood) $parts[] = $icon('Wood') . ' ' . $this->cost_wood;
-        if ($this->cost_gold) $parts[] = $icon('Gold') . ' ' . $this->cost_gold;
-        if ($this->cost_stone) $parts[] = $icon('Stone') . ' ' . $this->cost_stone;
-        return $parts ? implode('&nbsp; ', $parts) : 'Free';
+        // each resource stays whole when a narrow column wraps the cost
+        $part = function ($res, $value) use ($icon) {
+            return '<span class="cost-part">' . $icon($res) . ' ' . $value . '</span>';
+        };
+        if ($this->cost_food) $parts[] = $part('Food', $this->cost_food);
+        if ($this->cost_wood) $parts[] = $part('Wood', $this->cost_wood);
+        if ($this->cost_gold) $parts[] = $part('Gold', $this->cost_gold);
+        if ($this->cost_stone) $parts[] = $part('Stone', $this->cost_stone);
+        return $parts ? implode(' ', $parts) : 'Free';
+    }
+
+    /** Cost and time of the elite upgrade, with icons; empty when unknown. */
+    public function getUpgradeCostHtml()
+    {
+        $parts = [];
+        foreach (['Food' => $this->upgrade_cost_food, 'Wood' => $this->upgrade_cost_wood, 'Gold' => $this->upgrade_cost_gold, 'Stone' => $this->upgrade_cost_stone] as $res => $n) {
+            if ($n) $parts[] = '<span class="cost-part"><img src="/images/resources/' . $res . '.png" alt="' . $res . '" class="resource-icon"> ' . (int)$n . '</span>';
+        }
+        if ($this->upgrade_time) {
+            $parts[] = '<span class="cost-part"><img src="/images/stats/time.png" alt="Time" class="resource-icon"> ' . (int)$this->upgrade_time . 's</span>';
+        }
+        return implode(' ', $parts);
     }
 
     public function getArmorString()
@@ -109,12 +170,20 @@ class Unit extends ActiveRecord
     }
 
     /**
-     * Transparent in-game sprite (from the AoE wiki), if one was downloaded for this unit.
+     * Transparent in-game sprite, if one exists for this unit: an animated .webp taken from the
+     * game's own animation wins over a still .png (from the AoE wiki or the game).
      */
     public function getTransparentSpriteUrl()
     {
-        $url = '/images/sprites/' . $this->slug . '.png';
-        return file_exists(\Yii::getAlias('@webroot') . $url) ? $url : null;
+        foreach (['webp', 'png'] as $ext) {
+            // same cache busting as getIconUrl(): a redrawn sprite gets a new address
+            $url = '/images/sprites/' . $this->slug . '.' . $ext;
+            $mtime = @filemtime(\Yii::getAlias('@webroot') . $url);
+            if ($mtime) {
+                return "$url?v=$mtime";
+            }
+        }
+        return null;
     }
 
     /**

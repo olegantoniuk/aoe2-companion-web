@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use app\components\UnitPills;
 
 $this->title = $civ->name;
 ?>
@@ -20,6 +21,9 @@ $this->title = $civ->name;
         <?php endif; ?>
         <h1 style="margin: 0;"><?= Html::encode($civ->name) ?></h1>
     </div>
+    <?php if ($civ->hasAttribute('intro') && $civ->intro): ?>
+        <div class="civ-intro-wrap"><p class="civ-intro"><?= UnitPills::linkify(Html::encode($civ->intro), $civ->slug) ?></p></div>
+    <?php endif; ?>
 </div>
 
 <div class="row">
@@ -29,7 +33,7 @@ $this->title = $civ->name;
             <div class="card-header"><strong>Overview</strong></div>
             <table class="table table-sm stat-table mb-0">
                 <?php if ($civ->focus): ?>
-                    <tr><th>Focus</th><td><?= Html::encode($civ->focus) ?></td></tr>
+                    <tr><th>Focus</th><td><?= Html::encode(implode(", ", $civ->focusList)) ?></td></tr>
                 <?php endif; ?>
                 <?php if ($civ->architecture_set): ?>
                     <tr><th>Architecture</th><td><?= Html::encode($civ->architecture_set) ?></td></tr>
@@ -74,11 +78,11 @@ $this->title = $civ->name;
                     <?php foreach ($techs as $tech): ?>
                         <div class="mb-2 d-flex align-items-start gap-2">
                             <?php
-                            $techFile = str_replace([' ', "'", '*', '(', ')'], '', $tech->name) . '.png';
+                            $techFile = str_replace([' ', "'", '*', '(', ')', '-'], '', $tech->name) . '.png';
                             $techPath = Yii::getAlias('@webroot') . '/images/techs/' . $techFile;
                             $techSrc = file_exists($techPath) ? '/images/techs/' . $techFile : '/images/techs/UniqueTechCastle.png';
                             ?>
-                            <img src="<?= Html::encode($techSrc) ?>" alt="" class="tech-icon" style="flex-shrink: 0;">
+                            <img src="<?= Html::encode($techSrc) ?>" alt="" class="tech-icon tech-icon-bg" style="flex-shrink: 0;">
                             <div>
                                 <strong><?= Html::encode($tech->name) ?></strong>
                                 <?php if ($tech->description): ?>
@@ -100,27 +104,63 @@ $this->title = $civ->name;
                 <h3 style="margin: 0;">Unique Units</h3>
             </div>
             <div class="row g-3 mb-4">
-                <?php foreach ($uniqueUnits as $unit): ?>
+                <?php
+                // each unique unit, then its elite upgrade as a card of its own
+                $uniqueCards = [];
+                // real unique units with their elite versions first, civilization-only upgrades (Houfnice) last
+                usort($uniqueUnits, function ($a, $b) {
+                    return [(int)!$a->is_unique, $a->name] <=> [(int)!$b->is_unique, $b->name];
+                });
+                foreach ($uniqueUnits as $unit) {
+                    $uniqueCards[] = [
+                        'name' => $unit->name, 'icon' => $unit->iconUrl, 'age' => $unit->age, 'unit' => $unit,
+                        'hp' => $unit->hit_points, 'melee' => $unit->melee_attack, 'pierce' => $unit->pierce_attack,
+                        'marmor' => $unit->melee_armor, 'parmor' => $unit->pierce_armor, 'speed' => $unit->speed,
+                        'url' => Url::to(['unit/view', 'slug' => $unit->slug]), 'elite' => false,
+                    ];
+                    $ev = $unit->eliteData;
+                    if ($ev) {
+                        $uniqueCards[] = [
+                            'name' => $ev['name'], 'icon' => UnitPills::iconForName($ev['name']) ?: $unit->iconUrl,
+                            'age' => 'Imperial Age', 'unit' => $unit,
+                            'hp' => $ev['hit_points'] ?? $unit->hit_points,
+                            'melee' => array_key_exists('melee_attack', $ev) ? $ev['melee_attack'] : $unit->melee_attack,
+                            'pierce' => array_key_exists('pierce_attack', $ev) ? $ev['pierce_attack'] : $unit->pierce_attack,
+                            'marmor' => $ev['melee_armor'] ?? $unit->melee_armor, 'parmor' => $ev['pierce_armor'] ?? $unit->pierce_armor,
+                            'speed' => $ev['speed'] ?? $unit->speed,
+                            'url' => Url::to(['unit/view', 'slug' => $unit->slug, '#' => 'combat-stats']), 'elite' => true,
+                        ];
+                    }
+                }
+                ?>
+                <?php foreach ($uniqueCards as $c): ?>
                     <div class="col-md-6">
-                        <a href="<?= Url::to(['unit/view', 'slug' => $unit->slug]) ?>" class="civ-card-link">
-                            <div class="admin5-card admin5-card-border" style="margin-bottom: 0;">
+                        <a href="<?= $c['url'] ?>" class="civ-card-link">
+                            <div class="admin5-card admin5-card-border unique-card<?= $c['elite'] ? ' is-elite' : '' ?>" style="margin-bottom: 0;">
                                 <div class="card-content">
-                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <div class="d-flex justify-content-between align-items-center gap-2 mb-2">
                                         <div class="d-flex align-items-center gap-2">
-                                            <?php if ($unit->iconUrl): ?>
-                                                <img src="<?= Html::encode($unit->iconUrl) ?>" alt="" class="unit-image-sm">
-                                            <?php endif; ?>
-                                            <strong><?= Html::encode($unit->name) ?></strong>
+                                            <?= UnitPills::avatar($c['icon']) ?>
+                                            <span>
+                                                <span class="unit-list-name"><?= Html::encode($c['name']) ?></span>
+                                                <?php if ($c['elite']): ?>
+                                                    <span class="unique-card-upgrade">Upgrade of <?= Html::encode($c['unit']->name) ?></span>
+                                                <?php endif; ?>
+                                            </span>
                                         </div>
-                                        <?php if ($unit->age): ?>
-                                            <span class="badge badge-age age-<?= strtolower(explode(' ', $unit->age)[0]) ?>"><?= Html::encode($unit->age) ?></span>
+                                        <?php if ($c['age']): ?><?= UnitPills::agePill($c['age']) ?><?php endif; ?>
+                                    </div>
+                                    <div class="unique-card-stats">
+                                        <span><img src="/images/stats/hit_points.png" alt="" class="stat-icon"><?= $c['hp'] ?? '?' ?></span>
+                                        <span><img src="/images/stats/<?= $c['melee'] !== null ? 'melee_attack' : 'pierce_attack' ?>.png" alt="" class="stat-icon"><?= $c['melee'] ?? $c['pierce'] ?? '?' ?></span>
+                                        <span><img src="/images/stats/melee_armor.png" alt="" class="stat-icon"><?= (int)$c['marmor'] ?>/<?= (int)$c['parmor'] ?></span>
+                                        <?php if ($c['speed']): ?><span><img src="/images/stats/movement_speed.png" alt="" class="stat-icon"><?= $c['speed'] ?></span><?php endif; ?>
+                                        <?php if ($c['elite']): ?>
+                                            <span class="unit-list-cost" title="Elite upgrade cost"><?= $c['unit']->upgradeCostHtml ?></span>
+                                        <?php else: ?>
+                                            <span class="unit-list-cost"><?= $c['unit']->costHtml ?></span>
                                         <?php endif; ?>
                                     </div>
-                                    <small class="text-muted">
-                                        <img src="/images/stats/hit_points.png" alt="" class="stat-icon"> <?= $unit->hit_points ?? '?' ?>
-                                        &nbsp;<img src="/images/stats/melee_attack.png" alt="" class="stat-icon"> <?= $unit->melee_attack ?? $unit->pierce_attack ?? '?' ?>
-                                        &nbsp;<img src="/images/stats/melee_armor.png" alt="" class="stat-icon"> <?= $unit->armorString ?>
-                                    </small>
                                 </div>
                             </div>
                         </a>
@@ -282,41 +322,15 @@ $this->title = $civ->name;
                     <div class="tab-pane fade show active" id="tab-class" role="tabpanel">
                         <div class="admin5-card admin5-card-border admin5-card-attached">
                             <div class="table-responsive">
-                                <table class="table table-sm mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 40px"></th>
-                                            <th>Unit</th>
-                                            <th>Class</th>
-                                            <th>Age</th>
-                                            <th><img src="/images/stats/hit_points.png" alt="HP" class="stat-icon" title="Hit Points"></th>
-                                            <th><img src="/images/stats/melee_attack.png" alt="Atk" class="stat-icon" title="Attack"></th>
-                                            <th><img src="/images/stats/melee_armor.png" alt="Armor" class="stat-icon" title="Armor"></th>
-                                        </tr>
-                                    </thead>
+                                <table class="table table-sm mb-0 unit-list-table">
+                                    <thead><?= UnitPills::unitTableHead('Class', ['third']) ?></thead>
                                     <?php foreach ($byType as $group => $units): ?>
                                         <tbody class="unit-group" data-group="<?= Html::encode($group) ?>">
                                             <tr class="unit-group-row">
-                                                <td colspan="7" class="unit-group-header"><?= Html::encode($group) ?> <span class="group-count">(<?= count($units) ?>)</span></td>
+                                                <td colspan="<?= UnitPills::tableCols(['third']) ?>" class="unit-group-header"><span class="unit-group-name"><?= Html::encode($group) ?></span> <span class="badge bg-secondary badge-sm group-count"><?= count($units) ?></span></td>
                                             </tr>
                                             <?php foreach ($units as $unit): ?>
-                                                <tr class="unit-row" data-name="<?= Html::encode(strtolower($unit->name)) ?>">
-                                                    <td style="width: 40px">
-                                                        <?php if ($unit->iconUrl): ?>
-                                                            <img src="<?= Html::encode($unit->iconUrl) ?>" alt="" class="unit-image-xs">
-                                                        <?php endif; ?>
-                                                    </td>
-                                                    <td><?= Html::a(Html::encode($unit->name), ['unit/view', 'slug' => $unit->slug]) ?></td>
-                                                    <td><span class="badge bg-secondary badge-sm"><?= Html::encode($unit->armorClassGroup) ?></span></td>
-                                                    <td>
-                                                        <?php if ($unit->age): ?>
-                                                            <span class="badge badge-age age-<?= strtolower(explode(' ', $unit->age)[0]) ?>"><?= Html::encode($unit->age) ?></span>
-                                                        <?php endif; ?>
-                                                    </td>
-                                                    <td><?= $unit->hit_points ?></td>
-                                                    <td><?= $unit->melee_attack ?? $unit->pierce_attack ?? '-' ?></td>
-                                                    <td><?= $unit->armorString ?></td>
-                                                </tr>
+                                                <tr class="unit-row" data-name="<?= Html::encode(strtolower($unit->name)) ?>"><?= UnitPills::unitRowCells($unit, 'class', ['third']) ?></tr>
                                             <?php endforeach; ?>
                                         </tbody>
                                     <?php endforeach; ?>
@@ -329,46 +343,20 @@ $this->title = $civ->name;
                     <div class="tab-pane fade" id="tab-building" role="tabpanel">
                         <div class="admin5-card admin5-card-border admin5-card-attached">
                             <div class="table-responsive">
-                                <table class="table table-sm mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 40px"></th>
-                                            <th>Unit</th>
-                                            <th>Building</th>
-                                            <th>Age</th>
-                                            <th><img src="/images/stats/hit_points.png" alt="HP" class="stat-icon" title="Hit Points"></th>
-                                            <th><img src="/images/stats/melee_attack.png" alt="Atk" class="stat-icon" title="Attack"></th>
-                                            <th><img src="/images/stats/melee_armor.png" alt="Armor" class="stat-icon" title="Armor"></th>
-                                        </tr>
-                                    </thead>
+                                <table class="table table-sm mb-0 unit-list-table">
+                                    <thead><?= UnitPills::unitTableHead('Building', ['third']) ?></thead>
                                     <?php foreach ($byBuilding as $group => $units): ?>
                                         <tbody class="unit-group" data-group="<?= Html::encode($group) ?>">
                                             <tr class="unit-group-row">
-                                                <td colspan="7" class="unit-group-header">
+                                                <td colspan="<?= UnitPills::tableCols(['third']) ?>" class="unit-group-header">
                                                     <?php if (isset($buildingIcons[$group])): ?>
                                                         <img src="<?= Html::encode($buildingIcons[$group]) ?>" alt="" class="unit-image-xs" style="margin-right: 4px;">
                                                     <?php endif; ?>
-                                                    <?= Html::encode($group) ?> <span class="group-count">(<?= count($units) ?>)</span>
+                                                    <span class="unit-group-name"><?= Html::encode($group) ?></span> <span class="badge bg-secondary badge-sm group-count"><?= count($units) ?></span>
                                                 </td>
                                             </tr>
                                             <?php foreach ($units as $unit): ?>
-                                                <tr class="unit-row" data-name="<?= Html::encode(strtolower($unit->name)) ?>">
-                                                    <td style="width: 40px">
-                                                        <?php if ($unit->iconUrl): ?>
-                                                            <img src="<?= Html::encode($unit->iconUrl) ?>" alt="" class="unit-image-xs">
-                                                        <?php endif; ?>
-                                                    </td>
-                                                    <td><?= Html::a(Html::encode($unit->name), ['unit/view', 'slug' => $unit->slug]) ?></td>
-                                                    <td><span class="badge bg-secondary badge-sm"><?= Html::encode($unit->buildingGroup) ?></span></td>
-                                                    <td>
-                                                        <?php if ($unit->age): ?>
-                                                            <span class="badge badge-age age-<?= strtolower(explode(' ', $unit->age)[0]) ?>"><?= Html::encode($unit->age) ?></span>
-                                                        <?php endif; ?>
-                                                    </td>
-                                                    <td><?= $unit->hit_points ?></td>
-                                                    <td><?= $unit->melee_attack ?? $unit->pierce_attack ?? '-' ?></td>
-                                                    <td><?= $unit->armorString ?></td>
-                                                </tr>
+                                                <tr class="unit-row" data-name="<?= Html::encode(strtolower($unit->name)) ?>"><?= UnitPills::unitRowCells($unit, 'building', ['third']) ?></tr>
                                             <?php endforeach; ?>
                                         </tbody>
                                     <?php endforeach; ?>
@@ -381,44 +369,18 @@ $this->title = $civ->name;
                     <div class="tab-pane fade" id="tab-age" role="tabpanel">
                         <div class="admin5-card admin5-card-border admin5-card-attached">
                             <div class="table-responsive">
-                                <table class="table table-sm mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 40px"></th>
-                                            <th>Unit</th>
-                                            <th>Class</th>
-                                            <th>Age</th>
-                                            <th><img src="/images/stats/hit_points.png" alt="HP" class="stat-icon" title="Hit Points"></th>
-                                            <th><img src="/images/stats/melee_attack.png" alt="Atk" class="stat-icon" title="Attack"></th>
-                                            <th><img src="/images/stats/melee_armor.png" alt="Armor" class="stat-icon" title="Armor"></th>
-                                        </tr>
-                                    </thead>
+                                <table class="table table-sm mb-0 unit-list-table">
+                                    <thead><?= UnitPills::unitTableHead('Class', ['age']) ?></thead>
                                     <?php foreach ($byAge as $group => $units): ?>
                                         <tbody class="unit-group" data-group="<?= Html::encode($group) ?>">
                                             <tr class="unit-group-row">
-                                                <td colspan="7" class="unit-group-header">
-                                                    <span class="badge badge-age age-<?= strtolower(explode(' ', $group)[0]) ?>" style="margin-right: 4px;"><?= Html::encode($group) ?></span>
-                                                    <span class="group-count">(<?= count($units) ?>)</span>
+                                                <td colspan="<?= UnitPills::tableCols(['age']) ?>" class="unit-group-header">
+                                                    <?= UnitPills::agePill($group) ?>
+                                                    <span class="badge bg-secondary badge-sm group-count"><?= count($units) ?></span>
                                                 </td>
                                             </tr>
                                             <?php foreach ($units as $unit): ?>
-                                                <tr class="unit-row" data-name="<?= Html::encode(strtolower($unit->name)) ?>">
-                                                    <td style="width: 40px">
-                                                        <?php if ($unit->iconUrl): ?>
-                                                            <img src="<?= Html::encode($unit->iconUrl) ?>" alt="" class="unit-image-xs">
-                                                        <?php endif; ?>
-                                                    </td>
-                                                    <td><?= Html::a(Html::encode($unit->name), ['unit/view', 'slug' => $unit->slug]) ?></td>
-                                                    <td><span class="badge bg-secondary badge-sm"><?= Html::encode($unit->armorClassGroup) ?></span></td>
-                                                    <td>
-                                                        <?php if ($unit->age): ?>
-                                                            <span class="badge badge-age age-<?= strtolower(explode(' ', $unit->age)[0]) ?>"><?= Html::encode($unit->age) ?></span>
-                                                        <?php endif; ?>
-                                                    </td>
-                                                    <td><?= $unit->hit_points ?></td>
-                                                    <td><?= $unit->melee_attack ?? $unit->pierce_attack ?? '-' ?></td>
-                                                    <td><?= $unit->armorString ?></td>
-                                                </tr>
+                                                <tr class="unit-row" data-name="<?= Html::encode(strtolower($unit->name)) ?>"><?= UnitPills::unitRowCells($unit, 'class', ['age']) ?></tr>
                                             <?php endforeach; ?>
                                         </tbody>
                                     <?php endforeach; ?>
@@ -431,37 +393,11 @@ $this->title = $civ->name;
                     <div class="tab-pane fade" id="tab-az" role="tabpanel">
                         <div class="admin5-card admin5-card-border admin5-card-attached">
                             <div class="table-responsive">
-                                <table class="table table-striped table-sm mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 40px"></th>
-                                            <th>Unit</th>
-                                            <th>Class</th>
-                                            <th>Age</th>
-                                            <th><img src="/images/stats/hit_points.png" alt="HP" class="stat-icon" title="Hit Points"></th>
-                                            <th><img src="/images/stats/melee_attack.png" alt="Atk" class="stat-icon" title="Attack"></th>
-                                            <th><img src="/images/stats/melee_armor.png" alt="Armor" class="stat-icon" title="Armor"></th>
-                                        </tr>
-                                    </thead>
+                                <table class="table table-striped table-sm mb-0 unit-list-table">
+                                    <thead><?= UnitPills::unitTableHead('Class') ?></thead>
                                     <tbody>
                                         <?php foreach ($alphabetical as $unit): ?>
-                                            <tr class="unit-row" data-name="<?= Html::encode(strtolower($unit->name)) ?>">
-                                                <td>
-                                                    <?php if ($unit->iconUrl): ?>
-                                                        <img src="<?= Html::encode($unit->iconUrl) ?>" alt="" class="unit-image-xs">
-                                                    <?php endif; ?>
-                                                </td>
-                                                <td><?= Html::a(Html::encode($unit->name), ['unit/view', 'slug' => $unit->slug]) ?></td>
-                                                <td><span class="badge bg-secondary badge-sm"><?= Html::encode($unit->armorClassGroup) ?></span></td>
-                                                <td>
-                                                    <?php if ($unit->age): ?>
-                                                        <span class="badge badge-age age-<?= strtolower(explode(' ', $unit->age)[0]) ?>"><?= Html::encode($unit->age) ?></span>
-                                                    <?php endif; ?>
-                                                </td>
-                                                <td><?= $unit->hit_points ?></td>
-                                                <td><?= $unit->melee_attack ?? $unit->pierce_attack ?? '-' ?></td>
-                                                <td><?= $unit->armorString ?></td>
-                                            </tr>
+                                            <tr class="unit-row" data-name="<?= Html::encode(strtolower($unit->name)) ?>"><?= UnitPills::unitRowCells($unit) ?></tr>
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
@@ -484,10 +420,11 @@ $this->title = $civ->name;
                             <tbody>
                                 <?php foreach ($unavailableUnits as $unit): ?>
                                     <tr class="text-muted">
-                                        <td>
+                                        <td class="unit-unavailable-name">
+                                            <a href="<?= Url::to(['unit/view', 'slug' => $unit->slug]) ?>" class="unit-avatar-link"><?= UnitPills::avatar($unit->iconUrl) ?></a>
                                             <?= Html::a(Html::encode($unit->name), ['unit/view', 'slug' => $unit->slug], ['class' => 'text-muted']) ?>
                                         </td>
-                                        <td><span class="badge bg-secondary badge-sm"><?= Html::encode($unit->armorClassGroup) ?></span></td>
+                                        <td><?php $mc = UnitPills::mainClass($unit); ?><?= $mc ? UnitPills::classPill($mc) : '' ?></td>
                                         <td><span class="avail-no">Unavailable</span></td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -499,6 +436,8 @@ $this->title = $civ->name;
         <?php endif; ?>
     </div>
 </div>
+
+<?php UnitPills::registerTips($this); ?>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -524,10 +463,10 @@ document.addEventListener('DOMContentLoaded', function () {
             // Update count in header
             if (header && visible > 0 && q) {
                 var countEl = header.querySelector('.group-count');
-                if (countEl) countEl.textContent = '(' + visible + ')';
+                if (countEl) countEl.textContent = visible;
             } else if (header && !q) {
                 var countEl = header.querySelector('.group-count');
-                if (countEl) countEl.textContent = '(' + rows.length + ')';
+                if (countEl) countEl.textContent = rows.length;
             }
         });
     });

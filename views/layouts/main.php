@@ -26,18 +26,43 @@ AppAsset::register($this);
 
 <?php
 NavBar::begin([
-    'brandLabel' => '<strong>AoE2</strong> Companion',
+    // calligraphic wordmark: black on the light theme, white on the dark one
+    'brandLabel' => (is_file(Yii::getAlias('@webroot') . '/images/brand/emblem.png')
+            ? '<img src="/images/brand/emblem.png?v=' . filemtime(Yii::getAlias('@webroot') . '/images/brand/emblem.png') . '" alt="" class="brand-emblem">'
+            : '')
+        . '<img src="/images/logo/001-wordmark-black.png" alt="AoE2 Companion" class="brand-logo brand-logo-light">'
+        . '<img src="/images/logo/001-wordmark-white.png" alt="AoE2 Companion" class="brand-logo brand-logo-dark">',
     'brandUrl' => Yii::$app->homeUrl,
     'options' => [
         'class' => 'navbar navbar-expand-lg navbar-light',
     ],
 ]);
 
-$menuItems = [
+// the knowledge base first; the reference pages follow in a row on wide screens
+// and fold into one "Database" menu when the header runs out of room
+$referenceItems = [
     ['label' => 'Civilizations', 'url' => ['/civilization/index']],
     ['label' => 'Units', 'url' => ['/unit/index']],
+    ['label' => 'Buildings', 'url' => ['/building/index']],
+    ['label' => 'Technologies', 'url' => ['/technology/index']],
     ['label' => 'Classes', 'url' => ['/unit/classes']],
+];
+$route = Yii::$app->controller->id;
+$inReference = in_array($route, ['civilization', 'unit', 'building', 'technology'], true);
+$menuItems = [
+    ['label' => 'Builds', 'url' => ['/build/index']],
+    ['label' => 'Guides', 'url' => ['/guide/index']],
     ['label' => 'Matchup', 'url' => ['/matchup/index']],
+];
+foreach ($referenceItems as $i => $item) {
+    // shown in a row from 1400 px, and in the collapsed mobile menu
+    $menuItems[] = $item + ['options' => ['class' => 'nav-item d-lg-none d-xxl-block' . ($i === 0 ? ' nav-item-ref-first' : '')]];
+}
+$menuItems[] = [
+    'label' => 'Database',
+    'items' => $referenceItems,
+    'active' => $inReference,
+    'options' => ['class' => 'nav-item dropdown d-none d-lg-block d-xxl-none'],
 ];
 
 if (Yii::$app->user->isGuest) {
@@ -67,7 +92,7 @@ echo '<button class="theme-toggle ms-2" id="themeToggle" type="button" title="To
 NavBar::end();
 ?>
 
-<div class="admin5-content-wrapper">
+<div class="admin5-content-wrapper container">
     <?php if (Yii::$app->session->hasFlash('success')): ?>
         <div class="alert alert-success alert-dismissible fade show">
             <?= Yii::$app->session->getFlash('success') ?>
@@ -87,7 +112,7 @@ NavBar::end();
 
 <footer class="site-footer">
     <div class="container text-center">
-        <p class="mb-0">AoE2 Companion &copy; <?= date('Y') ?> &mdash; Data sourced from <a href="https://ageofempires.fandom.com" target="_blank" rel="noopener">Age of Empires Wiki</a></p>
+        <p class="mb-0">AoE2 Companion &copy; <?= date('Y') ?></p>
     </div>
 </footer>
 

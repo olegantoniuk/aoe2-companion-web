@@ -1,0 +1,3121 @@
+[
+ {
+  "slug": "archers-22-pop",
+  "title": "Archers (22 pop, two ranges)",
+  "strategy": "Archers",
+  "category": "feudal-aggression",
+  "elo": "intermediate",
+  "difficulty": 2,
+  "map_types": [
+   "open"
+  ],
+  "civs": [
+   "Britons",
+   "Ethiopians",
+   "Vietnamese",
+   "Maya",
+   "Mongols",
+   "Koreans",
+   "Vikings"
+  ],
+  "summary": "Click up with 21 villagers, drop two Archery Ranges as Feudal Age lands and push with Fletching archers before your opponent has Skirmishers.",
+  "description": "Straight archers is the standard ranged opening. You spend the Dark Age building a big wood economy, then turn wood and gold into Archers from two Archery Ranges as soon as you reach Feudal Age. Fletching from the Blacksmith comes in after the first few archers, and from then on a group of 8 to 10 archers can push villagers off their resources.\n\nPick it against civilizations that open with infantry or that like to boom, and on maps where you can see the opponent's base early. It is weaker into an opponent who opens Skirmishers or who walls well, so scout their buildings with your Scout Cavalry while the age loads.\n\nThe 22 pop version below is the easy one to execute. Strong players get the same army a minute earlier with 20 or 21 pop builds that use only one range at first; once this version feels smooth you can cut a villager from the end of the Dark Age.",
+  "steps": [
+   {
+    "pop": 3,
+    "type": "build",
+    "text": "Starting villagers build two Houses; scout for sheep"
+   },
+   {
+    "pop": 6,
+    "type": "villager",
+    "text": "First 6 villagers on sheep"
+   },
+   {
+    "pop": 10,
+    "type": "villager",
+    "text": "Next 4 villagers build a Lumber Camp and chop wood"
+   },
+   {
+    "pop": 11,
+    "type": "villager",
+    "text": "Villager 11 lures the first boar"
+   },
+   {
+    "pop": 12,
+    "type": "build",
+    "text": "Villager 12 builds a House, then the Mill next to the berries"
+   },
+   {
+    "pop": 15,
+    "type": "villager",
+    "text": "Next 3 villagers on berries (4 on berries); a boar villager lures the second boar"
+   },
+   {
+    "pop": 17,
+    "type": "villager",
+    "text": "Next 2 villagers on boar and sheep"
+   },
+   {
+    "pop": 21,
+    "type": "villager",
+    "text": "Next 4 villagers build a second Lumber Camp and chop (8 on wood)"
+   },
+   {
+    "pop": 22,
+    "type": "research",
+    "text": "Research Loom"
+   },
+   {
+    "pop": 22,
+    "type": "age",
+    "text": "Click up to the Feudal Age with 21 villagers plus the scout"
+   },
+   {
+    "pop": 22,
+    "type": "villager",
+    "text": "While the age loads, move 3 sheep villagers to wood (11 on wood) and 3 to build a Mining Camp on gold"
+   },
+   {
+    "pop": 22,
+    "type": "build",
+    "text": "Halfway through the age up, one wood villager builds a Barracks at the front of your base"
+   },
+   {
+    "pop": 22,
+    "type": "age",
+    "text": "Feudal Age arrives: build two Archery Ranges with wood villagers and start Archers from both"
+   },
+   {
+    "pop": 23,
+    "type": "research",
+    "text": "Research Double-Bit Axe; skip Horse Collar for now"
+   },
+   {
+    "pop": 27,
+    "type": "villager",
+    "text": "Next 5 villagers go to gold (8 on gold)"
+   },
+   {
+    "pop": 28,
+    "type": "build",
+    "text": "Build a Blacksmith and research Fletching before your archers attack"
+   }
+  ],
+  "after_feudal": "Move out with 6 to 8 archers once Fletching is done and attack the gold or wood lines, shooting at villagers and backing off from the Town Center and towers. New villagers after gold go onto Farms as sheep and berries run out. Get Wheelbarrow, and Horse Collar once the farms are going. Plan the Castle Age click for when you have about 20 archers, then research Crossbowman and Bodkin Arrow as soon as you arrive. A Stable for Knights or more Town Centers are the usual next steps in Castle Age.",
+  "tips": [
+   "Use patrol or attack move with archers so they fire at whatever is in range.",
+   "Keep 1 or 2 Spearmen with the archers if the opponent has scouts.",
+   "Do not chase villagers under the Town Center; Town Center arrows kill unarmored archers fast.",
+   "If the opponent switches to Skirmishers, stop archer production and use your Stable or infantry to clean them up.",
+   "Put the ranges between your base and the enemy so new archers do not walk far."
+  ],
+  "beaten_by": "Skirmishers with armor upgrades beat archers in Feudal Age, and a quick wall can leave you with little to shoot at. Scouts can also run down small groups of archers that wander without Spearmen. If your opponent goes Skirmishers, add a few Spearmen or Men-at-Arms, or go up to Castle Age and use Knights against them.",
+  "sources": [
+   {
+    "title": "22 pop Archers",
+    "url": "https://johsaoe2debuildorderreference.site44.com/22-pop-archers.html",
+    "type": "article"
+   },
+   {
+    "title": "23 pop Archers",
+    "url": "https://johsaoe2debuildorderreference.site44.com/23-pop-archers.html",
+    "type": "article"
+   },
+   {
+    "title": "How to Archer Rush: AOE2 Archer Rush Build Order Tutorial (video description)",
+    "url": "https://www.youtube.com/watch?v=K4MyN8kpD84",
+    "type": "video"
+   },
+   {
+    "title": "1-Range Archers (19 vils)",
+    "url": "https://ageofnotes.com/build-orders/1-range-archers-19-vils/",
+    "type": "article"
+   }
+  ],
+  "videos": [
+   {
+    "title": "Ultimate Guide To 2k | Archer Build Order & Early Game | Aoe2 DE",
+    "url": "https://www.youtube.com/watch?v=NKSehBJYYI8",
+    "channel": "Hera"
+   },
+   {
+    "title": "The Best Build Order Part 2: One and Two Range Archers",
+    "url": "https://www.youtube.com/watch?v=9dYOn2oiTgU",
+    "channel": "Survivalist"
+   },
+   {
+    "title": "Archer Rush Build Order Tutorial - AoE2 (23 pop, any civ)",
+    "url": "https://www.youtube.com/watch?v=6vkgQBnViBc",
+    "channel": "Hjörleif"
+   }
+  ]
+ },
+ {
+  "slug": "archers-one-range-20-pop",
+  "title": "One Range Archers (20 pop)",
+  "strategy": "Archers",
+  "category": "feudal-aggression",
+  "elo": "advanced",
+  "difficulty": 2,
+  "map_types": [
+   "open"
+  ],
+  "civs": [
+   "Britons",
+   "Maya",
+   "Ethiopians",
+   "Tatars",
+   "Vikings",
+   "Vietnamese"
+  ],
+  "summary": "The modern ladder archer build: click up on 19 villagers with a hunt heavy Dark Age, make archers from a single range, and keep the Castle Age timing early.",
+  "description": "Older archer builds clicked up on 22 or 23 pop and built two ranges at once. Current ladder play is faster: 19 villagers, most of them on sheep, boar and deer, and only one Archery Range in early Feudal Age. You have fewer archers at first, but they arrive sooner and your economy stays balanced, so a second range or a quick Castle Age both remain options.\n\nThis build depends on hunting. Lure both boars and push in deer with your scout once the sheep are found. Fletching should be done by the time you have three or four archers, and a Spearman or two covers them against scouts.\n\nUse it with civilizations that get strong archers later (Britons, Maya, Ethiopians, Vikings), because a single range army turns into Crossbowman quickly.",
+  "steps": [
+   {
+    "pop": 3,
+    "type": "build",
+    "text": "Starting villagers build two Houses; scout for sheep, deer and both boars"
+   },
+   {
+    "pop": 6,
+    "type": "villager",
+    "text": "First 6 villagers on sheep"
+   },
+   {
+    "pop": 9,
+    "type": "villager",
+    "text": "Next 3 villagers build a Lumber Camp and chop"
+   },
+   {
+    "pop": 10,
+    "type": "villager",
+    "text": "Villager 10 lures the first boar"
+   },
+   {
+    "pop": 11,
+    "type": "build",
+    "text": "Villager 11 builds a House, then the Mill on the berries, and gathers there"
+   },
+   {
+    "pop": 11,
+    "type": "note",
+    "text": "Once all sheep are found, push deer towards the Town Center with the scout"
+   },
+   {
+    "pop": 17,
+    "type": "villager",
+    "text": "Next 6 villagers hunt under the Town Center and bring in the second boar"
+   },
+   {
+    "pop": 19,
+    "type": "villager",
+    "text": "Next 2 villagers go to wood (5 on wood)"
+   },
+   {
+    "pop": 20,
+    "type": "research",
+    "text": "Research Loom"
+   },
+   {
+    "pop": 20,
+    "type": "age",
+    "text": "Click up to the Feudal Age with 19 villagers plus the scout, at about 9:15"
+   },
+   {
+    "pop": 20,
+    "type": "villager",
+    "text": "During the age up, 5 hunters build a second Lumber Camp and 2 more chop straggler trees"
+   },
+   {
+    "pop": 20,
+    "type": "build",
+    "text": "1 hunter builds a House and a Barracks, then returns to food"
+   },
+   {
+    "pop": 20,
+    "type": "villager",
+    "text": "2 hunters build a Mining Camp on gold and mine"
+   },
+   {
+    "pop": 20,
+    "type": "age",
+    "text": "Feudal Age arrives: build an Archery Range and start Archers; research Double-Bit Axe and skip Horse Collar"
+   },
+   {
+    "pop": 22,
+    "type": "villager",
+    "text": "The next 2 villagers go to gold (4 on gold)"
+   },
+   {
+    "pop": 23,
+    "type": "build",
+    "text": "Build a Blacksmith and research Fletching; make 1 or 2 Spearmen if the opponent has scouts"
+   },
+   {
+    "pop": 27,
+    "type": "villager",
+    "text": "Move 4 hunters to the berries when the hunt runs out and seed Farms with new villagers"
+   }
+  ],
+  "after_feudal": "Start walling with two or three villagers using houses and palisades while the archers go out. Attack with the first four or five Fletching archers and keep the Spearmen close to them. From here you can add a second range if the opponent is weak in Feudal Age, or aim for Castle Age with 10 to 15 archers and research Crossbowman and Bodkin Arrow straight away. In Castle Age a Stable for scouts against Skirmishers is a common addition.",
+  "tips": [
+   "Deer pushing is what makes the 19 villager timing work; if the map has none close, add a villager.",
+   "Four on gold is enough for one range; more delays your Farms.",
+   "Have Fletching finished before the first fight.",
+   "If the opponent opens Skirmishers early, stop archers and add a Stable or Man-at-Arms."
+  ],
+  "beaten_by": "Skirmishers and quick walls, as with any archer build. A scout rush can also kill your first archers before Fletching if they have no Spearman with them. When you see two enemy ranges of Skirmishers, switch to Castle Age early and use Knights.",
+  "sources": [
+   {
+    "title": "1-Range Archers (19 vils)",
+    "url": "https://ageofnotes.com/build-orders/1-range-archers-19-vils/",
+    "type": "article"
+   },
+   {
+    "title": "21 pop Archers (civilization variants)",
+    "url": "https://johsaoe2debuildorderreference.site44.com/21-pop-archers-various.html",
+    "type": "article"
+   },
+   {
+    "title": "Explaining Every META Opening Strategy (video by Hera)",
+    "url": "https://www.youtube.com/watch?v=nnXauSng9fY",
+    "type": "video"
+   }
+  ],
+  "videos": [
+   {
+    "title": "The Best Build Order Part 2: One and Two Range Archers",
+    "url": "https://www.youtube.com/watch?v=9dYOn2oiTgU",
+    "channel": "Survivalist"
+   },
+   {
+    "title": "THE FASTEST ARCHER RUSH BUILD ORDER YOU WILL EVER SEE | AoE2",
+    "url": "https://www.youtube.com/watch?v=P718AmycruQ",
+    "channel": "Hera"
+   },
+   {
+    "title": "Comprehensive Guide To Archer Play Ft. Liereyy",
+    "url": "https://www.youtube.com/watch?v=cEasd3kE5UE",
+    "channel": "Hera"
+   }
+  ]
+ },
+ {
+  "slug": "arena-fast-castle-boom",
+  "title": "Arena and Black Forest Fast Castle Boom (26+2)",
+  "strategy": "Closed map Fast Castle Boom",
+  "category": "boom",
+  "elo": "advanced",
+  "difficulty": 2,
+  "map_types": [
+   "closed"
+  ],
+  "civs": [
+   "Teutons",
+   "Turks",
+   "Burgundians",
+   "Bohemians",
+   "Celts",
+   "Aztecs",
+   "Byzantines",
+   "Chinese"
+  ],
+  "summary": "The closed map standard: a lean 25 villager Dark Age, a short Feudal Age with a Market and Blacksmith, and three Town Centers working as soon as Castle Age lands, with a fourth to follow.",
+  "description": "On Arena you start behind stone walls, and on Black Forest the only way in is through a few narrow gaps that you palisade early, so nobody can rush you effectively in the first 15 minutes. That turns the game into a race of economies. This build gets to Castle Age at around 14 minutes with enough wood for two Town Centers and keeps the Market busy buying food so the Town Centers never stop.\n\nOn Arena, delete the walls at the back of your base early on (keep the front ones). They take up space you want for Farms and buildings later. On Black Forest, wall every gap with palisades during the Dark Age, assign gaps to teammates in team games, and upgrade to stone walls in Castle Age.\n\nThe build is close to the 24+2 and 25+2 versions that other guides use; the extra villagers mostly go to wood. After the boom, closed map games usually move to Monks with siege, a Castle near the enemy wall, or a fast Imperial Age.",
+  "steps": [
+   {
+    "pop": 3,
+    "type": "build",
+    "text": "Starting villagers build two Houses; on Arena, shift delete the back walls"
+   },
+   {
+    "pop": 6,
+    "type": "villager",
+    "text": "First 6 villagers on sheep"
+   },
+   {
+    "pop": 10,
+    "type": "villager",
+    "text": "Next 4 villagers build a Lumber Camp on a thick woodline and chop"
+   },
+   {
+    "pop": 11,
+    "type": "villager",
+    "text": "Villager 11 lures the first boar"
+   },
+   {
+    "pop": 15,
+    "type": "build",
+    "text": "Villager 12 builds a Mill, then villagers 12 to 15 gather berries (4 on berries)"
+   },
+   {
+    "pop": 16,
+    "type": "villager",
+    "text": "Villager 16 lures the second boar and hunts"
+   },
+   {
+    "pop": 18,
+    "type": "villager",
+    "text": "Next 2 villagers on food under the Town Center; start Farms as the sheep run out"
+   },
+   {
+    "pop": 23,
+    "type": "villager",
+    "text": "Next 5 villagers build a second Lumber Camp and chop (9 on wood)"
+   },
+   {
+    "pop": 25,
+    "type": "villager",
+    "text": "Next 2 villagers build a Mining Camp on gold and mine"
+   },
+   {
+    "pop": 26,
+    "type": "age",
+    "text": "Click up to the Feudal Age with 25 villagers plus the scout, about 10:30; take Loom in Feudal Age or skip it"
+   },
+   {
+    "pop": 26,
+    "type": "build",
+    "text": "Seed about 4 Farms with sheep villagers during the age up; on Black Forest make sure every gap is walled"
+   },
+   {
+    "pop": 26,
+    "type": "age",
+    "text": "Feudal Age arrives: build a Market and a Blacksmith with wood or berry villagers"
+   },
+   {
+    "pop": 28,
+    "type": "villager",
+    "text": "Next 2 villagers: one to gold, one to wood"
+   },
+   {
+    "pop": 28,
+    "type": "age",
+    "text": "Click up to the Castle Age with exactly 800 food and 200 gold, about 11:30 to 12:00"
+   },
+   {
+    "pop": 28,
+    "type": "research",
+    "text": "Research Double-Bit Axe and Horse Collar during the age up"
+   },
+   {
+    "pop": 30,
+    "type": "villager",
+    "text": "Move the last sheep villagers to wood (about 14 on wood) and keep the gold miners where they are"
+   }
+  ],
+  "after_feudal": "When Castle Age arrives (about 14:00), build two Town Centers with four villagers each, one near a woodline and one near gold or stone. Buy food at the Market whenever a Town Center would otherwise stop. Research Bow Saw, then Wheelbarrow after a couple of villagers, and keep adding Farms; around 18 Farms think about a fourth Town Center (buy 100 stone if needed). Get Hand Cart as soon as you can afford it. From about 25 Farms put 10 villagers on gold and research Gold Mining, then build a Monastery and University or start stone for a Castle. Expect 60 to 80 Farms in the long run on these maps.",
+  "tips": [
+   "Build Farms around the gold Town Center first; you do not need more gold for a while.",
+   "Grab relics with your scout if they are reachable; Monks and relics are big on Arena.",
+   "Watch for a Castle or a Monk push near your wall around 17 to 20 minutes.",
+   "On Black Forest a single tile gap lets a ram in, so check your walls before you click Castle Age.",
+   "Use the Market both ways: buy food early, sell extra wood or stone later."
+  ],
+  "beaten_by": "A Monk and Mangonel push, Knights with Monks, or a Castle placed next to your wall can hit before your boom pays off. On Arena some civilizations also go for a fast Imperial Age with gunpowder units. Scout the opponent at about 15 minutes; if you see an early push, stop at three Town Centers and get a Castle, Pikemen and your own Monks.",
+  "sources": [
+   {
+    "title": "25+2 Arena 3TC Boom",
+    "url": "https://johsaoe2debuildorderreference.site44.com/25+2-arena-3tc-boom.html",
+    "type": "article"
+   },
+   {
+    "title": "AoE2 Advanced Arena Guide: 26+2 3TC Boom for 1v1s (video description)",
+    "url": "https://www.youtube.com/watch?v=f0w0cNytOuY",
+    "type": "video"
+   },
+   {
+    "title": "Arena map guide",
+    "url": "https://aoe2-guide.pages.dev/en/maps/arena/",
+    "type": "article"
+   },
+   {
+    "title": "Black Forest map guide",
+    "url": "https://aoe2-guide.pages.dev/en/maps/black-forest/",
+    "type": "article"
+   }
+  ],
+  "videos": [
+   {
+    "title": "AoE2 Advanced Arena Guide: 26+2 3TC Boom for 1v1s (NEW)",
+    "url": "https://www.youtube.com/watch?v=f0w0cNytOuY",
+    "channel": "AoE2 Arena"
+   },
+   {
+    "title": "The BEST Beginner Build Order In AoE2 (Fast Castle Boom)",
+    "url": "https://www.youtube.com/watch?v=JsTNM7j6fs4",
+    "channel": "Hera"
+   },
+   {
+    "title": "How To Play Black Forest | AoE2",
+    "url": "https://www.youtube.com/watch?v=1V_jsU9PF8Y",
+    "channel": "Hera"
+   }
+  ]
+ },
+ {
+  "slug": "drush-fast-castle",
+  "title": "Drush into Fast Castle Crossbows (32+2)",
+  "strategy": "Drush FC",
+  "category": "dark-age-rush",
+  "elo": "advanced",
+  "difficulty": 3,
+  "map_types": [
+   "open"
+  ],
+  "civs": [
+   "Britons",
+   "Ethiopians",
+   "Vietnamese",
+   "Maya",
+   "Aztecs",
+   "Japanese",
+   "Koreans"
+  ],
+  "summary": "Three militia slow the opponent down in the Dark Age while you wall and farm, then a quick Feudal Age with a range and Blacksmith leads to Castle Age Crossbowman.",
+  "description": "The drush into fast Castle Age is a classic answer to open maps where a plain fast Castle would get punished. Three militia go out late in the Dark Age and force the opponent to react, which delays their Feudal Age plan. Meanwhile your villagers wall the base and seed Farms, so by the time they could attack you the walls are up and you are already clicking Castle Age.\n\nThis version goes into Crossbowmen, so the two Feudal buildings are an Archery Range and a Blacksmith, and the first archers come out during the Castle Age research. The same opening into Knights uses a Stable instead of the range. The pop count includes the three militia: you click Feudal Age with 28 villagers, the scout and the militia.\n\nYour economy is stretched when you arrive in Castle Age, so expect to delay either Bow Saw or Bodkin Arrow a little. You usually want a good map for this: close gold and a woodline that is easy to wall.",
+  "steps": [
+   {
+    "pop": 3,
+    "type": "build",
+    "text": "Starting villagers build two Houses; scout for sheep and plan the wall"
+   },
+   {
+    "pop": 6,
+    "type": "villager",
+    "text": "First 6 villagers on sheep"
+   },
+   {
+    "pop": 10,
+    "type": "villager",
+    "text": "Next 4 villagers build a Lumber Camp and chop"
+   },
+   {
+    "pop": 11,
+    "type": "villager",
+    "text": "Villager 11 lures the first boar"
+   },
+   {
+    "pop": 15,
+    "type": "build",
+    "text": "Next 4 villagers build a House and the Mill, then gather berries (4 on berries)"
+   },
+   {
+    "pop": 16,
+    "type": "villager",
+    "text": "Villager 16 mines 10 gold by hand at the gold mine for the third militia, then goes back to food"
+   },
+   {
+    "pop": 17,
+    "type": "build",
+    "text": "Villager 17 builds a Barracks, then starts walling with palisades and houses"
+   },
+   {
+    "pop": 17,
+    "type": "military",
+    "text": "Train 3 militia and send them out together"
+   },
+   {
+    "pop": 18,
+    "type": "villager",
+    "text": "Villager 18 also walls"
+   },
+   {
+    "pop": 22,
+    "type": "villager",
+    "text": "Next 4 villagers go to wood (8 on wood)"
+   },
+   {
+    "pop": 28,
+    "type": "villager",
+    "text": "Next 6 villagers on sheep and stragglers; move sheep villagers to Farms as sheep run out until 8 are farming"
+   },
+   {
+    "pop": 32,
+    "type": "research",
+    "text": "Research Loom"
+   },
+   {
+    "pop": 32,
+    "type": "age",
+    "text": "Click up to the Feudal Age with 28 villagers, the scout and 3 militia"
+   },
+   {
+    "pop": 32,
+    "type": "villager",
+    "text": "During the age up, 4 food villagers go to gold, 2 to wood, and 2 to berries"
+   },
+   {
+    "pop": 32,
+    "type": "age",
+    "text": "Feudal Age arrives: build an Archery Range and a Blacksmith"
+   },
+   {
+    "pop": 34,
+    "type": "villager",
+    "text": "The next 2 villagers go to gold (6 on gold)"
+   },
+   {
+    "pop": 34,
+    "type": "age",
+    "text": "Click up to the Castle Age as soon as you have 800 food and 200 gold"
+   },
+   {
+    "pop": 36,
+    "type": "military",
+    "text": "During the age up, add villagers to gold until 9 are mining and start Archers; research Double-Bit Axe"
+   },
+   {
+    "pop": 37,
+    "type": "build",
+    "text": "Build a second Archery Range and research Fletching before Castle Age lands"
+   }
+  ],
+  "after_feudal": "Research Crossbowman as soon as Castle Age arrives and Bodkin Arrow when the gold allows. Keep both ranges working and walk out with 8 to 10 Crossbowmen; with Bodkin Arrow that many kill a villager with Loom in one volley. Keep adding Farms, then get Wheelbarrow and Bow Saw. Most players follow with a Siege Workshop or two more Town Centers depending on how much damage the crossbows do. If you went the Knight version, swap the ranges for Stables and get Bloodlines first.",
+  "tips": [
+   "Use the militia to hit the woodline or berries and to block villagers; three militia rarely win a fight with Loom villagers.",
+   "Bring the militia home in time to help defend; they can stand in a gap in your wall.",
+   "Walling counts for more than militia damage in this build, so never let the wallers go idle.",
+   "Skip the 10 gold trip and make only two militia if your gold is far away.",
+   "Check that you have 200 gold for Castle Age before you send gold villagers to the archers."
+  ],
+  "beaten_by": "A fast Feudal rush that arrives before your walls are closed hurts a lot, since you only have three militia. Towers on your gold or wood are also hard to deal with on this build. In Castle Age, Skirmishers, Knights and Mangonels counter Crossbowmen; scout and add Pikemen or switch to a Stable if you see Knights.",
+  "sources": [
+   {
+    "title": "32+2 Drush - FC",
+    "url": "https://johsaoe2debuildorderreference.site44.com/32+2-drush-fc.html",
+    "type": "article"
+   },
+   {
+    "title": "How To: Pre-Mill Drush Like a Pro (video description with a drush fast Castle build)",
+    "url": "https://www.youtube.com/watch?v=uzUc9my3VLA",
+    "type": "video"
+   },
+   {
+    "title": "Build order (Age of Empires Series Wiki)",
+    "url": "https://ageofempires.fandom.com/wiki/Build_order",
+    "type": "wiki"
+   }
+  ],
+  "videos": [
+   {
+    "title": "Basic Build Order | Drush Fast Castle",
+    "url": "https://www.youtube.com/watch?v=yAQrez0cmaQ",
+    "channel": "Hera"
+   },
+   {
+    "title": "AOE2 Drush Fast Castle to Crossbow Build Order Tutorial",
+    "url": "https://www.youtube.com/watch?v=R4fYnBsChjc",
+    "channel": "Morley Games"
+   },
+   {
+    "title": "Cicero's Interactive Build Order: Drush Fast Castle Crossbow | Applying Build Orders",
+    "url": "https://www.youtube.com/watch?v=V16EiFY9cQA",
+    "channel": "ShadowCrystallux"
+   }
+  ]
+ },
+ {
+  "slug": "drush-into-archers",
+  "title": "Drush into Archers (28 pop)",
+  "strategy": "Drush Archers",
+  "category": "dark-age-rush",
+  "elo": "advanced",
+  "difficulty": 3,
+  "map_types": [
+   "open"
+  ],
+  "civs": [
+   "Britons",
+   "Maya",
+   "Ethiopians",
+   "Vietnamese",
+   "Japanese",
+   "Aztecs",
+   "Malians"
+  ],
+  "summary": "Three Dark Age militia buy time for a two range archer army; you click Feudal Age with 24 villagers and have archers with Fletching out a few minutes later.",
+  "description": "Straight archers on their own are a slow build in 1v1, so many players open with a drush to cover the time it takes to mass them. The three militia leave late in the Dark Age and harass the opponent's woodline or berries. Every villager they pull away from work makes the opponent's Feudal Age later, and any kills are a bonus.\n\nWhen you reach Feudal Age, two Archery Ranges are built at once and the gold miners are already in place, so a group of Fletching archers can push before the opponent has recovered. The pop count includes the militia: 24 villagers, the scout and three militia make 28.\n\nSources range from 20 to 24 villagers for this build. Faster versions make two militia and click on about 20 villagers; the version below is the one most written guides use and keeps the archer production steady.",
+  "steps": [
+   {
+    "pop": 3,
+    "type": "build",
+    "text": "Starting villagers build two Houses; scout for sheep"
+   },
+   {
+    "pop": 6,
+    "type": "villager",
+    "text": "First 6 villagers on sheep"
+   },
+   {
+    "pop": 10,
+    "type": "villager",
+    "text": "Next 4 villagers build a Lumber Camp and chop"
+   },
+   {
+    "pop": 11,
+    "type": "villager",
+    "text": "Villager 11 lures the first boar"
+   },
+   {
+    "pop": 12,
+    "type": "build",
+    "text": "Villager 12 builds a House and the Mill, then gathers berries"
+   },
+   {
+    "pop": 15,
+    "type": "villager",
+    "text": "Next 3 villagers on berries (4 on berries); lure the second boar"
+   },
+   {
+    "pop": 16,
+    "type": "villager",
+    "text": "Villager 16 mines 10 gold by hand for the third militia, then goes to wood"
+   },
+   {
+    "pop": 17,
+    "type": "build",
+    "text": "Villager 17 builds a Barracks and a House, then chops wood"
+   },
+   {
+    "pop": 17,
+    "type": "military",
+    "text": "Train 3 militia as soon as the Barracks finishes and attack with all three"
+   },
+   {
+    "pop": 24,
+    "type": "villager",
+    "text": "Next 7 villagers on sheep and boar; move 3 sheep villagers onto Farms as sheep run low"
+   },
+   {
+    "pop": 28,
+    "type": "research",
+    "text": "Research Loom"
+   },
+   {
+    "pop": 28,
+    "type": "age",
+    "text": "Click up to the Feudal Age with 24 villagers, the scout and 3 militia"
+   },
+   {
+    "pop": 28,
+    "type": "villager",
+    "text": "When the sheep are finished, move 6 food villagers to a second Lumber Camp and 4 to gold"
+   },
+   {
+    "pop": 28,
+    "type": "age",
+    "text": "Feudal Age arrives: build two Archery Ranges and start Archers; research Double-Bit Axe"
+   },
+   {
+    "pop": 33,
+    "type": "villager",
+    "text": "Next 5 villagers go to gold (about 8 or 9 on gold)"
+   },
+   {
+    "pop": 34,
+    "type": "build",
+    "text": "Build a Blacksmith and research Fletching"
+   },
+   {
+    "pop": 36,
+    "type": "villager",
+    "text": "Berry villagers build Farms when the berries run out; new villagers go to wood and Farms"
+   }
+  ],
+  "after_feudal": "Bring the militia home or keep them near the archers as a screen against scouts. Attack with 6 to 8 Fletching archers and focus on villagers at the gold or wood. Get Wheelbarrow and keep adding Farms; plan to click Castle Age with about 20 archers, then research Crossbowman and Bodkin Arrow. If the opponent switches to Skirmishers, add a Stable or Man-at-Arms to clean them up.",
+  "tips": [
+   "Send the militia out as a group; one militia on its own dies to a few villagers.",
+   "Block the opponent's villagers on the berries or woodline instead of chasing the Town Center.",
+   "Your own economy relies on the sheep for a while, so do not let the scout lose them.",
+   "If gold is far, make two militia and skip the hand mined 10 gold."
+  ],
+  "beaten_by": "Quick walls and good villager micro take away the drush damage, and an opponent who answers with Skirmishers or a fast Castle Age beats the archers. Scouts can also catch the militia in the open. When the drush does nothing, get your walls up and turn into a Castle Age plan.",
+  "sources": [
+   {
+    "title": "28 pop Drush - Archers",
+    "url": "https://johsaoe2debuildorderreference.site44.com/28-pop-drush-archers.html",
+    "type": "article"
+   },
+   {
+    "title": "AOE2 Drush into Archers Build Order Tutorial (video description)",
+    "url": "https://www.youtube.com/watch?v=iHTK7My4urA",
+    "type": "video"
+   },
+   {
+    "title": "Learn Drush | 10 Minute AoE2 Build Orders (video by Toaster226)",
+    "url": "https://www.youtube.com/watch?v=ACae5IY8egU",
+    "type": "video"
+   }
+  ],
+  "videos": [
+   {
+    "title": "AOE2 Drush into Archers Build Order Tutorial",
+    "url": "https://www.youtube.com/watch?v=iHTK7My4urA",
+    "channel": "Morley Games"
+   },
+   {
+    "title": "Build Orders   Drush + Archers",
+    "url": "https://www.youtube.com/watch?v=ZuYpaTxuUE0",
+    "channel": "St4rk Age of Empires"
+   },
+   {
+    "title": "Interactive Build Order Guide | 27 Pop Drush - Archers [A+ Demonstration]",
+    "url": "https://www.youtube.com/watch?v=qu9dCwTDpBc",
+    "channel": "Cicero"
+   }
+  ]
+ },
+ {
+  "slug": "fast-castle-boom-3tc",
+  "title": "Fast Castle into 3 Town Center Boom (27+2)",
+  "strategy": "Fast Castle Boom",
+  "category": "boom",
+  "elo": "beginner",
+  "difficulty": 2,
+  "map_types": [
+   "closed",
+   "hybrid",
+   "open"
+  ],
+  "civs": [
+   "Teutons",
+   "Chinese",
+   "Burgundians",
+   "Vikings",
+   "Slavs",
+   "Persians",
+   "Hindustanis"
+  ],
+  "summary": "Go up to Castle Age with a Market and Blacksmith, drop two extra Town Centers the moment you arrive and grow to a much bigger economy than your opponent.",
+  "description": "This is the standard boom. Hera recommends a version of it to beginners because it asks for very little fighting early on. You build a steady Dark Age economy of 26 villagers with Farms already started, click up, build a Market and a Blacksmith in Feudal Age, and click Castle Age as soon as you can. The 200 starting stone pays for two new Town Centers, and from then on three Town Centers make villagers at once.\n\nIt works best where you cannot be rushed easily: maps that start with walls, Hideout style maps, the pocket position in team games, or any game against a slow opponent. On open 1v1 maps wall your base before Castle Age. Faster versions exist (24+2 is common on Arena), but the 27+2 version gives beginners some slack for mistakes.",
+  "steps": [
+   {
+    "pop": 3,
+    "type": "build",
+    "text": "Starting villagers build two Houses; scout for sheep"
+   },
+   {
+    "pop": 6,
+    "type": "villager",
+    "text": "First 6 villagers on sheep"
+   },
+   {
+    "pop": 10,
+    "type": "villager",
+    "text": "Next 4 villagers build a Lumber Camp on a thick woodline and chop"
+   },
+   {
+    "pop": 11,
+    "type": "villager",
+    "text": "Villager 11 lures the first boar"
+   },
+   {
+    "pop": 12,
+    "type": "build",
+    "text": "Villager 12 builds a House and the Mill, then gathers berries"
+   },
+   {
+    "pop": 16,
+    "type": "villager",
+    "text": "Next 4 villagers on berries (5 on berries); lure the second boar"
+   },
+   {
+    "pop": 18,
+    "type": "villager",
+    "text": "Next 2 villagers on boar and sheep; damaged sheep villagers start Farms as sheep run low"
+   },
+   {
+    "pop": 23,
+    "type": "villager",
+    "text": "Next 5 villagers build a second Lumber Camp and chop (9 on wood)"
+   },
+   {
+    "pop": 26,
+    "type": "villager",
+    "text": "Next 3 villagers build a Mining Camp on gold and mine"
+   },
+   {
+    "pop": 27,
+    "type": "research",
+    "text": "Research Loom"
+   },
+   {
+    "pop": 27,
+    "type": "age",
+    "text": "Click up to the Feudal Age with 26 villagers plus the scout, at roughly 10:30 to 11:00"
+   },
+   {
+    "pop": 27,
+    "type": "build",
+    "text": "During the age up, sheep and boar villagers move onto Farms (about 8 Farms)"
+   },
+   {
+    "pop": 27,
+    "type": "age",
+    "text": "Feudal Age arrives: 2 villagers build a Market and 1 builds a Blacksmith"
+   },
+   {
+    "pop": 29,
+    "type": "villager",
+    "text": "The next 2 villagers go to wood (11 on wood)"
+   },
+   {
+    "pop": 29,
+    "type": "age",
+    "text": "Click up to the Castle Age as soon as you have 800 food and 200 gold"
+   },
+   {
+    "pop": 29,
+    "type": "research",
+    "text": "Research Double-Bit Axe and Horse Collar while the age loads"
+   },
+   {
+    "pop": 31,
+    "type": "villager",
+    "text": "Move a few berry and sheep villagers to wood so 14 are chopping when Castle Age lands"
+   },
+   {
+    "pop": 31,
+    "type": "note",
+    "text": "Pick spots for the new Town Centers: one on a woodline, one on gold or stone"
+   }
+  ],
+  "after_feudal": "When Castle Age arrives, build two Town Centers with four villagers each, and set all three Town Centers to make villagers nonstop. Research Bow Saw first, then Wheelbarrow, and add a Farm every time you have 60 wood until you have about 18. Keep the gold miners where they are; they let you buy food or wood at the Market if production would stop. Hand Cart and Heavy Plow come next, then decide between a fourth Town Center, a Castle, a Monastery or an army based on what your opponent is doing. Aim for 60 or more villagers around the 22 to 24 minute mark.",
+  "tips": [
+   "Place Farms around the Town Center that is not near wood or gold first.",
+   "Set each new Town Center's gather point to the resource next to it.",
+   "Wheelbarrow goes in after the first couple of villagers from the new Town Centers.",
+   "If you get attacked in Feudal Age, delay the Castle click, get towers or a few archers, and catch up later.",
+   "Teutons have cheaper Farms and Chinese start with extra villagers, so both boom faster than others.",
+   "Scout before you place the third Town Center: no army on the way means boom, an army coming means units first. If the opponent is already booming ahead of you, pressure them instead of copying the boom a minute later."
+  ],
+  "beaten_by": "Any early rush that reaches your base before you are walled: scouts, archers, Man-at-Arms or towers. In Castle Age, a knight rush or a castle drop can stop the new Town Centers from working. Hold with Town Center fire and villagers garrisoned, add Spearmen or Pikemen, and keep making villagers.",
+  "sources": [
+   {
+    "title": "27+2 FC Boom",
+    "url": "https://johsaoe2debuildorderreference.site44.com/27+2-fc-boom.html",
+    "type": "article"
+   },
+   {
+    "title": "FC Boom Build Order (AoE2)",
+    "url": "https://ageofnotes.com/build-orders/fc-boom-build-order-aoe2",
+    "type": "article"
+   },
+   {
+    "title": "How To Economy Boom: AOE2 Fast Castle Build Order Tutorial (video description)",
+    "url": "https://www.youtube.com/watch?v=Ae2k3ah1mRA",
+    "type": "video"
+   },
+   {
+    "title": "Boom (Age of Empires Series Wiki)",
+    "url": "https://ageofempires.fandom.com/wiki/Boom",
+    "type": "wiki"
+   },
+   {
+    "title": "Tips for deciding 3 TC boom or staying at 1 or 2 TCs? (r/aoe2)",
+    "url": "https://www.reddit.com/r/aoe2/comments/itwbrz/tips_for_deciding_3_tc_boom_or_staying_at_1_or_2/",
+    "type": "reddit"
+   }
+  ],
+  "videos": [
+   {
+    "title": "The BEST Beginner Build Order In AoE2 (Fast Castle Boom)",
+    "url": "https://www.youtube.com/watch?v=JsTNM7j6fs4",
+    "channel": "Hera"
+   },
+   {
+    "title": "AOE2 How To Economy Boom | A Quick Guide for Beginners | AOE2 Fast Castle Build Order",
+    "url": "https://www.youtube.com/watch?v=2OnHElM0DWM",
+    "channel": "Morley Games"
+   },
+   {
+    "title": "Ultimate Guide To Booming & Carrying in AoE2",
+    "url": "https://www.youtube.com/watch?v=8GQeYKuOhLo",
+    "channel": "Hera"
+   }
+  ]
+ },
+ {
+  "slug": "fast-castle-knights",
+  "title": "Fast Castle into Knights (28+2)",
+  "strategy": "Fast Castle Knights",
+  "category": "fast-castle",
+  "elo": "intermediate",
+  "difficulty": 2,
+  "map_types": [
+   "open",
+   "closed"
+  ],
+  "civs": [
+   "Franks",
+   "Berbers",
+   "Burgundians",
+   "Persians",
+   "Lithuanians",
+   "Poles",
+   "Teutons"
+  ],
+  "summary": "Skip Feudal fighting, reach Castle Age around the 15 minute mark with two Stables ready and hit your opponent with Knights before they have pikes or Castle Age archers.",
+  "description": "This is the classic Castle Age knight rush. You build a longer Dark Age economy with 27 villagers, spend only a short time in Feudal Age putting up a Blacksmith and a Stable, and click Castle Age as soon as you have 800 food and 200 gold. While the age loads you build a second Stable so that both start making Knights the moment Castle Age arrives.\n\nPick it when you expect a slow opponent, when you play the pocket position in team games, or on maps where you can wall early. On an open 1v1 map a strong Feudal rush can hurt you badly, so wall your wood and gold lines with palisades and houses before you click up to Castle Age.\n\nSources put the Dark Age anywhere from 24 to 28 villagers. The 27 villager version below is the most common one and leaves room for Loom and a few mistakes. Once you can play it cleanly, try cutting the Dark Age by two or three villagers for a faster Castle time.",
+  "steps": [
+   {
+    "pop": 3,
+    "type": "build",
+    "text": "The three starting villagers build two Houses; queue villagers and send the Scout Cavalry looking for sheep"
+   },
+   {
+    "pop": 6,
+    "type": "villager",
+    "text": "First 6 villagers on sheep under the Town Center"
+   },
+   {
+    "pop": 10,
+    "type": "villager",
+    "text": "Next 4 villagers build a Lumber Camp on a good woodline and chop"
+   },
+   {
+    "pop": 11,
+    "type": "villager",
+    "text": "Villager 11 lures the first boar to the Town Center"
+   },
+   {
+    "pop": 12,
+    "type": "build",
+    "text": "Villager 12 builds a House, then a Mill next to the berries, and stays there"
+   },
+   {
+    "pop": 16,
+    "type": "villager",
+    "text": "Next 4 villagers on berries (5 on berries in total); lure the second boar with a boar villager when the first one is nearly eaten"
+   },
+   {
+    "pop": 18,
+    "type": "villager",
+    "text": "Next 2 villagers on boar or sheep under the Town Center"
+   },
+   {
+    "pop": 18,
+    "type": "build",
+    "text": "As sheep run low, move the most damaged sheep villagers onto Farms around the Town Center"
+   },
+   {
+    "pop": 24,
+    "type": "villager",
+    "text": "Next 6 villagers build a second Lumber Camp and chop wood (10 on wood in total)"
+   },
+   {
+    "pop": 27,
+    "type": "villager",
+    "text": "Next 3 villagers build a Mining Camp and mine gold"
+   },
+   {
+    "pop": 27,
+    "type": "research",
+    "text": "Research Loom while you finish collecting 500 food"
+   },
+   {
+    "pop": 28,
+    "type": "age",
+    "text": "Click up to the Feudal Age with 27 villagers plus the Scout Cavalry"
+   },
+   {
+    "pop": 28,
+    "type": "build",
+    "text": "When sheep run out, keep seeding Farms with those villagers until you have about 9 Farms; build a Barracks with one wood villager halfway through the age up"
+   },
+   {
+    "pop": 28,
+    "type": "build",
+    "text": "Feudal Age arrives: two wood villagers build a Stable and a Blacksmith right away"
+   },
+   {
+    "pop": 30,
+    "type": "villager",
+    "text": "The next 2 villagers go to gold (5 on gold)"
+   },
+   {
+    "pop": 30,
+    "type": "age",
+    "text": "Click up to the Castle Age as soon as you have 800 food and 200 gold"
+   },
+   {
+    "pop": 30,
+    "type": "research",
+    "text": "While the age loads, research Double-Bit Axe and Horse Collar"
+   },
+   {
+    "pop": 32,
+    "type": "villager",
+    "text": "New villagers go to gold; when berries run out, move 3 of those villagers to gold and the rest onto Farms"
+   },
+   {
+    "pop": 32,
+    "type": "build",
+    "text": "Build a second Stable before Castle Age arrives and keep walling"
+   },
+   {
+    "pop": 32,
+    "type": "note",
+    "text": "Castle Age arrives at about 15:00 for most players; queue Knights from both Stables immediately"
+   }
+  ],
+  "after_feudal": "Start Knights from both Stables the moment Castle Age lands and keep your Town Center making villagers. Send the first four or five new villagers to gold, since two Stables need about 6 to 8 gold miners plus Gold Mining. Research Bloodlines and the first armor or attack upgrade at the Blacksmith once you have about six Knights. Raid with all of them together: hit wood lines and farms, retreat when pikes show up and go somewhere else. Many players add a third Town Center behind the first raid so the knight rush turns into a lead in villagers.",
+  "tips": [
+   "Wall before you click Castle Age; you have almost no army in Feudal Age.",
+   "Keep the Town Center making villagers during the raid; a knight rush that stops villager production falls behind quickly.",
+   "If you see a Feudal rush coming, drop a Barracks and make a few Spearmen, or delay Castle Age and get towers or archers.",
+   "Keep the first six Knights in one group; a single Knight does very little against villagers who fight back.",
+   "Franks get a free farming upgrade and tougher Knights, which makes them the easiest civilization to learn this build with.",
+   "Knights are especially strong below about 1500 because most players reach Castle Age with spare food from a slower game. Higher up, you often have to choose between a few Knights and extra Town Centers."
+  ],
+  "beaten_by": "A Feudal rush that arrives before your walls are up is the biggest threat, since scouts or archers can kill villagers while you have no units. In Castle Age, massed Pikemen, Camel Rider units and Monks hold Knights well. If your opponent has many pikes, switch to Crossbowmen or add a third Town Center and play for the economy.",
+  "sources": [
+   {
+    "title": "28+2 FC Knights",
+    "url": "https://johsaoe2debuildorderreference.site44.com/28+2-fc-knights.html",
+    "type": "article"
+   },
+   {
+    "title": "Fast Castle Knights Build in AoE2",
+    "url": "https://diamondlobby.com/age-of-empires-2/fast-castle-knights-build-aoe2/",
+    "type": "article"
+   },
+   {
+    "title": "Fast Castle Age (The Art of War)",
+    "url": "https://ageofempires.fandom.com/wiki/Fast_Castle_Age",
+    "type": "wiki"
+   },
+   {
+    "title": "How To Knight Rush: AOE2 Fast Castle into Knights build order (video description)",
+    "url": "https://www.youtube.com/watch?v=ivgT8n1kxgs",
+    "type": "video"
+   },
+   {
+    "title": "Top 5 reasons why the meta differs on different levels (r/aoe2)",
+    "url": "https://www.reddit.com/r/aoe2/comments/152d71n/top_5_reasons_why_the_meta_differs_on_different/",
+    "type": "reddit"
+   }
+  ],
+  "videos": [
+   {
+    "title": "AoE2 Build Order | Fast Castle into Knights!",
+    "url": "https://www.youtube.com/watch?v=47tidO64SCA",
+    "channel": "T90Official"
+   },
+   {
+    "title": "How To Knight Rush | AOE2 Fast Castle into Knights Build Order Tutorial",
+    "url": "https://www.youtube.com/watch?v=ivgT8n1kxgs",
+    "channel": "Morley Games"
+   },
+   {
+    "title": "Learn Fast Castle | 10 Minute AoE2 Build Orders",
+    "url": "https://www.youtube.com/watch?v=mm8S9Wtpgrc",
+    "channel": "Toaster226"
+   }
+  ]
+ },
+ {
+  "slug": "fast-castle-unique-unit",
+  "title": "Fast Castle into Unique Unit (27+2)",
+  "strategy": "Fast Castle Castle drop",
+  "category": "fast-castle",
+  "elo": "advanced",
+  "difficulty": 2,
+  "map_types": [
+   "closed",
+   "open"
+  ],
+  "civs": [
+   "Spanish",
+   "Turks",
+   "Mongols",
+   "Japanese",
+   "Aztecs",
+   "Byzantines",
+   "Britons",
+   "Malians"
+  ],
+  "summary": "Mine stone from the Dark Age on, reach Castle Age with enough for a Castle and start producing your unique unit within a minute of arriving.",
+  "description": "Many civilizations have a unique unit that is strong as soon as it appears, but it only comes from a Castle, which costs 650 stone. This build sends villagers to stone before you even click Feudal Age, so the Castle goes down right after you reach Castle Age. The same opening works for a castle drop near the opponent's base on Arena, or a Castle at home that protects a boom while unique units start to trickle out.\n\nThe example below is set up for a food and gold unit such as Conquistadors, Janissaries or Samurai. For a wood and gold unit such as Longbowmen, Mangudai or Plumed Archers, move two or three Farmers to wood once the Castle is placed. Wall well on open maps, because you have no army until the Castle is up.",
+  "steps": [
+   {
+    "pop": 3,
+    "type": "build",
+    "text": "Starting villagers build two Houses; scout for sheep and your stone"
+   },
+   {
+    "pop": 6,
+    "type": "villager",
+    "text": "First 6 villagers on sheep"
+   },
+   {
+    "pop": 10,
+    "type": "villager",
+    "text": "Next 4 villagers build a Lumber Camp and chop"
+   },
+   {
+    "pop": 11,
+    "type": "villager",
+    "text": "Villager 11 lures the first boar"
+   },
+   {
+    "pop": 12,
+    "type": "build",
+    "text": "Villager 12 builds a House and the Mill, then gathers berries"
+   },
+   {
+    "pop": 15,
+    "type": "villager",
+    "text": "Next 3 villagers on berries (4 on berries); lure the second boar"
+   },
+   {
+    "pop": 17,
+    "type": "villager",
+    "text": "Next 2 villagers on boar and sheep; move 2 or 3 weak sheep villagers to Farms when sheep run low"
+   },
+   {
+    "pop": 22,
+    "type": "villager",
+    "text": "Next 5 villagers build a second Lumber Camp (9 on wood)"
+   },
+   {
+    "pop": 24,
+    "type": "villager",
+    "text": "Next 2 villagers build a Mining Camp on gold and mine"
+   },
+   {
+    "pop": 26,
+    "type": "villager",
+    "text": "Next 2 villagers build a Mining Camp on stone and mine"
+   },
+   {
+    "pop": 27,
+    "type": "research",
+    "text": "Research Loom"
+   },
+   {
+    "pop": 27,
+    "type": "age",
+    "text": "Click up to the Feudal Age with 26 villagers plus the scout"
+   },
+   {
+    "pop": 27,
+    "type": "villager",
+    "text": "During the age up, move the last sheep villagers onto Farms and add 1 more to stone (3 on stone)"
+   },
+   {
+    "pop": 27,
+    "type": "age",
+    "text": "Feudal Age arrives: 2 wood villagers build a Market, 1 builds a Blacksmith"
+   },
+   {
+    "pop": 29,
+    "type": "villager",
+    "text": "The next 2 villagers go to stone (5 on stone)"
+   },
+   {
+    "pop": 29,
+    "type": "age",
+    "text": "Click up to the Castle Age as soon as you have 800 food and 200 gold"
+   },
+   {
+    "pop": 29,
+    "type": "research",
+    "text": "Research Double-Bit Axe and Horse Collar while the age loads"
+   },
+   {
+    "pop": 31,
+    "type": "villager",
+    "text": "When berries run out, move 1 berry villager to gold and the rest to Farms (about 8 Farms)"
+   },
+   {
+    "pop": 31,
+    "type": "note",
+    "text": "Walk the stone miners to the Castle spot near the end of the age up"
+   }
+  ],
+  "after_feudal": "On arrival, build the Castle with the five stone miners and start your unique unit the moment it finishes. Send the next five villagers to gold and the rest onto Farms (around 13 Farms), then get Wheelbarrow and Gold Mining. With a castle drop, the Castle shoots the opponent's villagers while it trains units; add a Siege Workshop for Battering Rams if they turtle. With a home Castle, build two more Town Centers with the next wood and keep the unique units as a defensive force until you have more of them.",
+  "tips": [
+   "Check your stone count before clicking Castle Age; 650 is the target on arrival or shortly after.",
+   "Sell stone only if you have more than you need for the Castle.",
+   "A forward Castle needs every builder you can spare; five builders still take about a minute and a half.",
+   "Research the unique unit's elite upgrade only once the economy can pay for it.",
+   "If you are unsure about a forward Castle, build it next to your own gold; it protects your miners and still trains units."
+  ],
+  "beaten_by": "Early Feudal aggression is the main danger, since you have stone miners instead of units. Against a castle drop, the defender can build their own Castle, use villagers and a Battering Ram to stop an unfinished one, or answer with the unit that counters your unique unit. Scout and adapt the unit choice: a Castle full of Conquistadors loses to Skirmishers and Pikemen supported by Monks.",
+  "sources": [
+   {
+    "title": "26+2 Arena Castle Drop",
+    "url": "https://johsaoe2debuildorderreference.site44.com/26+2-arena-castle-drop.html",
+    "type": "article"
+   },
+   {
+    "title": "AOE2 Fast Castle into Unique Unit Build Order Tutorial: Food And Gold units (video description)",
+    "url": "https://www.youtube.com/watch?v=XHtzL4r_PGY",
+    "type": "video"
+   },
+   {
+    "title": "Castle drop (Age of Empires Series Wiki)",
+    "url": "https://ageofempires.fandom.com/wiki/Castle_drop",
+    "type": "wiki"
+   }
+  ],
+  "videos": [
+   {
+    "title": "AOE2 Fast Castle into Unique Unit Build Order Tutorial - Food And Gold units",
+    "url": "https://www.youtube.com/watch?v=XHtzL4r_PGY",
+    "channel": "Morley Games"
+   },
+   {
+    "title": "AOE2 Fast Castle Unique Unit into Build Order Tutorial - Wood units",
+    "url": "https://www.youtube.com/watch?v=V3JQzMIaxqQ",
+    "channel": "Morley Games"
+   },
+   {
+    "title": "Fast Castle Into Unique Unit || Build Order Guide",
+    "url": "https://www.youtube.com/watch?v=TCOBy3D5pFI",
+    "channel": "Scholley AOC"
+   }
+  ]
+ },
+ {
+  "slug": "fast-imperial-gunpowder",
+  "title": "Fast Imperial into Gunpowder (Imperial at 18 minutes)",
+  "strategy": "Fast Imperial",
+  "category": "fast-castle",
+  "elo": "expert",
+  "difficulty": 3,
+  "map_types": [
+   "closed"
+  ],
+  "civs": [
+   "Turks",
+   "Bulgarians",
+   "Byzantines",
+   "Malay",
+   "Italians",
+   "Bohemians",
+   "Portuguese"
+  ],
+  "summary": "A closed map all in: one Town Center, as few villagers as possible on the way, and Imperial Age at about 18 minutes with Hand Cannoneers and Bombard Cannons ready to push.",
+  "description": "A fast Imperial Age skips the Castle Age boom and spends everything on reaching Imperial Age while the opponent is still adding Town Centers. Gunpowder units suit it because Hand Cannoneers and Bombard Cannons are strong without many upgrades. Turks are the classic civilization for it since they get Chemistry for free, but civilizations with cheaper or faster age ups (Byzantines, Malay, Italians) or gunpowder bonuses (Bohemians, Portuguese) also play it.\n\nYou stay on one Town Center and use the Market heavily, selling and buying to fix the food and gold balance. It only works where you cannot be rushed: Arena, Black Forest or a protected pocket in team games. On open maps any Feudal pressure breaks it. The timings below (Feudal Age click at 8:50, Castle Age at about 12:30, Imperial Age at 18:00) come from a clean Turks game; safer versions click Feudal Age on 28 villagers and arrive in Imperial Age a minute or two later.",
+  "steps": [
+   {
+    "pop": 3,
+    "type": "build",
+    "text": "Starting villagers build two Houses; scout for sheep, deer and boar"
+   },
+   {
+    "pop": 6,
+    "type": "villager",
+    "text": "First 6 villagers on sheep"
+   },
+   {
+    "pop": 10,
+    "type": "villager",
+    "text": "Next 4 villagers build a Lumber Camp and chop"
+   },
+   {
+    "pop": 16,
+    "type": "villager",
+    "text": "Next 6 villagers hunt under the Town Center; lure both boars and push in deer, with no more than 2 carcasses at a time"
+   },
+   {
+    "pop": 20,
+    "type": "build",
+    "text": "Next 4 villagers build a Mill and gather berries"
+   },
+   {
+    "pop": 23,
+    "type": "villager",
+    "text": "Next 3 villagers go to wood (7 on wood)"
+   },
+   {
+    "pop": 24,
+    "type": "villager",
+    "text": "Villager 24 builds a Mining Camp on gold and mines"
+   },
+   {
+    "pop": 25,
+    "type": "age",
+    "text": "Click up to the Feudal Age with 24 villagers plus the scout, about 8:50; queue Loom and 2 villagers behind it"
+   },
+   {
+    "pop": 25,
+    "type": "villager",
+    "text": "During the age up, move 1 hunter to gold and 1 to wood; as the hunt ends, build up to 5 Farms and send the rest to berries"
+   },
+   {
+    "pop": 25,
+    "type": "age",
+    "text": "Feudal Age arrives: 2 berry villagers build a Market and a Blacksmith; research Double-Bit Axe only"
+   },
+   {
+    "pop": 27,
+    "type": "villager",
+    "text": "The 2 queued villagers go to gold (4 on gold); add Farms up to about 10"
+   },
+   {
+    "pop": 27,
+    "type": "age",
+    "text": "Click up to the Castle Age at about 12:30"
+   },
+   {
+    "pop": 27,
+    "type": "villager",
+    "text": "During the age up, move 2 berry villagers to gold (6 on gold)"
+   },
+   {
+    "pop": 33,
+    "type": "villager",
+    "text": "In Castle Age make 6 more villagers: 2 to Farms, 2 to gold, 2 to wood"
+   },
+   {
+    "pop": 33,
+    "type": "build",
+    "text": "A berry villager builds a Siege Workshop and a University (or a Monastery) for the Imperial Age requirement"
+   },
+   {
+    "pop": 33,
+    "type": "note",
+    "text": "Use the Market to sell extra wood or stone and buy what you need for 1000 food and 800 gold"
+   },
+   {
+    "pop": 33,
+    "type": "age",
+    "text": "Click up to the Imperial Age at about 18:00"
+   },
+   {
+    "pop": 33,
+    "type": "build",
+    "text": "During the age up, the builder and gold villagers start a second Lumber Camp, a Barracks and an Archery Range"
+   }
+  ],
+  "after_feudal": "When Imperial Age lands, produce Hand Cannoneers from the Archery Range and Bombard Cannons from the Siege Workshop without stopping, selling food at the Market when gold runs low. Push straight at the opponent's walls and Town Centers with the Bombard Cannons behind the Hand Cannoneers. Add Halberdiers if the opponent has Knights, and Trebuchets if they hide behind a Castle. This is an all in, so keep the push going; if it stalls, get the economy upgrades and more Town Centers as quickly as you can.",
+  "tips": [
+   "Never let the Market sit idle; selling stone and wood is part of the build.",
+   "Wall well early, since you have no units until about 20 minutes.",
+   "Refresh the Lumber Camp once the trees are two or three tiles away.",
+   "Turks get free Chemistry and faster gunpowder units; other civilizations need to research Chemistry first.",
+   "If you are pressured in Feudal Age, make Skirmishers and Spearmen and accept a later Imperial Age."
+  ],
+  "beaten_by": "Early aggression of any kind ruins it, and on closed maps a well timed Monk and Mangonel push or a castle drop in Castle Age hits before your Imperial Age units exist. A booming opponent with Castles and many Town Centers can also outlast a weak push. Skirmishers and Knights counter Hand Cannoneers, and Bombard Cannons die quickly to cavalry.",
+  "sources": [
+   {
+    "title": "Turks 29+2+2 Fast Imperial",
+    "url": "https://johsaoe2debuildorderreference.site44.com/29+2+2-fi-TURKS.html",
+    "type": "article"
+   },
+   {
+    "title": "Build order (Age of Empires Series Wiki), Fast Imperial Age",
+    "url": "https://ageofempires.fandom.com/wiki/Build_order",
+    "type": "wiki"
+   },
+   {
+    "title": "Learn Fast Imperial | 10 Minutes AoE2 Build Orders (video by Toaster226)",
+    "url": "https://www.youtube.com/watch?v=CMAuErOEVzA",
+    "type": "video"
+   },
+   {
+    "title": "Black Forest map guide",
+    "url": "https://aoe2-guide.pages.dev/en/maps/black-forest/",
+    "type": "article"
+   }
+  ],
+  "videos": [
+   {
+    "title": "Learn Fast Imperial | 10 Minutes AoE2 Build Orders",
+    "url": "https://www.youtube.com/watch?v=CMAuErOEVzA",
+    "channel": "Toaster226"
+   },
+   {
+    "title": "*IMP BY 20 MINUTES* Turks Fast Imperial Age Build Order Tutorial | AoE2",
+    "url": "https://www.youtube.com/watch?v=OfgPo09zCl4",
+    "channel": "Hera"
+   },
+   {
+    "title": "Top 5 Fast Imperial Civilizations in Age of Empires 2",
+    "url": "https://www.youtube.com/watch?v=zU1xFRSBUkA",
+    "channel": "Hera"
+   }
+  ]
+ },
+ {
+  "slug": "first-build-22-pop-scouts",
+  "title": "Your First Build: Scouts (22 pop)",
+  "strategy": "Scouts",
+  "category": "feudal-aggression",
+  "elo": "beginner",
+  "difficulty": 1,
+  "map_types": [
+   "open"
+  ],
+  "civs": [
+   "Franks",
+   "Magyars",
+   "Huns",
+   "Lithuanians",
+   "Berbers",
+   "Mongols"
+  ],
+  "summary": "The easiest full build order to learn first: 21 villagers, a relaxed Feudal Age click and a few Scout Cavalry to annoy your opponent while you set up farms.",
+  "description": "This is a common first build for new players. It uses the standard opening that almost every other build starts from (six on sheep, four on wood, boar, berries), so everything you practise here carries over. You click up with 21 villagers, which leaves enough food and wood on the way up for a Barracks, a Stable and the first scouts.\n\nThe aim at this level is simple: never let the Town Center stop making villagers, and never have idle villagers. Scouts are forgiving units because they are fast and you can leave them alone for a few seconds while you look after your economy. Send them at the enemy woodline or berries, kill a villager or two, and come home if Spearmen show up.\n\nFaster versions of this build (18 to 20 villagers) are used at higher ratings. Learn this one first, then cut a villager at a time once your timings are clean. A good target is reaching Feudal Age by about 10:00; around 9:00 is very good for this build.",
+  "steps": [
+   {
+    "pop": 3,
+    "type": "build",
+    "text": "Two starting villagers build a House together, the third builds a second House; queue villagers at the Town Center"
+   },
+   {
+    "pop": 3,
+    "type": "note",
+    "text": "Send the Scout Cavalry in circles around your base to find the sheep, then the boars, berries and gold"
+   },
+   {
+    "pop": 6,
+    "type": "villager",
+    "text": "When the Houses finish, those villagers and every new one go on sheep under the Town Center until 6 are on sheep"
+   },
+   {
+    "pop": 7,
+    "type": "build",
+    "text": "Villager 7 builds a Lumber Camp next to the nearest big woodline"
+   },
+   {
+    "pop": 10,
+    "type": "villager",
+    "text": "Villagers 8 to 10 chop wood there (4 on wood)"
+   },
+   {
+    "pop": 11,
+    "type": "villager",
+    "text": "Villager 11 lures the first boar to the Town Center; the sheep villagers then hunt it"
+   },
+   {
+    "pop": 12,
+    "type": "build",
+    "text": "Villager 12 builds a House near the berries"
+   },
+   {
+    "pop": 13,
+    "type": "build",
+    "text": "Villager 13 builds a Mill next to the berries; both builders then gather berries"
+   },
+   {
+    "pop": 14,
+    "type": "villager",
+    "text": "Villager 14 goes to berries (3 on berries)"
+   },
+   {
+    "pop": 15,
+    "type": "villager",
+    "text": "Villager 15 lures the second boar when the first one is almost gone"
+   },
+   {
+    "pop": 16,
+    "type": "villager",
+    "text": "Villager 16 goes to berries (4 on berries)"
+   },
+   {
+    "pop": 18,
+    "type": "villager",
+    "text": "Villagers 17 and 18 go to the boar and sheep under the Town Center"
+   },
+   {
+    "pop": 18,
+    "type": "build",
+    "text": "Build a House whenever you are 2 population away from the limit"
+   },
+   {
+    "pop": 21,
+    "type": "villager",
+    "text": "Villagers 19 to 21 build a second Lumber Camp and chop wood (7 on wood)"
+   },
+   {
+    "pop": 22,
+    "type": "research",
+    "text": "Research Loom"
+   },
+   {
+    "pop": 22,
+    "type": "age",
+    "text": "Click up to the Feudal Age with 21 villagers plus your scout"
+   },
+   {
+    "pop": 22,
+    "type": "villager",
+    "text": "While the age loads, move 3 sheep villagers to wood (10 on wood)"
+   },
+   {
+    "pop": 22,
+    "type": "build",
+    "text": "Halfway through the age up, one wood villager builds a Barracks"
+   },
+   {
+    "pop": 22,
+    "type": "age",
+    "text": "Feudal Age arrives: the Barracks builder builds a Stable right away"
+   }
+  ],
+  "after_feudal": "Make Scout Cavalry nonstop from the Stable and research Double-Bit Axe and Horse Collar as soon as you can. When the sheep and boar run out, put those villagers on Farms, and send new villagers to Farms too until you have about 14. After that, put 5 new villagers on gold and get Wheelbarrow. Attack with your first three or four scouts together and look for villagers working away from the Town Center. Keep a few scouts at home if your opponent sends archers. Click up to the Castle Age once you have 800 food and 200 gold; the Blacksmith and Stable count as your two Feudal buildings.",
+  "tips": [
+   "Press the idle villager button often; idle villagers cost more than a slightly wrong count.",
+   "Watch the Town Center queue. If it ever stops, queue a villager before doing anything else.",
+   "If you run short of food for the age up, force your hunters and berry villagers to drop off what they carry.",
+   "Spearmen beat scouts. When you see two or three, run and attack a different part of their base.",
+   "If you see the opponent making archers, go home and build an Archery Range for Skirmishers instead of chasing them.",
+   "The natural follow-up is Knights in the Castle Age. A 1400 player on r/aoe2 named a solid Dark Age plus scouts into Knights as the best way out of low ratings."
+  ],
+  "beaten_by": "Walls and a few Spearmen stop the scouts cold, and an opponent with many Archers and a couple of Spearmen will win the Feudal fight. When that happens, stop making scouts, build an Archery Range for Skirmishers, wall your base and go up to the Castle Age. Faster Feudal builds can also arrive with units before you do, so keep a scout at home early on.",
+  "sources": [
+   {
+    "title": "22 pop Scouts",
+    "url": "https://johsaoe2debuildorderreference.site44.com/22-pop-scouts.html",
+    "type": "article"
+   },
+   {
+    "title": "Build order (Age of Empires Series Wiki)",
+    "url": "https://ageofempires.fandom.com/wiki/Build_order",
+    "type": "wiki"
+   },
+   {
+    "title": "How To Scout Rush: AOE2 Scout Rush Build Order Tutorial 21 Population (video description)",
+    "url": "https://www.youtube.com/watch?v=tyQXpGVRaCc",
+    "type": "video"
+   },
+   {
+    "title": "Mastering the Scout Rush in Age of Empires 2: A Complete Guide",
+    "url": "https://ageofempires.substack.com/p/aoe2-scout-rush-guide",
+    "type": "article"
+   },
+   {
+    "title": "Stuck at 750 Elo, 28% win rate (r/aoe2)",
+    "url": "https://www.reddit.com/r/aoe2/comments/1ua5fjj/stuck_at_750_elo_28_win_rate_and_honestly_ready/",
+    "type": "reddit"
+   }
+  ],
+  "videos": [
+   {
+    "title": "Your First Build Order - AoE2 New Player Guide",
+    "url": "https://www.youtube.com/watch?v=VtFhlA7_5Pc",
+    "channel": "ZeroEmpires"
+   },
+   {
+    "title": "How to Scout Rush in Age of Empires 2 Definitive Edition | Beginner Build Order: Pop 22 Scouts",
+    "url": "https://www.youtube.com/watch?v=bcpEPuVd9rE",
+    "channel": "Nili_AoE"
+   },
+   {
+    "title": "Beginner guide to the first 15 villagers [AoE2]",
+    "url": "https://www.youtube.com/watch?v=O7zaXjaJVWM",
+    "channel": "Spirit Of The Law"
+   }
+  ]
+ },
+ {
+  "slug": "hybrid-dock-feudal",
+  "title": "Hybrid Map Dock into Feudal (24 pop)",
+  "strategy": "Hybrid opening",
+  "category": "hybrid",
+  "elo": "intermediate",
+  "difficulty": 2,
+  "map_types": [
+   "hybrid"
+  ],
+  "civs": [
+   "Japanese",
+   "Byzantines",
+   "Dravidians",
+   "Bengalis",
+   "Berbers",
+   "Italians",
+   "Koreans",
+   "Portuguese"
+  ],
+  "summary": "For maps with land and water: a Dock and three Fishing Ships in the Dark Age, a normal Feudal Age click on 20 villagers, then Fire Galleys from two Docks alongside your land army.",
+  "description": "Maps like Mediterranean, Baltic, Four Lakes or Gold Rush with water have fish that are always worth fighting for, even when the main fight is on land. This opening adds a Dock and a few Fishing Ships to an otherwise standard Dark Age, so you click Feudal Age at a normal time with a stronger food income.\n\nThe Dock goes next to a shore fish, so the villager who builds it can fish there afterwards. In Feudal Age you make Fire Galleys from two Docks to protect your fish and attack the opponent's, while a Stable or Archery Range handles the land. Once the water is decided one way or the other, put everything back into the land army.\n\nThe Fishing Ships do not show in the villager count, so the pop figures here include them.",
+  "steps": [
+   {
+    "pop": 3,
+    "type": "build",
+    "text": "Starting villagers build two Houses; scout the shore, the sheep and a shore fish"
+   },
+   {
+    "pop": 6,
+    "type": "villager",
+    "text": "First 6 villagers on sheep"
+   },
+   {
+    "pop": 11,
+    "type": "villager",
+    "text": "Next 5 villagers build a Lumber Camp and chop wood"
+   },
+   {
+    "pop": 12,
+    "type": "build",
+    "text": "Villager 12 builds a House, then a Dock next to a shore fish, and fishes that shore fish with a House behind it for cover"
+   },
+   {
+    "pop": 12,
+    "type": "military",
+    "text": "Make 3 Fishing Ships from the Dock for the deep water fish"
+   },
+   {
+    "pop": 17,
+    "type": "villager",
+    "text": "Next 5 villagers hunt under the Town Center; the first of them lures the boar"
+   },
+   {
+    "pop": 20,
+    "type": "villager",
+    "text": "Next 3 villagers go to wood (8 on wood)"
+   },
+   {
+    "pop": 24,
+    "type": "research",
+    "text": "Research Loom"
+   },
+   {
+    "pop": 24,
+    "type": "age",
+    "text": "Click up to the Feudal Age with 20 villagers, 3 Fishing Ships and the scout"
+   },
+   {
+    "pop": 24,
+    "type": "villager",
+    "text": "During the age up, move all hunters to wood except 3 who go to gold"
+   },
+   {
+    "pop": 24,
+    "type": "build",
+    "text": "The fishing villager builds a second Dock and a House near the next shore fish"
+   },
+   {
+    "pop": 24,
+    "type": "build",
+    "text": "Halfway through the age up, 2 wood villagers build a Barracks"
+   },
+   {
+    "pop": 24,
+    "type": "age",
+    "text": "Feudal Age arrives: build a Stable or Archery Range and start Fire Galleys from both Docks"
+   },
+   {
+    "pop": 26,
+    "type": "villager",
+    "text": "The first new villager goes to gold, the rest to food: berries, then Farms"
+   },
+   {
+    "pop": 28,
+    "type": "villager",
+    "text": "After the first two Fire Galleys and the land building, shift wood villagers to food until 8 to 10 are on wood"
+   },
+   {
+    "pop": 28,
+    "type": "build",
+    "text": "Keep one villager building Houses nonstop"
+   }
+  ],
+  "after_feudal": "Send the first two Fire Galleys to find the enemy Dock and kill Fishing Ships, and raid on land with the first scouts or archers at the same time. Wall your base and move from the hunt onto berries and Farms. Stop making land units when they can no longer do damage, and stop Fire Galleys once the water is clearly won or lost. If you won it, patrol the coast and keep fishing; if you lost it, a hidden Dock in Castle Age can win it back later.",
+  "tips": [
+   "Skipping Loom is tempting on hybrid maps but leaves you open to Man-at-Arms; take it unless you are sure.",
+   "Put Houses between your fishing villager and the enemy side of the water.",
+   "Add more Fishing Ships whenever the Town Center is busy and you have spare wood.",
+   "Fire Galleys plus a couple of scouts split the opponent's attention well.",
+   "Dravidians and Japanese have fishing bonuses that make this build stronger."
+  ],
+  "beaten_by": "An opponent who goes all in on the water with three Docks can take the fish and leave you behind; one who goes all in on land can hurt your base while your wood is in ships. Scout their Docks early with the first Fire Galleys and match where they invest.",
+  "sources": [
+   {
+    "title": "26 pop Hybrid",
+    "url": "https://johsaoe2debuildorderreference.site44.com/26-pop-hybrid.html",
+    "type": "article"
+   },
+   {
+    "title": "Build Order: Generic Civ Hybrid (video description)",
+    "url": "https://www.youtube.com/watch?v=5KBobgUFNdw",
+    "type": "video"
+   },
+   {
+    "title": "Learn Hybrid | 10 Minute AoE2 Build Orders (video by Toaster226)",
+    "url": "https://www.youtube.com/watch?v=JrjMxArqQDk",
+    "type": "video"
+   }
+  ],
+  "videos": [
+   {
+    "title": "Learn Hybrid | 10 Minute AoE2 Build Orders",
+    "url": "https://www.youtube.com/watch?v=JrjMxArqQDk",
+    "channel": "Toaster226"
+   },
+   {
+    "title": "Aoe2 DE Hybrid Map Build Order | How To Dominate Water & Land!",
+    "url": "https://www.youtube.com/watch?v=IgYGPZG4ECw",
+    "channel": "Hera"
+   },
+   {
+    "title": "Build Order: Generic Civ Hybrid",
+    "url": "https://www.youtube.com/watch?v=5KBobgUFNdw",
+    "channel": "Survivalist"
+   }
+  ]
+ },
+ {
+  "slug": "men-at-arms-into-archers",
+  "title": "Men-at-Arms into Archers (22 pop)",
+  "strategy": "Men-at-Arms into Archers",
+  "category": "feudal-aggression",
+  "elo": "advanced",
+  "difficulty": 2,
+  "map_types": [
+   "open"
+  ],
+  "civs": [
+   "Japanese",
+   "Vikings",
+   "Goths",
+   "Bulgarians",
+   "Dravidians",
+   "Malians",
+   "Aztecs",
+   "Slavs"
+  ],
+  "summary": "Three militia made on the way up become Man-at-Arms the moment Feudal Age lands; they force the opponent to defend while you build up to a range of Fletching archers.",
+  "description": "This is one of the most played 1v1 openings on open maps. You build a Barracks late in the Dark Age and train three militia while the Town Center researches Feudal Age. When you arrive, the Man-at-Arms upgrade finishes about when the militia reach the enemy base, and three Man-at-Arms are strong enough to kill villagers on the woodline or berries unless the opponent fights back with many villagers or has walls up.\n\nWhile the opponent deals with them, you set up an Archery Range and a Blacksmith at home. The Man-at-Arms buy the time that straight archers usually lack. A single range keeps your Castle Age on schedule; add a second one only once you have several Farms running.\n\nVersions range from 19 to 23 pop. The 22 pop build below (21 villagers) is the most common and leaves enough resources to keep the Town Center busy. Higher rated players also play an 18 villager version that skips the Dark Age Mill, needs good deer pushing and makes the militia in Feudal Age.",
+  "steps": [
+   {
+    "pop": 3,
+    "type": "build",
+    "text": "Starting villagers build two Houses; scout for sheep and deer"
+   },
+   {
+    "pop": 6,
+    "type": "villager",
+    "text": "First 6 villagers on sheep"
+   },
+   {
+    "pop": 10,
+    "type": "villager",
+    "text": "Next 4 villagers build a Lumber Camp and chop"
+   },
+   {
+    "pop": 11,
+    "type": "villager",
+    "text": "Villager 11 lures the first boar"
+   },
+   {
+    "pop": 12,
+    "type": "build",
+    "text": "Villager 12 builds a House and the Mill, then gathers berries"
+   },
+   {
+    "pop": 15,
+    "type": "villager",
+    "text": "Next 3 villagers on berries (4 on berries); lure the second boar"
+   },
+   {
+    "pop": 17,
+    "type": "villager",
+    "text": "Next 2 villagers on boar and sheep"
+   },
+   {
+    "pop": 18,
+    "type": "build",
+    "text": "Villager 18 builds a Barracks as soon as you have 175 wood, then chops wood"
+   },
+   {
+    "pop": 19,
+    "type": "villager",
+    "text": "Villager 19 goes to wood (6 on wood)"
+   },
+   {
+    "pop": 21,
+    "type": "villager",
+    "text": "Villagers 20 and 21 build a Mining Camp on gold and mine"
+   },
+   {
+    "pop": 22,
+    "type": "research",
+    "text": "Research Loom"
+   },
+   {
+    "pop": 22,
+    "type": "age",
+    "text": "Click up to the Feudal Age with 21 villagers plus the scout"
+   },
+   {
+    "pop": 22,
+    "type": "military",
+    "text": "Queue 3 militia at the Barracks and send them towards the enemy as they come out"
+   },
+   {
+    "pop": 22,
+    "type": "villager",
+    "text": "Move 3 or 4 sheep villagers to a second Lumber Camp; seed Farms as the sheep run out"
+   },
+   {
+    "pop": 25,
+    "type": "research",
+    "text": "Feudal Age arrives: research Man-at-Arms right away (100 food, 40 gold), then Double-Bit Axe"
+   },
+   {
+    "pop": 25,
+    "type": "build",
+    "text": "Build an Archery Range and start Archers"
+   },
+   {
+    "pop": 27,
+    "type": "villager",
+    "text": "Next 2 villagers go to gold (4 on gold); skip Horse Collar for now"
+   },
+   {
+    "pop": 29,
+    "type": "build",
+    "text": "Once 9 villagers are on food, build a Blacksmith and research Fletching"
+   }
+  ],
+  "after_feudal": "Use the Man-at-Arms to hit villagers that are far from the Town Center, such as the woodline or a gold mine, and retreat when too many villagers come to fight. Then bring them home and walk them out with the first archers. Keep adding Farms and a second range once 8 to 10 Farms are running. For the move to Castle Age, aim for 10 or more archers, 8 to 10 Farms and around 35 villagers, then research Crossbowman and Bodkin Arrow on arrival. Selling a little stone or wood at a Market helps the click.",
+  "tips": [
+   "The first militia should leave as soon as it trains; the other two catch up.",
+   "If the opponent has walls, use the Man-at-Arms to defend instead of breaking walls for nothing.",
+   "Have 40 gold banked when Feudal Age lands so the upgrade starts at once.",
+   "Make one Spearman if the opponent opened scouts.",
+   "An extra villager on gold early makes the archer production smooth."
+  ],
+  "beaten_by": "Archers and Skirmishers in numbers kill Man-at-Arms easily, and a quick wall makes the militia almost useless. Scouts with good micro can also pick off your archers before Fletching. If the opponent opens Skirmishers, keep the Man-at-Arms in front of your archers, add Spearmen, or skip to Castle Age with Knights.",
+  "sources": [
+   {
+    "title": "22 pop Man-at-Arms - Archers",
+    "url": "https://johsaoe2debuildorderreference.site44.com/22-pop-men-at-arms-archers.html",
+    "type": "article"
+   },
+   {
+    "title": "Advice on how to do a better MAA into archers build? (1100 elo)",
+    "url": "https://forums.ageofempires.com/t/advice-on-how-to-do-a-better-maa-into-archers-build-1100-elo/209157",
+    "type": "forum"
+   },
+   {
+    "title": "Generic Modern Man-at-Arms Rush (18 vils)",
+    "url": "https://ageofnotes.com/build-orders/generic-modern-man-at-arms-rush-18-vils/",
+    "type": "article"
+   },
+   {
+    "title": "AOE2 Man At Arms Into Archers Build Order Tutorial (video description)",
+    "url": "https://www.youtube.com/watch?v=0684mP9BVc0",
+    "type": "video"
+   }
+  ],
+  "videos": [
+   {
+    "title": "The Best Build Order Part 4: MAA into Archers, Booming",
+    "url": "https://www.youtube.com/watch?v=8MZVS4YWp1Y",
+    "channel": "Survivalist"
+   },
+   {
+    "title": "This NEW Men at Arms Rush is INSANE works with any civ",
+    "url": "https://www.youtube.com/watch?v=f4v0MjFeEY0",
+    "channel": "Hera"
+   },
+   {
+    "title": "AOE2 Man At Arms Into Archers Build Order Tutorial",
+    "url": "https://www.youtube.com/watch?v=0684mP9BVc0",
+    "channel": "Morley Games"
+   }
+  ]
+ },
+ {
+  "slug": "men-at-arms-into-towers",
+  "title": "Men-at-Arms into Towers (21 pop)",
+  "strategy": "Men-at-Arms and Towers",
+  "category": "feudal-aggression",
+  "elo": "advanced",
+  "difficulty": 3,
+  "map_types": [
+   "open"
+  ],
+  "civs": [
+   "Bulgarians",
+   "Koreans",
+   "Byzantines",
+   "Inca",
+   "Teutons",
+   "Poles",
+   "Armenians"
+  ],
+  "summary": "Three Man-at-Arms escort four forward villagers who tower the enemy woodline or gold, then you race to Castle Age while the opponent fights under arrow fire.",
+  "description": "This opening mixes a Man-at-Arms rush with a tower rush. You click Feudal Age with 20 villagers, three militia and a few villagers on stone. The militia become Man-at-Arms on arrival and stand guard while four villagers build Watch Towers next to the opponent's woodline, berries or gold. Villagers that come to stop the towers have to get past the Man-at-Arms first, which is what separates this build from a plain tower rush that villagers alone can beat.\n\nThe goal is to deny resources long enough that you reach Castle Age first. Stop mining stone once two or three towers are up and the opponent has moved off their resources. Civilizations with tower or stone bonuses (Koreans, Inca, Byzantines, Teutons) and Bulgarians, whose militia upgrade to Man-at-Arms for free, get the most out of it. It is an all in build, so scout the map carefully before you commit the villagers.",
+  "steps": [
+   {
+    "pop": 3,
+    "type": "build",
+    "text": "Starting villagers build two Houses; scout for sheep, boar and a forward gold"
+   },
+   {
+    "pop": 6,
+    "type": "villager",
+    "text": "First 6 villagers on sheep"
+   },
+   {
+    "pop": 9,
+    "type": "villager",
+    "text": "Next 3 villagers build a Lumber Camp and chop"
+   },
+   {
+    "pop": 10,
+    "type": "build",
+    "text": "Villager 10 builds a House next to the forward boar, then lures it"
+   },
+   {
+    "pop": 15,
+    "type": "villager",
+    "text": "Next 5 villagers hunt under the Town Center; push in 1 or 2 deer and bring the second boar"
+   },
+   {
+    "pop": 16,
+    "type": "build",
+    "text": "Villager 16 builds a Barracks, ideally near a gold mine so it can mine 10 gold afterwards"
+   },
+   {
+    "pop": 16,
+    "type": "build",
+    "text": "A wood villager builds a House"
+   },
+   {
+    "pop": 20,
+    "type": "villager",
+    "text": "Every villager up to 20 goes to food under the Town Center"
+   },
+   {
+    "pop": 20,
+    "type": "military",
+    "text": "Queue 2 militia at once and the third when it no longer delays the age up"
+   },
+   {
+    "pop": 20,
+    "type": "build",
+    "text": "Build a Mill on the berries with a food villager when the hunt is nearly gone"
+   },
+   {
+    "pop": 21,
+    "type": "research",
+    "text": "Research Loom"
+   },
+   {
+    "pop": 21,
+    "type": "age",
+    "text": "Click up to the Feudal Age with 20 villagers plus the scout"
+   },
+   {
+    "pop": 21,
+    "type": "villager",
+    "text": "While the age loads: 3 food villagers build a Mining Camp on stone, 3 more go to wood, and 4 walk to the enemy base"
+   },
+   {
+    "pop": 21,
+    "type": "villager",
+    "text": "The remaining food villagers finish the hunt and then move to berries"
+   },
+   {
+    "pop": 24,
+    "type": "research",
+    "text": "Feudal Age arrives: research Man-at-Arms (free for Bulgarians) and Double-Bit Axe"
+   },
+   {
+    "pop": 24,
+    "type": "build",
+    "text": "Forward villagers build a Watch Tower next to the enemy woodline or gold, with the Man-at-Arms standing guard"
+   },
+   {
+    "pop": 26,
+    "type": "build",
+    "text": "Add a second tower in range of the first, and palisade the open sides of a lone woodline tower"
+   },
+   {
+    "pop": 26,
+    "type": "villager",
+    "text": "New villagers at home go to wood and Farms"
+   }
+  ],
+  "after_feudal": "Build two or three towers in total, then stop the stone mining and switch those villagers to gold. Keep the Man-at-Arms close to the towers and use them to kill villagers that try to build counter towers. At home, wall up, seed Farms and only make counter units if the opponent sends Feudal units. Click Castle Age as soon as you can; the first player to reach Castle Age usually wins this kind of game. Bring the forward villagers home or have them build a Barracks or Archery Range near the towers.",
+  "tips": [
+   "Do not send more than four villagers forward; your own economy needs the rest.",
+   "Place the first tower where it shoots the most villagers, usually the main woodline.",
+   "Keep one forward villager repairing the towers when they come under attack.",
+   "Begin with 1 or 2 on stone if you are unsure, and add more once the rush is working.",
+   "If the opponent abandons the resource, do not chase with more towers; take the lead and go to Castle Age."
+  ],
+  "beaten_by": "Archers shoot down the Man-at-Arms and then the tower builders, and a straight Archer opening is the cleanest answer. Counter towers, many villagers fighting together with Loom, or an opponent who skips to Castle Age while moving their villagers can also beat it. If the first tower fails, bring everyone home and play a normal Feudal Age game.",
+  "sources": [
+   {
+    "title": "Explaining Every META Opening Strategy (video by Hera)",
+    "url": "https://www.youtube.com/watch?v=nnXauSng9fY",
+    "type": "video"
+   },
+   {
+    "title": "Rush (Age of Empires Series Wiki)",
+    "url": "https://ageofempires.fandom.com/wiki/Rush",
+    "type": "wiki"
+   },
+   {
+    "title": "Learn Tower Rush | 10 Minute AoE2 Build Orders (video by Toaster226)",
+    "url": "https://www.youtube.com/watch?v=atMpSibZnWk",
+    "type": "video"
+   }
+  ],
+  "videos": [
+   {
+    "title": "Learn Tower Rush | 10 Minute AoE2 Build Orders",
+    "url": "https://www.youtube.com/watch?v=atMpSibZnWk",
+    "channel": "Toaster226"
+   },
+   {
+    "title": "Build Orders - M@A + Towers",
+    "url": "https://www.youtube.com/watch?v=jzy4pKegXzs",
+    "channel": "St4rk Age of Empires"
+   },
+   {
+    "title": "Armenian Man at Arms + Towers Build Order | 20 pop Feudal",
+    "url": "https://www.youtube.com/watch?v=Bu0ObvOQMZ0",
+    "channel": "ColinAoC"
+   }
+  ]
+ },
+ {
+  "slug": "premill-drush-militia-rush",
+  "title": "Pre-Mill Militia Rush into Scouts (21 pop)",
+  "strategy": "Militia rush (pre-mill drush)",
+  "category": "dark-age-rush",
+  "elo": "expert",
+  "difficulty": 3,
+  "map_types": [
+   "open"
+  ],
+  "civs": [
+   "Goths",
+   "Bulgarians",
+   "Britons",
+   "Japanese",
+   "Aztecs",
+   "Celts",
+   "Lithuanians"
+  ],
+  "summary": "Build the Barracks before the Mill, get two militia into the enemy base while they are still in the Dark Age, then click up on 20 villagers and follow with scouts.",
+  "description": "A pre-mill drush places the Barracks as your second Dark Age building, before any Mill. That gets militia to the enemy base about two minutes earlier than a normal drush, often while the opponent is still luring boar or building their Mill. You do not need kills: a couple of militia chasing woodcutters and blocking berry villagers causes idle time, and the opponent falls behind your Feudal Age timing.\n\nThe version here makes two militia, because a third delays your own age up, and clicks Feudal Age on 20 villagers with the Mill built during the age up. When Feudal Age lands you build a Stable and keep the pressure going with scouts. You can also turn the same opening into a fast Castle Age or into Man-at-Arms with towers.\n\nIt is a demanding build. You must keep the Town Center busy and control the militia at the same moment, so practise against the AI before using it on the ladder.",
+  "steps": [
+   {
+    "pop": 3,
+    "type": "build",
+    "text": "Starting villagers build two Houses; send the Scout Cavalry straight towards the enemy first, and let spare sheep scout your base"
+   },
+   {
+    "pop": 6,
+    "type": "villager",
+    "text": "First 6 villagers on sheep"
+   },
+   {
+    "pop": 9,
+    "type": "villager",
+    "text": "Next 3 villagers build a Lumber Camp and chop"
+   },
+   {
+    "pop": 10,
+    "type": "build",
+    "text": "Villager 10 builds a third House near the forward boar, then lures it"
+   },
+   {
+    "pop": 14,
+    "type": "villager",
+    "text": "Next 4 villagers hunt under the Town Center; push in 1 or 2 deer"
+   },
+   {
+    "pop": 15,
+    "type": "build",
+    "text": "Villager 15 builds a Barracks as soon as you have 175 wood (force your woodcutters to drop off), then a House, then goes back to food"
+   },
+   {
+    "pop": 15,
+    "type": "military",
+    "text": "Queue 2 militia; they cost 120 food and 40 gold in total"
+   },
+   {
+    "pop": 15,
+    "type": "villager",
+    "text": "Move 1 villager from wood to food once the Barracks is placed"
+   },
+   {
+    "pop": 20,
+    "type": "villager",
+    "text": "Every villager up to 20 goes to food under the Town Center; bring in the second boar"
+   },
+   {
+    "pop": 21,
+    "type": "research",
+    "text": "Research Loom only if your timing slipped, otherwise save it for Feudal Age"
+   },
+   {
+    "pop": 21,
+    "type": "age",
+    "text": "Click up to the Feudal Age with 20 villagers plus the scout"
+   },
+   {
+    "pop": 21,
+    "type": "villager",
+    "text": "During the age up, 6 villagers go to wood and 6 build a Mill on the berries and gather there"
+   },
+   {
+    "pop": 21,
+    "type": "villager",
+    "text": "The rest finish the hunt, then go to straggler trees and the first Farms"
+   },
+   {
+    "pop": 21,
+    "type": "build",
+    "text": "In the second half of the age up, one villager builds a House and gets ready to place a Stable"
+   },
+   {
+    "pop": 21,
+    "type": "age",
+    "text": "Feudal Age arrives: place the Stable, research Loom if you skipped it, and start Scout Cavalry"
+   }
+  ],
+  "after_feudal": "Keep the militia alive and join them with the first scouts. Research Double-Bit Axe and Horse Collar, seed Farms only once you have the wood for the Stable and a couple of houses, and wall while the scouts raid. If the drush did real damage, keep attacking with scouts and add Spearmen as needed; if not, wall up, play defensively and go for Castle Age Knights. Two other common follow ups from this opening are a fast Castle Age (add 2 to 4 villagers before clicking, two of them on gold) or Man-at-Arms with towers.",
+  "tips": [
+   "Hit and run with the militia; three villagers with Loom will kill a militia that stays to fight.",
+   "Use the scout to body block villagers trying to walk away.",
+   "The goal is idle time. Chasing one villager around their base for a minute is a good result.",
+   "Do not make the third militia if it would delay your Feudal Age click.",
+   "Goths and Bulgarians make the opening cheaper or stronger; Japanese save wood on the Lumber Camp and Mill."
+  ],
+  "beaten_by": "An opponent who walls quickly or fights back with many villagers takes away the damage, and then your plain Feudal Age is a bit later than theirs. Fast archers can also punish the low wood count. If the militia do nothing, stop sending more, wall, and turn the game into a defensive scouts or fast Castle Age plan.",
+  "sources": [
+   {
+    "title": "32+2 Pre-Mill Drush - FC",
+    "url": "https://johsaoe2debuildorderreference.site44.com/32+2-pre-mill-drush-fc.html",
+    "type": "article"
+   },
+   {
+    "title": "How To: Pre-Mill Drush Like a Pro (video description)",
+    "url": "https://www.youtube.com/watch?v=uzUc9my3VLA",
+    "type": "video"
+   },
+   {
+    "title": "Feudal Drush (18 vils)",
+    "url": "https://ageofnotes.com/build-orders/feudal-drush-18-vils/",
+    "type": "article"
+   },
+   {
+    "title": "Rush (Age of Empires Series Wiki)",
+    "url": "https://ageofempires.fandom.com/wiki/Rush",
+    "type": "wiki"
+   }
+  ],
+  "videos": [
+   {
+    "title": "Learn Drush | 10 Minute AoE2 Build Orders",
+    "url": "https://www.youtube.com/watch?v=ACae5IY8egU",
+    "channel": "Toaster226"
+   },
+   {
+    "title": "How To: Pre-Mill Drush Like a Pro | Age of Empires II: Definitive Edition",
+    "url": "https://www.youtube.com/watch?v=uzUc9my3VLA",
+    "channel": "HumzaCrumza"
+   },
+   {
+    "title": "The INSTANT Drush Is Viable Again | AoE2",
+    "url": "https://www.youtube.com/watch?v=vHw1sKf3zUk",
+    "channel": "Hera"
+   }
+  ]
+ },
+ {
+  "slug": "scouts-19-pop",
+  "title": "Scouts (19 pop)",
+  "strategy": "Scouts",
+  "category": "feudal-aggression",
+  "elo": "intermediate",
+  "difficulty": 2,
+  "map_types": [
+   "open"
+  ],
+  "civs": [
+   "Franks",
+   "Magyars",
+   "Mongols",
+   "Huns",
+   "Lithuanians",
+   "Malians",
+   "Khmer",
+   "Berbers"
+  ],
+  "summary": "The modern ladder scout rush: 18 villagers, a hunt-heavy Dark Age and a Stable down the moment Feudal Age lands, so scouts reach the enemy before their walls are finished.",
+  "description": "Current scout builds click up on 18 to 20 villagers instead of the old 21 or 22. The trick is a Dark Age that lives almost entirely on sheep, boar and deer, with only two villagers on wood until the very end. The Mill goes on the berries early so you have your two Dark Age buildings, but most food comes from hunting under the Town Center.\n\nLuring deer with the Scout Cavalry after you have found your sheep helps a lot, and civilizations with a hunting or Feudal cavalry bonus can go even faster. The build lands in Feudal Age at roughly 8:50 to 9:15 with enough wood for a Barracks, a Stable and a few houses.\n\nAfter the first scouts go out, most players either keep a single Stable going and set up for Castle Age Knights, or add an Archery Range if the opponent answers with Spearmen and Archers.",
+  "steps": [
+   {
+    "pop": 3,
+    "type": "build",
+    "text": "Starting villagers build two Houses; the Scout Cavalry and spare sheep scout around the base"
+   },
+   {
+    "pop": 6,
+    "type": "villager",
+    "text": "First 6 villagers on sheep"
+   },
+   {
+    "pop": 8,
+    "type": "villager",
+    "text": "Next 2 villagers build a Lumber Camp on the closest woodline and chop"
+   },
+   {
+    "pop": 9,
+    "type": "build",
+    "text": "Villager 9 builds a House (on the boar side if one boar is forward), then lures the first boar"
+   },
+   {
+    "pop": 10,
+    "type": "build",
+    "text": "Villager 10 builds a Mill on the berries and gathers there"
+   },
+   {
+    "pop": 10,
+    "type": "note",
+    "text": "Once all sheep are found, push 2 or 3 deer towards the Town Center with the scout"
+   },
+   {
+    "pop": 16,
+    "type": "villager",
+    "text": "Next 6 villagers hunt under the Town Center; bring in the second boar and the deer as the first boar runs out"
+   },
+   {
+    "pop": 18,
+    "type": "villager",
+    "text": "Next 2 villagers go to wood (4 on wood)"
+   },
+   {
+    "pop": 19,
+    "type": "research",
+    "text": "Research Loom if you are not quite at 500 food, otherwise save it for Feudal Age"
+   },
+   {
+    "pop": 19,
+    "type": "age",
+    "text": "Click up to the Feudal Age with 18 villagers plus the scout, at about 8:50 to 9:15"
+   },
+   {
+    "pop": 19,
+    "type": "villager",
+    "text": "Move 4 or 5 hunters to wood (8 to 9 on wood); use a second Lumber Camp if you want a safer setup"
+   },
+   {
+    "pop": 19,
+    "type": "villager",
+    "text": "Move 4 hunters to the berries"
+   },
+   {
+    "pop": 19,
+    "type": "build",
+    "text": "At about 60 percent of the age up, one food villager builds a Barracks"
+   },
+   {
+    "pop": 19,
+    "type": "age",
+    "text": "Feudal Age arrives: two villagers build a Stable towards the enemy and start Scout Cavalry"
+   }
+  ],
+  "after_feudal": "Research Double-Bit Axe, then Horse Collar, while the Stable makes scouts nonstop. The two Stable builders wall the sides of your base with houses and palisades. New villagers go to food: seed Farms as the hunt runs out and aim for about 15 Farms. Attack with three or four scouts together and keep making scouts until you are fully walled. Get Bloodlines around 7 or 8 scouts if the fighting goes long. About three minutes before you want to click Castle Age, send 5 to 8 villagers to gold; one Stable of Knights is the most common follow up.",
+  "tips": [
+   "Keep no more than two or three carcasses under the Town Center or the meat rots.",
+   "If your boar or deer are far away, add one more villager before clicking up instead of forcing the timing.",
+   "Three scouts can kill one Spearman. Two cannot, so do not take even fights.",
+   "Make one or two Spearmen at home if the opponent also opens scouts.",
+   "If you see two Archery Ranges, add your own range and make Skirmishers instead of more scouts."
+  ],
+  "beaten_by": "Fast walls plus a couple of Spearmen take away most of your damage, and a mass of Archers with a few Spearmen wins the late Feudal fight. A Man-at-Arms opening can also catch you with few villagers on wood. Adapt by adding Skirmishers, walling, and moving into Castle Age before the archer count gets too high.",
+  "sources": [
+   {
+    "title": "1-Stable Scouts (18 vils)",
+    "url": "https://ageofnotes.com/build-orders/1-stable-scouts-18-vils/",
+    "type": "article"
+   },
+   {
+    "title": "20 pop Scouts",
+    "url": "https://johsaoe2debuildorderreference.site44.com/20-pop-scouts.html",
+    "type": "article"
+   },
+   {
+    "title": "Mastering the Scout Rush in Age of Empires 2: A Complete Guide",
+    "url": "https://ageofempires.substack.com/p/aoe2-scout-rush-guide",
+    "type": "article"
+   }
+  ],
+  "videos": [
+   {
+    "title": "Learn Fast Feudal | 10-Minute AoE2 Build Orders",
+    "url": "https://www.youtube.com/watch?v=YTA0TLpBDPo",
+    "channel": "Toaster226"
+   },
+   {
+    "title": "Explaining Every META Opening Strategy | AoE2",
+    "url": "https://www.youtube.com/watch?v=nnXauSng9fY",
+    "channel": "Hera"
+   },
+   {
+    "title": "Scout Rush in 2023: 18 Pop build order that will Improve AOE2 Game!",
+    "url": "https://www.youtube.com/watch?v=PcKxbQKlZH8",
+    "channel": "Morley Games"
+   }
+  ]
+ },
+ {
+  "slug": "scouts-into-archers",
+  "title": "Scouts into Archers (21 pop)",
+  "strategy": "Scouts into Archers",
+  "category": "feudal-aggression",
+  "elo": "intermediate",
+  "difficulty": 2,
+  "map_types": [
+   "open"
+  ],
+  "civs": [
+   "Huns",
+   "Mongols",
+   "Magyars",
+   "Tatars",
+   "Cumans",
+   "Turks"
+  ],
+  "summary": "Open with a handful of Scout Cavalry for early map control, then add two Archery Ranges and Fletching archers for a second Feudal push.",
+  "description": "This build starts exactly like a normal scout rush, then turns into an archer army once your Farms are running. The scouts take map control, kill a villager or two and keep the opponent's scouts busy. By the time the opponent has Spearmen out to stop them, your gold miners are in place and archers start coming out of two ranges.\n\nThe switch costs time, so your Castle Age click comes later than with straight scouts. It suits long Feudal fights on open maps, and civilizations that want scouts early and Cavalry Archers or Hussars later, such as Huns or Mongols. Use it when you scout Spearmen or many towers against your scouts, since archers handle both better.",
+  "steps": [
+   {
+    "pop": 3,
+    "type": "build",
+    "text": "Starting villagers build two Houses; scout for sheep"
+   },
+   {
+    "pop": 6,
+    "type": "villager",
+    "text": "First 6 villagers on sheep"
+   },
+   {
+    "pop": 9,
+    "type": "villager",
+    "text": "Next 3 villagers build a Lumber Camp and chop wood"
+   },
+   {
+    "pop": 10,
+    "type": "villager",
+    "text": "Villager 10 lures the first boar"
+   },
+   {
+    "pop": 11,
+    "type": "build",
+    "text": "Villager 11 builds a House and the Mill on the berries, then gathers berries"
+   },
+   {
+    "pop": 14,
+    "type": "villager",
+    "text": "Next 3 villagers on berries (4 on berries)"
+   },
+   {
+    "pop": 15,
+    "type": "villager",
+    "text": "Villager 15 lures the second boar"
+   },
+   {
+    "pop": 17,
+    "type": "villager",
+    "text": "Next 2 villagers on boar; move a weak sheep villager onto a Farm when sheep run low"
+   },
+   {
+    "pop": 20,
+    "type": "villager",
+    "text": "Next 3 villagers build a second Lumber Camp and chop (6 on wood)"
+   },
+   {
+    "pop": 21,
+    "type": "research",
+    "text": "Research Loom"
+   },
+   {
+    "pop": 21,
+    "type": "age",
+    "text": "Click up to the Feudal Age with 20 villagers plus the scout"
+   },
+   {
+    "pop": 21,
+    "type": "villager",
+    "text": "Move 4 sheep villagers to wood so each Lumber Camp has 5"
+   },
+   {
+    "pop": 21,
+    "type": "build",
+    "text": "Halfway through the age up, one wood villager builds a Barracks"
+   },
+   {
+    "pop": 21,
+    "type": "age",
+    "text": "Feudal Age arrives: build a Stable, research Double-Bit Axe and Horse Collar, make 3 to 5 Scout Cavalry"
+   },
+   {
+    "pop": 28,
+    "type": "villager",
+    "text": "New villagers build Farms (10 to 14 Farms in total)"
+   },
+   {
+    "pop": 30,
+    "type": "build",
+    "text": "Build two Archery Ranges and a Blacksmith as wood allows"
+   },
+   {
+    "pop": 36,
+    "type": "villager",
+    "text": "Send the next villagers to gold until about 10 are mining; move 2 berry villagers to gold when berries end"
+   },
+   {
+    "pop": 36,
+    "type": "military",
+    "text": "Make Archers from both ranges and research Fletching; get Bloodlines for the scouts"
+   }
+  ],
+  "after_feudal": "Keep the scouts alive and use them to protect your archers from enemy scouts and to pick off Skirmishers. Join the first 5 or 6 archers with the scouts and push a resource the opponent cannot easily defend. Get Wheelbarrow once gold is running. Click Castle Age with about 10 archers and Fletching; Crossbowman and Bodkin Arrow come first, or switch to Cavalry Archers and Light Cavalry if your civilization is better at those.",
+  "tips": [
+   "Do not lose the first scouts for nothing; they protect the archers later.",
+   "Watch the opponent's buildings. Two Archery Ranges on their side mean you should make Skirmishers instead of Archers.",
+   "Spearmen are slow; archers kill them easily, which is the reason to switch.",
+   "Build the ranges closer to the enemy than the Stable so the archers reach the front quickly."
+  ],
+  "beaten_by": "Fast Skirmishers and walls make both halves of the build weak. A straight fast Castle Age can also outpace you, since you spend a lot in Feudal Age. If your damage is low, stop at a small archer count and go to Castle Age early.",
+  "sources": [
+   {
+    "title": "21 pop Scouts - Archers",
+    "url": "https://johsaoe2debuildorderreference.site44.com/21-pop-scouts-archers.html",
+    "type": "article"
+   },
+   {
+    "title": "AOE2 Scouts Into Archers Build Order Tutorial (video description)",
+    "url": "https://www.youtube.com/watch?v=d565j04Jn6E",
+    "type": "video"
+   },
+   {
+    "title": "Scouts into Cavalry Archers (18 vils)",
+    "url": "https://ageofnotes.com/build-orders/scouts-into-cavalry-archers-18-vils/",
+    "type": "article"
+   }
+  ],
+  "videos": [
+   {
+    "title": "AOE2 Scouts Into Archers Build Order Tutorial",
+    "url": "https://www.youtube.com/watch?v=d565j04Jn6E",
+    "channel": "Morley Games"
+   },
+   {
+    "title": "The best Scouts into archers build order! | Age of empires 2 DE",
+    "url": "https://www.youtube.com/watch?v=aTi7K_9Fv00",
+    "channel": "F1ReAoE"
+   }
+  ]
+ },
+ {
+  "slug": "scouts-into-skirmishers",
+  "title": "Scouts into Skirmishers (21 pop)",
+  "strategy": "Scouts into Skirmishers",
+  "category": "feudal-aggression",
+  "elo": "intermediate",
+  "difficulty": 2,
+  "map_types": [
+   "open"
+  ],
+  "civs": [
+   "Franks",
+   "Magyars",
+   "Lithuanians",
+   "Berbers",
+   "Vietnamese",
+   "Poles"
+  ],
+  "summary": "A scout opening with a single Archery Range of Skirmishers added once the opponent commits to archers, so your scouts stay useful and your Castle Age stays on time.",
+  "description": "A common problem with scouts is an opponent who answers with Archers and Spearmen. Making your own Archers at that point leaves you behind in numbers, so this build adds one Archery Range and makes Skirmishers instead. They cost food and wood, produce quickly, and with Padded Archer Armor they take very little damage from archers.\n\nThe Dark Age is the same 21 pop scout opening, which gives your Farms a solid start. The scouts keep the opponent's Spearmen and villagers busy while the Skirmishers clear the archers. Because you never need many gold miners in Feudal Age, the switch to Castle Age Knights comes quickly afterwards.",
+  "steps": [
+   {
+    "pop": 3,
+    "type": "build",
+    "text": "Starting villagers build two Houses; scout for sheep"
+   },
+   {
+    "pop": 6,
+    "type": "villager",
+    "text": "First 6 villagers on sheep"
+   },
+   {
+    "pop": 9,
+    "type": "villager",
+    "text": "Next 3 villagers build a Lumber Camp and chop wood"
+   },
+   {
+    "pop": 10,
+    "type": "villager",
+    "text": "Villager 10 lures the first boar"
+   },
+   {
+    "pop": 11,
+    "type": "build",
+    "text": "Villager 11 builds a House and the Mill, then gathers berries"
+   },
+   {
+    "pop": 14,
+    "type": "villager",
+    "text": "Next 3 villagers on berries (4 on berries)"
+   },
+   {
+    "pop": 15,
+    "type": "villager",
+    "text": "Villager 15 lures the second boar"
+   },
+   {
+    "pop": 17,
+    "type": "villager",
+    "text": "Next 2 villagers on boar; weak sheep villagers start Farms as the sheep run out"
+   },
+   {
+    "pop": 20,
+    "type": "villager",
+    "text": "Next 3 villagers build a second Lumber Camp (6 on wood)"
+   },
+   {
+    "pop": 21,
+    "type": "research",
+    "text": "Research Loom"
+   },
+   {
+    "pop": 21,
+    "type": "age",
+    "text": "Click up to the Feudal Age with 20 villagers plus the scout"
+   },
+   {
+    "pop": 21,
+    "type": "villager",
+    "text": "Move 4 food villagers to wood (10 on wood); a wood villager builds a Barracks halfway through"
+   },
+   {
+    "pop": 21,
+    "type": "age",
+    "text": "Feudal Age arrives: build a Stable, research Double-Bit Axe and Horse Collar, start Scout Cavalry"
+   },
+   {
+    "pop": 27,
+    "type": "villager",
+    "text": "New villagers build Farms; 2 more go to wood once Farms are steady"
+   },
+   {
+    "pop": 28,
+    "type": "build",
+    "text": "When you see enemy archers, build one Archery Range and make Skirmishers nonstop"
+   },
+   {
+    "pop": 30,
+    "type": "villager",
+    "text": "Move 2 berry villagers to gold and add 2 more (4 on gold)"
+   },
+   {
+    "pop": 31,
+    "type": "build",
+    "text": "Build a Blacksmith; research Padded Archer Armor first if archers are the threat, Fletching after"
+   }
+  ],
+  "after_feudal": "Use the Skirmishers in a tight group in front of your Farms and gold, with the scouts ready to run down any Spearmen that come at them. Once the enemy archers stop, raid with scouts again and keep adding Farms until you have 15 or so. Get Wheelbarrow, put 7 to 9 villagers on gold, and click Castle Age. Knights are the natural next unit; keep the Skirmishers and get Elite Skirmisher if the opponent goes Crossbowman.",
+  "tips": [
+   "Skirmishers are weak against everything except archers, so keep them out of melee fights.",
+   "One range is enough. Skirmishers train faster than Archers.",
+   "Get Padded Archer Armor before Fletching if the opponent has many archers.",
+   "Your scouts kill Spearmen that try to reach the Skirmishers; keep the two groups close."
+  ],
+  "beaten_by": "Men-at-Arms and Spearmen in numbers beat Skirmishers in melee, and a Knight switch in Castle Age punishes a large Skirmisher count. If the opponent goes heavy infantry, use the Stable and add archers of your own or go up to Castle Age.",
+  "sources": [
+   {
+    "title": "21 pop Scouts - Skirms",
+    "url": "https://johsaoe2debuildorderreference.site44.com/21-pop-scouts-skirms.html",
+    "type": "article"
+   },
+   {
+    "title": "AOE2 Scouts into Skirmishers Build Order Tutorial (video description)",
+    "url": "https://www.youtube.com/watch?v=Ap-j_hbr7h0",
+    "type": "video"
+   },
+   {
+    "title": "1-Stable Scouts (18 vils), follow up notes",
+    "url": "https://ageofnotes.com/build-orders/1-stable-scouts-18-vils/",
+    "type": "article"
+   }
+  ],
+  "videos": [
+   {
+    "title": "AoE2 Build Order: Scouts into Skirms!",
+    "url": "https://www.youtube.com/watch?v=feHD1AhMUOE",
+    "channel": "T90Official"
+   },
+   {
+    "title": "AOE2 Scouts into Skirmishers Build Order Tutorial",
+    "url": "https://www.youtube.com/watch?v=Ap-j_hbr7h0",
+    "channel": "Morley Games"
+   },
+   {
+    "title": "Scouts into Skirmishers - Build Order | Age of empires 2 DE",
+    "url": "https://www.youtube.com/watch?v=7aloeb1mhgY",
+    "channel": "F1ReAoE"
+   }
+  ]
+ },
+ {
+  "slug": "skirmisher-spear-defence",
+  "title": "Walled Skirmisher and Spearman Defence (21 pop)",
+  "strategy": "Skirmishers and Spearmen",
+  "category": "defensive",
+  "elo": "beginner",
+  "difficulty": 2,
+  "map_types": [
+   "open"
+  ],
+  "civs": [
+   "Vietnamese",
+   "Lithuanians",
+   "Byzantines",
+   "Teutons",
+   "Bulgarians",
+   "Slavs"
+  ],
+  "summary": "Wall during the Dark Age, reach Feudal Age with 20 villagers, and answer whatever your opponent sends with cheap Skirmishers and Spearmen while you farm up for Castle Age Knights.",
+  "description": "Many players lose their first ladder games to a Feudal rush they did not see coming. This build is a safe answer. You make the usual Dark Age economy, but two wood villagers start walling with palisades and houses before you click up, and a Barracks sits in the front wall. In Feudal Age you only make units that cost no gold: Spearmen against scouts and Skirmishers against archers. Everything else goes into Farms and the economy upgrades.\n\nSkirmishers and Spearmen are trash units, so they are cheap and easy to replace. Their job is to keep your villagers working until you reach Castle Age with a larger economy than your opponent; the Knights you make there are what win the game. Scout what your opponent is building and only make the counter you need.",
+  "steps": [
+   {
+    "pop": 3,
+    "type": "build",
+    "text": "Two villagers build one House, the third builds another; scout for sheep"
+   },
+   {
+    "pop": 6,
+    "type": "villager",
+    "text": "First 6 villagers on sheep"
+   },
+   {
+    "pop": 10,
+    "type": "villager",
+    "text": "Next 4 villagers build a Lumber Camp and chop; one of them builds the next two Houses"
+   },
+   {
+    "pop": 11,
+    "type": "villager",
+    "text": "Villager 11 lures the first boar"
+   },
+   {
+    "pop": 13,
+    "type": "villager",
+    "text": "Next 2 villagers on boar and sheep (9 on food under the Town Center)"
+   },
+   {
+    "pop": 13,
+    "type": "note",
+    "text": "Lure the second boar when the first has less than 200 food left"
+   },
+   {
+    "pop": 14,
+    "type": "build",
+    "text": "Villager 14 builds a Mill on the berries and gathers there"
+   },
+   {
+    "pop": 17,
+    "type": "villager",
+    "text": "Next 3 villagers on berries (4 on berries)"
+   },
+   {
+    "pop": 20,
+    "type": "villager",
+    "text": "Next 3 villagers build a second Lumber Camp (7 on wood); when the boars are gone, start walling with 2 wood villagers"
+   },
+   {
+    "pop": 20,
+    "type": "build",
+    "text": "Put a Barracks into the front wall with one of the wallers"
+   },
+   {
+    "pop": 21,
+    "type": "research",
+    "text": "Research Loom"
+   },
+   {
+    "pop": 21,
+    "type": "age",
+    "text": "Click up to the Feudal Age with 20 villagers plus the scout; queue one more villager behind it"
+   },
+   {
+    "pop": 21,
+    "type": "build",
+    "text": "Keep walling during the age up so the base is closed when Feudal Age lands"
+   },
+   {
+    "pop": 21,
+    "type": "research",
+    "text": "Feudal Age arrives: research Double-Bit Axe and Horse Collar"
+   },
+   {
+    "pop": 22,
+    "type": "military",
+    "text": "Against scouts, make up to 3 Spearmen from the Barracks"
+   },
+   {
+    "pop": 23,
+    "type": "build",
+    "text": "Against archers, build an Archery Range and make Skirmishers; add a Blacksmith for Padded Archer Armor"
+   },
+   {
+    "pop": 30,
+    "type": "villager",
+    "text": "New villagers build Farms from the straggler trees, one Farm every time you have 60 wood, up to about 15"
+   }
+  ],
+  "after_feudal": "Start sending villagers to gold about three minutes before you want to click Castle Age: roughly 8 miners, or 5 with Wheelbarrow. Click up somewhere between 31 and 37 villagers, using the Archery Range or Barracks and the Blacksmith as your two Feudal buildings, and build a Stable during the age up. In Castle Age, put 9 or 10 villagers on gold and 15 to 17 on Farms, research Gold Mining and Bloodlines, and make Knights from two Stables. Keep the Skirmishers alive; they still beat Crossbowmen in small numbers next to your Town Center.",
+  "tips": [
+   "Wall the resources you depend on first: the main woodline and gold.",
+   "Get Padded Archer Armor only if your Skirmishers are fighting about twice as many archers.",
+   "Never chase scouts with Spearmen into the open; stand them next to your villagers.",
+   "Garrison or pull villagers into the Town Center if a Man-at-Arms group breaks your wall, and fight them with Spearmen and villagers.",
+   "If the opponent does nothing aggressive, stop making units and spend it all on Farms."
+  ],
+  "beaten_by": "A fast Castle Age opponent with a better economy can outscale you, since you spent resources on units and walls. Men-at-Arms break palisades and beat Skirmishers in a straight fight; pull Spearmen and villagers to defend, and keep the Skirmishers out of melee. Against a tower rush, walls do not help, so use villagers to build your own tower or move resources.",
+  "sources": [
+   {
+    "title": "21 pop Scouts - Skirms",
+    "url": "https://johsaoe2debuildorderreference.site44.com/21-pop-scouts-skirms.html",
+    "type": "article"
+   },
+   {
+    "title": "Mastering the Scout Rush in Age of Empires 2 (how to counter scouts)",
+    "url": "https://ageofempires.substack.com/p/aoe2-scout-rush-guide",
+    "type": "article"
+   },
+   {
+    "title": "The Best Build Order Part 1: Foundation",
+    "url": "https://www.youtube.com/watch?v=NKMA2gUV-cc",
+    "type": "video"
+   }
+  ],
+  "videos": [
+   {
+    "title": "The Best Build Order Part 1: Foundation",
+    "url": "https://www.youtube.com/watch?v=NKMA2gUV-cc",
+    "channel": "Survivalist"
+   },
+   {
+    "title": "Hera's Skirm + Spear Rush Build Order | NEW (old) META",
+    "url": "https://www.youtube.com/watch?v=QjI3qTFLn30",
+    "channel": "Hera"
+   },
+   {
+    "title": "Watch This Video If you get Attacked Early | AoE2 Coaching",
+    "url": "https://www.youtube.com/watch?v=wthkcgAcuFw",
+    "channel": "Hera"
+   }
+  ]
+ },
+ {
+  "slug": "tower-rush",
+  "title": "Feudal Tower Rush (19 pop)",
+  "strategy": "Tower rush",
+  "category": "feudal-aggression",
+  "elo": "expert",
+  "difficulty": 3,
+  "map_types": [
+   "open"
+  ],
+  "civs": [
+   "Koreans",
+   "Inca",
+   "Byzantines",
+   "Teutons",
+   "Bulgarians",
+   "Spanish",
+   "Poles"
+  ],
+  "summary": "A very fast Feudal Age with almost no wood, then four or five villagers walk forward and tower the opponent's woodline, gold or berries before they have units out.",
+  "description": "The tower rush (often called a trush) goes for the fastest practical Feudal Age, around 18 villagers, with only two lumberjacks and most villagers on food. During the age up you send villagers to stone and walk a group of builders to the enemy base, so that the first Watch Tower goes up next to their woodline seconds after you reach Feudal Age. Each tower denies a resource, and towers placed in range of each other protect one another.\n\nIt is a high risk build. Your own economy is weak while stone and builders are tied up, and Watch Towers have lower hit points in Feudal Age than they used to, so a group of villagers with Loom can tear down a half finished tower. Use it on maps where the opponent's resources are close to your side, and with civilizations that have tower or stone bonuses. Most players only use it as a surprise.",
+  "steps": [
+   {
+    "pop": 3,
+    "type": "build",
+    "text": "Starting villagers build two Houses; scout the enemy direction early to plan tower spots"
+   },
+   {
+    "pop": 6,
+    "type": "villager",
+    "text": "First 6 villagers on sheep"
+   },
+   {
+    "pop": 8,
+    "type": "villager",
+    "text": "Next 2 villagers build a Lumber Camp and chop wood"
+   },
+   {
+    "pop": 9,
+    "type": "villager",
+    "text": "Villager 9 lures the first boar"
+   },
+   {
+    "pop": 10,
+    "type": "villager",
+    "text": "Villager 10 goes to the boar"
+   },
+   {
+    "pop": 12,
+    "type": "build",
+    "text": "Next 2 villagers build a Mill on the berries and gather there"
+   },
+   {
+    "pop": 18,
+    "type": "villager",
+    "text": "Next 6 villagers on sheep and boar; a hunter lures the second boar"
+   },
+   {
+    "pop": 19,
+    "type": "research",
+    "text": "Research Loom"
+   },
+   {
+    "pop": 19,
+    "type": "age",
+    "text": "Click up to the Feudal Age with 18 villagers plus the scout"
+   },
+   {
+    "pop": 19,
+    "type": "villager",
+    "text": "Move 4 or 5 food villagers to the enemy base and hide them out of sight near their woodline or gold"
+   },
+   {
+    "pop": 19,
+    "type": "villager",
+    "text": "Move 2 to 4 food villagers to stone and build a Mining Camp"
+   },
+   {
+    "pop": 19,
+    "type": "villager",
+    "text": "Add 2 villagers to wood (4 on wood)"
+   },
+   {
+    "pop": 19,
+    "type": "age",
+    "text": "Feudal Age arrives: the forward villagers build the first Watch Tower right away"
+   },
+   {
+    "pop": 20,
+    "type": "villager",
+    "text": "New villagers go to stone until 5 are mining, then to berries and Farms"
+   },
+   {
+    "pop": 22,
+    "type": "build",
+    "text": "Build the second tower in range of the first and wall around tower builders if villagers come to fight"
+   }
+  ],
+  "after_feudal": "Keep towering only while each new tower denies something. Once the opponent has given up a woodline or gold, stop mining stone, put those villagers on gold and wood, and grow your economy with Farms. Many tower rushers then build a Barracks or Archery Range at home for protection and go to Castle Age quickly, often adding Town Centers behind the lead. If the opponent goes up to Castle Age instead of fighting, you need units at home and walls, because Knights will clean up the forward villagers.",
+  "tips": [
+   "Build the first tower where the opponent has no second resource close by to move to.",
+   "Garrison the tower builders inside the tower if they are attacked; Watch Towers fire extra arrows with villagers inside.",
+   "Put a palisade around a lone tower so villagers cannot surround it.",
+   "Do not keep sending stone into towers that are not in range of anything.",
+   "Defending a tower rush: pull the villagers being shot to another resource, send 5 or 6 Loom villagers at an unfinished tower, or build your own counter tower next to theirs. Going straight to Castle Age with Knights is also a common answer."
+  ],
+  "beaten_by": "Fast Archers or Man-at-Arms in Feudal Age kill the forward villagers, and an opponent who just moves their economy and goes straight to Castle Age leaves you with an expensive tower and a weaker economy. Villagers with Loom can also stop an unfinished tower, and at lower ratings a big group of them on the first tower is the most common answer. Archers that shoot the builders and then attack your empty base are the other one. If the first tower fails, bring the builders home and switch to a normal build.",
+  "sources": [
+   {
+    "title": "19 pop Towers",
+    "url": "https://johsaoe2debuildorderreference.site44.com/19-pop-towers.html",
+    "type": "article"
+   },
+   {
+    "title": "AOE2 Tower Rush Build Order Tutorial (video description)",
+    "url": "https://www.youtube.com/watch?v=xINAzQ5ReXs",
+    "type": "video"
+   },
+   {
+    "title": "Rush (Age of Empires Series Wiki)",
+    "url": "https://ageofempires.fandom.com/wiki/Rush",
+    "type": "wiki"
+   },
+   {
+    "title": "Tower rush just makes me want to quit this game (r/aoe2)",
+    "url": "https://www.reddit.com/r/aoe2/comments/1mebdte/tower_rush_just_makes_me_want_to_quit_this_game/",
+    "type": "reddit"
+   },
+   {
+    "title": "Help: how to counter cheesy strategies (r/aoe2)",
+    "url": "https://www.reddit.com/r/aoe2/comments/1vke7he/help_how_to_counter_cheesy_strategies/",
+    "type": "reddit"
+   }
+  ],
+  "videos": [
+   {
+    "title": "Learn Tower Rush | 10 Minute AoE2 Build Orders",
+    "url": "https://www.youtube.com/watch?v=atMpSibZnWk",
+    "channel": "Toaster226"
+   },
+   {
+    "title": "AOE2 Tower Rush Build Order Tutorial",
+    "url": "https://www.youtube.com/watch?v=xINAzQ5ReXs",
+    "channel": "Morley Games"
+   },
+   {
+    "title": "Tower Rush is EASY To Beat Just do This | 1500 Elo Coaching",
+    "url": "https://www.youtube.com/watch?v=7GRKpd0RIig",
+    "channel": "Hera"
+   }
+  ]
+ },
+ {
+  "slug": "water-fire-galleys",
+  "title": "Full Water Fast Feudal Fire Galleys (26 pop)",
+  "strategy": "Water opening, Fire Galleys",
+  "category": "water",
+  "elo": "advanced",
+  "difficulty": 3,
+  "map_types": [
+   "water"
+  ],
+  "civs": [
+   "Vikings",
+   "Italians",
+   "Malay",
+   "Portuguese",
+   "Byzantines",
+   "Dravidians",
+   "Bengalis",
+   "Koreans"
+  ],
+  "summary": "On Islands style maps the game is won on the water: build a Dock in the Dark Age, click up with four Fishing Ships out, and produce Fire Galleys from three Docks in Feudal Age.",
+  "description": "On full water maps, the player who loses the water usually loses the game, because the winner fishes freely and then lands an army. This build commits to the water from the start. One villager becomes the designated builder for Houses and Docks, the first Dock goes down early in the Dark Age, and four Fishing Ships are working before you click Feudal Age. You skip Loom, since nothing can reach your villagers early on an island map.\n\nIn Feudal Age a second and third Dock let you make Fire Galleys nonstop. Fire Galleys are strong against other warships and Fishing Ships at close range. Many players mix in a few Demolition Rafts against groups of enemy ships, or switch to Galley production with Fletching if the opponent goes Fire Galleys too.\n\nFish placement varies between maps, so your Castle Age timing can vary more with this build than with land builds. Always fish deep water fish with your ships and leave shore fish for villagers.",
+  "steps": [
+   {
+    "pop": 3,
+    "type": "build",
+    "text": "Starting villagers build two Houses; scout the shoreline for fish and the sheep"
+   },
+   {
+    "pop": 6,
+    "type": "villager",
+    "text": "First 6 villagers on sheep"
+   },
+   {
+    "pop": 10,
+    "type": "villager",
+    "text": "Next 4 villagers build a Lumber Camp and chop"
+   },
+   {
+    "pop": 11,
+    "type": "villager",
+    "text": "Villager 11 lures the first boar"
+   },
+   {
+    "pop": 12,
+    "type": "build",
+    "text": "Villager 12 builds a House, then a Dock next to deep fish; this villager keeps building Houses and Docks all game"
+   },
+   {
+    "pop": 12,
+    "type": "military",
+    "text": "Start making Fishing Ships from the Dock whenever you have 75 wood, until you have 4"
+   },
+   {
+    "pop": 14,
+    "type": "villager",
+    "text": "Next 2 villagers go to wood (6 on wood)"
+   },
+   {
+    "pop": 21,
+    "type": "villager",
+    "text": "Next 7 villagers on sheep and boar; lure the second boar"
+   },
+   {
+    "pop": 26,
+    "type": "age",
+    "text": "Click up to the Feudal Age with 21 villagers, 4 Fishing Ships and the scout; skip Loom"
+   },
+   {
+    "pop": 26,
+    "type": "villager",
+    "text": "During the age up, move food villagers to a second Lumber Camp (14 on wood) and 6 to gold"
+   },
+   {
+    "pop": 26,
+    "type": "build",
+    "text": "The builder places a second Dock towards the enemy"
+   },
+   {
+    "pop": 26,
+    "type": "age",
+    "text": "Feudal Age arrives: research Double-Bit Axe and start Fire Galleys from both Docks"
+   },
+   {
+    "pop": 27,
+    "type": "build",
+    "text": "Build a third Dock and keep all three producing"
+   },
+   {
+    "pop": 30,
+    "type": "villager",
+    "text": "New villagers finish the sheep, then gather berries; add Farms as wood allows"
+   },
+   {
+    "pop": 32,
+    "type": "build",
+    "text": "Build a Market and a Blacksmith for Castle Age and for Fletching if you switch to Galleys"
+   }
+  ],
+  "after_feudal": "Group the Fire Galleys and go for the enemy Docks and Fishing Ships; killing ships before they finish fishing is worth more than chasing their warships. Protect your own Fishing Ships, since a single enemy Galley can wipe them out. Once you control the water, add Fishing Ships from every Dock and use Galleys to clear coastal towers. In Castle Age, upgrade to War Galley, add Fire Ships against enemy galleys, and look at a Transport Ship landing with Archers or Knights when the coast is clear.",
+  "tips": [
+   "Fish the deep water fish first; they hold more food than shore fish.",
+   "Keep the builder villager working on Docks and Houses so the Town Center never waits for pop space.",
+   "Fire Galleys need to be close to their target; keep them away from Galleys at range when possible.",
+   "If the opponent goes heavy Fire Galleys, switch to Galleys with Fletching and a few demolition rafts.",
+   "Claim neutral islands with a Dock or Town Center later for extra fish and safety."
+  ],
+  "beaten_by": "An opponent with more Docks or a better Galley micro wins the water fight; a Galley army with Fletching beats Fire Galleys at range. A Transport Ship landing with villagers and towers behind your base can also catch you if you only look at the water. Watch your shoreline and keep at least three Docks producing.",
+  "sources": [
+   {
+    "title": "26 pop Full Water",
+    "url": "https://johsaoe2debuildorderreference.site44.com/26-pop-full-water.html",
+    "type": "article"
+   },
+   {
+    "title": "AOE2 Galley Rush Build Order (video description)",
+    "url": "https://www.youtube.com/watch?v=kq58h9D_QJ4",
+    "type": "video"
+   },
+   {
+    "title": "Islands map guide",
+    "url": "https://aoe2-guide.pages.dev/tr/maps/islands",
+    "type": "article"
+   },
+   {
+    "title": "Rush (Age of Empires Series Wiki), naval maps section",
+    "url": "https://ageofempires.fandom.com/wiki/Rush",
+    "type": "wiki"
+   }
+  ],
+  "videos": [
+   {
+    "title": "AOE2 Galley Rush Build Order",
+    "url": "https://www.youtube.com/watch?v=kq58h9D_QJ4",
+    "channel": "Morley Games"
+   },
+   {
+    "title": "Build Order : Fire Galley Opening",
+    "url": "https://www.youtube.com/watch?v=c5ThNL7e15c",
+    "channel": "DragonstarAoE"
+   },
+   {
+    "title": "Everything You Need To Know About Water Gameplay | AoE2",
+    "url": "https://www.youtube.com/watch?v=_B3zbk9CxK4",
+    "channel": "Hera"
+   }
+  ]
+ }
+]

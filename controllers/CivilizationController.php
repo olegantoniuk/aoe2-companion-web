@@ -14,8 +14,11 @@ class CivilizationController extends Controller
     {
         $civs = Civilization::find()->orderBy(['name' => SORT_ASC])->all();
 
+        $uniqueByCiv = Unit::uniqueByCivilization();
+
         return $this->render('index', [
             'civs' => $civs,
+            'uniqueByCiv' => $uniqueByCiv,
         ]);
     }
 
@@ -26,11 +29,8 @@ class CivilizationController extends Controller
             throw new NotFoundHttpException('Civilization not found.');
         }
 
-        // Get unique units for this civ
-        $uniqueUnits = Unit::find()
-            ->where(['civilization_id' => $civ->id, 'is_unique' => 1])
-            ->orderBy(['name' => SORT_ASC])
-            ->all();
+        // its own units: unique ones, units shared by a few civilizations, upgrades only it has (Houfnice)
+        $uniqueUnits = Unit::uniqueByCivilization()[$civ->id] ?? [];
 
         // Get available shared units via availability table
         $availableUnits = Unit::find()

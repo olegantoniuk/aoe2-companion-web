@@ -1,0 +1,774 @@
+{
+ "Anarchy": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Andean Sling": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Architecture": {
+  "building": "University",
+  "age": "Imperial Age"
+ },
+ "Arquebus": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Arrowslits": {
+  "building": "University",
+  "age": "Imperial Age"
+ },
+ "Arson": {
+  "building": "Barracks",
+  "age": "Feudal Age"
+ },
+ "Artillery": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Atheism": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Atlatl": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Atonement": {
+  "building": "Monastery",
+  "age": "Castle Age"
+ },
+ "Aznauri Cavalry": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Bagains": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Ballistas": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Ballistics": {
+  "building": "University",
+  "age": "Castle Age"
+ },
+ "Banking": {
+  "building": "Market",
+  "age": "Imperial Age"
+ },
+ "Bimaristan": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Blast Furnace": {
+  "building": "Blacksmith",
+  "age": "Imperial Age"
+ },
+ "Block Printing": {
+  "building": "Monastery",
+  "age": "Imperial Age"
+ },
+ "Bloodlines": {
+  "building": "Stable",
+  "age": "Feudal Age"
+ },
+ "Bodkin Arrow": {
+  "building": "Blacksmith",
+  "age": "Castle Age"
+ },
+ "Bogsveigar": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Bolt Magazine": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Bombard Tower": {
+  "building": "University",
+  "age": "Imperial Age"
+ },
+ "Bow Saw": {
+  "building": "Lumber Camp",
+  "age": "Castle Age"
+ },
+ "Bracer": {
+  "building": "Blacksmith",
+  "age": "Imperial Age"
+ },
+ "Burgundian Vineyards": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Butalmapu": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Caciques": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Caravan": {
+  "building": "Market",
+  "age": "Castle Age"
+ },
+ "Careening": {
+  "building": "University",
+  "age": "Castle Age"
+ },
+ "Carvel Hull": {
+  "building": "University",
+  "age": "Imperial Age"
+ },
+ "Castle Age": {
+  "building": "Town Center",
+  "age": "Feudal Age"
+ },
+ "Chain Barding Armor": {
+  "building": "Blacksmith",
+  "age": "Castle Age"
+ },
+ "Chain Mail Armor": {
+  "building": "Blacksmith",
+  "age": "Castle Age"
+ },
+ "Chatras": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Chemistry": {
+  "building": "University",
+  "age": "Imperial Age"
+ },
+ "Chieftains": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Chivalry": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Cilician Fleet": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Circum- navigation": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Citadels": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Clinker Construction": {
+  "building": "University",
+  "age": "Castle Age"
+ },
+ "Coiled Serpent Array": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Coinage": {
+  "building": "Market",
+  "age": "Castle Age"
+ },
+ "Comitatenses": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Conscription": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Corvinian Army": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Counter- weights": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Cranequins": {
+  "building": "Archery Range",
+  "age": "Imperial Age"
+ },
+ "Crenellations": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Crop Rotation": {
+  "building": "Mill",
+  "age": "Imperial Age"
+ },
+ "Cuman Mercenaries": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Curare": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Detinets": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Devotion": {
+  "building": "Monastery",
+  "age": "Castle Age"
+ },
+ "Domestication": {
+  "building": "Mill",
+  "age": "Feudal Age"
+ },
+ "Double Crossbow": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Double-Bit Axe": {
+  "building": "Lumber Camp",
+  "age": "Feudal Age"
+ },
+ "Drill": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Druzhina": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Dry Dock": {
+  "building": "University",
+  "age": "Imperial Age"
+ },
+ "Eupseong": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Fabric Shields": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Faith": {
+  "building": "Monastery",
+  "age": "Imperial Age"
+ },
+ "Farimba": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Fereters": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Fervor": {
+  "building": "Monastery",
+  "age": "Castle Age"
+ },
+ "Feudal Age": {
+  "building": "Town Center",
+  "age": "Dark Age"
+ },
+ "First Crusade": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Fishing Lines": {
+  "building": "Dock",
+  "age": "Feudal Age"
+ },
+ "Flemish Revolution": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Fletching": {
+  "building": "Blacksmith",
+  "age": "Feudal Age"
+ },
+ "Forced Levy": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Forging": {
+  "building": "Blacksmith",
+  "age": "Feudal Age"
+ },
+ "Fortified Bastions": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Fortified Wall": {
+  "building": "University",
+  "age": "Castle Age"
+ },
+ "Frontier Guards": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Furor Celtica": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Gambesons": {
+  "building": "Barracks",
+  "age": "Castle Age"
+ },
+ "Garland Wars": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Gillnets": {
+  "building": "Dock",
+  "age": "Castle Age"
+ },
+ "Gold Mining": {
+  "building": "Mining Camp",
+  "age": "Feudal Age"
+ },
+ "Gold Shaft Mining": {
+  "building": "Mining Camp",
+  "age": "Castle Age"
+ },
+ "Grand Trunk Road": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Great Wall": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Greek Fire": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Guard Tower": {
+  "building": "University",
+  "age": "Castle Age"
+ },
+ "Guilds": {
+  "building": "Market",
+  "age": "Imperial Age"
+ },
+ "Hand Cart": {
+  "building": "Town Center",
+  "age": "Castle Age"
+ },
+ "Hauberk": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Heated Shot": {
+  "building": "University",
+  "age": "Castle Age"
+ },
+ "Heavy Plow": {
+  "building": "Mill",
+  "age": "Castle Age"
+ },
+ "Heavy Warships": {
+  "building": "Dock",
+  "age": "Imperial Age"
+ },
+ "Herbal Medicine": {
+  "building": "Monastery",
+  "age": "Castle Age"
+ },
+ "Herbalism": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Heresy": {
+  "building": "Monastery",
+  "age": "Castle Age"
+ },
+ "Hill Forts": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Hoardings": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Holcans": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Horse Collar": {
+  "building": "Mill",
+  "age": "Feudal Age"
+ },
+ "Howdah": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Huaracas": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Hul'che Javelineers": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Husbandry": {
+  "building": "Stable",
+  "age": "Castle Age"
+ },
+ "Hussite Reforms": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Illumination": {
+  "building": "Monastery",
+  "age": "Imperial Age"
+ },
+ "Imperial Age": {
+  "building": "Town Center",
+  "age": "Castle Age"
+ },
+ "Incendiaries": {
+  "building": "University",
+  "age": "Imperial Age"
+ },
+ "Inquisition": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Iron Casting": {
+  "building": "Blacksmith",
+  "age": "Castle Age"
+ },
+ "Ironclad": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Kamandaran": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Kasbah": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Kataparuto": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Keep": {
+  "building": "University",
+  "age": "Imperial Age"
+ },
+ "Kshatriyas": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Lamellar Armor": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Leather Archer Armor": {
+  "building": "Blacksmith",
+  "age": "Castle Age"
+ },
+ "Lechitic Legacy": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Logistica": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Loom": {
+  "building": "Town Center",
+  "age": "Dark Age"
+ },
+ "Maghrebi Camels": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Mahayana": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Malon": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Manipur Cavalry": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Marauders": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Masonry": {
+  "building": "University",
+  "age": "Castle Age"
+ },
+ "Medical Corps": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Medium Warships": {
+  "building": "Dock",
+  "age": "Castle Age"
+ },
+ "Ming Guang Armor": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Murder Holes": {
+  "building": "University",
+  "age": "Castle Age"
+ },
+ "Nomads": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Ordo Cavalry": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Ordonnance Companies": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Padded Archer Armor": {
+  "building": "Blacksmith",
+  "age": "Feudal Age"
+ },
+ "Paiks": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Paper Money": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Parthian Tactics": {
+  "building": "Archery Range",
+  "age": "Imperial Age"
+ },
+ "Pastoralism": {
+  "building": "Mill",
+  "age": "Castle Age"
+ },
+ "Perfusion": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Pirotechnia": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Plate Barding Armor": {
+  "building": "Blacksmith",
+  "age": "Imperial Age"
+ },
+ "Plate Mail Armor": {
+  "building": "Blacksmith",
+  "age": "Imperial Age"
+ },
+ "Recurve Bow": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Red Cliffs Tactics": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Redemption": {
+  "building": "Monastery",
+  "age": "Castle Age"
+ },
+ "Ring Archer Armor": {
+  "building": "Blacksmith",
+  "age": "Imperial Age"
+ },
+ "Rocketry": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Royal Heirs": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Sanctity": {
+  "building": "Monastery",
+  "age": "Castle Age"
+ },
+ "Sappers": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Scale Barding Armor": {
+  "building": "Blacksmith",
+  "age": "Feudal Age"
+ },
+ "Scale Mail Armor": {
+  "building": "Blacksmith",
+  "age": "Feudal Age"
+ },
+ "Shatagni": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Shinkichon": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Shipwright": {
+  "building": "University",
+  "age": "Imperial Age"
+ },
+ "Siege Engineers": {
+  "building": "University",
+  "age": "Imperial Age"
+ },
+ "Silk Armor": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Silk Road": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Sipahi": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Siphons": {
+  "building": "University",
+  "age": "Castle Age"
+ },
+ "Sitting Tiger": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Spies/Treason": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Squires": {
+  "building": "Barracks",
+  "age": "Castle Age"
+ },
+ "Steppe Husbandry": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Stirrups": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Stone Mining": {
+  "building": "Mining Camp",
+  "age": "Feudal Age"
+ },
+ "Stone Shaft Mining": {
+  "building": "Mining Camp",
+  "age": "Castle Age"
+ },
+ "Stronghold": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Supremacy": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Svan Towers": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Szlachta Privileges": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Thalassocracy": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Theocracy": {
+  "building": "Monastery",
+  "age": "Imperial Age"
+ },
+ "Thumb Ring": {
+  "building": "Archery Range",
+  "age": "Castle Age"
+ },
+ "Thunderclap Bombs": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Tigui": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Timurid Siegecraft": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Torsion Engines": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Tower Shields": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Town Patrol": {
+  "building": "Town Center",
+  "age": "Castle Age"
+ },
+ "Town Watch": {
+  "building": "Town Center",
+  "age": "Feudal Age"
+ },
+ "Transhumance": {
+  "building": "Mill",
+  "age": "Imperial Age"
+ },
+ "Treadmill Crane": {
+  "building": "University",
+  "age": "Castle Age"
+ },
+ "Tuntian": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Tusk Swords": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Two-Man Saw": {
+  "building": "Lumber Camp",
+  "age": "Imperial Age"
+ },
+ "Wagenburg Tactics": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Warwolf": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Wheelbarrow": {
+  "building": "Town Center",
+  "age": "Feudal Age"
+ },
+ "Wootz Steel": {
+  "building": "Castle",
+  "age": "Imperial Age"
+ },
+ "Yasama": {
+  "building": "Castle",
+  "age": "Castle Age"
+ },
+ "Yeomen": {
+  "building": "Castle",
+  "age": "Castle Age"
+ }
+}

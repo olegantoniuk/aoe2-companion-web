@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use app\components\UnitPills;
 
 $this->title = $categoryName;
 ?>
@@ -23,58 +24,11 @@ $this->title = $categoryName;
 <?php if ($units): ?>
     <div class="admin5-card admin5-card-border">
         <div class="table-responsive">
-            <table class="table table-striped table-sm mb-0">
-                <thead>
-                    <tr>
-                        <th style="width: 40px"></th>
-                        <th>Unit</th>
-                        <th>Civilization</th>
-                        <th>Classes</th>
-                        <th>Age</th>
-                        <th>HP</th>
-                        <th>Atk</th>
-                        <th>Armor</th>
-                        <th>Cost</th>
-                    </tr>
-                </thead>
+            <table class="table table-striped table-sm mb-0 unit-list-table">
+                <thead><?= UnitPills::unitTableHead('Classes') ?></thead>
                 <tbody>
                     <?php foreach ($units as $unit): ?>
-                        <tr>
-                            <td>
-                                <?php if ($unit->iconUrl): ?>
-                                    <img src="<?= Html::encode($unit->iconUrl) ?>" alt="" class="unit-image-sm">
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <?= Html::a(Html::encode($unit->name), ['unit/view', 'slug' => $unit->slug], ['class' => 'fw-medium']) ?>
-                                <?php if ($unit->is_unique): ?>
-                                    <span class="badge bg-warning badge-sm ms-1">Unique</span>
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <?php if ($unit->is_unique && $unit->civilization): ?>
-                                    <?php $civ = $unit->civilization; ?>
-                                    <?php if ($civ->emblemUrl): ?>
-                                        <img src="<?= Html::encode($civ->emblemUrl) ?>" alt="" class="civ-emblem-sm">
-                                    <?php endif; ?>
-                                    <?= Html::a(Html::encode($civ->name), ['civilization/view', 'slug' => $civ->slug]) ?>
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <?php foreach ($unit->displayArmorClasses as $ac): ?>
-                                    <span class="badge bg-secondary badge-sm"><?= Html::encode($ac->name) ?></span>
-                                <?php endforeach; ?>
-                            </td>
-                            <td>
-                                <?php if ($unit->age): ?>
-                                    <span class="badge badge-age age-<?= strtolower(explode(' ', $unit->age)[0]) ?>"><?= Html::encode($unit->age) ?></span>
-                                <?php endif; ?>
-                            </td>
-                            <td><img src="/images/stats/hit_points.png" alt="" class="stat-icon"> <?= $unit->hit_points ?? '-' ?></td>
-                            <td><img src="/images/stats/<?= $unit->pierce_attack && !$unit->melee_attack ? 'pierce_attack' : 'melee_attack' ?>.png" alt="" class="stat-icon"> <?= $unit->melee_attack ?? $unit->pierce_attack ?? '-' ?></td>
-                            <td><img src="/images/stats/melee_armor.png" alt="" class="stat-icon"> <?= $unit->armorString ?></td>
-                            <td><small><?= $unit->costHtml ?></small></td>
-                        </tr>
+                        <tr><?= UnitPills::unitRowCells($unit, 'classes') ?></tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
@@ -83,3 +37,5 @@ $this->title = $categoryName;
 <?php else: ?>
     <p class="text-muted">No units found in this category.</p>
 <?php endif; ?>
+
+<?php UnitPills::registerTips($this); ?>

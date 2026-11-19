@@ -15,7 +15,7 @@ class UnitController extends Controller
     {
         $query = Unit::find();
 
-        $query->with('armorClasses');
+        $query->with(['armorClasses', 'civilization']);
 
         // Filters
         $age = Yii::$app->request->get('age');
