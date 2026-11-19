@@ -7,14 +7,8 @@
 # Yii2 compiled assets
 /web/assets
 
-# Images (copied to server manually)
-/web/images/units
-/web/images/civs
-/web/images/buildings
-/web/images/techs
-/web/images/stats
-/web/images/resources
-/web/images/sprites
+# Images and other assets (copied to server manually, never committed)
+/web/images
 
 # Mac DS_Store
 .DS_Store

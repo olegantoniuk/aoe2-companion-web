@@ -1012,6 +1012,53 @@ ul.pagination > li.page-item.disabled .page-link {
     height: 18px;
 }
 
+/* ── Stats by age ── */
+.age-stat-table th:first-child {
+    width: auto;
+}
+
+.age-stat-table thead th {
+    background-color: var(--color-surface-muted);
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 8px 8px;
+    vertical-align: bottom;
+}
+
+.age-stat-table .age-stat-col {
+    width: auto;
+    text-align: center;
+    white-space: nowrap;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.age-stat-table thead .age-stat-col span {
+    display: block;
+    margin-top: 2px;
+}
+
+.age-stat-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.stat-delta {
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: 2px;
+}
+
+.stat-delta-up {
+    color: var(--color-success);
+}
+
+.stat-delta-down {
+    color: var(--color-danger);
+}
+
 /* ── Stat Icons ── */
 .stat-icon {
     width: 16px;

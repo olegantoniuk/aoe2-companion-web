@@ -286,8 +286,71 @@ foreach ($techGroups as $techName => $items) {
         </div>
 
         <!-- Combat Stats -->
+        <?php
+        $ageStats = $unit->age_stats;
+        if (is_string($ageStats)) {
+            $ageStats = json_decode($ageStats, true);
+        }
+        $ageColumns = $ageStats['columns'] ?? [];
+        ?>
         <div class="admin5-card admin5-card-border">
             <div class="card-header"><strong>Combat Stats</strong></div>
+            <?php if ($ageColumns): ?>
+                <?php
+                // [column, icon key, label, value suffix, shown when the unit has the stat]
+                $combatRows = [
+                    ['hit_points', 'hp', 'Hit Points', '', true],
+                    ['melee_attack', 'melee_attack', 'Melee Attack', '', $unit->melee_attack !== null],
+                    ['pierce_attack', 'pierce_attack', 'Pierce Attack', '', $unit->pierce_attack !== null],
+                    ['melee_armor', 'melee_armor', 'Melee Armor', '', true],
+                    ['pierce_armor', 'pierce_armor', 'Pierce Armor', '', true],
+                    ['range_val', 'range', 'Range', '', (bool)$unit->range_val],
+                    ['accuracy', 'accuracy', 'Accuracy', '%', (bool)$unit->accuracy],
+                    ['rate_of_fire', 'reload_time', 'Rate of Fire', '', true],
+                    ['speed', 'speed', 'Speed', '', true],
+                    ['line_of_sight', 'line_of_sight', 'Line of Sight', '', (bool)$unit->line_of_sight],
+                ];
+                $fmtDelta = function ($d) {
+                    $d = round($d, 2);
+                    return ($d > 0 ? '+' : '') . $d;
+                };
+                ?>
+                <table class="table table-sm stat-table age-stat-table mb-0">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <?php foreach ($ageColumns as $col): ?>
+                                <th class="age-stat-col">
+                                    <img src="/images/ages/<?= Html::encode($col['icon']) ?>.png" alt="" class="age-stat-icon" title="<?= Html::encode($col['age']) ?>">
+                                    <span><?= Html::encode($col['label']) ?></span>
+                                </th>
+                            <?php endforeach; ?>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($combatRows as [$attr, $icon, $label, $suffix, $show]): ?>
+                            <?php if (!$show) continue; ?>
+                            <tr>
+                                <th><?= $si($icon) ?> <?= $label ?></th>
+                                <?php $prev = null; ?>
+                                <?php foreach ($ageColumns as $i => $col): ?>
+                                    <?php
+                                    $value = $ageStats['stats'][$attr][$i] ?? $unit->$attr;
+                                    $delta = ($prev !== null && $value !== null && $value != $prev) ? $value - $prev : null;
+                                    $prev = $value;
+                                    ?>
+                                    <td class="age-stat-col">
+                                        <?= $value !== null ? $value . $suffix : '-' ?>
+                                        <?php if ($delta !== null): ?>
+                                            <span class="stat-delta <?= $delta > 0 ? 'stat-delta-up' : 'stat-delta-down' ?>"><?= $fmtDelta($delta) . $suffix ?></span>
+                                        <?php endif; ?>
+                                    </td>
+                                <?php endforeach; ?>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php else: ?>
             <table class="table table-sm stat-table mb-0">
                 <tr><th><?= $si('hp') ?> Hit Points</th><td><?= $unit->hit_points ?? '-' ?></td></tr>
                 <?php if ($unit->melee_attack !== null): ?>
@@ -310,6 +373,7 @@ foreach ($techGroups as $techName => $items) {
                     <tr><th><?= $si('line_of_sight') ?> Line of Sight</th><td><?= $unit->line_of_sight ?></td></tr>
                 <?php endif; ?>
             </table>
+            <?php endif; ?>
         </div>
 
         <!-- Upgrade Path -->
@@ -327,11 +391,12 @@ foreach ($techGroups as $techName => $items) {
                         <div>
                             <small class="text-muted">Upgrades to:</small>
                             <strong><?= Html::encode($unit->upgrades_to) ?></strong>
-                            <?php if ($unit->upgrade_cost_food || $unit->upgrade_cost_gold): ?>
+                            <?php if ($unit->upgrade_cost_food || $unit->upgrade_cost_wood || $unit->upgrade_cost_gold): ?>
                                 <br><small class="text-muted">
                                     Cost: <?php
                                     $parts = [];
                                     if ($unit->upgrade_cost_food) $parts[] = '<img src="' . $resIcons['Food'] . '" alt="Food" class="res-icon"> ' . $unit->upgrade_cost_food;
+                                    if ($unit->upgrade_cost_wood) $parts[] = '<img src="' . $resIcons['Wood'] . '" alt="Wood" class="res-icon"> ' . $unit->upgrade_cost_wood;
                                     if ($unit->upgrade_cost_gold) $parts[] = '<img src="' . $resIcons['Gold'] . '" alt="Gold" class="res-icon"> ' . $unit->upgrade_cost_gold;
                                     echo implode(' &nbsp; ', $parts);
                                     ?>
@@ -637,8 +702,17 @@ JS
                     <?php if (isset($eliteVariant['range'])): ?>
                         <tr><th><?= $si('range') ?> Range</th><td><?= $eliteVariant['range'] ?></td></tr>
                     <?php endif; ?>
+                    <?php if (isset($eliteVariant['accuracy'])): ?>
+                        <tr><th><?= $si('accuracy') ?> Accuracy</th><td><?= $eliteVariant['accuracy'] ?>%</td></tr>
+                    <?php endif; ?>
+                    <?php if (isset($eliteVariant['rate_of_fire'])): ?>
+                        <tr><th><?= $si('reload_time') ?> Rate of Fire</th><td><?= $eliteVariant['rate_of_fire'] ?></td></tr>
+                    <?php endif; ?>
                     <?php if (isset($eliteVariant['speed'])): ?>
                         <tr><th><?= $si('speed') ?> Speed</th><td><?= $eliteVariant['speed'] ?></td></tr>
+                    <?php endif; ?>
+                    <?php if (isset($eliteVariant['line_of_sight'])): ?>
+                        <tr><th><?= $si('line_of_sight') ?> Line of Sight</th><td><?= $eliteVariant['line_of_sight'] ?></td></tr>
                     <?php endif; ?>
                 </table>
             </div>
