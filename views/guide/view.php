@@ -1,13 +1,16 @@
 <?php
 
 use yii\helpers\Html;
+use app\components\Seo;
 use yii\helpers\Url;
 use app\models\Elo;
 use app\models\Unit;
 use app\components\TextFormat;
 use app\components\UnitPills;
+use app\components\EloHistogram;
 
 $this->title = $article->title;
+Seo::page($this, $article->title, $article->summary ?: $article->title, $article->avatarUrl);
 
 $units = [];
 $names = $article->listOf('related_units');
@@ -30,22 +33,32 @@ if ($names) {
     </ol>
 </nav>
 
+<!-- title with the guide's avatar, then the level with the ladder histogram -->
+<header class="kb-head kb-article-head">
+    <div class="unit-title">
+        <img src="<?= Html::encode($article->avatarUrl) ?>" alt="" class="unit-title-icon kb-article-avatar">
+        <h1 class="kb-article-title"><?= Html::encode($article->title) ?></h1>
+    </div>
+    <div class="kb-article-level">
+        <span class="pill-row">
+            <?= UnitPills::eloPill($article->elo, ['href' => Url::to(['guide/index', 'elo' => $article->elo])]) ?>
+            <?= UnitPills::tagPill($article->category, $article->categoryLabel, Url::to(['guide/index', 'category' => $article->category])) ?>
+        </span>
+        <?= EloHistogram::render($article->elo, ['width' => 200, 'height' => 34]) ?>
+        <span class="kb-article-meta">
+            <?php if ($article->reading_minutes): ?>
+                <span class="kb-minutes"><?= (int)$article->reading_minutes ?> min read</span>
+            <?php endif; ?>
+        </span>
+        <?php foreach ($article->civModels as $c): ?><?= UnitPills::civPill($c) ?><?php endforeach; ?>
+    </div>
+</header>
+
 <div class="row g-4">
     <article class="col-lg-8">
-        <header class="kb-head">
-            <div class="kb-card-meta">
-                <a href="<?= Url::to(['guide/index', 'elo' => $article->elo]) ?>" class="kb-elo kb-elo-<?= Html::encode($article->elo) ?>"><?= Elo::label($article->elo) ?></a>
-        <span class="kb-elo-range"><?= Html::encode(Elo::range($article->elo)) ?></span>
-                <a href="<?= Url::to(['guide/index', 'category' => $article->category]) ?>" class="kb-category"><?= Html::encode($article->categoryLabel) ?></a>
-                <?php if ($article->reading_minutes): ?>
-                    <span class="kb-minutes"><?= (int)$article->reading_minutes ?> min read</span>
-                <?php endif; ?>
-            </div>
-            <h1 class="kb-article-title"><?= Html::encode($article->title) ?></h1>
-            <?php if ($article->summary): ?>
-                <p class="kb-article-summary"><?= Html::encode($article->summary) ?></p>
-            <?php endif; ?>
-        </header>
+        <?php if ($article->summary): ?>
+            <p class="kb-article-summary"><?= Html::encode($article->summary) ?></p>
+        <?php endif; ?>
         <div class="kb-prose kb-article-body">
             <?= TextFormat::render($article->body) ?>
         </div>
@@ -78,7 +91,7 @@ if ($names) {
         <?php endif; ?>
         <div class="admin5-card admin5-card-border">
             <div class="card-content">
-                <a href="<?= Url::to(['build/index', 'elo' => $article->elo]) ?>" class="kb-aside-link">Build orders for this level →</a>
+                <a href="<?= Url::to(['build/index', 'elo' => $article->elo]) ?>" class="kb-aside-link">More build orders for this level<?= UnitPills::chevron() ?></a>
             </div>
         </div>
     </aside>

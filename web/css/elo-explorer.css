@@ -1,0 +1,484 @@
+/* Elo explorer on the guides page (views/guide/_elo_explorer.php).
+   Band colours come from the elo pill variables in app.css; the chart fills get their own
+   stronger values in the dark theme, where the pill avatar colours are almost black. */
+
+.elo-x {
+    --ex-beginner: var(--color-pill-elo-beginner-avatar);
+    --ex-intermediate: var(--color-pill-elo-intermediate-avatar);
+    --ex-advanced: var(--color-pill-elo-advanced-avatar);
+    --ex-expert: var(--color-pill-elo-expert-avatar);
+    --ex-weak: 0.32;
+
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 440px;
+    margin: 0 0 24px;
+    padding: 16px 16px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    background: var(--color-surface);
+    color: var(--color-text);
+}
+
+[data-theme="dark"] .elo-x {
+    --ex-beginner: #6FA85C;
+    --ex-intermediate: #5F8FC4;
+    --ex-advanced: #C9935A;
+    --ex-expert: #B86F92;
+    --ex-weak: 0.26;
+}
+
+.elo-x *,
+.elo-x *::before,
+.elo-x *::after {
+    box-sizing: border-box;
+}
+
+/* header */
+.elo-x-head {
+    margin-bottom: 4px;
+}
+
+.elo-x-title {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--color-text);
+}
+
+/* chart */
+.elo-x-chart svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    user-select: none;
+}
+
+.elo-x-band-beginner { --ex-c: var(--ex-beginner); --ex-ink: var(--color-pill-elo-beginner-text); }
+.elo-x-band-intermediate { --ex-c: var(--ex-intermediate); --ex-ink: var(--color-pill-elo-intermediate-text); }
+.elo-x-band-advanced { --ex-c: var(--ex-advanced); --ex-ink: var(--color-pill-elo-advanced-text); }
+.elo-x-band-expert { --ex-c: var(--ex-expert); --ex-ink: var(--color-pill-elo-expert-text); }
+
+.elo-x-fill-weak {
+    fill: var(--ex-c);
+    fill-opacity: var(--ex-weak);
+    transition: fill-opacity 0.15s;
+}
+
+.elo-x-fill-strong {
+    fill: var(--ex-c);
+}
+
+.elo-x-line {
+    fill: none;
+    stroke: var(--ex-ink);
+    stroke-opacity: 0.75;
+    stroke-width: 1.25;
+    stroke-linejoin: round;
+}
+
+.elo-x-baseline,
+.elo-x-tick {
+    stroke: var(--color-border-strong);
+    stroke-width: 1;
+}
+
+.elo-x-edge {
+    stroke: var(--color-border-strong);
+    stroke-width: 1;
+    stroke-dasharray: 2 3;
+}
+
+.elo-x-axis {
+    fill: var(--color-text-muted);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+}
+
+.elo-x-hit {
+    fill: transparent;
+    cursor: pointer;
+}
+
+.elo-x[data-band="beginner"] .elo-x-band-beginner .elo-x-fill-weak,
+.elo-x[data-band="intermediate"] .elo-x-band-intermediate .elo-x-fill-weak,
+.elo-x[data-band="advanced"] .elo-x-band-advanced .elo-x-fill-weak,
+.elo-x[data-band="expert"] .elo-x-band-expert .elo-x-fill-weak {
+    fill-opacity: calc(var(--ex-weak) + 0.12);
+}
+
+@media (hover: hover) {
+    .elo-x-chart:has(.elo-x-hit[data-band="beginner"]:hover) .elo-x-band-beginner .elo-x-fill-weak,
+    .elo-x-chart:has(.elo-x-hit[data-band="intermediate"]:hover) .elo-x-band-intermediate .elo-x-fill-weak,
+    .elo-x-chart:has(.elo-x-hit[data-band="advanced"]:hover) .elo-x-band-advanced .elo-x-fill-weak,
+    .elo-x-chart:has(.elo-x-hit[data-band="expert"]:hover) .elo-x-band-expert .elo-x-fill-weak {
+        fill-opacity: calc(var(--ex-weak) + 0.25);
+    }
+}
+
+.elo-x-marker {
+    pointer-events: none;
+}
+
+.elo-x-marker-line {
+    stroke: var(--color-text);
+    stroke-width: 1.5;
+}
+
+.elo-x-marker-dot {
+    fill: var(--color-surface);
+    stroke: var(--color-text);
+    stroke-width: 2;
+}
+
+.elo-x-marker-tag rect {
+    fill: var(--color-text);
+}
+
+.elo-x-marker-tag text {
+    fill: var(--color-surface);
+    font-size: 12px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+/* rating controls */
+.elo-x-control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.elo-x-label {
+    margin: 0;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.elo-x .elo-x-number {
+    width: 84px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+/* The slider track lines up with the chart axis (8 of 400 units padding on each side). */
+.elo-x-range {
+    --thumb: 20px;
+    display: block;
+    width: calc(100% - 4% + var(--thumb));
+    margin: 8px calc(2% - var(--thumb) / 2) 4px;
+    height: 28px;
+    background: transparent;
+    accent-color: var(--color-text);
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    /* band edges as shares of the axis (--s1..--s3, set inline), shifted for the thumb overhang */
+    --e1: calc(var(--thumb) / 2 + (100% - var(--thumb)) * var(--s1, 0.29));
+    --e2: calc(var(--thumb) / 2 + (100% - var(--thumb)) * var(--s2, 0.42));
+    --e3: calc(var(--thumb) / 2 + (100% - var(--thumb)) * var(--s3, 0.55));
+    --ex-track: linear-gradient(to right,
+        var(--ex-beginner) 0 var(--e1),
+        var(--ex-intermediate) var(--e1) var(--e2),
+        var(--ex-advanced) var(--e2) var(--e3),
+        var(--ex-expert) var(--e3) 100%);
+}
+
+.elo-x-range:focus {
+    outline: none;
+}
+
+.elo-x-range::-webkit-slider-runnable-track {
+    height: 6px;
+    border-radius: 3px;
+    background: var(--ex-track);
+}
+
+.elo-x-range::-moz-range-track {
+    height: 6px;
+    border-radius: 3px;
+    background: var(--ex-track);
+}
+
+.elo-x-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: var(--thumb);
+    height: var(--thumb);
+    margin-top: calc(3px - var(--thumb) / 2);
+    border: 2px solid var(--color-text);
+    border-radius: 50%;
+    background: var(--color-surface);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+.elo-x-range::-moz-range-thumb {
+    width: var(--thumb);
+    height: var(--thumb);
+    border: 2px solid var(--color-text);
+    border-radius: 50%;
+    background: var(--color-surface);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+.elo-x-range:focus-visible::-webkit-slider-thumb {
+    box-shadow: 0 0 0 3px var(--color-surface), 0 0 0 5px var(--color-text);
+}
+
+.elo-x-range:focus-visible::-moz-range-thumb {
+    box-shadow: 0 0 0 3px var(--color-surface), 0 0 0 5px var(--color-text);
+}
+
+/* band chips */
+.elo-x-chips {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+    margin: 4px 0 12px;
+}
+
+.elo-x-chip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    min-width: 0;
+    padding: 5px 4px 4px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background: var(--color-surface-muted);
+    color: var(--color-text);
+    font-size: 12px;
+    line-height: 1.15;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.elo-x-chip img {
+    flex: none;
+    width: 24px;
+    height: 24px;
+    padding: 2px;
+    border-radius: 50%;
+    object-fit: contain;
+    background: var(--ex-chip-avatar);
+}
+
+.elo-x-chip-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    min-width: 0;
+}
+
+.elo-x-chip-name,
+.elo-x-chip-share {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.elo-x-chip-name {
+    font-weight: 600;
+}
+
+.elo-x-chip-share {
+    color: var(--color-text-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.elo-x-chip-beginner { --ex-chip-bg: var(--color-pill-elo-beginner-bg); --ex-chip-border: var(--color-pill-elo-beginner-border); --ex-chip-text: var(--color-pill-elo-beginner-text); --ex-chip-avatar: var(--color-pill-elo-beginner-avatar); }
+.elo-x-chip-intermediate { --ex-chip-bg: var(--color-pill-elo-intermediate-bg); --ex-chip-border: var(--color-pill-elo-intermediate-border); --ex-chip-text: var(--color-pill-elo-intermediate-text); --ex-chip-avatar: var(--color-pill-elo-intermediate-avatar); }
+.elo-x-chip-advanced { --ex-chip-bg: var(--color-pill-elo-advanced-bg); --ex-chip-border: var(--color-pill-elo-advanced-border); --ex-chip-text: var(--color-pill-elo-advanced-text); --ex-chip-avatar: var(--color-pill-elo-advanced-avatar); }
+.elo-x-chip-expert { --ex-chip-bg: var(--color-pill-elo-expert-bg); --ex-chip-border: var(--color-pill-elo-expert-border); --ex-chip-text: var(--color-pill-elo-expert-text); --ex-chip-avatar: var(--color-pill-elo-expert-avatar); }
+
+.elo-x-chip:hover {
+    border-color: var(--ex-chip-border);
+    background: var(--ex-chip-bg);
+}
+
+.elo-x-chip[aria-pressed="true"] {
+    border-color: var(--ex-chip-text);
+    background: var(--ex-chip-bg);
+    color: var(--ex-chip-text);
+}
+
+.elo-x-chip[aria-pressed="true"] .elo-x-chip-share {
+    color: inherit;
+}
+
+.elo-x-chip:focus-visible {
+    outline: 2px solid var(--color-text);
+    outline-offset: 2px;
+}
+
+/* readout */
+.elo-x[data-band="beginner"] { --ex-cur-bg: var(--color-pill-elo-beginner-bg); --ex-cur-border: var(--color-pill-elo-beginner-border); --ex-cur-text: var(--color-pill-elo-beginner-text); --ex-cur-avatar: var(--color-pill-elo-beginner-avatar); }
+.elo-x[data-band="intermediate"] { --ex-cur-bg: var(--color-pill-elo-intermediate-bg); --ex-cur-border: var(--color-pill-elo-intermediate-border); --ex-cur-text: var(--color-pill-elo-intermediate-text); --ex-cur-avatar: var(--color-pill-elo-intermediate-avatar); }
+.elo-x[data-band="advanced"] { --ex-cur-bg: var(--color-pill-elo-advanced-bg); --ex-cur-border: var(--color-pill-elo-advanced-border); --ex-cur-text: var(--color-pill-elo-advanced-text); --ex-cur-avatar: var(--color-pill-elo-advanced-avatar); }
+.elo-x[data-band="expert"] { --ex-cur-bg: var(--color-pill-elo-expert-bg); --ex-cur-border: var(--color-pill-elo-expert-border); --ex-cur-text: var(--color-pill-elo-expert-text); --ex-cur-avatar: var(--color-pill-elo-expert-avatar); }
+
+.elo-x-readout {
+    padding-top: 12px;
+    border-top: 1px solid var(--color-border-subtle, var(--color-border));
+}
+
+.elo-x-you {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.elo-x-you-icon {
+    flex: none;
+    width: 44px;
+    height: 44px;
+    padding: 3px;
+    border: 1px solid var(--ex-cur-border, var(--color-border));
+    border-radius: 50%;
+    object-fit: contain;
+    background: var(--ex-cur-avatar, var(--color-surface-muted));
+}
+
+.elo-x-you-icon[src=""] {
+    visibility: hidden;
+}
+
+.elo-x-you-text {
+    min-width: 0;
+}
+
+.elo-x-you-band {
+    font-size: 0.8rem;
+    line-height: 1.3;
+    color: var(--color-text-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.elo-x-you-band strong {
+    margin-right: 4px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--ex-cur-text, var(--color-text));
+}
+
+.elo-x-pct {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.3;
+}
+
+.elo-x-pct strong {
+    font-size: 1.35rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.elo-x-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin: 10px 0;
+}
+
+.elo-x-stat {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    margin: 0;
+    padding: 6px 8px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    font-size: 0.72rem;
+    line-height: 1.3;
+    color: var(--color-text-muted);
+}
+
+.elo-x-stat strong {
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--color-text);
+    font-variant-numeric: tabular-nums;
+}
+
+.elo-x-tip {
+    margin: 0;
+    padding: 8px 10px;
+    border-left: 3px solid var(--ex-cur-border, var(--color-border));
+    border-radius: 0 4px 4px 0;
+    background: var(--color-surface-muted);
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.elo-x-tip a {
+    font-weight: 600;
+    white-space: nowrap;
+    color: var(--accent-color);
+}
+
+.elo-x-tip a::after {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-left: 5px;
+    border-top: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+    transform: rotate(45deg);
+    vertical-align: 1px;
+}
+
+.elo-x-note {
+    margin: 12px 0 0;
+    font-size: 0.75rem;
+    line-height: 1.45;
+    color: var(--color-text-muted);
+}
+
+.elo-x-note a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+@media (max-width: 380px) {
+    .elo-x {
+        padding: 12px 12px 10px;
+    }
+
+    .elo-x-chips {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .elo-x-chip {
+        flex-direction: row;
+        gap: 8px;
+        padding: 4px 8px 4px 4px;
+    }
+
+    .elo-x-chip-text {
+        align-items: flex-start;
+    }
+
+    .elo-x-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .elo-x-stat {
+        flex-direction: row;
+        align-items: baseline;
+        gap: 6px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .elo-x-fill-weak,
+    .elo-x-chip {
+        transition: none;
+    }
+}

@@ -1,11 +1,13 @@
 <?php
 
 use yii\helpers\Html;
+use app\components\Seo;
 use yii\helpers\Url;
 use yii\helpers\Json;
 use app\components\UnitPills;
 
 $this->title = $unit->name;
+Seo::page($this, $unit->name . ': Stats, Counters and Upgrades', $unit->description ?: ($unit->name . ' in Age of Empires II: stats in every age, upgrades, counters and the civilizations that can train it.'), $unit->iconUrl);
 
 $attackBonuses = $unit->attackBonuses;
 $armorClasses = $unit->armorClasses;

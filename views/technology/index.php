@@ -1,14 +1,19 @@
 <?php
 
 use yii\helpers\Html;
+use app\components\Seo;
 use yii\helpers\Url;
 use app\components\UnitPills;
 
 $this->title = 'Technologies';
+Seo::page($this, 'All Technologies in Age of Empires II', 'Every technology in Age of Empires II grouped by the building that researches it, with age, cost, research time and effect.', '/images/icons/technologies.png');
 ?>
 
 <div class="admin5-page-header">
-    <h1>Technologies <span class="badge bg-secondary badge-sm"><?= $total ?></span></h1>
+    <div class="page-title">
+        <?= UnitPills::pageIcon('technologies') ?>
+        <h1>Technologies <span class="badge bg-secondary badge-sm"><?= $total ?></span></h1>
+    </div>
 </div>
 
 <nav class="kb-filters tech-jump">

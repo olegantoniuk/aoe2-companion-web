@@ -1,17 +1,22 @@
 <?php
 
 use yii\helpers\Html;
+use app\components\Seo;
 use yii\helpers\Url;
 use yii\widgets\LinkPager;
 use app\components\UnitPills;
 
 $this->title = 'Units';
+Seo::page($this, 'All Units in Age of Empires II: Stats and Costs', 'Every unit in Age of Empires II with hit points, attack, armor, speed and cost, filterable by age and by unique or shared units.', '/images/icons/units.png');
 $models = $dataProvider->getModels();
 $pagination = $dataProvider->getPagination();
 ?>
 
 <div class="admin5-page-header">
-    <h1>Units <span class="badge bg-secondary badge-sm"><?= $dataProvider->getTotalCount() ?></span></h1>
+    <div class="page-title">
+        <?= UnitPills::pageIcon('units') ?>
+        <h1>Units <span class="badge bg-secondary badge-sm"><?= $dataProvider->getTotalCount() ?></span></h1>
+    </div>
 </div>
 
 <!-- Filters -->

@@ -1,10 +1,12 @@
 <?php
 
 use yii\helpers\Html;
+use app\components\Seo;
 use yii\helpers\Url;
 use app\components\UnitPills;
 
 $this->title = $civ->name;
+Seo::page($this, $civ->name . ': Bonuses, Unique Units and How to Play', ($civ->intro ?: $civ->summary) ?: ($civ->name . ' in Age of Empires II: civilization bonuses, team bonus, unique units and technologies.'), $civ->emblemUrl);
 ?>
 
 <nav aria-label="breadcrumb" class="mb-3">
@@ -165,6 +167,29 @@ $this->title = $civ->name;
                             </div>
                         </a>
                     </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+
+        <!-- how to play it: the guide and the civilization's own build orders -->
+        <?php if ($guide || $civBuilds): ?>
+            <div class="admin5-page-header" style="margin-bottom: 16px;">
+                <h3 style="margin: 0;">Guide and Build Orders</h3>
+            </div>
+            <div class="home-kb-list civ-kb-list mb-4">
+                <?php if ($guide): ?>
+                    <a href="<?= Url::to(['guide/view', 'slug' => $guide->slug]) ?>" class="admin5-card admin5-card-border home-kb-item">
+                        <img src="<?= Html::encode(UnitPills::pageIconUrl('guides')) ?>" alt="" class="home-kb-avatar">
+                        <span class="home-kb-title"><?= Html::encode($guide->title) ?></span>
+                        <?= UnitPills::eloPill($guide->elo) ?>
+                    </a>
+                <?php endif; ?>
+                <?php foreach ($civBuilds as $b): ?>
+                    <a href="<?= Url::to(['build/view', 'slug' => $b->slug]) ?>" class="admin5-card admin5-card-border home-kb-item">
+                        <img src="<?= Html::encode(UnitPills::pageIconUrl('builds')) ?>" alt="" class="home-kb-avatar">
+                        <span class="home-kb-title"><?= Html::encode($b->title) ?></span>
+                        <?= UnitPills::eloPill($b->elo) ?>
+                    </a>
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>

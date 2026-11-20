@@ -1,9 +1,11 @@
 <?php
 
 use yii\helpers\Html;
+use app\components\Seo;
 use app\components\UnitPills;
 
 $this->title = $categoryName;
+Seo::page($this, $categoryName . ' Units in Age of Empires II', 'All ' . $categoryName . ' units in Age of Empires II with their stats, costs and classes.');
 ?>
 
 <nav aria-label="breadcrumb" class="mb-3">

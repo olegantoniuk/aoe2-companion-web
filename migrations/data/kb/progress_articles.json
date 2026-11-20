@@ -1,0 +1,556 @@
+[
+ {
+  "slug": "progress-1000-to-1300",
+  "title": "From 1000 to 1300: What Changes",
+  "category": "elo-and-progression",
+  "elo": "intermediate",
+  "summary": "Around 1000 most players already know a build order. Getting to 1300, roughly the top 20 percent, takes scouting, simple plans you can adapt, and defending raids without letting the economy stop.",
+  "body": "The band between 1000 and 1300 holds about 31 percent of active 1v1 players, one of the most crowded stretches of the ladder. Reaching 1300 puts you in roughly the top 20 percent. The jump feels harder than the climb to 1000, because the obvious problems are gone. You make Villagers, you know a build, you reach the Castle Age. Your opponents do too.\n\nWhat separates the two ends of this band is mostly what happens after the build order, when the game stops following a script.\n\n## The build order is no longer the problem\n\nA thread on the official forums asked whether 1000 players had improved over the years. A 1700 player replied that most of them now know a build order, but their decisions, their Town Center idle time and their reactions to attacks have hardly changed. Another poster in a different thread described players around 1000 to 1200 as people who know the basics and are strong in one area only, which makes results at this level noisy.\n\nSo drilling a third build order will not help much. Look at your losses and note where the game turned. For most players in this band it is one of three moments: an attack that stopped the economy, a scouting report that came too late, or a lead that was never used.\n\n## Scout and react\n\nAt 1000, players scout the opponent in the Dark Age and then stop looking. At 1300 they look again when they reach the Feudal Age and again before the Castle Age. What you are checking for is simple:\n\n- How many military buildings, and which ones.\n- Whether the opponent is walling, which often means a fast Castle Age.\n- How many Villagers are on gold, which hints at Knights, Crossbowmen or an early Castle Age.\n\nThen answer with something you have practised. Survivalist's strategy video in his improvement series covers matchups, sticking to a build and adapting it to what you see, and map control in that order.\n\n## Keep plans simple\n\nHera's coaching video titled Getting 1200 ELO is Easy Just Keep It SIMPLE makes a point that holds for the whole band. Have one plan for archer civilizations and one for cavalry civilizations, and know the counter for each. Making two unit types with their upgrades beats making five without them. Fletching, Bodkin Arrow, Bloodlines and the first armour upgrades are what turn a group of units into an army.\n\n## Defend raids and keep working\n\nRaids are where economies in this band fall apart. A few Scout Cavalry or Knights reach your wood line, you panic, and three minutes later the Town Center has been idle the whole time. Players who climb past 1300 still lose a few Villagers to raids, but their production never stops.\n\n- Put a Spearman or a Pikeman near your wood and gold lines once the opponent has cavalry.\n- Garrison briefly in the Town Center or a tower and send Villagers back as soon as the raid leaves.\n- Queue units first, fight second.\n\nHera's video titled Defending Tips You NEED To Break 1200 Elo is a good watch, and the guide Raiding and Defending Raids with Town Center Arrows and Garrison has the mechanics.\n\n## Use your lead\n\nPlayers at 1000 often win the Feudal Age and then sit back. A good Feudal Age is worth something only if it turns into a Castle Age advantage: more Town Centers, an earlier Castle Age, Knights or Crossbowmen arriving while the opponent is still recovering. The Castle Age Transition guide covers when to click up and what to make.\n\n## The 1300 wall\n\nMany players stall near 1300 for months. On aoezone, one player asked how others had got past this range after noticing how many people stay there even after around 1500 ranked games. Another said he had watched guide series and still plateaued around 1300 after over 100 ranked Arabia games. The advice in reply was to practise uncomfortable situations: matchups and maps where you have to plan around your own civilization's weak points and the opponent's strengths.\n\nBelow 1300 you can win most games with one comfortable plan. Above it, opponents start to find the hole in that plan, so you need answers for the games that do not go your way.",
+  "related_units": [
+   "Villager",
+   "Scout Cavalry",
+   "Knight",
+   "Crossbowman",
+   "Spearman",
+   "Pikeman"
+  ],
+  "sources": [
+   {
+    "title": "Are 1000 ELO players now significantly better than they were two years ago? (Age of Empires forums)",
+    "url": "https://forums.ageofempires.com/t/are-1000-elo-players-now-significantly-better-than-they-were-two-years-ago/256220",
+    "type": "forum"
+   },
+   {
+    "title": "How reflective is a player's elo of their overall skill level? (Age of Empires forums)",
+    "url": "https://forums.ageofempires.com/t/how-reflective-is-a-players-elo-of-their-overall-skill-level/132094",
+    "type": "forum"
+   },
+   {
+    "title": "Plateaued around 1300 after 100+ ranked Arabia games (aoezone)",
+    "url": "https://www.aoezone.net/goto/post?id=686130",
+    "type": "forum"
+   },
+   {
+    "title": "How did you get past the 1300 range? (aoezone)",
+    "url": "https://aoezone.net/goto/post?id=685882",
+    "type": "forum"
+   },
+   {
+    "title": "aoe2companion 1v1 Random Map leaderboard (active players, read November 2026)",
+    "url": "https://data.aoe2companion.com/api/leaderboards/rm_1v1",
+    "type": "article"
+   }
+  ],
+  "videos": [
+   {
+    "title": "Every 1100 Elo Player Makes These Mistakes! | AoE2 Coaching",
+    "url": "https://www.youtube.com/watch?v=6UFlXkOc06M",
+    "channel": "Hera - Age of Empires 2"
+   },
+   {
+    "title": "Getting 1200 ELO is Easy Just Keep It SIMPLE | AoE2 Coaching",
+    "url": "https://www.youtube.com/watch?v=Rz-sVuJjd5o",
+    "channel": "Hera - Age of Empires 2"
+   },
+   {
+    "title": "Defending Tips You NEED To Break 1200 Elo | AoE2 Coaching",
+    "url": "https://www.youtube.com/watch?v=LT8ESZmPy7w",
+    "channel": "Hera - Age of Empires 2"
+   },
+   {
+    "title": "How to Improve at Age of Empires 2 - Part 3: Strategy",
+    "url": "https://www.youtube.com/watch?v=mLGfEPHlKw8",
+    "channel": "Survivalist"
+   }
+  ],
+  "reading_minutes": 3
+ },
+ {
+  "slug": "progress-beginner-past-900",
+  "title": "Getting Past 900: A Plan for Your Next 30 Games",
+  "category": "elo-and-progression",
+  "elo": "beginner",
+  "summary": "More than a third of ranked players sit under 900. A simple routine of one civilization, one opening and one number to check after every game moves you out of that group faster than learning more strategies.",
+  "body": "In November 2026, about 37 percent of active 1v1 ranked players were rated under 900, and a little over a quarter were under 800. Almost all of them already know enough to climb. What they lack is a routine that makes the basics happen in every game, including the ones where something goes wrong in minute six.\n\nThis site already has two guides on the habits themselves, The Habits That Get You Out of Low Elo and The Mistakes That Keep Players Below 1000. This one is about the practice plan: how to set up your next 30 or so games so those habits stick.\n\n## Fix your civilization and your opening\n\nPick one civilization and play it in every ranked game for a month. Franks, Britons and Teutons are good choices because their bonuses work without any special knowledge. The point is to stop thinking about what your civilization does, so your attention goes to the economy.\n\nThen pick one opening and play it on every open map. A scout opening or an archer opening into the Castle Age both work well. Advice on the official forums says the same thing: a few universal builds take you further at this level than civilization specific ones, and micro matters much less than keeping the economy running.\n\nPlay the build against the AI a few times until you can do it without looking at notes. The guide How to Learn and Practise Your First Build Order explains how.\n\n## Have a plan for the whole game\n\nMost games under 900 are lost after the build order ends, when the player stops following a plan. Write a short one down and keep it the same for every game:\n\n- Feudal Age: make your first units, scout the opponent's base, keep Villagers coming.\n- Around the time your Feudal army is out: click up to the Castle Age.\n- Castle Age: add a second and third Town Center, then make Knights or Crossbowmen with their upgrades.\n- Once you have 15 to 20 units and a couple of Battering Rams: attack a Town Center or a Castle and keep making Villagers while you do it.\n\nIt does not need to be clever. A plan you carry out every game beats a better plan you forget halfway.\n\n## Check one number after every game\n\nAt the end of each game, open the statistics and look at your Villager count in the timeline. Ask one question: when did it stop going up, and why? Every flat stretch is a moment the Town Center was idle or you were housed. The guide Reading the Score, the Post-Game Stats and Your Own Replays shows where to find the graphs.\n\nPick one problem from that graph, such as getting housed in the Feudal Age, and work only on that in the next five games. When it stops showing up, pick the next one.\n\n## Finish games\n\nA lot of games at this level go past 40 minutes because neither player can break buildings. If your Castle Age plan includes a few Battering Rams, you can end a game you are winning in minutes. Hera's coaching session with a 1000 player carries the blunt title Imperial Age is a Myth & Does NOT Matter, which sums up the idea: use your lead before the opponent catches up.\n\n## Defend once, then go back to work\n\nThe first rush is where many games under 900 fall apart. Ring the Town Bell, get Loom, put a Spearman or Skirmisher in front of the Town Center and then go back to your economy straight away. Every minute you spend watching the fight is a minute with no new Villagers. Defending Your First Rush covers the details.\n\n## Expect a slow climb\n\nAn even game is worth about 16 points. If you win 55 out of 100 games against players at your level, you gain roughly 150 points, about the distance from 750 to 900. That is one to two months of regular play for most people, and the number will go up and down by 50 or 100 on the way.\n\nCount a game as good when the Villager graph has no long flat stretch, whether you won it or not. If those games become normal, the rating catches up on its own.\n\n## What can wait\n\nAdvanced micro, a second civilization, water maps and the Imperial Age unit mix can all wait until you are past 900. Players at this level who try to learn everything at once tend to do none of it in a real game.",
+  "related_units": [
+   "Villager",
+   "Scout Cavalry",
+   "Archer",
+   "Knight",
+   "Crossbowman",
+   "Battering Ram",
+   "Mangonel",
+   "Spearman",
+   "Skirmisher"
+  ],
+  "sources": [
+   {
+    "title": "How much should I expect from winning or losing? (Age of Empires forums)",
+    "url": "https://forums.ageofempires.com/t/how-difficult-is-to-climb/89875",
+    "type": "forum"
+   },
+   {
+    "title": "Are 1000 ELO players now significantly better than they were two years ago? (Age of Empires forums)",
+    "url": "https://forums.ageofempires.com/t/are-1000-elo-players-now-significantly-better-than-they-were-two-years-ago/256220",
+    "type": "forum"
+   },
+   {
+    "title": "How reflective is a player's elo of their overall skill level? (Age of Empires forums)",
+    "url": "https://forums.ageofempires.com/t/how-reflective-is-a-players-elo-of-their-overall-skill-level/132094",
+    "type": "forum"
+   },
+   {
+    "title": "aoe2companion 1v1 Random Map leaderboard (active players, read November 2026)",
+    "url": "https://data.aoe2companion.com/api/leaderboards/rm_1v1",
+    "type": "article"
+   }
+  ],
+  "videos": [
+   {
+    "title": "The Secret To Winning Every Game Below 1000 Elo | AoE2 Coaching",
+    "url": "https://www.youtube.com/watch?v=4qUwiiV6aa8",
+    "channel": "Hera - Age of Empires 2"
+   },
+   {
+    "title": "Talented Player Held Back by Filthy 800 Elo Habits | AoE2 Coaching",
+    "url": "https://www.youtube.com/watch?v=2z_gYbFerpM",
+    "channel": "Hera - Age of Empires 2"
+   },
+   {
+    "title": "Imperial Age is a Myth & Does NOT Matter | 1000 Elo Coaching",
+    "url": "https://www.youtube.com/watch?v=jE1cpr1JUMQ",
+    "channel": "Hera - Age of Empires 2"
+   },
+   {
+    "title": "How to Improve at Age of Empires 2 - Part 2: Macro",
+    "url": "https://www.youtube.com/watch?v=hH8hCC-oQUY",
+    "channel": "Survivalist"
+   }
+  ],
+  "reading_minutes": 3
+ },
+ {
+  "slug": "progress-crossing-1700",
+  "title": "From Advanced to Expert: Crossing 1700",
+  "category": "elo-and-progression",
+  "elo": "advanced",
+  "summary": "1700 is roughly the top 5 percent of the 1v1 ladder. Getting there is about keeping the economy running while you fight, choosing when to fight, and having more than one plan per map.",
+  "body": "Only about 2,300 of the 48,150 active 1v1 players were rated 1700 or higher in November 2026, roughly the top 5 percent. The band below it, 1300 to 1700, holds about 15 percent of the ladder. Each 100 points here takes longer than the last: one forum player estimated about 100 games for 900 to 1100 and about 500 games for 1700 to 1900.\n\nPlayers at 1500 already know the build orders, the counters and the standard timings. The work in this band is doing all of it at once, under pressure, against someone who is trying to break your plan.\n\n## Macro while you fight\n\nA 1700 player on the official forums put it plainly: below about 1500, players struggle to keep their economy going while they answer a surprise attack. Almost every game at this level has a moment like that. The player who keeps queuing Villagers, adding Farms and building Houses through the fight usually wins the next five minutes.\n\nThis is mostly an attention habit. The guide Efficient APM: What to Do With Each Second in a 1v1 describes a loop that checks production every few seconds. Players in an old forum data thread reported effective actions per minute of around 45 at 1500, and one poster reading AoE2Insights data felt that players stuck near 20 eAPM rarely got past 1700. A slow loop puts a ceiling on what you can manage, even when your decisions are good.\n\n## Choose your fights\n\nAt 1300, armies meet in the middle and the bigger one wins. At 1700, players avoid fights they do not need and look for the ones they can win cheaply:\n\n- Fight under your own Castle, towers or Town Center.\n- Hit when an upgrade has just finished and the opponent's has not.\n- Attack in two places when the opponent's army is out of position.\n- Back off when the trade is even and take map control or a relic instead.\n\nHera's coaching video titled Explaining High Elo Concepts that NOBODY Talks About goes through this kind of thinking with a 1700 player.\n\n## Have more than one plan\n\nIf you open the same way every game, a good opponent learns to expect it, and one scout of your base confirms what he already guessed. Learn two openings per map type, and vary your Castle Age plan with the matchup. The guide Reading Your Opponent's Build From Small Clues covers the other side of this.\n\nBreadth matters too. At 1700 you meet every map in the pool. Hybrid maps, closed maps and the odd water map will cost you points if you only know Arabia.\n\n## Micro where it pays\n\nMicro does more work in this band than lower down. Splitting archers against a Mangonel, pulling a hurt Knight back, running Villagers from a raid and microing a Mangonel shot each decide fights that are otherwise even. Survivalist's micro video covers most units in the game, and Archer and Skirmisher Micro on this site goes through the ranged units in detail.\n\nKeep it in proportion. Micro that makes your Town Center go idle loses more than it gains.\n\n## Practise on purpose\n\nPlaying ranked game after ranked game gets slower results here. Three things help alongside it:\n\n- Watch their losses with a question in mind, using CaptureAge for idle time and resource graphs.\n- Drill one situation outside ranked, such as defending a tower rush or the first two minutes of the Castle Age.\n- Play against stronger players, in lobbies or with friends.\n\nPractice Routines: Replay Review, Build Drills and Handling Tilt covers this in more detail.\n\n## When you feel stuck\n\nHera has a coaching session with a 1700 viewer who said he was hardstuck, and another on the typical mistakes most 1500 players make. Watch them with your own last replay open, and pause at every mistake the coach points out to check whether you made it too. Gaps in this band are small, and a 100 point edge already means winning about 64 percent of games, so fixing one habit can be enough to move you up a level.",
+  "related_units": [
+   "Villager",
+   "Knight",
+   "Archer",
+   "Mangonel",
+   "Crossbowman"
+  ],
+  "sources": [
+   {
+    "title": "How reflective is a player's elo of their overall skill level? (Age of Empires forums)",
+    "url": "https://forums.ageofempires.com/t/how-reflective-is-a-players-elo-of-their-overall-skill-level/132094",
+    "type": "forum"
+   },
+   {
+    "title": "Are 1000 ELO players now significantly better than they were two years ago? (Age of Empires forums)",
+    "url": "https://forums.ageofempires.com/t/are-1000-elo-players-now-significantly-better-than-they-were-two-years-ago/256220",
+    "type": "forum"
+   },
+   {
+    "title": "EAPM (Effective Actions per Minute) & ELO List (Age of Empires forums)",
+    "url": "https://forums.ageofempires.com/t/eapm-effective-actions-per-minute-elo-list/109200",
+    "type": "forum"
+   },
+   {
+    "title": "aoe2companion 1v1 Random Map leaderboard (active players, read November 2026)",
+    "url": "https://data.aoe2companion.com/api/leaderboards/rm_1v1",
+    "type": "article"
+   }
+  ],
+  "videos": [
+   {
+    "title": "Explaining High Elo Concepts that NOBODY Talks About | 1700 Elo Coaching",
+    "url": "https://www.youtube.com/watch?v=-ONqPWkbp6k",
+    "channel": "Hera - Age of Empires 2"
+   },
+   {
+    "title": "A 1700 Viewer Told me He Was HARDSTUCK | AoE2 Coaching",
+    "url": "https://www.youtube.com/watch?v=Iwoei3KePSE",
+    "channel": "Hera - Age of Empires 2"
+   },
+   {
+    "title": "Typical Mistakes That Most 1500 Players Make! | AoE2 Coaching Session",
+    "url": "https://www.youtube.com/watch?v=gAW9xvXnRZY",
+    "channel": "Hera - Age of Empires 2"
+   },
+   {
+    "title": "How to Improve at Age of Empires 2 - Part 4: Micro",
+    "url": "https://www.youtube.com/watch?v=aOzudiQ5Jcs",
+    "channel": "Survivalist"
+   }
+  ],
+  "reading_minutes": 3
+ },
+ {
+  "slug": "progress-how-elo-works",
+  "title": "How Elo Works in AoE2",
+  "category": "elo-and-progression",
+  "elo": "beginner",
+  "summary": "Where your rating starts, how many points a ranked game is worth, why the number jumps around from day to day, and what the four skill bands on this site actually describe.",
+  "body": "Every ranked game in Age of Empires II: Definitive Edition changes a number next to your name. The game calls it your rating and the community calls it Elo, after the chess system it is modelled on. Once you know how that number moves, a losing streak is easier to read, because most of the time it is a few points of ordinary noise.\n\n## One rating per ladder\n\nRanked play has separate ladders, and each keeps its own rating. The two most played are 1v1 Random Map and Team Random Map. All team sizes share the single team rating, so a 2v2 and a 4v4 feed the same number. Empire Wars has its own ladders as well. Winning a team game does nothing for your 1v1 rating and the other way round.\n\nWhen this site says Elo, it means the 1v1 Random Map rating. That is the ladder where every result depends on you alone, so it tells the most about one player's skill.\n\n## Where you start\n\nA new account starts near 1000, the figure players on the official forums and Steam keep reporting. That lands you right in the middle of the ladder: in November 2026 the median rating among 48,150 active 1v1 players was 1004.\n\nYour first games move more points than later ones. Forum regulars describe a placement period of roughly the first 10 to 15 ranked games, where wins and losses swing your rating much harder so it can find your level quickly. Some players also report that a rating you already have on another ladder can be used as your starting point. If you start well below 1000 in skill, expect a run of losses at first, which is the system looking for your level. Spirit of the Law has two videos on whether the starting rating is too high and how placement against the AI could help.\n\n## How many points a game moves\n\nThe rating compares your number with your opponent's and works out how often you should win. The bigger the gap, the more the favourite is expected to win, and the fewer points a predicted result is worth.\n\n- Equal ratings: each game is worth about 16 points either way. The developers used this exact figure in their own explanation of the team ladder.\n- A 100 point gap: the higher rated player is expected to win about 64 percent of the time. An upset win earns the underdog roughly 20 points, and a loss costs the underdog about 12.\n- A 200 point gap: about 76 percent for the favourite. The underdog gains about 24 for a win and loses about 8.\n- A 400 point gap: about 91 percent. The favourite gains only about 3 for winning and loses close to 30 for losing.\n\nOnly the result counts. Score, game length and how close the fight was make no difference. Resigning at minute 8 and losing at minute 60 cost the same.\n\n## Why it swings\n\nAt 16 points a game, five or six losses in a row cost close to 100 points, and five or six wins put them back. One forum player put a normal day's swing at about 100 points, and that matches what most people see in their own history. Maps in the pool, civilization picks, a tired evening and your opponent's form all push results around.\n\nLow ratings swing the most. Posters on Age of Notes and the official forums agree that the number gets noticeably less precise below about 1100 to 1200, because players there are inconsistent. The same player can play a clean game and then forget to make Villagers in the next. Higher up, results follow the ratings more closely, and big upsets are rarer.\n\n## Winning half your games is normal\n\nThe system pushes everyone toward the rating where they win about half their games. A 50 percent win rate means it is working. To climb you need to win a bit more than you lose for a long stretch: at 55 percent over 100 games you gain roughly 150 points.\n\nThe rating is also relative. It measures you against everyone else on the ladder, so if you improve at the same pace as the players around you, your number stays put even though you play better than you did a year ago.\n\n## What the bands on this site mean\n\nThe guides here are tagged with four bands. Using the November 2026 ladder of 48,150 active players, this is how many players sit in each:\n\n- Beginner, under 900: about 37 percent of active players.\n- Intermediate, 900 to 1300: about 43 percent, the largest group.\n- Advanced, 1300 to 1700: about 15 percent.\n- Expert, 1700 and up: about 5 percent.\n\nThe other guides in this category go through what players in each band can do, how to move from one band to the next, and how team ratings compare. For the queues themselves and the difference between ranked, Quick Play and lobbies, see the matchmaking guide in the fundamentals section.",
+  "related_units": [],
+  "sources": [
+   {
+    "title": "Updates to ranked team game Elo calculation (Age of Empires news)",
+    "url": "https://www.ageofempires.com/news/updates-to-ranked-team-game-elo-calculation/",
+    "type": "article"
+   },
+   {
+    "title": "How the elo rating points works? (Age of Empires forums)",
+    "url": "https://forums.ageofempires.com/t/how-the-elo-rating-points-works/111755",
+    "type": "forum"
+   },
+   {
+    "title": "How much should I expect from winning or losing? (Age of Empires forums)",
+    "url": "https://forums.ageofempires.com/t/how-difficult-is-to-climb/89875",
+    "type": "forum"
+   },
+   {
+    "title": "How accurate is Age of Empires II: Definitive Edition's 1v1 ranked Elo system? (Age of Notes forum)",
+    "url": "https://ageofnotes.com/forums/topic/how-accurate-is-age-of-empires-ii-definitive-editions-1v1-ranked-elo-system",
+    "type": "forum"
+   },
+   {
+    "title": "How reflective is a player's elo of their overall skill level? (Age of Empires forums)",
+    "url": "https://forums.ageofempires.com/t/how-reflective-is-a-players-elo-of-their-overall-skill-level/132094",
+    "type": "forum"
+   },
+   {
+    "title": "Starting from 1000 should be changed (Steam discussions)",
+    "url": "https://steamcommunity.com/app/813780/discussions/0/3812911294786932928",
+    "type": "forum"
+   },
+   {
+    "title": "aoe2companion 1v1 Random Map leaderboard (active players, read November 2026)",
+    "url": "https://data.aoe2companion.com/api/leaderboards/rm_1v1",
+    "type": "article"
+   }
+  ],
+  "videos": [
+   {
+    "title": "How Elo Ratings Are Calculated",
+    "url": "https://www.youtube.com/watch?v=GTaAWtuLHuo",
+    "channel": "Spirit Of The Law"
+   },
+   {
+    "title": "Is AoE2's starting Elo too high for new players?",
+    "url": "https://www.youtube.com/watch?v=kx2Z7pnk17M",
+    "channel": "Spirit Of The Law"
+   },
+   {
+    "title": "How AI Placement Matches fix (almost) everything",
+    "url": "https://www.youtube.com/watch?v=4RLYB7JUhZM",
+    "channel": "Spirit Of The Law"
+   }
+  ],
+  "reading_minutes": 4
+ },
+ {
+  "slug": "progress-how-long-improvement-takes",
+  "title": "How Long Improvement Takes and How to Measure It",
+  "category": "elo-and-progression",
+  "elo": "intermediate",
+  "summary": "Realistic timelines from players who tracked their climb, why plateaus are normal, and the per-game numbers that show progress long before your rating moves.",
+  "body": "Players who post about their climb on the official forums report very different speeds, but the numbers have a pattern. One player reached about 1250 to 1300 after four months and roughly 450 games, most of them team games. Another went from about 800 to 1100 in around 300 games. A third had played a few hundred games since January and hovered between 1300 and 1400. Posters agreed that 1900 in under 100 games is out of reach for a normal new account, although a returning veteran or a pro on a second account might manage it.\n\n## Each step takes longer\n\nThe higher you go, the more games each 100 points costs. One forum player estimated around 100 games to go from 900 to 1100 and about 500 to go from 1700 to 1900. In a 2023 forum thread that analysed ladder data, posters found a decent link between games played and rating from about 500 up to 1700. Above that the link got close to random, and one reply called the learning curve incredibly flat.\n\nThese rough ranges come from those reports and assume you play a few ranked games most days and work on your weaknesses:\n\n- Your first 10 to 15 games: big swings while the system finds your level.\n- From there to the middle of the ladder: weeks to a few months.\n- 1000 to 1300: several months for most players.\n- 1300 to 1700: often a year or more.\n- Above 1700: progress slows to a crawl and depends heavily on how you practise.\n\nThere are exceptions. Hera made a video about a well known streamer who reached 1500 in two months, and Ozone describes going from zero to 2000 in just over a year. Treat those as the fast end of the range.\n\n## Why your rating lags behind your skill\n\nAn even game is worth about 16 points, so a 55 percent win rate over 100 games is only about 150 points. Your rating can also swing by around 100 in a day. That means a week of real improvement can be hidden under one bad evening.\n\nThe rating is relative as well. It compares you with the players around you, who are also learning. If you improve at the same pace as they do, your number stays where it is.\n\n## Plateaus are normal\n\nAlmost everyone stalls somewhere, and 1300 is a famous spot. A plateau usually means one weakness is costing you the games your other skills should win. The fix is to find it in replays and change how you practise. More ranked games played the same way rarely help.\n\nBreaks cause a different kind of drop. Players returning after months away often play well below their old level for a while. Expect that, and give yourself a couple of weeks before you judge.\n\n## Measure the game itself\n\nNumbers from each game show progress long before the rating does. Pick two or three and track them for a month:\n\n- Feudal Age and Castle Age arrival times on your main opening.\n- Villager count at 15 and 25 minutes.\n- Town Center idle time, which CaptureAge and AoE2Insights can show.\n- Resources banked at the end of each age.\n- Effective actions per minute. Forum data puts players around 1250 to 1400 at roughly 25 and players at 1500 at about 45.\n\nCompare the numbers between games of the same type. A Castle Age arrival time means little if one game was a fast castle and the next a scout opening.\n\n## Keep a short log\n\nA notes file or spreadsheet with five columns is enough: date, map, civilizations, result and one mistake. After 30 games, count the mistakes. The one at the top of the list is the thing to practise next, and when it drops down the list you have proof of progress, whatever the rating says.\n\nFor rating trends, look at your history over a month on a stats site instead of after each game. A line that climbs 50 points over four weeks is real progress, even if Tuesday was a disaster.\n\nThe guides Reading the Score, the Post-Game Stats and Your Own Replays and The Tools and Sites AoE2 Players Recommend show where to find these numbers.",
+  "related_units": [
+   "Villager"
+  ],
+  "sources": [
+   {
+    "title": "How many games for specific ratings? (Age of Empires forums)",
+    "url": "https://forums.ageofempires.com/t/how-many-games-for-specific-ratings/109420",
+    "type": "forum"
+   },
+   {
+    "title": "How reflective is a player's elo of their overall skill level? (Age of Empires forums)",
+    "url": "https://forums.ageofempires.com/t/how-reflective-is-a-players-elo-of-their-overall-skill-level/132094",
+    "type": "forum"
+   },
+   {
+    "title": "How much should I expect from winning or losing? (Age of Empires forums)",
+    "url": "https://forums.ageofempires.com/t/how-difficult-is-to-climb/89875",
+    "type": "forum"
+   },
+   {
+    "title": "EAPM (Effective Actions per Minute) & ELO List (Age of Empires forums)",
+    "url": "https://forums.ageofempires.com/t/eapm-effective-actions-per-minute-elo-list/109200",
+    "type": "forum"
+   },
+   {
+    "title": "How accurate is Age of Empires II: Definitive Edition's 1v1 ranked Elo system? (Age of Notes forum)",
+    "url": "https://ageofnotes.com/forums/topic/how-accurate-is-age-of-empires-ii-definitive-editions-1v1-ranked-elo-system",
+    "type": "forum"
+   },
+   {
+    "title": "How did you get past the 1300 range? (aoezone)",
+    "url": "https://aoezone.net/goto/post?id=685882",
+    "type": "forum"
+   }
+  ],
+  "videos": [
+   {
+    "title": "How a Famous Streamer Got 1500 Elo in 2 Months | AoE2",
+    "url": "https://www.youtube.com/watch?v=agDn8Q0nPRE",
+    "channel": "Hera - Age of Empires 2"
+   },
+   {
+    "title": "The FASTEST Way to Improve at Age of Empires 2 (Do This Instead)",
+    "url": "https://www.youtube.com/watch?v=fmyYTMv2LZU",
+    "channel": "Ozone  - Age of Empires 2"
+   },
+   {
+    "title": "The Most Efficient Way to Improve at Age of Empires 2",
+    "url": "https://www.youtube.com/watch?v=Lt4N-5-OeAk",
+    "channel": "Survivalist"
+   },
+   {
+    "title": "EP0 - Guide to 2k : Macro your way to 1500 ELO (Aoe2)",
+    "url": "https://www.youtube.com/watch?v=l5sq_IJD4Qg",
+    "channel": "DragonstarAoE"
+   }
+  ],
+  "reading_minutes": 3
+ },
+ {
+  "slug": "progress-ladder-in-numbers",
+  "title": "The 1v1 Ladder in Numbers",
+  "category": "elo-and-progression",
+  "elo": "beginner",
+  "summary": "A tour of the November 2026 1v1 Random Map ladder: where the middle is, how many players sit below 900 or above 2000, and what your rating means as a share of the ladder.",
+  "body": "Ratings make more sense once you know how many players sit around each number. The figures below come from the full 1v1 Random Map leaderboard as listed on aoe2companion on 19 November 2026. It counts 48,150 players flagged as active, nearly all of whom played a ranked match in October or November. Ratings ran from 0 to 3055.\n\n## The middle of the ladder\n\nThe median rating was 1004, so half of the active players were above it and half below. The single most crowded 50 point slice was 1000 to 1050, with 3,421 players. That is close to where new accounts start, so part of the crowd there is players who have not played many ranked games yet.\n\nThe middle half of the ladder, from the 25th to the 75th percentile, ran from roughly 775 to 1225. Half of all active players fit inside that 450 point window.\n\n## Below 1000\n\n- About 7 percent were under 500.\n- 10 percent were under 564.\n- About 27 percent, a little over a quarter, were under 800.\n- About 37 percent, more than a third, were under 900.\n- About 49 percent were under 1000.\n\nIf you are under 900, you share that part of the ladder with more than a third of all active players, and you are still well clear of the bottom.\n\n## Above 1000\n\n- 1200 put you in about the top 27 percent.\n- 1300 put you in about the top 20 percent.\n- 1500 was the 90th percentile at 1498, so roughly the top 10 percent.\n- 1700 was about the top 5 percent, with 2,323 players at or above it.\n- 2000 was about the top 1.6 percent, with 759 players.\n- 2500 or more: about 100 players.\n- 2800 or more: 23 players, and only 3 above 3000.\n\n## The far ends\n\nThe very bottom of the ladder is small. Only about 420 active players were under 200. T90's Low Elo Legends series is built around games from this end of the ladder, and in one video he follows a 48 Elo player he found playing against the AI.\n\nThe top is even smaller. A single 50 point slice around 1000 held more players than the whole ladder above 1900, which had about 1,100.\n\n## The bands on this site\n\nGrouped by the four bands used across these guides:\n\n- Beginner, under 900: about 18,000 players, 37 percent.\n- Intermediate, 900 to 1300: about 20,800 players, 43 percent.\n- Advanced, 1300 to 1700: about 7,000 players, 15 percent.\n- Expert, 1700 and up: about 2,300 players, 5 percent.\n\n## Why 100 points means different things\n\nA 100 point gap always means the same expected result: the higher rated player wins about 64 percent of the time. What changes is how many players you pass. Going from 1000 to 1100 moves you past about 13 percent of the ladder, more than 6,500 players. Going from 1900 to 2000 passes about 0.7 percent, around 350 players. So your rank climbs quickly in the middle and slowly at the top, even though the games feel harder up there.\n\n## Reading the numbers carefully\n\nA few things to keep in mind:\n\n- The list only includes active players. People who stopped playing are left out.\n- The ladder was read while games were being played, so a few players may sit one bucket off.\n- Second accounts and players still in their first placement games add noise, especially around 1000.\n- These are ranked 1v1 ratings only. Team ratings sit on a different scale, covered in Team Game Rating Versus 1v1 Rating.\n\nThe shape has stayed fairly stable over the years. In 2020, a forum poster counted about 45.8 percent of players below 1000, and in 2024 a forum regular noted that 1300 was already the top 20 percent. Both are close to the November 2026 figures above.",
+  "related_units": [],
+  "sources": [
+   {
+    "title": "aoe2companion 1v1 Random Map leaderboard (active players, read November 2026)",
+    "url": "https://data.aoe2companion.com/api/leaderboards/rm_1v1",
+    "type": "article"
+   },
+   {
+    "title": "What's the average elo on 1v1 ranked? (Age of Empires forums)",
+    "url": "https://forums.ageofempires.com/t/whats-the-average-elo-on-1v1-ranked/106997",
+    "type": "forum"
+   },
+   {
+    "title": "Are 1000 ELO players now significantly better than they were two years ago? (Age of Empires forums)",
+    "url": "https://forums.ageofempires.com/t/are-1000-elo-players-now-significantly-better-than-they-were-two-years-ago/256220",
+    "type": "forum"
+   },
+   {
+    "title": "Starting from 1000 should be changed (Steam discussions)",
+    "url": "https://steamcommunity.com/app/813780/discussions/0/3812911294786932928",
+    "type": "forum"
+   }
+  ],
+  "videos": [
+   {
+    "title": "The impact of civ choice at 1000 vs 1600+ elo",
+    "url": "https://www.youtube.com/watch?v=poDLUisCFYA",
+    "channel": "Spirit Of The Law"
+   },
+   {
+    "title": "Are You Afraid To Play Ranked? | AoE2",
+    "url": "https://www.youtube.com/watch?v=Uu9kinXroh8",
+    "channel": "Hera - Age of Empires 2"
+   },
+   {
+    "title": "I Found a 48 Elo Player Playing vs AI",
+    "url": "https://www.youtube.com/watch?v=urKK5G7QUH0",
+    "channel": "T90Official - Age Of Empires 2"
+   }
+  ],
+  "reading_minutes": 3
+ },
+ {
+  "slug": "progress-skills-by-elo-band",
+  "title": "What Players Can Do at Each Rating",
+  "category": "elo-and-progression",
+  "elo": "beginner",
+  "summary": "A skills checklist for each band on this site, from under 900 to 1700 and up, with the mistakes that players in each band still tend to make.",
+  "body": "A rating is a summary of hundreds of small things a player does or does not do. It helps to know what those things are at each level, so you can see which ones you already have and which one is holding you back. The lists below describe a typical player in each band on the 1v1 Random Map ladder. Nobody fits a list exactly; a player might have the build order of a 1300 and the defending of an 800.\n\n## Under 900\n\nAbout 37 percent of active ranked players are here, so this is a big and mixed group. It includes complete newcomers and players who have been around for years but play a few relaxed games a week.\n\nWhat players here can usually do:\n\n- Follow a build order from notes or memory for the first few minutes.\n- Reach the Feudal Age and make one or two kinds of military unit.\n- Know the basic counters, such as Spearman against Scout Cavalry and Skirmisher against Archer.\n- Use a few hotkeys, at least for the Town Center and military buildings.\n\nWhat usually still goes wrong:\n\n- The Town Center sits idle for minutes at a time, especially once fighting starts.\n- Population cap is reached with no House coming, so production stops.\n- Hundreds of resources pile up unspent.\n- The army waits at home while the opponent booms.\n- Nobody scouts the opponent after the first minutes, so attacks arrive as a surprise.\n- Games drag on because neither player can break buildings.\n\nHera's coaching video of a typical 900 game shows most of these in one match.\n\n## 900 to 1300\n\nThis is the busiest part of the ladder, with about 43 percent of players, and the most crowded single slice sits right around 1000.\n\nWhat players here can usually do:\n\n- Play at least one standard opening without notes and reach the Feudal Age on time.\n- Defend a first rush with Loom, Town Center arrows and the right counter unit.\n- Add a second and third Town Center in the Castle Age.\n- Get the main upgrades for the unit they make, such as Fletching or Bloodlines.\n\nWhat usually still goes wrong:\n\n- The economy pauses whenever a fight happens. A 1700 player on the official forums described this level well: most 1000 players now know a build order, but idle Town Center time, slow reactions to attacks and predictable openings have changed very little.\n- Scouting information arrives, but the response is late or the wrong one.\n- One unit type gets massed without the upgrades or support it needs.\n- A lead in the Feudal Age is not turned into a win, and the game drifts into a long Imperial Age.\n\n## 1300 to 1700\n\nAbout 15 percent of active players are here. Reaching 1300 puts you in roughly the top 20 percent of the ladder.\n\nWhat players here can usually do:\n\n- Play several openings and choose one to suit the map and the matchup.\n- Lure boar, take deer and keep Dark Age idle time low.\n- Scout the opponent's base, read what is coming and adapt in time.\n- Micro an archer group against a Mangonel and run Villagers from a raid.\n- Boom behind walls or map control without dying to the first push.\n\nWhat usually still goes wrong:\n\n- Multitasking under pressure. A forum poster at 1700 argued that players below about 1500 struggle to keep their economy going while answering a surprise attack.\n- Rigid plans that ignore what scouting shows.\n- Missing the moment to hit, so an advantage fades.\n- Trading armies evenly when a better fight was available later.\n\n## 1700 and up\n\nAbout 5 percent of active players reach 1700, and 2000 is roughly the top 1.6 percent.\n\nWhat players here can usually do:\n\n- Run a near perfect Dark Age on every map type and with most civilizations.\n- Read the opponent's plan from small clues and prepare for it.\n- Fight in two places while the economy keeps growing.\n- Plan transitions a couple of minutes ahead and time attacks to power spikes.\n\nWhat still goes wrong here is harder to name. Results follow ratings closely at this level: forum posters point out that a 2000 player beats a 1600 player the large majority of the time. The remaining gaps are mostly consistency and speed of decisions. A 1700 player plays a great game on a good day; a 2100 player plays nearly the same game on a bad day, on an unfamiliar map, against an opponent who changes plans halfway.\n\n## Using the lists\n\nPick the band one step above your own and look at its first list. Whatever you cannot yet do reliably is the thing to practise. The progression guides in this category go through each step in more detail, and Gygciu has a video that compares macro statistics from 27,000 Arabia replays between each 100 point bracket from 600 to 1800.",
+  "related_units": [
+   "Villager",
+   "Scout Cavalry",
+   "Spearman",
+   "Archer",
+   "Skirmisher",
+   "Mangonel"
+  ],
+  "sources": [
+   {
+    "title": "Are 1000 ELO players now significantly better than they were two years ago? (Age of Empires forums)",
+    "url": "https://forums.ageofempires.com/t/are-1000-elo-players-now-significantly-better-than-they-were-two-years-ago/256220",
+    "type": "forum"
+   },
+   {
+    "title": "How reflective is a player's elo of their overall skill level? (Age of Empires forums)",
+    "url": "https://forums.ageofempires.com/t/how-reflective-is-a-players-elo-of-their-overall-skill-level/132094",
+    "type": "forum"
+   },
+   {
+    "title": "Breakdown of Aoe 2 De Skill levels (Age of Empires forums)",
+    "url": "https://forums.ageofempires.com/t/breakdown-of-aoe-2-de-skill-levels/109421",
+    "type": "forum"
+   },
+   {
+    "title": "How much should I expect from winning or losing? (Age of Empires forums)",
+    "url": "https://forums.ageofempires.com/t/how-difficult-is-to-climb/89875",
+    "type": "forum"
+   },
+   {
+    "title": "aoe2companion 1v1 Random Map leaderboard (active players, read November 2026)",
+    "url": "https://data.aoe2companion.com/api/leaderboards/rm_1v1",
+    "type": "article"
+   }
+  ],
+  "videos": [
+   {
+    "title": "Typical 900 Elo Game | AoE2 Coaching",
+    "url": "https://www.youtube.com/watch?v=Ms67hiL_O2c",
+    "channel": "Hera - Age of Empires 2"
+   },
+   {
+    "title": "Difference between each AOE2 ELO with Statistics",
+    "url": "https://www.youtube.com/watch?v=fuiK_JJAFYE",
+    "channel": "Gygciu AOE2"
+   },
+   {
+    "title": "The Difference Between 2900 & 1200 Elo | AoE2",
+    "url": "https://www.youtube.com/watch?v=dBfVspAv6fg",
+    "channel": "Hera - Age of Empires 2"
+   }
+  ],
+  "reading_minutes": 4
+ },
+ {
+  "slug": "progress-staying-above-2000",
+  "title": "Staying Above 2000: What Top Ladder Players Do Differently",
+  "category": "elo-and-progression",
+  "elo": "expert",
+  "summary": "Fewer than 2 percent of active 1v1 players are rated 2000 or more. Holding that rating depends on consistency, a wide map and civilization pool, planning ahead and handling the maths of a small player pool.",
+  "body": "In November 2026, 759 of the 48,150 active 1v1 Random Map players were rated 2000 or higher, about 1.6 percent of the ladder. The top 1 percent started at roughly 2100, about 100 players were above 2500 and only 23 above 2800. Reaching 2000 once is a milestone. Staying there means playing at that level week after week, against opponents who know as much as you do.\n\n## The maths changes near the top\n\nLower on the ladder, there are thousands of players within 50 points of you. Above 2000 the pool is small, so matchmaking has fewer close opponents to choose from and can pair you with someone a few hundred points away. That makes the rating less forgiving:\n\n- Beating a player 200 points below you earns only about 8 points.\n- Losing to the same player costs about 24.\n- Against someone 400 points below, a win is worth about 3 and a loss close to 30.\n\nOne upset can wipe out three or four wins, so holding a high rating is mostly about making upsets rare.\n\n## Consistency\n\nThe gap between a 1900 and a 2100 player shows most in their worst games, which for the 2100 player look much like the best ones. A 2100 player's Dark Age looks the same whether he is fresh or tired, on Arabia or on a map he has played twice. Idle time stays near zero, Houses go up before they are needed, and the first scouting trip finds the same information every game.\n\nForum posters noted years ago that upsets get rarer as ratings rise: a 2000 player should beat a 1600 player most of the time, and a 1500 rarely beats a 1700. At 2000 your opponents are consistent too, so a sloppy game is the most common way to lose.\n\n## A wide pool of maps and civilizations\n\nAbove 2000 you meet every map in the pool and opponents who pick the civilization that suits it. Players who hold this rating can play open, closed and hybrid maps, and they have a plan for the occasional water or Nomad game. The Nomad and MegaRandom Mindset guide covers the unusual starts. They also have at least a few civilizations they trust for each map type, plus a counter pick ready for common opponents.\n\n## Planning ahead\n\nHera's coaching video with a 2200 player is called How To Read The Game & Plan Ahead, and the title names the habit. Strong players decide what they will do in two or three minutes and start preparing now: walls before the Knights arrive, a Siege Workshop before the Castle Age push, gold Villagers moved before the switch to a new unit. Their scouting is aimed at confirming or ruling out a plan, the subject of Reading Your Opponent's Build From Small Clues on this site.\n\n## Attention and speed\n\nTop players act fast, but more importantly they act on the right thing. A data thread on the official forums found effective actions per minute rising with rating, with players at 1500 averaging around 45. The guide Efficient APM: What to Do With Each Second in a 1v1 explains how to build an attention loop that keeps production going while you micro. At 2000 that loop has to hold up in a fight on two fronts.\n\n## Preparation outside ranked games\n\nAt this level most of the improvement happens outside ranked games. Ozone, who reached 2000 from zero in just over a year, made a video about the method he used. Habits that help:\n\n- Reviewing every loss, often with CaptureAge, and writing down one cause.\n- Drilling a specific situation with save and reload, the method Survivalist explains in his video on efficient practice.\n- Studying how pros play a matchup they find hard.\n- Playing practice games against stronger players.\n\n## Managing sessions\n\nRating at the top is also a question of when you play. Because a single upset costs so much, stopping after two losses in a row and skipping ranked when you are tired both save real points. Practice Routines: Replay Review, Build Drills and Handling Tilt has more on handling a bad run.\n\n## What still separates 2200 from 2900\n\nHera made a whole coaching video comparing a 2200 and a 2900 player, and another on the biggest weakness of each top pro. On the November 2026 ladder, 2200 still left more than 300 players above you, and the leader sat at 3055.",
+  "related_units": [
+   "Villager",
+   "Knight"
+  ],
+  "sources": [
+   {
+    "title": "aoe2companion 1v1 Random Map leaderboard (active players, read November 2026)",
+    "url": "https://data.aoe2companion.com/api/leaderboards/rm_1v1",
+    "type": "article"
+   },
+   {
+    "title": "How reflective is a player's elo of their overall skill level? (Age of Empires forums)",
+    "url": "https://forums.ageofempires.com/t/how-reflective-is-a-players-elo-of-their-overall-skill-level/132094",
+    "type": "forum"
+   },
+   {
+    "title": "EAPM (Effective Actions per Minute) & ELO List (Age of Empires forums)",
+    "url": "https://forums.ageofempires.com/t/eapm-effective-actions-per-minute-elo-list/109200",
+    "type": "forum"
+   },
+   {
+    "title": "How many games for specific ratings? (Age of Empires forums)",
+    "url": "https://forums.ageofempires.com/t/how-many-games-for-specific-ratings/109420",
+    "type": "forum"
+   }
+  ],
+  "videos": [
+   {
+    "title": "The Difference Between a 2200 Elo & a 2900 Elo | AoE2 Coaching",
+    "url": "https://www.youtube.com/watch?v=iSFDKve-xD0",
+    "channel": "Hera - Age of Empires 2"
+   },
+   {
+    "title": "How To Read The Game & Plan Ahead | 2200 Elo Coaching",
+    "url": "https://www.youtube.com/watch?v=NBskNRz_zlU",
+    "channel": "Hera - Age of Empires 2"
+   },
+   {
+    "title": "The FASTEST Way to Improve at Age of Empires 2 (Do This Instead)",
+    "url": "https://www.youtube.com/watch?v=fmyYTMv2LZU",
+    "channel": "Ozone  - Age of Empires 2"
+   },
+   {
+    "title": "Every Pro Player & Their Biggest Weakness | AoE2",
+    "url": "https://www.youtube.com/watch?v=4ma03BGyfLU",
+    "channel": "Hera - Age of Empires 2"
+   }
+  ],
+  "reading_minutes": 3
+ },
+ {
+  "slug": "progress-team-rating-vs-1v1",
+  "title": "Team Game Rating Versus 1v1 Rating",
+  "category": "elo-and-progression",
+  "elo": "intermediate",
+  "summary": "Why your team rating and your 1v1 rating rarely match, how team points are worked out since the 2022 change, how the two ladders compare today, and what each one actually tests.",
+  "body": "Players who play both ladders often have two quite different numbers, sometimes a few hundred points apart in either direction. Both are Elo ratings, but they come from different games and different maths, so they do not translate one into the other.\n\n## How team points are worked out\n\nThe team ladder has been changed several times. In 2021 the developers announced a first fix for team ratings, and Spirit of the Law made a video explaining what had been wrong with the old calculation. In July 2022 came the change that still shapes the ladder.\n\nBefore it, every player on a team got the same points, based on the two teams' average ratings. According to the developers, this let strong players with weaker teammates gain more than they should, and team ratings inflated much faster than 1v1 ratings. The 2022 update did two things:\n\n- Each player's points now depend on their own rating compared with the enemy team's average. In the developers' example, a 2000 player who beats a team averaging 1500 gains only 2 points, while his 1000 rated teammate gains 30.\n- Team ratings were reset once to undo the inflation, which lowered most players' team rating.\n\n## The two ladders today\n\nA snapshot of both Random Map ladders from November 2026, counting active players only:\n\n- Size: about 73,000 active team players against about 48,000 in 1v1.\n- Middle: the team median is about 1035 and the 1v1 median 1004, so the centre of both ladders is close.\n- Top 10 percent: starts at about 1420 in team games and about 1500 in 1v1.\n- Top 1 percent: about 1770 in team games, above 2100 in 1v1.\n- The best player: 2267 on the team ladder and 3055 on the 1v1 ladder.\n- Bottom 10 percent: under about 680 in team games and under 564 in 1v1.\n\nThe team ladder is squeezed together at the top. A team rating of 1800 is a top 1 percent result, the same share of the ladder as a 1v1 rating above 2100. Older posts that call team ratings hugely inflated describe the ladder before the reset, so check the date before you trust a comparison.\n\n## Why the two numbers drift apart\n\nA team's strength is not the average of its players. A forum post from 2026 worked through an example: a team of two 2000 players and two very weak players has the same average as four 1000 players, yet would win almost every game against them. Matchmaking still balances teams by average, so a high rated player can end up with much weaker teammates.\n\nThis cuts both ways. A forum thread from 2024 described a 2000 player with three 1000 teammates facing a team averaging 1800, a game he could lose about 30 points for. Low rated players, on the other hand, gain points quickly when they win with strong partners. Your teammates are also a source of noise you do not control, so short term swings in a team rating say little about you.\n\n## What each ladder tests\n\nA 1v1 tests everything at once. You scout, defend every rush yourself, run the whole economy and pick every fight. Every mistake is yours, which is why the 1v1 rating is the better measure of one player's fundamentals and the one this site uses for its bands.\n\nTeam games test different skills:\n\n- Playing a role. Flank players take the early pressure and often need to hold alone, while pocket players boom and arrive with a strong Castle Age army. The guide Team Games: Flank and Pocket Roles, Team Bonuses and Trade covers both.\n- Working with others: calling for help, sending resources and timing attacks together.\n- The late game. Team games last longer, so Imperial Age armies, trade and full upgrades matter much more than in a typical 1v1.\n\nA strong pocket player who has never had to survive an early rush alone can have a team rating far above his 1v1. A strong 1v1 player who plays team games rarely, or who rushes from the pocket, can have the reverse.\n\n## Using both\n\nIf your goal is to raise your 1v1 rating, 1v1 games teach the fundamentals fastest, because every lesson lands on you. Team games are good for practising late game play and for fun with friends. Judge yourself and your teammates by the ladder that matches the game, and read Team Game Etiquette: Roles, Calling for Help and When to Resign before your next 4v4.",
+  "related_units": [
+   "Trade Cart",
+   "Knight"
+  ],
+  "sources": [
+   {
+    "title": "Updates to ranked team game Elo calculation (Age of Empires news)",
+    "url": "https://www.ageofempires.com/news/updates-to-ranked-team-game-elo-calculation/",
+    "type": "article"
+   },
+   {
+    "title": "[BLOG] Updates to Ranked Team Game ELO Acquisition (Age of Empires forums)",
+    "url": "https://forums.ageofempires.com/t/blog-age-of-empires-ii-definitive-edition-updates-to-ranked-team-game-elo-acquisition/130892",
+    "type": "forum"
+   },
+   {
+    "title": "TG elo system should be fix (Age of Empires forums)",
+    "url": "https://forums.ageofempires.com/t/tg-elo-system-should-be-fix/250064",
+    "type": "forum"
+   },
+   {
+    "title": "The mistake of the elo system that leads to the TG ladder issues (Age of Empires forums)",
+    "url": "https://forums.ageofempires.com/t/the-mistake-of-the-elo-system-that-leads-to-the-tg-ladder-issues/289535",
+    "type": "forum"
+   },
+   {
+    "title": "Ranked ladders and ratings (Guild Order wiki)",
+    "url": "https://guildorder.com/games/aoe2/wiki/ranked-ladders-and-ratings",
+    "type": "wiki"
+   },
+   {
+    "title": "aoe2companion Team Random Map leaderboard (active players, read November 2026)",
+    "url": "https://data.aoe2companion.com/api/leaderboards/rm_team",
+    "type": "article"
+   },
+   {
+    "title": "aoe2companion 1v1 Random Map leaderboard (active players, read November 2026)",
+    "url": "https://data.aoe2companion.com/api/leaderboards/rm_1v1",
+    "type": "article"
+   }
+  ],
+  "videos": [
+   {
+    "title": "The AoE2 team Elo fix explained",
+    "url": "https://www.youtube.com/watch?v=uLrfT8l1SYQ",
+    "channel": "Spirit Of The Law"
+   },
+   {
+    "title": "The Ultimate Guide To 2v2 | AoE2",
+    "url": "https://www.youtube.com/watch?v=aOV2cAWxPKE",
+    "channel": "Hera - Age of Empires 2"
+   },
+   {
+    "title": "This is How You HARD CARRY Team Games | 2v4 AoE2",
+    "url": "https://www.youtube.com/watch?v=a0fds9PrSbA",
+    "channel": "Hera - Age of Empires 2"
+   }
+  ],
+  "reading_minutes": 3
+ }
+]

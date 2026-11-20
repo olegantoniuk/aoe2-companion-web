@@ -1,10 +1,13 @@
 <?php
 
 use yii\helpers\Html;
+use app\components\Seo;
 use yii\helpers\Url;
 use yii\helpers\Json;
+use app\components\UnitPills;
 
 $this->title = $yourCiv->name . ' vs ' . $enemyCiv->name;
+Seo::page($this, $yourCiv->name . ' vs ' . $enemyCiv->name . ': Matchup and Counters', 'How ' . $yourCiv->name . ' answer every ' . $enemyCiv->name . ' unit in Age of Empires II, age by age: the best counter units from your tech tree and their attack bonuses.', $yourCiv->emblemUrl);
 
 // Count land lines for All tab
 $allLandCount = 0;
@@ -16,7 +19,7 @@ foreach ($navalLines as $line) {
     $allNavalCount += count($line['units']);
 }
 
-// Helper: format unit type display (fix "CavalryScout unit" → "Cavalry scout")
+// Helper: format unit type display (fix "CavalryScout unit" to "Cavalry scout")
 $formatType = function ($type) {
     if (empty($type)) return '';
     $type = preg_replace_callback('/([a-z])([A-Z])/', function ($m) {
@@ -80,8 +83,14 @@ $collectCounters($allEnemyUnits);
 // Collect building counter units for popup
 $collectCounters($buildingCounters['units']);
 
+
+// Bonus of a counter shown as a small round pill inside the counter pill
+$bonusPill = function ($text) {
+    return '<span class="counter-bonus-badge">' . Html::encode($text) . '</span>';
+};
+
 // Helper to render counter link with bonus badge and naval class
-$renderCounterLink = function ($cu, $enemyIds = [], $counterBonuses = []) {
+$renderCounterLink = function ($cu, $enemyIds = [], $counterBonuses = []) use ($bonusPill) {
     $icon = $cu->iconUrl ? '<img src="' . Html::encode($cu->iconUrl) . '" alt="" class="unit-image-xs">' : '';
     $bonusBadge = '';
     $extraClass = '';
@@ -89,7 +98,7 @@ $renderCounterLink = function ($cu, $enemyIds = [], $counterBonuses = []) {
     foreach ($enemyIds as $eid) {
         if (isset($counterBonuses[$eid][$cu->id])) {
             $b = $counterBonuses[$eid][$cu->id];
-            $bonusBadge = ' <span class="counter-bonus-badge">+' . $b['bonus'] . ' vs ' . Html::encode($b['vs']) . '</span>';
+            $bonusBadge = $bonusPill('+' . $b['bonus'] . ' vs ' . $b['vs']);
             $extraClass = ' counter-has-bonus';
             break;
         }
@@ -100,19 +109,75 @@ $renderCounterLink = function ($cu, $enemyIds = [], $counterBonuses = []) {
 };
 
 // Helper to render building counter link
-$renderBuildingCounterLink = function ($cu) use ($buildingCounters) {
+$renderBuildingCounterLink = function ($cu) use ($buildingCounters, $bonusPill) {
     $icon = $cu->iconUrl ? '<img src="' . Html::encode($cu->iconUrl) . '" alt="" class="unit-image-xs">' : '';
     $bonusBadge = '';
     $extraClass = '';
     if (isset($buildingCounters['bonuses'][$cu->id])) {
         $b = $buildingCounters['bonuses'][$cu->id];
-        $bonusBadge = ' <span class="counter-bonus-badge">+' . $b['bonus'] . '</span>';
+        $bonusBadge = $bonusPill('+' . $b['bonus']);
         $extraClass = ' counter-has-bonus';
     }
     $navalClass = ($cu->isNaval) ? ' counter-naval' : '';
     return '<a href="' . Url::to(['unit/view', 'slug' => $cu->slug]) . '" class="counter-unit-link' . $extraClass . $navalClass . '" data-unit-id="' . $cu->id . '">'
         . $icon . Html::encode($cu->name) . $bonusBadge . '</a>';
 };
+
+// Enemy unit: round avatar on the beige backdrop, as in the unit list
+$enemyAvatar = function ($u) {
+    if (!$u->iconUrl) return '';
+    return '<a href="' . Url::to(['unit/view', 'slug' => $u->slug]) . '" class="unit-avatar-link enemy-unit-hover" data-unit-id="' . $u->id . '" aria-label="' . Html::encode($u->name) . '">'
+        . UnitPills::avatar($u->iconUrl) . '</a>';
+};
+
+$enemyName = function ($u) {
+    return '<a href="' . Url::to(['unit/view', 'slug' => $u->slug]) . '" class="unit-list-name enemy-unit-hover" data-unit-id="' . $u->id . '">'
+        . Html::encode($u->name) . '</a>';
+};
+
+// Upgrade line: names joined by a chevron (Spearman > Pikeman > Halberdier)
+$enemyLine = function (array $units) use ($enemyName) {
+    $parts = array_map($enemyName, array_values($units));
+    return '<div class="matchup-line">' . implode('<span class="matchup-line-step">' . UnitPills::chevron() . '</span>', $parts) . '</div>';
+};
+
+// Civilization pill for a unique unit and the pill of its main armor class
+$enemyPills = function ($u) {
+    $pills = '';
+    if ($u->is_unique && $u->civilization) {
+        $pills .= UnitPills::civPill($u->civilization);
+    }
+    $main = UnitPills::mainClass($u);
+    if ($main) {
+        $pills .= UnitPills::classPill($main);
+    }
+    return $pills ? '<div class="pill-row matchup-enemy-pills">' . $pills . '</div>' : '';
+};
+
+$emptyCounters = '<span class="text-muted">&mdash;</span>';
+
+// One table row: enemy unit (or upgrade line) and your counters
+$enemyRow = function (array $units, array $counterList, $naval = false) use ($enemyAvatar, $enemyName, $enemyLine, $enemyPills, $renderCounterLink, $counterBonuses, $emptyCounters) {
+    $units = array_values($units);
+    $last = end($units);
+    $enemyIds = array_map(function ($u) { return $u->id; }, $units);
+    $h = '<tr' . ($naval ? ' class="naval-unit-row" style="display: none;"' : '') . '>';
+    $h .= '<td>' . $enemyAvatar($last) . '</td>';
+    $h .= '<td class="matchup-enemy">' . (count($units) > 1 ? $enemyLine($units) : $enemyName($last)) . $enemyPills($last) . '</td>';
+    $h .= '<td>';
+    if ($counterList) {
+        $h .= '<div class="pill-row matchup-counters">';
+        foreach ($counterList as $cu) {
+            $h .= $renderCounterLink($cu, $enemyIds, $counterBonuses);
+        }
+        $h .= '</div>';
+    } else {
+        $h .= $emptyCounters;
+    }
+    return $h . '</td></tr>';
+};
+
+$tableHead = '<thead><tr><th class="matchup-avatar-col"></th><th>Enemy Unit</th><th>Your Counters</th></tr></thead>';
 ?>
 
 <nav aria-label="breadcrumb" class="mb-3">
@@ -123,21 +188,27 @@ $renderBuildingCounterLink = function ($cu) use ($buildingCounters) {
 </nav>
 
 <!-- Header -->
-<div class="d-flex align-items-center gap-3 mb-4 flex-wrap">
-    <?php if ($yourCiv->emblemUrl): ?>
-        <img src="<?= Html::encode($yourCiv->emblemUrl) ?>" alt="" class="civ-emblem-lg">
-    <?php endif; ?>
-    <div>
-        <h1 class="mb-0" style="font-size: 1.75rem;">
-            <a href="<?= Url::to(['civilization/view', 'slug' => $yourCiv->slug]) ?>"><?= Html::encode($yourCiv->name) ?></a>
-            <span style="color: var(--color-text-muted); font-weight: 400;"> vs </span>
-            <a href="<?= Url::to(['civilization/view', 'slug' => $enemyCiv->slug]) ?>"><?= Html::encode($enemyCiv->name) ?></a>
-        </h1>
-        <p class="text-muted mb-0">Your counters against enemy units</p>
+<div class="admin5-page-header">
+    <div class="matchup-title">
+        <?php if ($yourCiv->emblemUrl): ?>
+            <a href="<?= Url::to(['civilization/view', 'slug' => $yourCiv->slug]) ?>" class="matchup-emblem-link" aria-label="<?= Html::encode($yourCiv->name) ?>">
+                <img src="<?= Html::encode($yourCiv->emblemUrl) ?>" alt="" class="civ-emblem-lg">
+            </a>
+        <?php endif; ?>
+        <div class="matchup-title-text">
+            <h1>
+                <a href="<?= Url::to(['civilization/view', 'slug' => $yourCiv->slug]) ?>"><?= Html::encode($yourCiv->name) ?></a>
+                <span class="matchup-vs">vs</span>
+                <a href="<?= Url::to(['civilization/view', 'slug' => $enemyCiv->slug]) ?>"><?= Html::encode($enemyCiv->name) ?></a>
+            </h1>
+            <p class="text-muted mb-0">Your counters against enemy units</p>
+        </div>
+        <?php if ($enemyCiv->emblemUrl): ?>
+            <a href="<?= Url::to(['civilization/view', 'slug' => $enemyCiv->slug]) ?>" class="matchup-emblem-link" aria-label="<?= Html::encode($enemyCiv->name) ?>">
+                <img src="<?= Html::encode($enemyCiv->emblemUrl) ?>" alt="" class="civ-emblem-lg">
+            </a>
+        <?php endif; ?>
     </div>
-    <?php if ($enemyCiv->emblemUrl): ?>
-        <img src="<?= Html::encode($enemyCiv->emblemUrl) ?>" alt="" class="civ-emblem-lg">
-    <?php endif; ?>
 </div>
 
 <!-- Civ selector -->
@@ -176,8 +247,8 @@ $renderBuildingCounterLink = function ($cu) use ($buildingCounters) {
 </div>
 
 <!-- Age tabs -->
-<div class="unit-tabs mb-3">
-    <ul class="nav nav-tabs" id="ageTabs" role="tablist">
+<div class="unit-tabs matchup-tabs">
+    <ul class="nav nav-tabs mb-0" id="ageTabs" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link active" id="tab-all" data-bs-toggle="tab" data-bs-target="#pane-all" type="button" role="tab">
                 All
@@ -187,98 +258,52 @@ $renderBuildingCounterLink = function ($cu) use ($buildingCounters) {
         <?php foreach ($byAge as $age => $units): ?>
             <?php
             $tabId = strtolower(str_replace(' ', '-', $age));
-            $ageClass = '';
-            if (strpos($age, 'Feudal') !== false) $ageClass = 'age-feudal';
-            elseif (strpos($age, 'Castle') !== false) $ageClass = 'age-castle';
-            elseif (strpos($age, 'Imperial') !== false) $ageClass = 'age-imperial';
             $navalCount = isset($navalByAge[$age]) ? count($navalByAge[$age]) : 0;
+            $ageIcon = UnitPills::ageIcon($age);
             ?>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="tab-<?= $tabId ?>" data-bs-toggle="tab" data-bs-target="#pane-<?= $tabId ?>"
                         type="button" role="tab"
                         data-land-count="<?= count($units) ?>" data-naval-count="<?= $navalCount ?>">
+                    <?php if ($ageIcon): ?>
+                        <img src="<?= Html::encode($ageIcon) ?>" alt="" class="matchup-tab-age-icon">
+                    <?php endif; ?>
                     <?= Html::encode($age) ?>
-                    <span class="badge badge-sm <?= $ageClass ?> age-count"><?= count($units) ?></span>
+                    <span class="badge badge-sm bg-secondary age-count"><?= count($units) ?></span>
                 </button>
             </li>
         <?php endforeach; ?>
     </ul>
-</div>
 
 <!-- Tab content -->
 <div class="tab-content">
 
     <!-- ALL tab (grouped upgrade lines) -->
     <div class="tab-pane fade show active" id="pane-all" role="tabpanel">
-        <div class="admin5-card admin5-card-border">
-            <table class="table table-striped mb-0">
-                <thead>
-                    <tr>
-                        <th style="width: 48px;"></th>
-                        <th>Enemy Unit</th>
-                        <th>Your Counters</th>
-                    </tr>
-                </thead>
+        <div class="admin5-card admin5-card-border admin5-card-attached">
+            <div class="table-responsive">
+            <table class="table table-striped mb-0 matchup-table">
+                <?= $tableHead ?>
                 <tbody>
                     <?php foreach ($upgradeLines as $line): ?>
-                        <?php
-                        $lineUnits = $line['units'];
-                        $lineCounters = $line['counters'];
-                        $lastUnit = end($lineUnits);
-                        $isMulti = count($lineUnits) > 1;
-                        ?>
-                        <tr>
-                            <td>
-                                <?php if ($lastUnit->iconUrl): ?>
-                                    <img src="<?= Html::encode($lastUnit->iconUrl) ?>" alt="" class="unit-image-md enemy-unit-hover" data-unit-id="<?= $lastUnit->id ?>">
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <?php if ($isMulti): ?>
-                                    <div style="font-weight: 600;">
-                                        <?php foreach ($lineUnits as $i => $lu): ?>
-                                            <?php if ($i > 0): ?> <span style="color: var(--color-text-muted); font-weight: 400;">&rarr;</span> <?php endif; ?>
-                                            <a href="<?= Url::to(['unit/view', 'slug' => $lu->slug]) ?>" class="enemy-unit-hover" data-unit-id="<?= $lu->id ?>" style="font-weight: 600;"><?= Html::encode($lu->name) ?></a>
-                                        <?php endforeach; ?>
-                                    </div>
-                                <?php else: ?>
-                                    <a href="<?= Url::to(['unit/view', 'slug' => $lastUnit->slug]) ?>" class="enemy-unit-hover" data-unit-id="<?= $lastUnit->id ?>" style="font-weight: 600;">
-                                        <?= Html::encode($lastUnit->name) ?>
-                                    </a>
-                                    <?php if ($lastUnit->is_unique): ?>
-                                        <span class="badge bg-warning badge-sm ms-1">Unique</span>
-                                    <?php endif; ?>
-                                <?php endif; ?>
-                                <?php if ($lastUnit->armorClassGroup !== 'Other'): ?>
-                                    <br><small class="text-muted"><?= Html::encode($lastUnit->armorClassGroup) ?></small>
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <?php if (!empty($lineCounters)): ?>
-                                    <?php $lineEnemyIds = array_map(function ($u) { return $u->id; }, $lineUnits); ?>
-                                    <div class="d-flex flex-wrap gap-1">
-                                        <?php foreach ($lineCounters as $cu): ?>
-                                            <?= $renderCounterLink($cu, $lineEnemyIds, $counterBonuses) ?>
-                                        <?php endforeach; ?>
-                                    </div>
-                                <?php else: ?>
-                                    <span class="text-muted">&mdash;</span>
-                                <?php endif; ?>
-                            </td>
-                        </tr>
+                        <?= $enemyRow($line['units'], $line['counters']) ?>
                     <?php endforeach; ?>
 
                     <?php if (!empty($buildingCounters['units'])): ?>
+                        <?php $houseIcon = UnitPills::buildingIcon('House'); ?>
                         <tr>
-                            <td>
-                                <img src="/images/buildings/House.png" alt="Building" class="unit-image-md">
+                            <td><?= UnitPills::avatar($houseIcon) ?></td>
+                            <td class="matchup-enemy">
+                                <span class="unit-list-name">Buildings</span>
+                                <div class="pill-row matchup-enemy-pills">
+                                    <?= UnitPills::pill('Structures', [
+                                        'variant' => 'building',
+                                        'tip' => ['title' => 'Buildings', 'icon' => $houseIcon, 'text' => UnitPills::text('building:Buildings')],
+                                    ]) ?>
+                                </div>
                             </td>
                             <td>
-                                <span style="font-weight: 600;">Building</span>
-                                <br><small class="text-muted">Structures</small>
-                            </td>
-                            <td>
-                                <div class="d-flex flex-wrap gap-1">
+                                <div class="pill-row matchup-counters">
                                     <?php foreach ($buildingCounters['units'] as $cu): ?>
                                         <?= $renderBuildingCounterLink($cu) ?>
                                     <?php endforeach; ?>
@@ -288,51 +313,11 @@ $renderBuildingCounterLink = function ($cu) use ($buildingCounters) {
                     <?php endif; ?>
 
                     <?php foreach ($navalLines as $line): ?>
-                        <?php
-                        $lineUnits = $line['units'];
-                        $lineCounters = $line['counters'];
-                        $lastUnit = end($lineUnits);
-                        $isMulti = count($lineUnits) > 1;
-                        ?>
-                        <tr class="naval-unit-row" style="display: none;">
-                            <td>
-                                <?php if ($lastUnit->iconUrl): ?>
-                                    <img src="<?= Html::encode($lastUnit->iconUrl) ?>" alt="" class="unit-image-md enemy-unit-hover" data-unit-id="<?= $lastUnit->id ?>">
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <?php if ($isMulti): ?>
-                                    <div style="font-weight: 600;">
-                                        <?php foreach ($lineUnits as $i => $lu): ?>
-                                            <?php if ($i > 0): ?> <span style="color: var(--color-text-muted); font-weight: 400;">&rarr;</span> <?php endif; ?>
-                                            <a href="<?= Url::to(['unit/view', 'slug' => $lu->slug]) ?>" class="enemy-unit-hover" data-unit-id="<?= $lu->id ?>" style="font-weight: 600;"><?= Html::encode($lu->name) ?></a>
-                                        <?php endforeach; ?>
-                                    </div>
-                                <?php else: ?>
-                                    <a href="<?= Url::to(['unit/view', 'slug' => $lastUnit->slug]) ?>" class="enemy-unit-hover" data-unit-id="<?= $lastUnit->id ?>" style="font-weight: 600;">
-                                        <?= Html::encode($lastUnit->name) ?>
-                                    </a>
-                                <?php endif; ?>
-                                <?php if ($lastUnit->armorClassGroup !== 'Other'): ?>
-                                    <br><small class="text-muted"><?= Html::encode($lastUnit->armorClassGroup) ?></small>
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <?php if (!empty($lineCounters)): ?>
-                                    <?php $lineEnemyIds = array_map(function ($u) { return $u->id; }, $lineUnits); ?>
-                                    <div class="d-flex flex-wrap gap-1">
-                                        <?php foreach ($lineCounters as $cu): ?>
-                                            <?= $renderCounterLink($cu, $lineEnemyIds, $counterBonuses) ?>
-                                        <?php endforeach; ?>
-                                    </div>
-                                <?php else: ?>
-                                    <span class="text-muted">&mdash;</span>
-                                <?php endif; ?>
-                            </td>
-                        </tr>
+                        <?= $enemyRow($line['units'], $line['counters'], true) ?>
                     <?php endforeach; ?>
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
 
@@ -340,84 +325,31 @@ $renderBuildingCounterLink = function ($cu) use ($buildingCounters) {
     <?php foreach ($byAge as $age => $units): ?>
         <?php $tabId = strtolower(str_replace(' ', '-', $age)); ?>
         <div class="tab-pane fade" id="pane-<?= $tabId ?>" role="tabpanel">
-            <div class="admin5-card admin5-card-border">
-                <table class="table table-striped mb-0">
-                    <thead>
-                        <tr>
-                            <th style="width: 48px;"></th>
-                            <th>Enemy Unit</th>
-                            <th>Your Counters</th>
-                        </tr>
-                    </thead>
+            <div class="admin5-card admin5-card-border admin5-card-attached">
+                <div class="table-responsive">
+                <table class="table table-striped mb-0 matchup-table">
+                    <?= $tableHead ?>
                     <tbody>
                         <?php foreach ($units as $eu): ?>
-                            <tr>
-                                <td>
-                                    <?php if ($eu->iconUrl): ?>
-                                        <img src="<?= Html::encode($eu->iconUrl) ?>" alt="" class="unit-image-md enemy-unit-hover" data-unit-id="<?= $eu->id ?>">
-                                    <?php endif; ?>
-                                </td>
-                                <td>
-                                    <a href="<?= Url::to(['unit/view', 'slug' => $eu->slug]) ?>" class="enemy-unit-hover" data-unit-id="<?= $eu->id ?>" style="font-weight: 600;">
-                                        <?= Html::encode($eu->name) ?>
-                                    </a>
-                                    <?php if ($eu->is_unique): ?>
-                                        <span class="badge bg-warning badge-sm ms-1">Unique</span>
-                                    <?php endif; ?>
-                                    <?php if ($eu->armorClassGroup !== 'Other'): ?>
-                                        <br><small class="text-muted"><?= Html::encode($eu->armorClassGroup) ?></small>
-                                    <?php endif; ?>
-                                </td>
-                                <td>
-                                    <?php if (!empty($counters[$eu->id])): ?>
-                                        <div class="d-flex flex-wrap gap-1">
-                                            <?php foreach ($counters[$eu->id] as $cu): ?>
-                                                <?= $renderCounterLink($cu, [$eu->id], $counterBonuses) ?>
-                                            <?php endforeach; ?>
-                                        </div>
-                                    <?php else: ?>
-                                        <span class="text-muted">&mdash;</span>
-                                    <?php endif; ?>
-                                </td>
-                            </tr>
+                            <?= $enemyRow([$eu], $counters[$eu->id] ?? []) ?>
                         <?php endforeach; ?>
 
                         <?php if (isset($navalByAge[$age])): ?>
                             <?php foreach ($navalByAge[$age] as $eu): ?>
-                                <tr class="naval-unit-row" style="display: none;">
-                                    <td>
-                                        <?php if ($eu->iconUrl): ?>
-                                            <img src="<?= Html::encode($eu->iconUrl) ?>" alt="" class="unit-image-md enemy-unit-hover" data-unit-id="<?= $eu->id ?>">
-                                        <?php endif; ?>
-                                    </td>
-                                    <td>
-                                        <a href="<?= Url::to(['unit/view', 'slug' => $eu->slug]) ?>" class="enemy-unit-hover" data-unit-id="<?= $eu->id ?>" style="font-weight: 600;">
-                                            <?= Html::encode($eu->name) ?>
-                                        </a>
-                                        <?php if ($eu->armorClassGroup !== 'Other'): ?>
-                                            <br><small class="text-muted"><?= Html::encode($eu->armorClassGroup) ?></small>
-                                        <?php endif; ?>
-                                    </td>
-                                    <td>
-                                        <?php if (!empty($counters[$eu->id])): ?>
-                                            <div class="d-flex flex-wrap gap-1">
-                                                <?php foreach ($counters[$eu->id] as $cu): ?>
-                                                    <?= $renderCounterLink($cu, [$eu->id], $counterBonuses) ?>
-                                                <?php endforeach; ?>
-                                            </div>
-                                        <?php else: ?>
-                                            <span class="text-muted">&mdash;</span>
-                                        <?php endif; ?>
-                                    </td>
-                                </tr>
+                                <?= $enemyRow([$eu], $counters[$eu->id] ?? [], true) ?>
                             <?php endforeach; ?>
                         <?php endif; ?>
                     </tbody>
                 </table>
+                </div>
             </div>
         </div>
     <?php endforeach; ?>
 </div>
+</div>
+
+<?php UnitPills::registerTips($this); ?>
+
 
 <!-- Unit popup element -->
 <div class="unit-popup" id="unitPopup"></div>
@@ -550,7 +482,7 @@ $this->registerJs(<<<JS
     }
 
     document.addEventListener('mouseenter', function(e) {
-        var link = e.target.closest('.counter-unit-link[data-unit-id], .enemy-unit-hover[data-unit-id]');
+        var link = e.target.closest && e.target.closest('.counter-unit-link[data-unit-id], .enemy-unit-hover[data-unit-id]');
         if (!link) return;
         clearTimeout(hideTimer);
         clearTimeout(showTimer);
@@ -560,7 +492,7 @@ $this->registerJs(<<<JS
     }, true);
 
     document.addEventListener('mouseleave', function(e) {
-        var link = e.target.closest('.counter-unit-link[data-unit-id], .enemy-unit-hover[data-unit-id]');
+        var link = e.target.closest && e.target.closest('.counter-unit-link[data-unit-id], .enemy-unit-hover[data-unit-id]');
         if (!link) return;
         clearTimeout(showTimer);
         hideTimer = setTimeout(hidePopup, 150);

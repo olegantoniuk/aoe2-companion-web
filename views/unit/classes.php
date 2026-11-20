@@ -1,9 +1,12 @@
 <?php
 
 use yii\helpers\Html;
+use app\components\Seo;
+use app\components\UnitPills;
 use yii\helpers\Url;
 
 $this->title = 'Unit Classes';
+Seo::page($this, 'Unit Classes and Armor Classes in Age of Empires II', 'The armor classes of Age of Empires II and the units in each, so you can see which bonuses hit which units.', '/images/icons/classes.png');
 
 $mainClasses = array_filter($classes, function ($c) { return $c['isMain']; });
 $subClasses = array_filter($classes, function ($c) { return !$c['isMain']; });
@@ -25,7 +28,10 @@ uasort($byCount, function ($a, $b) { return $b['unitCount'] - $a['unitCount']; }
 </nav>
 
 <div class="admin5-page-header">
-    <h1>Unit Classes <span class="badge bg-secondary badge-sm"><?= count($classes) ?></span></h1>
+    <div class="page-title">
+        <?= UnitPills::pageIcon('classes') ?>
+        <h1>Unit Classes <span class="badge bg-secondary badge-sm"><?= count($classes) ?></span></h1>
+    </div>
     <p class="text-muted">Units classified by their armor classes — the same system the game uses for attack bonuses.</p>
 </div>
 

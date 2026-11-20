@@ -14,9 +14,12 @@ class BuildController extends Controller
     {
         $elo = Yii::$app->request->get('elo');
         $category = Yii::$app->request->get('category');
+        $civSlug = Yii::$app->request->get('civ');
+        $civ = $civSlug ? \app\models\Civilization::findOne(['slug' => $civSlug]) : null;
         $query = BuildOrder::find();
         if ($elo && isset(Elo::BANDS[$elo])) $query->andWhere(['elo' => $elo]);
         if ($category && isset(BuildOrder::CATEGORIES[$category])) $query->andWhere(['category' => $category]);
+        if ($civ) $query->andWhere(['like', 'civs', '"' . $civ->name . '"']);
         $builds = $query->all();
         // easy builds first inside each band, the bands in skill order
         $order = array_flip(array_keys(Elo::BANDS));
@@ -28,6 +31,8 @@ class BuildController extends Controller
             'builds' => $builds,
             'currentElo' => $elo,
             'currentCategory' => $category,
+            'currentCiv' => $civ,
+            'civs' => \app\models\Civilization::find()->orderBy(['name' => SORT_ASC])->all(),
         ]);
     }
 

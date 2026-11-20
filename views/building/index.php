@@ -1,15 +1,20 @@
 <?php
 
 use yii\helpers\Html;
+use app\components\Seo;
 use yii\helpers\Url;
 use app\models\Building;
 use app\components\UnitPills;
 
 $this->title = 'Buildings';
+Seo::page($this, 'All Buildings in Age of Empires II', 'Every building in Age of Empires II with its cost, hit points, armor, the units it trains and the technologies researched there.', '/images/icons/buildings.png');
 ?>
 
 <div class="admin5-page-header">
-    <h1>Buildings <span class="badge bg-secondary badge-sm"><?= $total ?></span></h1>
+    <div class="page-title">
+        <?= UnitPills::pageIcon('buildings') ?>
+        <h1>Buildings <span class="badge bg-secondary badge-sm"><?= $total ?></span></h1>
+    </div>
 </div>
 
 <?php foreach ($byCategory as $cat => $buildings): ?>

@@ -1,0 +1,836 @@
+{
+ "villagers": {
+  "wood": {
+   "file": "vil_wood.webp",
+   "w": 202,
+   "h": 171,
+   "foot": [
+    102,
+    142
+   ],
+   "frames": 30,
+   "ms": 45,
+   "direction": 1,
+   "scale": 1.4,
+   "source": "u_vil_male_lumberjack_taskA_x2.sld"
+  },
+  "build": {
+   "file": "vil_build.webp",
+   "w": 157,
+   "h": 143,
+   "foot": [
+    94,
+    112
+   ],
+   "frames": 15,
+   "ms": 45,
+   "direction": 1,
+   "scale": 1.4,
+   "source": "u_vil_male_builder_taskA_x2.sld"
+  },
+  "sheep": {
+   "file": "vil_sheep.webp",
+   "w": 180,
+   "h": 179,
+   "foot": [
+    85,
+    126
+   ],
+   "frames": 30,
+   "ms": 45,
+   "direction": 1,
+   "scale": 1.4,
+   "source": "u_vil_male_shepherd_taskA_x2.sld"
+  },
+  "sheep_kneel": {
+   "file": "vil_sheep_kneel.webp",
+   "w": 165,
+   "h": 120,
+   "foot": [
+    118,
+    85
+   ],
+   "frames": 15,
+   "ms": 45,
+   "direction": 1,
+   "scale": 1.4,
+   "source": "u_vil_male_shepherd_taskB_x2.sld"
+  },
+  "berries": {
+   "file": "vil_berries.webp",
+   "w": 132,
+   "h": 93,
+   "foot": [
+    63,
+    65
+   ],
+   "frames": 30,
+   "ms": 45,
+   "direction": 1,
+   "scale": 1.4,
+   "source": "u_vil_male_forager_taskA_x2.sld"
+  },
+  "gold": {
+   "file": "vil_gold.webp",
+   "w": 225,
+   "h": 172,
+   "foot": [
+    113,
+    140
+   ],
+   "frames": 30,
+   "ms": 45,
+   "direction": 1,
+   "scale": 1.4,
+   "source": "u_vil_male_miner_gold_taskA_x2.sld"
+  },
+  "farm": {
+   "file": "vil_farm.webp",
+   "w": 257,
+   "h": 248,
+   "foot": [
+    80,
+    204
+   ],
+   "frames": 30,
+   "ms": 45,
+   "direction": 1,
+   "scale": 1.4,
+   "source": "u_vil_male_farmer_taskA_x2.sld"
+  },
+  "hunt": {
+   "file": "vil_hunt.webp",
+   "w": 153,
+   "h": 125,
+   "foot": [
+    102,
+    97
+   ],
+   "frames": 15,
+   "ms": 45,
+   "direction": 1,
+   "scale": 1.4,
+   "source": "u_vil_male_hunter_taskA_x2.sld"
+  },
+  "hunt_shoot": {
+   "file": "vil_hunt_shoot.webp",
+   "w": 175,
+   "h": 160,
+   "foot": [
+    71,
+    136
+   ],
+   "frames": 15,
+   "ms": 45,
+   "direction": 1,
+   "scale": 1.4,
+   "source": "u_vil_male_hunter_attackA_x2.sld"
+  },
+  "fish": {
+   "file": "vil_fish.webp",
+   "w": 433,
+   "h": 197,
+   "foot": [
+    106,
+    109
+   ],
+   "frames": 30,
+   "ms": 45,
+   "direction": 1,
+   "scale": 1.4,
+   "source": "u_vil_male_fisherman_taskA_x2.sld"
+  },
+  "walk": {
+   "file": "vil_walk.webp",
+   "w": 102,
+   "h": 127,
+   "foot": [
+    56,
+    108
+   ],
+   "frames": 15,
+   "ms": 45,
+   "direction": 1,
+   "scale": 1.4,
+   "source": "u_vil_male_villager_walkA_x2.sld"
+  },
+  "stone": {
+   "file": "vil_gold.webp",
+   "w": 225,
+   "h": 172,
+   "foot": [
+    113,
+    140
+   ],
+   "frames": 30,
+   "ms": 45,
+   "direction": 1,
+   "scale": 1.4,
+   "source": "u_vil_male_miner_gold_taskA_x2.sld",
+   "note": "the game has no stone mining animation; stone miners use the gold one"
+  }
+ },
+ "villagers_female": {
+  "sheep": {
+   "file": "vil_f_sheep.webp",
+   "w": 170,
+   "h": 153,
+   "foot": [
+    76,
+    109
+   ],
+   "frames": 23,
+   "ms": 45,
+   "direction": 1,
+   "scale": 1.4,
+   "source": "u_vil_female_shepherd_taskA_x2.sld"
+  },
+  "sheep_kneel": {
+   "file": "vil_f_sheep_kneel.webp",
+   "w": 148,
+   "h": 89,
+   "foot": [
+    80,
+    65
+   ],
+   "frames": 30,
+   "ms": 45,
+   "direction": 1,
+   "scale": 1.4,
+   "source": "u_vil_female_shepherd_taskB_x2.sld"
+  },
+  "wood": {
+   "file": "vil_f_wood.webp",
+   "w": 211,
+   "h": 158,
+   "foot": [
+    99,
+    125
+   ],
+   "frames": 23,
+   "ms": 45,
+   "direction": 1,
+   "scale": 1.4,
+   "source": "u_vil_female_lumberjack_taskA_x2.sld"
+  },
+  "berries": {
+   "file": "vil_f_berries.webp",
+   "w": 134,
+   "h": 77,
+   "foot": [
+    35,
+    50
+   ],
+   "frames": 23,
+   "ms": 45,
+   "direction": 1,
+   "scale": 1.4,
+   "source": "u_vil_female_forager_taskA_x2.sld"
+  },
+  "gold": {
+   "file": "vil_f_gold.webp",
+   "w": 194,
+   "h": 167,
+   "foot": [
+    103,
+    145
+   ],
+   "frames": 23,
+   "ms": 45,
+   "direction": 1,
+   "scale": 1.4,
+   "source": "u_vil_female_miner_gold_taskA_x2.sld"
+  },
+  "farm": {
+   "file": "vil_f_farm.webp",
+   "w": 121,
+   "h": 77,
+   "foot": [
+    35,
+    51
+   ],
+   "frames": 23,
+   "ms": 45,
+   "direction": 1,
+   "scale": 1.4,
+   "source": "u_vil_female_farmer_taskA_x2.sld"
+  },
+  "build": {
+   "file": "vil_f_build.webp",
+   "w": 139,
+   "h": 114,
+   "foot": [
+    78,
+    92
+   ],
+   "frames": 15,
+   "ms": 45,
+   "direction": 1,
+   "scale": 1.4,
+   "source": "u_vil_female_builder_taskA_x2.sld"
+  },
+  "hunt": {
+   "file": "vil_f_hunt.webp",
+   "w": 133,
+   "h": 88,
+   "foot": [
+    63,
+    64
+   ],
+   "frames": 23,
+   "ms": 45,
+   "direction": 1,
+   "scale": 1.4,
+   "source": "u_vil_female_hunter_taskA_x2.sld"
+  },
+  "hunt_shoot": {
+   "file": "vil_f_hunt_shoot.webp",
+   "w": 174,
+   "h": 163,
+   "foot": [
+    50,
+    132
+   ],
+   "frames": 23,
+   "ms": 45,
+   "direction": 1,
+   "scale": 1.4,
+   "source": "u_vil_female_hunter_attackA_x2.sld"
+  },
+  "fish": {
+   "file": "vil_f_fish.webp",
+   "w": 430,
+   "h": 192,
+   "foot": [
+    105,
+    105
+   ],
+   "frames": 30,
+   "ms": 45,
+   "direction": 1,
+   "scale": 1.4,
+   "source": "u_vil_female_fisherman_taskA_x2.sld"
+  },
+  "walk": {
+   "file": "vil_f_walk.webp",
+   "w": 98,
+   "h": 121,
+   "foot": [
+    55,
+    104
+   ],
+   "frames": 15,
+   "ms": 45,
+   "direction": 1,
+   "scale": 1.4,
+   "source": "u_vil_female_villager_walkA_x2.sld"
+  },
+  "stone": {
+   "file": "vil_f_gold.webp",
+   "w": 194,
+   "h": 167,
+   "foot": [
+    103,
+    145
+   ],
+   "frames": 23,
+   "ms": 45,
+   "direction": 1,
+   "scale": 1.4,
+   "source": "u_vil_female_miner_gold_taskA_x2.sld",
+   "note": "the game has no stone mining animation; stone miners use the gold one"
+  }
+ },
+ "objects": {
+  "sheep": {
+   "file": "obj_sheep.png",
+   "w": 221,
+   "h": 111,
+   "foot": [
+    125,
+    85
+   ],
+   "scale": 1.4,
+   "source": "a_herd_sheep_idleA_x2.sld",
+   "note": "three sheep, foot is the middle of the group"
+  },
+  "sheep_one": {
+   "file": "obj_sheep_one.png",
+   "w": 129,
+   "h": 80,
+   "foot": [
+    83,
+    62
+   ],
+   "scale": 1.4,
+   "source": "a_herd_sheep_idleA_x2.sld"
+  },
+  "boar": {
+   "file": "obj_boar.png",
+   "w": 174,
+   "h": 101,
+   "foot": [
+    97,
+    76
+   ],
+   "scale": 1.4,
+   "source": "a_hunt_boar_idleA_x2.sld"
+  },
+  "boar_dead": {
+   "file": "obj_boar_dead.png",
+   "w": 104,
+   "h": 111,
+   "foot": [
+    62,
+    67
+   ],
+   "scale": 1.4,
+   "source": "a_hunt_boar_decayA_x2.sld",
+   "note": "carcass, for the gathering hunter"
+  },
+  "deer": {
+   "file": "obj_deer.png",
+   "w": 144,
+   "h": 103,
+   "foot": [
+    102,
+    87
+   ],
+   "scale": 1.4,
+   "source": "a_hunt_deer_idleA_x2.sld"
+  },
+  "deer_dead": {
+   "file": "obj_deer_dead.png",
+   "w": 137,
+   "h": 66,
+   "foot": [
+    94,
+    40
+   ],
+   "scale": 1.4,
+   "source": "a_hunt_deer_decayA_x2.sld",
+   "note": "carcass, for the gathering hunter"
+  },
+  "berries": {
+   "file": "obj_berries.png",
+   "w": 219,
+   "h": 157,
+   "foot": [
+    131,
+    87
+   ],
+   "scale": 1.1,
+   "source": "n_forage_bush_x2.sld"
+  },
+  "gold": {
+   "file": "obj_gold.png",
+   "w": 276,
+   "h": 139,
+   "foot": [
+    137,
+    69
+   ],
+   "scale": 1.4,
+   "source": "n_mine_gold_x2.sld"
+  },
+  "stone": {
+   "file": "obj_stone.png",
+   "w": 242,
+   "h": 141,
+   "foot": [
+    118,
+    77
+   ],
+   "scale": 1.4,
+   "source": "n_mine_stone_x2.sld"
+  },
+  "tree": {
+   "file": "obj_tree.png",
+   "w": 182,
+   "h": 187,
+   "foot": [
+    108,
+    163
+   ],
+   "scale": 0.569,
+   "source": "n_tree_green_oak_x2.sld"
+  },
+  "trees": {
+   "file": "obj_trees.png",
+   "w": 213,
+   "h": 230,
+   "foot": [
+    127,
+    195
+   ],
+   "frames": [
+    6,
+    0
+   ],
+   "scale": 0.569,
+   "source": "n_tree_green_oak_x2.sld"
+  },
+  "fish": {
+   "file": "obj_fish.png",
+   "w": 269,
+   "h": 134,
+   "foot": [
+    134,
+    67
+   ],
+   "scale": 1.4,
+   "source": "a_fish_shore_underwater_x2.sld on terrain g_wtr",
+   "note": "foot is the centre of the water patch"
+  },
+  "farm": {
+   "file": "obj_farm.png",
+   "w": 254,
+   "h": 127,
+   "foot": [
+    127,
+    63
+   ],
+   "scale": 0.442,
+   "source": "terrain g_fc2 (freshly sown farm)"
+  }
+ },
+ "buildings": {
+  "house": {
+   "file": "bld_house.png",
+   "w": 171,
+   "h": 151,
+   "foot": [
+    92,
+    111
+   ],
+   "scale": 0.442,
+   "source": [
+    "b_west_house_age2_x2.sld"
+   ]
+  },
+  "lumber_camp": {
+   "file": "bld_lumber_camp.png",
+   "w": 229,
+   "h": 146,
+   "foot": [
+    128,
+    102
+   ],
+   "scale": 0.561,
+   "source": [
+    "b_west_lumber_camp_age2_x2.sld"
+   ]
+  },
+  "mill": {
+   "file": "bld_mill.png",
+   "w": 199,
+   "h": 161,
+   "foot": [
+    124,
+    121
+   ],
+   "scale": 0.347,
+   "source": [
+    "b_west_mill_age2_x2.sld"
+   ]
+  },
+  "mining_camp": {
+   "file": "bld_mining_camp.png",
+   "w": 245,
+   "h": 149,
+   "foot": [
+    130,
+    88
+   ],
+   "scale": 0.697,
+   "source": [
+    "b_west_mining_camp_age2_x2.sld"
+   ]
+  },
+  "barracks": {
+   "file": "bld_barracks.png",
+   "w": 207,
+   "h": 162,
+   "foot": [
+    106,
+    114
+   ],
+   "scale": 0.32,
+   "source": [
+    "b_west_barracks_age2_x2.sld"
+   ]
+  },
+  "archery_range": {
+   "file": "bld_archery_range.png",
+   "w": 196,
+   "h": 163,
+   "foot": [
+    96,
+    115
+   ],
+   "scale": 0.31,
+   "source": [
+    "b_west_archery_range_age2_x2.sld"
+   ]
+  },
+  "stable": {
+   "file": "bld_stable.png",
+   "w": 238,
+   "h": 157,
+   "foot": [
+    119,
+    106
+   ],
+   "scale": 0.373,
+   "source": [
+    "b_west_stable_age2_x2.sld"
+   ]
+  },
+  "blacksmith": {
+   "file": "bld_blacksmith.png",
+   "w": 237,
+   "h": 152,
+   "foot": [
+    122,
+    119
+   ],
+   "scale": 0.428,
+   "source": [
+    "b_west_blacksmith_age2_x2.sld"
+   ]
+  },
+  "market": {
+   "file": "bld_market.png",
+   "w": 221,
+   "h": 171,
+   "foot": [
+    115,
+    117
+   ],
+   "scale": 0.272,
+   "source": [
+    "b_west_market_age2_x2.sld"
+   ]
+  },
+  "dock": {
+   "file": "bld_dock.png",
+   "w": 199,
+   "h": 154,
+   "foot": [
+    107,
+    113
+   ],
+   "scale": 0.388,
+   "source": [
+    "b_west_dock_age2_x2.sld"
+   ]
+  },
+  "town_center": {
+   "file": "bld_town_center.png",
+   "w": 261,
+   "h": 161,
+   "foot": [
+    139,
+    124
+   ],
+   "scale": 0.314,
+   "source": [
+    "b_west_town_center_age2_back_x2.sld",
+    "b_west_town_center_age2_main_x2.sld",
+    "b_west_town_center_age2_center_x2.sld",
+    "b_west_town_center_age2_front_x2.sld"
+   ]
+  },
+  "siege_workshop": {
+   "file": "bld_siege_workshop.png",
+   "w": 239,
+   "h": 159,
+   "foot": [
+    123,
+    95
+   ],
+   "scale": 0.336,
+   "source": [
+    "b_west_siege_workshop_age3_x2.sld"
+   ]
+  },
+  "monastery": {
+   "file": "bld_monastery.png",
+   "w": 206,
+   "h": 171,
+   "foot": [
+    121,
+    134
+   ],
+   "scale": 0.277,
+   "source": [
+    "b_west_monastery_age3_x2.sld"
+   ]
+  },
+  "castle": {
+   "file": "bld_castle.png",
+   "w": 205,
+   "h": 182,
+   "foot": [
+    124,
+    136
+   ],
+   "scale": 0.229,
+   "source": [
+    "b_west_castle_age3_x2.sld"
+   ]
+  },
+  "watch_tower": {
+   "file": "bld_watch_tower.png",
+   "w": 131,
+   "h": 156,
+   "foot": [
+    91,
+    140
+   ],
+   "scale": 0.376,
+   "source": [
+    "b_west_tower_age2_x2.sld"
+   ]
+  },
+  "outpost": {
+   "file": "bld_outpost.png",
+   "w": 292,
+   "h": 199,
+   "foot": [
+    136,
+    128
+   ],
+   "scale": 0.522,
+   "source": [
+    "b_dark_outpost_age1_x2.sld"
+   ]
+  },
+  "house_dark": {
+   "file": "bld_house_dark.png",
+   "w": 200,
+   "h": 146,
+   "foot": [
+    105,
+    89
+   ],
+   "scale": 0.581,
+   "source": [
+    "b_dark_house_age1_x2.sld"
+   ]
+  },
+  "mill_dark": {
+   "file": "bld_mill_dark.png",
+   "w": 220,
+   "h": 147,
+   "foot": [
+    116,
+    108
+   ],
+   "scale": 0.49,
+   "source": [
+    "b_dark_mill_age1_x2.sld"
+   ]
+  },
+  "barracks_dark": {
+   "file": "bld_barracks_dark.png",
+   "w": 230,
+   "h": 156,
+   "foot": [
+    122,
+    101
+   ],
+   "scale": 0.372,
+   "source": [
+    "b_dark_barracks_age1_x2.sld"
+   ]
+  },
+  "dock_dark": {
+   "file": "bld_dock_dark.png",
+   "w": 196,
+   "h": 157,
+   "foot": [
+    113,
+    104
+   ],
+   "scale": 0.366,
+   "source": [
+    "b_dark_dock_age1_x2.sld"
+   ]
+  },
+  "town_center_dark": {
+   "file": "bld_town_center_dark.png",
+   "w": 274,
+   "h": 158,
+   "foot": [
+    143,
+    123
+   ],
+   "scale": 0.344,
+   "source": [
+    "b_dark_town_center_age1_back_x2.sld",
+    "b_dark_town_center_age1_main_x2.sld",
+    "b_dark_town_center_age1_center_x2.sld",
+    "b_dark_town_center_age1_front_x2.sld"
+   ]
+  },
+  "palisade": {
+   "file": "bld_palisade.png",
+   "w": 110,
+   "h": 63,
+   "foot": [
+    61,
+    48
+   ],
+   "scale": 0.442,
+   "source": "b_dark_wall_palisade_x2.sld"
+  },
+  "foundation": {
+   "file": "bld_foundation.png",
+   "w": 193,
+   "h": 132,
+   "foot": [
+    101,
+    86
+   ],
+   "scale": 0.442,
+   "source": "b_misc_foundation_house_x2.sld",
+   "note": "scaffolding of a building under construction"
+  },
+  "foundation_barracks": {
+   "file": "bld_foundation_barracks.png",
+   "w": 200,
+   "h": 130,
+   "foot": [
+    103,
+    81
+   ],
+   "scale": 0.32,
+   "source": "b_misc_foundation_barracks_x2.sld",
+   "note": "scaffolding of a building under construction"
+  },
+  "fish_trap": {
+   "file": "bld_fish_trap.png",
+   "w": 269,
+   "h": 134,
+   "foot": [
+    134,
+    67
+   ],
+   "scale": 1.0,
+   "source": "b_misc_fish_trap(_underwater)_x2.sld on terrain g_wtr"
+  },
+  "farm": {
+   "file": "bld_farm.png",
+   "w": 254,
+   "h": 127,
+   "foot": [
+    127,
+    63
+   ],
+   "scale": 0.442,
+   "source": "terrain g_fm1 (grown farm)"
+  }
+ },
+ "notes": "foot = [x, y] in px from the top left of the image: where the thing touches the ground. For villagers and animals it is the point between the feet; for buildings, farms, mines and the water patches it is the centre of the footprint (the game hotspot), so the front of a building reaches below it. Put every foot on one ground line. Villagers all face game direction 1 (east, slightly toward the viewer), so the target goes on their right; the animals face direction 7 (toward the villager). Villager WebPs keep every 2nd game frame at 45 ms (quality 55, alpha 50, method 4), like the idle sprites. scale = output px per x2 game px: villagers and animals 1.4, trees smaller (~165 px tall instead of ~460), buildings 0.23 to 0.57 so they land at 140 to 180 px, small buildings (palisade, foundation) use the house scale. Buildings: Feudal Age Western European where the game has one, Castle Age for siege workshop, monastery and castle (they have no earlier look), Dark Age generic outpost and palisade; *_dark are the Dark Age generic look of house, mill, barracks, dock and town center. obj_farm is a freshly sown farm, bld_farm a grown one (both drawn from the farm ground textures, 3 x 3 tiles). Player colour is blue (42, 94, 207) like the idle sprites."
+}

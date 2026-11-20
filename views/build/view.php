@@ -1,12 +1,16 @@
 <?php
 
 use yii\helpers\Html;
+use app\components\Seo;
 use yii\helpers\Url;
 use app\models\Elo;
 use app\components\TextFormat;
 use app\components\UnitPills;
+use app\components\BuildScene;
+use app\components\EloHistogram;
 
 $this->title = $build->title;
+Seo::page($this, $build->title . ' Build Order', $build->summary ?: ($build->title . ': a step by step Age of Empires II build order.'), (count($build->civModels) === 1 && $build->civ_specific) ? $build->civModels[0]->emblemUrl : '/images/icons/builds.png');
 
 $stepIcons = [
     'villager' => '/images/units/villager_icon.png',
@@ -29,32 +33,88 @@ $stepIcon = function ($type) use ($stepIcons) {
 </nav>
 
 <div class="admin5-page-header kb-head">
-    <h1><?= Html::encode($build->title) ?></h1>
-    <div class="kb-card-meta">
-        <a href="<?= Url::to(['build/index', 'elo' => $build->elo]) ?>" class="kb-elo kb-elo-<?= Html::encode($build->elo) ?>"><?= Elo::label($build->elo) ?></a>
-        <span class="kb-elo-range"><?= Html::encode(Elo::range($build->elo)) ?></span>
-        <a href="<?= Url::to(['build/index', 'category' => $build->category]) ?>" class="kb-category"><?= Html::encode($build->categoryLabel) ?></a>
-        <span class="kb-difficulty" title="Difficulty"><?= str_repeat('●', (int)$build->difficulty) . str_repeat('○', max(0, 3 - (int)$build->difficulty)) ?></span>
-        <?php foreach ($build->listOf('map_types') as $m): ?>
-            <span class="kb-category"><?= Html::encode(ucfirst($m)) ?> maps</span>
-        <?php endforeach; ?>
+    <div class="page-title">
+        <?php if (count($build->civModels) === 1 && $build->civ_specific && $build->civModels[0]->emblemUrl): ?>
+            <img src="<?= Html::encode($build->civModels[0]->emblemUrl) ?>" alt="" class="unit-title-icon page-title-icon">
+        <?php else: ?>
+            <?= UnitPills::pageIcon('builds') ?>
+        <?php endif; ?>
+        <h1><?= Html::encode($build->title) ?></h1>
+    </div>
+    <div class="kb-article-level">
+        <span class="pill-row">
+            <?= UnitPills::eloPill($build->elo, ['href' => Url::to(['build/index', 'elo' => $build->elo])]) ?>
+            <?= UnitPills::tagPill($build->category, $build->categoryLabel, Url::to(['build/index', 'category' => $build->category])) ?>
+            <?php foreach ($build->listOf('map_types') as $m): ?><?= UnitPills::mapPill($m) ?><?php endforeach; ?>
+            <?= UnitPills::difficulty($build->difficulty) ?>
+        </span>
+        <?= EloHistogram::render($build->elo, ['width' => 200, 'height' => 34]) ?>
     </div>
 </div>
 
 <div class="row g-4">
     <div class="col-lg-7">
-        <div class="admin5-card admin5-card-border">
-            <div class="card-header"><strong>Steps</strong></div>
-            <ol class="build-steps">
-                <?php foreach ($build->listOf('steps') as $s): ?>
-                    <?php $type = $s['type'] ?? 'note'; $icon = $stepIcon($type); ?>
-                    <li class="build-step build-step-<?= Html::encode($type) ?>">
-                        <span class="build-step-pop"><?= isset($s['pop']) && $s['pop'] !== null ? (int)$s['pop'] : '' ?></span>
-                        <span class="build-step-icon"><?php if ($icon): ?><img src="<?= $icon ?>" alt=""><?php endif; ?></span>
-                        <span class="build-step-text"><?= UnitPills::linkify(Html::encode($s['text'] ?? ''), 'villager') ?></span>
+        <?php $steps = $build->listOf('steps'); $hasScenes = (bool)array_filter($steps, function ($s) { return !empty($s['scene']['actions']); }); ?>
+        <div class="unit-tabs build-step-tabs">
+            <ul class="nav nav-tabs mb-0" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#steps-short" type="button" role="tab">Steps</button>
+                </li>
+                <?php if ($hasScenes): ?>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#steps-visual" type="button" role="tab">Visual</button>
                     </li>
-                <?php endforeach; ?>
-            </ol>
+                <?php endif; ?>
+            </ul>
+        </div>
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="steps-short" role="tabpanel">
+                <div class="admin5-card admin5-card-border admin5-card-attached">
+                    <div class="build-steps-tools">
+                        <span>Tick the steps as you play them.</span>
+                        <button type="button" class="btn btn-link btn-sm build-steps-reset">Clear the ticks</button>
+                    </div>
+                    <ol class="build-steps">
+                        <?php foreach ($steps as $i => $s): ?>
+                            <?php $type = $s['type'] ?? 'note'; $icons = BuildScene::stepIcons($s); ?>
+                            <li class="build-step build-step-<?= Html::encode($type) ?>">
+                                <label class="build-step-check" title="Done">
+                                    <input type="checkbox" data-step="<?= $i ?>">
+                                    <span class="build-step-num">Step <?= $i + 1 ?></span>
+                                </label>
+                                <span class="build-step-pop" title="Population"><?= isset($s['pop']) && $s['pop'] !== null ? (int)$s['pop'] : '' ?></span>
+                                <span class="build-step-icons">
+                                    <?php foreach ($icons as [$src, $kind]): ?>
+                                        <img src="<?= Html::encode($src) ?>" alt="" class="build-step-avatar is-<?= $kind ?>">
+                                    <?php endforeach; ?>
+                                </span>
+                                <span class="build-step-text"><?= UnitPills::linkify(Html::encode($s['text'] ?? ''), 'villager') ?></span>
+                            </li>
+                        <?php endforeach; ?>
+                    </ol>
+                </div>
+            </div>
+            <?php if ($hasScenes): ?>
+                <div class="tab-pane fade" id="steps-visual" role="tabpanel">
+                    <div class="admin5-card admin5-card-border admin5-card-attached">
+                        <ol class="build-scenes">
+                            <?php foreach ($steps as $i => $s): ?>
+                                <?php $scene = BuildScene::render($s); ?>
+                                <li class="build-scene-step build-step-<?= Html::encode($s['type'] ?? 'note') ?>">
+                                    <div class="build-scene-head">
+                                        <span class="build-step-num">Step <?= $i + 1 ?></span>
+                                        <?php if (isset($s['pop']) && $s['pop'] !== null): ?>
+                                            <span class="build-scene-pop"><?= (int)$s['pop'] ?> pop</span>
+                                        <?php endif; ?>
+                                    </div>
+                                    <?= $scene ?>
+                                    <p class="build-scene-text"><?= UnitPills::linkify(Html::encode($s['text'] ?? ''), 'villager') ?></p>
+                                </li>
+                            <?php endforeach; ?>
+                        </ol>
+                    </div>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
     <div class="col-lg-5">
@@ -95,7 +155,7 @@ $stepIcon = function ($type) use ($stepIcons) {
     <div class="kb-grid">
         <?php foreach ($related as $b): ?>
             <a href="<?= Url::to(['build/view', 'slug' => $b->slug]) ?>" class="admin5-card admin5-card-border kb-card">
-                <div class="kb-card-meta"><span class="kb-elo kb-elo-<?= Html::encode($b->elo) ?>"><?= Elo::label($b->elo) ?></span></div>
+                <div class="kb-card-meta"><?= UnitPills::eloPill($b->elo) ?></div>
                 <h2 class="kb-card-title"><?= Html::encode($b->title) ?></h2>
                 <p class="kb-card-summary"><?= Html::encode($b->summary) ?></p>
             </a>
@@ -104,3 +164,27 @@ $stepIcon = function ($type) use ($stepIcons) {
 <?php endif; ?>
 
 <?php UnitPills::registerTips($this); ?>
+
+<script>
+(function () {
+    var key = 'build-ticks:<?= Html::encode($build->slug) ?>';
+    var boxes = document.querySelectorAll('.build-step-check input');
+    var saved = [];
+    try { saved = JSON.parse(localStorage.getItem(key) || '[]'); } catch (e) {}
+    boxes.forEach(function (b) {
+        var li = b.closest('.build-step');
+        if (saved.indexOf(+b.dataset.step) !== -1) { b.checked = true; li.classList.add('is-done'); }
+        b.addEventListener('change', function () {
+            li.classList.toggle('is-done', b.checked);
+            var done = [];
+            boxes.forEach(function (x) { if (x.checked) done.push(+x.dataset.step); });
+            try { localStorage.setItem(key, JSON.stringify(done)); } catch (e) {}
+        });
+    });
+    var reset = document.querySelector('.build-steps-reset');
+    if (reset) reset.addEventListener('click', function () {
+        boxes.forEach(function (b) { b.checked = false; b.closest('.build-step').classList.remove('is-done'); });
+        try { localStorage.removeItem(key); } catch (e) {}
+    });
+})();
+</script>

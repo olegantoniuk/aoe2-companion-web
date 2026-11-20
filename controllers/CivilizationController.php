@@ -48,8 +48,15 @@ class CivilizationController extends Controller
             ->orderBy(['unit.name' => SORT_ASC])
             ->all();
 
+        // its guide and its own build orders
+        $like = ['like', 'civs', '"' . $civ->name . '"'];
+        $guide = \app\models\Article::find()->where($like)->andWhere(['category' => 'civilization-strategy'])->one();
+        $civBuilds = \app\models\BuildOrder::find()->where($like)->andWhere(['civ_specific' => 1])->orderBy(['difficulty' => SORT_ASC, 'title' => SORT_ASC])->all();
+
         return $this->render('view', [
             'civ' => $civ,
+            'guide' => $guide,
+            'civBuilds' => $civBuilds,
             'uniqueUnits' => $uniqueUnits,
             'availableUnits' => $availableUnits,
             'unavailableUnits' => $unavailableUnits,

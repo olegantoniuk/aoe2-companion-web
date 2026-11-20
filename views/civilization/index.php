@@ -1,11 +1,13 @@
 <?php
 
 use yii\helpers\Html;
+use app\components\Seo;
 use yii\helpers\Url;
 use app\models\Civilization;
 use app\components\UnitPills;
 
 $this->title = 'Civilizations';
+Seo::page($this, 'All ' . count($civs) . ' Civilizations of Age of Empires II', 'Every Age of Empires II civilization with its bonuses, team bonus, unique units and a short summary, listed A to Z or grouped by region.', '/images/icons/civilizations.png');
 
 $bySlug = [];
 foreach ($civs as $civ) {
@@ -35,7 +37,10 @@ $uniquesOf = function ($civ) use ($uniqueByCiv) {
 ?>
 
 <div class="admin5-page-header">
-    <h1>Civilizations <span class="badge bg-secondary badge-sm"><?= count($civs) ?></span></h1>
+    <div class="page-title">
+        <?= UnitPills::pageIcon('civilizations') ?>
+        <h1>Civilizations <span class="badge bg-secondary badge-sm"><?= count($civs) ?></span></h1>
+    </div>
 </div>
 
 <ul class="nav nav-tabs civ-list-tabs" role="tablist">

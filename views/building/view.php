@@ -1,11 +1,13 @@
 <?php
 
 use yii\helpers\Html;
+use app\components\Seo;
 use yii\helpers\Url;
 use app\models\Civilization;
 use app\components\UnitPills;
 
 $this->title = $building->name;
+Seo::page($this, $building->name . ': Stats, Units and Technologies', $building->description ?: ($building->name . ' in Age of Empires II: cost, stats, units and technologies.'), $building->iconUrl);
 
 $stat = function ($icon, $label, $value) {
     if ($value === null || $value === '') return '';
@@ -43,6 +45,28 @@ $civs = $availNames ? Civilization::find()->where(['name' => $availNames])->orde
 
 <div class="row g-4">
     <div class="col-lg-4">
+        <?php
+        $preview = $building->preview;
+        $meta = json_decode(@file_get_contents(Yii::getAlias('@app/components/data/building_preview.json')) ?: '{}', true)[$building->slug] ?? null;
+        ?>
+        <?php if ($preview): ?>
+            <?php
+            [$pUrl, $pW, $pH] = $preview;
+            $s = min(1.4, 240 / $pH, 330 / $pW);
+            $foot = $meta['foot'] ?? [$pW / 2, $pH * 0.8];
+            $groundY = round($foot[1] * $s) + 12;
+            $stageH = $groundY + max(round(($pH - $foot[1]) * $s), 70) + 14;
+            // the grass tile is drawn at 1.4 px per game pixel; scale it like the building
+            $grass = $meta['scale'] ?? null ? round(512 / 1.4 * $meta['scale'] * $s) : 160;
+            ?>
+            <!-- the building standing on a patch of game grass, like the unit pages -->
+            <div class="building-stage" style="height: <?= $stageH ?>px">
+                <span class="building-ground" style="top: <?= $groundY - 75 ?>px; background-size: <?= $grass ?>px"></span>
+                <img src="<?= Html::encode($pUrl) ?>" alt="<?= Html::encode($building->name) ?>"
+                     width="<?= round($pW * $s) ?>" height="<?= round($pH * $s) ?>"
+                     style="left: calc(50% - <?= round($foot[0] * $s) ?>px); top: <?= $groundY - round($foot[1] * $s) ?>px">
+            </div>
+        <?php endif; ?>
         <div class="admin5-card admin5-card-border">
             <div class="card-header"><strong>Stats</strong></div>
             <table class="table table-sm stat-table mb-0">
@@ -79,7 +103,7 @@ $civs = $availNames ? Civilization::find()->where(['name' => $availNames])->orde
         <?php endif; ?>
 
         <?php if ($units): ?>
-            <div class="admin5-card admin5-card-border">
+            <div class="admin5-card admin5-card-border building-trains">
                 <div class="card-header"><strong>Trains</strong> <span class="badge bg-secondary badge-sm"><?= count($units) ?></span></div>
                 <div class="table-responsive">
                     <table class="table table-striped table-sm mb-0 unit-list-table">

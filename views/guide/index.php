@@ -1,63 +1,101 @@
 <?php
 
 use yii\helpers\Html;
+use app\components\Seo;
 use yii\helpers\Url;
 use app\models\Article;
 use app\models\Elo;
+use app\components\UnitPills;
+use app\components\EloHistogram;
 
 $this->title = 'Guides';
+Seo::page($this, 'Age of Empires II Guides for Every Elo', 'Guides for Age of Empires II players at every rating: economy, military, scouting, maps, civilization guides and how to climb from one Elo band to the next.', '/images/icons/guides.png');
 
-$filterUrl = function ($elo, $category) {
-    return Url::to(array_filter(['guide/index', 'elo' => $elo, 'category' => $category]));
+$filterUrl = function ($elo, $category, $civ = null) use ($currentCiv) {
+    $civ = $civ === false ? null : ($civ ?? ($currentCiv ? $currentCiv->slug : null));
+    return Url::to(array_filter(['guide/index', 'elo' => $elo, 'category' => $category, 'civ' => $civ]));
 };
 ?>
 
 <div class="admin5-page-header">
-    <h1>Guides <span class="badge bg-secondary badge-sm"><?= $total ?></span></h1>
-</div>
-<p class="kb-lead">What the community keeps telling players at each level, collected from the official forums, Steam discussions, coaching videos and community guides, and sorted by rating. Start with your own band; the habits from the lower ones still matter.</p>
-
-<div class="kb-filters">
-    <div class="kb-filter-row">
-        <span class="kb-filter-label">Level</span>
-        <a href="<?= $filterUrl(null, $currentCategory) ?>" class="kb-chip<?= !$currentElo ? ' is-active' : '' ?>">All</a>
-        <?php foreach (Elo::BANDS as $key => [$label, $range]): ?>
-            <a href="<?= $filterUrl($key, $currentCategory) ?>" class="kb-chip kb-chip-<?= $key ?><?= $currentElo === $key ? ' is-active' : '' ?>"><?= $label ?> <small><?= Html::encode($range) ?></small></a>
-        <?php endforeach; ?>
-    </div>
-    <div class="kb-filter-row">
-        <span class="kb-filter-label">Topic</span>
-        <a href="<?= $filterUrl($currentElo, null) ?>" class="kb-chip<?= !$currentCategory ? ' is-active' : '' ?>">All</a>
-        <?php foreach (Article::CATEGORIES as $key => $label): ?>
-            <a href="<?= $filterUrl($currentElo, $key) ?>" class="kb-chip<?= $currentCategory === $key ? ' is-active' : '' ?>"><?= $label ?></a>
-        <?php endforeach; ?>
+    <div class="page-title">
+        <?= UnitPills::pageIcon('guides') ?>
+        <h1>Guides <span class="badge bg-secondary badge-sm"><?= $total ?></span></h1>
     </div>
 </div>
+<!-- intro and filters on the left, the ladder explorer on the right -->
+<div class="row g-4 guides-top">
+    <div class="col-lg-7">
+        <p class="kb-lead">What the community keeps telling players at each level, collected from Reddit, the official forums, Steam discussions, coaching videos and community guides, and sorted by rating. Start with your own band; the habits from the lower ones still matter.</p>
+        <p class="kb-lead">Every guide is tagged with the level it helps most, from Beginner (Elo < 900) to Expert (Elo ≥ 1700), and with its topic: economy, military, scouting, maps, civilization strategy and more. The Elo and Progression section explains how the ladder works and what each level is expected to know.</p>
+        <p class="kb-lead">Not sure where to start? Start with the Beginner guides, even if your rating is higher. Most games below 1300 are still decided by villager production, housing and the first fights, and those guides cover exactly that. Then drag the slider on the right to your own rating to see where you stand, how far the next level is and which guides fit you.</p>
 
-<?php if (!$byElo): ?>
+        <?= $this->render('//build/_filters', [
+    'filterUrl' => $filterUrl,
+    'currentElo' => $currentElo,
+    'currentCategory' => $currentCategory,
+    'currentCiv' => $currentCiv,
+    'civs' => $civs,
+    'categories' => Article::CATEGORIES,
+    'categoryLabel' => 'Topic',
+    'route' => 'guide/index',
+]) ?>
+    </div>
+    <div class="col-lg-5">
+        <?= $this->render('_elo_explorer') ?>
+    </div>
+</div>
+
+<?php if ($progression): ?>
+    <section class="kb-band kb-progression">
+        <div class="kb-band-head">
+            <h2 class="kb-section-title"><?= UnitPills::pageIcon('classes') ?>Elo and Progression</h2>
+            <p class="kb-section-note">How the ladder works, what players at each level can do, and what it takes to reach the next one.</p>
+        </div>
+        <div class="kb-grid">
+            <?php foreach ($progression as $a): ?>
+                <a href="<?= Url::to(['guide/view', 'slug' => $a->slug]) ?>" class="admin5-card admin5-card-border kb-card">
+                    <div class="kb-card-title-row">
+                        <img src="<?= Html::encode($a->avatarUrl) ?>" alt="" class="kb-card-avatar">
+                        <h3 class="kb-card-title"><?= Html::encode($a->title) ?></h3>
+                    </div>
+                    <p class="kb-card-summary"><?= Html::encode($a->summary) ?></p>
+                    <div class="kb-card-meta">
+                        <?= UnitPills::eloPill($a->elo) ?>
+                        <?php if ($a->reading_minutes): ?>
+                            <span class="kb-minutes"><?= (int)$a->reading_minutes ?> min read</span>
+                        <?php endif; ?>
+                    </div>
+                </a>
+            <?php endforeach; ?>
+        </div>
+    </section>
+<?php endif; ?>
+
+<?php if (!$byElo && !$progression): ?>
     <p class="text-muted">No guides match these filters.</p>
 <?php endif; ?>
 
 <?php foreach ($byElo as $band => $articles): ?>
     <section class="kb-band">
-        <h2 class="kb-band-title">
-            <span class="kb-elo kb-elo-<?= $band ?>"><?= Elo::label($band) ?></span>
-            <span class="kb-band-range"><?= Html::encode(Elo::range($band)) ?></span>
-        </h2>
+        <div class="kb-band-head">
+            <?= UnitPills::eloPill($band, ['size' => 'lg', 'href' => $filterUrl($band, $currentCategory)]) ?>
+            <?= EloHistogram::render($band, ['width' => 260, 'height' => 40]) ?>
+        </div>
         <div class="kb-grid">
             <?php foreach ($articles as $a): ?>
                 <a href="<?= Url::to(['guide/view', 'slug' => $a->slug]) ?>" class="admin5-card admin5-card-border kb-card">
+                    <div class="kb-card-title-row">
+                        <img src="<?= Html::encode($a->avatarUrl) ?>" alt="" class="kb-card-avatar">
+                        <h3 class="kb-card-title"><?= Html::encode($a->title) ?></h3>
+                    </div>
+                    <p class="kb-card-summary"><?= Html::encode($a->summary) ?></p>
                     <div class="kb-card-meta">
-                        <span class="kb-category"><?= Html::encode($a->categoryLabel) ?></span>
+                        <?= UnitPills::tagPill($a->category, $a->categoryLabel) ?>
                         <?php if ($a->reading_minutes): ?>
                             <span class="kb-minutes"><?= (int)$a->reading_minutes ?> min read</span>
                         <?php endif; ?>
-                        <?php if ($a->listOf('videos')): ?>
-                            <span class="kb-has-video" title="Has videos">▶</span>
-                        <?php endif; ?>
                     </div>
-                    <h3 class="kb-card-title"><?= Html::encode($a->title) ?></h3>
-                    <p class="kb-card-summary"><?= Html::encode($a->summary) ?></p>
                 </a>
             <?php endforeach; ?>
         </div>

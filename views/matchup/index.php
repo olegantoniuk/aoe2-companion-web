@@ -1,13 +1,19 @@
 <?php
 
 use yii\helpers\Html;
+use app\components\Seo;
+use app\components\UnitPills;
 use yii\helpers\Url;
 
 $this->title = 'Matchup Analyzer';
+Seo::page($this, 'Matchup Analyzer: Counter Any Civilization', 'Pick your civilization and your opponent to see which of your units answer each unit they can build, age by age, with attack bonuses.', '/images/icons/matchup.png');
 ?>
 
 <div class="admin5-page-header">
-    <h1>Matchup Analyzer</h1>
+    <div class="page-title">
+        <?= UnitPills::pageIcon('matchup') ?>
+        <h1>Matchup Analyzer</h1>
+    </div>
 </div>
 
 <div class="admin5-card admin5-card-border" style="max-width: 640px;">
@@ -67,7 +73,7 @@ $this->title = 'Matchup Analyzer';
         </div>
 
         <div class="mt-4">
-            <button id="compareBtn" class="btn btn-primary" disabled>Compare</button>
+            <button id="compareBtn" class="btn btn-primary matchup-compare-btn" disabled>Compare</button>
         </div>
     </div>
 </div>

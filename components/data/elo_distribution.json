@@ -1,0 +1,319 @@
+{
+ "source": "aoe2companion.com leaderboard API, https://data.aoe2companion.com/api/leaderboards/rm_1v1 (all 482 pages, deduplicated by profileId)",
+ "fetched": "2026-11-19",
+ "leaderboard": "1v1 Random Map",
+ "note": "Every player on the current aoe2companion RM 1v1 leaderboard, which lists only players flagged active: 48150 unique players. Last ranked match: 48094 since 2026-10-01, all since 2026-04-04. Ratings 0 to 3055. Buckets are [from, to). Paged 2026-11-19 while ratings were live, so a few players may sit one bucket off. Percentiles: p10 564, median 1004, p90 1498.",
+ "bucket": 50,
+ "buckets": [
+  {
+   "from": 0,
+   "to": 50,
+   "players": 106
+  },
+  {
+   "from": 50,
+   "to": 100,
+   "players": 71
+  },
+  {
+   "from": 100,
+   "to": 150,
+   "players": 101
+  },
+  {
+   "from": 150,
+   "to": 200,
+   "players": 141
+  },
+  {
+   "from": 200,
+   "to": 250,
+   "players": 218
+  },
+  {
+   "from": 250,
+   "to": 300,
+   "players": 286
+  },
+  {
+   "from": 300,
+   "to": 350,
+   "players": 354
+  },
+  {
+   "from": 350,
+   "to": 400,
+   "players": 517
+  },
+  {
+   "from": 400,
+   "to": 450,
+   "players": 686
+  },
+  {
+   "from": 450,
+   "to": 500,
+   "players": 875
+  },
+  {
+   "from": 500,
+   "to": 550,
+   "players": 1103
+  },
+  {
+   "from": 550,
+   "to": 600,
+   "players": 1308
+  },
+  {
+   "from": 600,
+   "to": 650,
+   "players": 1565
+  },
+  {
+   "from": 650,
+   "to": 700,
+   "players": 1773
+  },
+  {
+   "from": 700,
+   "to": 750,
+   "players": 1878
+  },
+  {
+   "from": 750,
+   "to": 800,
+   "players": 2129
+  },
+  {
+   "from": 800,
+   "to": 850,
+   "players": 2346
+  },
+  {
+   "from": 850,
+   "to": 900,
+   "players": 2535
+  },
+  {
+   "from": 900,
+   "to": 950,
+   "players": 2778
+  },
+  {
+   "from": 950,
+   "to": 1000,
+   "players": 2985
+  },
+  {
+   "from": 1000,
+   "to": 1050,
+   "players": 3421
+  },
+  {
+   "from": 1050,
+   "to": 1100,
+   "players": 3105
+  },
+  {
+   "from": 1100,
+   "to": 1150,
+   "players": 2613
+  },
+  {
+   "from": 1150,
+   "to": 1200,
+   "players": 2188
+  },
+  {
+   "from": 1200,
+   "to": 1250,
+   "players": 2090
+  },
+  {
+   "from": 1250,
+   "to": 1300,
+   "players": 1598
+  },
+  {
+   "from": 1300,
+   "to": 1350,
+   "players": 1499
+  },
+  {
+   "from": 1350,
+   "to": 1400,
+   "players": 1207
+  },
+  {
+   "from": 1400,
+   "to": 1450,
+   "players": 1058
+  },
+  {
+   "from": 1450,
+   "to": 1500,
+   "players": 816
+  },
+  {
+   "from": 1500,
+   "to": 1550,
+   "players": 839
+  },
+  {
+   "from": 1550,
+   "to": 1600,
+   "players": 623
+  },
+  {
+   "from": 1600,
+   "to": 1650,
+   "players": 585
+  },
+  {
+   "from": 1650,
+   "to": 1700,
+   "players": 430
+  },
+  {
+   "from": 1700,
+   "to": 1750,
+   "players": 392
+  },
+  {
+   "from": 1750,
+   "to": 1800,
+   "players": 315
+  },
+  {
+   "from": 1800,
+   "to": 1850,
+   "players": 303
+  },
+  {
+   "from": 1850,
+   "to": 1900,
+   "players": 201
+  },
+  {
+   "from": 1900,
+   "to": 1950,
+   "players": 207
+  },
+  {
+   "from": 1950,
+   "to": 2000,
+   "players": 146
+  },
+  {
+   "from": 2000,
+   "to": 2050,
+   "players": 150
+  },
+  {
+   "from": 2050,
+   "to": 2100,
+   "players": 111
+  },
+  {
+   "from": 2100,
+   "to": 2150,
+   "players": 112
+  },
+  {
+   "from": 2150,
+   "to": 2200,
+   "players": 60
+  },
+  {
+   "from": 2200,
+   "to": 2250,
+   "players": 56
+  },
+  {
+   "from": 2250,
+   "to": 2300,
+   "players": 44
+  },
+  {
+   "from": 2300,
+   "to": 2350,
+   "players": 43
+  },
+  {
+   "from": 2350,
+   "to": 2400,
+   "players": 36
+  },
+  {
+   "from": 2400,
+   "to": 2450,
+   "players": 25
+  },
+  {
+   "from": 2450,
+   "to": 2500,
+   "players": 22
+  },
+  {
+   "from": 2500,
+   "to": 2550,
+   "players": 22
+  },
+  {
+   "from": 2550,
+   "to": 2600,
+   "players": 17
+  },
+  {
+   "from": 2600,
+   "to": 2650,
+   "players": 13
+  },
+  {
+   "from": 2650,
+   "to": 2700,
+   "players": 12
+  },
+  {
+   "from": 2700,
+   "to": 2750,
+   "players": 5
+  },
+  {
+   "from": 2750,
+   "to": 2800,
+   "players": 8
+  },
+  {
+   "from": 2800,
+   "to": 2850,
+   "players": 9
+  },
+  {
+   "from": 2850,
+   "to": 2900,
+   "players": 6
+  },
+  {
+   "from": 2900,
+   "to": 2950,
+   "players": 3
+  },
+  {
+   "from": 2950,
+   "to": 3000,
+   "players": 2
+  },
+  {
+   "from": 3000,
+   "to": 3050,
+   "players": 2
+  },
+  {
+   "from": 3050,
+   "to": 3100,
+   "players": 1
+  }
+ ]
+}

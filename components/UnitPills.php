@@ -237,6 +237,104 @@ class UnitPills
         return self::$classSlugs[strtolower($className)] ?? null;
     }
 
+    /**
+     * Pictures for the neutral tag pills of the knowledge base: guide topics, build styles and map types.
+     * Values are unit slugs ("unit:archer"), building icon names ("building:Castle") or image paths.
+     */
+    const TAG_ICONS = [
+        // guide topics
+        'elo-and-progression' => '/images/icons/expert.png',
+        'fundamentals' => '/images/icons/guides.png',
+        'economy' => 'unit:villager',
+        'military' => '/images/icons/matchup.png',
+        'scouting-and-map-control' => 'unit:scout-cavalry',
+        'build-order-theory' => '/images/icons/builds.png',
+        'civilization-strategy' => '/images/icons/civilizations.png',
+        'maps' => 'building:Outpost',
+        'improvement-and-mindset' => '/images/icons/classes.png',
+        // build styles
+        'dark-age-rush' => 'unit:militia',
+        'feudal-aggression' => 'unit:scout-cavalry',
+        'fast-castle' => '/images/ages/CastleAge.png',
+        'boom' => 'building:TownCenter',
+        'water' => 'unit:galley',
+        'defensive' => 'building:WatchTower',
+        'hybrid' => 'building:Dock',
+        // map types
+        'open' => 'building:Outpost',
+        'closed' => 'building:PalisadeWall',
+        'hybrid-map' => 'building:Dock',
+        'water-map' => 'unit:galley',
+    ];
+
+    /** Neutral beige pill for a topic, build style or map type, with its picture. */
+    public static function tagPill($key, $label, $href = null)
+    {
+        $ref = self::TAG_ICONS[$key] ?? null;
+        $icon = null;
+        if ($ref && strpos($ref, 'unit:') === 0) {
+            $icon = self::iconForSlug(substr($ref, 5));
+        } elseif ($ref && strpos($ref, 'building:') === 0) {
+            $icon = self::buildingIcon(substr($ref, 9));
+        } elseif ($ref) {
+            $icon = $ref;
+        }
+        return self::pill($label, ['href' => $href, 'variant' => 'tag', 'icon' => $icon]);
+    }
+
+    /** Tag pill for a map type of a build ("open" -> "Open maps"). */
+    public static function mapPill($type, $href = null)
+    {
+        $key = in_array($type, ['hybrid', 'water'], true) ? $type . '-map' : $type;
+        return self::tagPill($key, ucfirst($type) . ' maps', $href);
+    }
+
+    /** Difficulty of a build as three equal circles; the filled ones take the colour of the level. */
+    public static function difficulty($level)
+    {
+        $level = max(0, min(3, (int)$level));
+        $names = [1 => 'Easy', 2 => 'Medium', 3 => 'Hard'];
+        $svg = '<svg class="difficulty difficulty-' . $level . '" viewBox="0 0 44 12" width="44" height="12" role="img" aria-label="Difficulty: '
+            . ($names[$level] ?? 'unknown') . '"><title>Difficulty: ' . ($names[$level] ?? 'unknown') . '</title>';
+        for ($i = 0; $i < 3; $i++) {
+            $svg .= '<circle cx="' . (6 + $i * 16) . '" cy="6" r="4.5" class="' . ($i < $level ? 'is-on' : 'is-off') . '"/>';
+        }
+        return $svg . '</svg>';
+    }
+
+    /**
+     * Pill for a skill band (beginner, intermediate, advanced, expert) with its icon and colour.
+     * $o: href, size ('lg' for the big one on the guides page).
+     */
+    public static function eloPill($band, array $o = [])
+    {
+        $icon = '/images/icons/' . $band . '.png';
+        return self::pill(\app\models\Elo::label($band), [
+            'href' => $o['href'] ?? null,
+            'variant' => 'elo pill-elo-' . $band . (!empty($o['size']) ? ' pill-' . $o['size'] : ''),
+            'icon' => is_file(\Yii::getAlias('@webroot') . $icon) ? $icon : null,
+        ]);
+    }
+
+    /** Chevron pointing right, for "more" links (never an arrow). */
+    public static function chevron()
+    {
+        return '<svg class="chevron-right" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    }
+
+    /** Address of a section icon (builds, guides, units...). */
+    public static function pageIconUrl($name)
+    {
+        return '/images/icons/' . $name . '.png';
+    }
+
+    /** Big round icon left of a page title, like the unit portrait on unit pages. */
+    public static function pageIcon($name)
+    {
+        $f = '/images/icons/' . $name . '.png';
+        return is_file(\Yii::getAlias('@webroot') . $f) ? '<img src="' . $f . '" alt="" class="unit-title-icon page-title-icon">' : '';
+    }
+
     /** Purple pill for an armor class: a typical unit as the avatar, link to the class page, hover card. */
     public static function classPill($className, $label = null)
     {

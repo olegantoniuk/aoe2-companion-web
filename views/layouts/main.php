@@ -15,7 +15,8 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?> — AoE2 Companion</title>
+    <title><?= Html::encode(\app\components\Seo::title($this)) ?></title>
+    <?= \app\components\Seo::head($this) ?>
     <?php $this->head() ?>
     <script>
     (function(){var t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);})();
@@ -116,7 +117,40 @@ NavBar::end();
     </div>
 </footer>
 
+<button type="button" class="back-to-top" id="backToTop" aria-label="Back to top" title="Back to top">
+    <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true"><path d="M3 10l5-5 5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
 <script>
+// header that hides while scrolling down and comes back on the way up; a back to top button once the page has moved
+(function () {
+    var nav = document.querySelector('nav.navbar');
+    var top = document.getElementById('backToTop');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var lastY = window.scrollY;
+    var ticking = false;
+    function update() {
+        var y = window.scrollY;
+        var menuOpen = nav && nav.querySelector('.navbar-collapse.show, .dropdown-menu.show');
+        if (nav) {
+            nav.classList.toggle('is-scrolled', y > 4);
+            if (y > 80 && y > lastY + 4 && !menuOpen) nav.classList.add('is-hidden');
+            else if (y < lastY - 4 || y <= 80) nav.classList.remove('is-hidden');
+        }
+        if (top) top.classList.toggle('is-visible', y > 400);
+        lastY = y;
+        ticking = false;
+    }
+    window.addEventListener('scroll', function () {
+        if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+    }, { passive: true });
+    if (top) top.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+        top.blur();
+    });
+    update();
+})();
+
 document.getElementById('themeToggle').addEventListener('click', function() {
     var html = document.documentElement;
     var current = html.getAttribute('data-theme');

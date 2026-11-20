@@ -1,39 +1,38 @@
 <?php
 
 use yii\helpers\Html;
+use app\components\Seo;
 use yii\helpers\Url;
 use app\models\BuildOrder;
 use app\models\Elo;
 use app\components\UnitPills;
 
 $this->title = 'Build Orders';
+Seo::page($this, 'Build Orders for Every Level and Civilization', 'Step by step Age of Empires II build orders from the first villager to the age up: scouts, archers, fast castle, drush and the signature openings of every civilization.', '/images/icons/builds.png');
 
-$filterUrl = function ($elo, $category) {
-    return Url::to(array_filter(['build/index', 'elo' => $elo, 'category' => $category]));
+$filterUrl = function ($elo, $category, $civ = null) use ($currentCiv) {
+    $civ = $civ === false ? null : ($civ ?? ($currentCiv ? $currentCiv->slug : null));
+    return Url::to(array_filter(['build/index', 'elo' => $elo, 'category' => $category, 'civ' => $civ]));
 };
 ?>
 
 <div class="admin5-page-header">
-    <h1>Build Orders <span class="badge bg-secondary badge-sm"><?= count($builds) ?></span></h1>
+    <div class="page-title">
+        <?= UnitPills::pageIcon('builds') ?>
+        <h1>Build Orders <span class="badge bg-secondary badge-sm"><?= count($builds) ?></span></h1>
+    </div>
 </div>
-<p class="kb-lead">The openings most players use on the ladder, step by step from the first villager to the age up. Pick one that fits your level, learn it until it runs without thinking, then add the next.</p>
+<p class="kb-lead">The openings most players use on the ladder, step by step from the first villager to the age up, plus the signature builds of each civilization. Pick one that fits your level, learn it until it runs without thinking, then add the next.</p>
 
-<div class="kb-filters">
-    <div class="kb-filter-row">
-        <span class="kb-filter-label">Level</span>
-        <a href="<?= $filterUrl(null, $currentCategory) ?>" class="kb-chip<?= !$currentElo ? ' is-active' : '' ?>">All</a>
-        <?php foreach (Elo::BANDS as $key => [$label, $range]): ?>
-            <a href="<?= $filterUrl($key, $currentCategory) ?>" class="kb-chip kb-chip-<?= $key ?><?= $currentElo === $key ? ' is-active' : '' ?>"><?= $label ?> <small><?= Html::encode($range) ?></small></a>
-        <?php endforeach; ?>
-    </div>
-    <div class="kb-filter-row">
-        <span class="kb-filter-label">Style</span>
-        <a href="<?= $filterUrl($currentElo, null) ?>" class="kb-chip<?= !$currentCategory ? ' is-active' : '' ?>">All</a>
-        <?php foreach (BuildOrder::CATEGORIES as $key => $label): ?>
-            <a href="<?= $filterUrl($currentElo, $key) ?>" class="kb-chip<?= $currentCategory === $key ? ' is-active' : '' ?>"><?= $label ?></a>
-        <?php endforeach; ?>
-    </div>
-</div>
+<?= $this->render('_filters', [
+    'filterUrl' => $filterUrl,
+    'currentElo' => $currentElo,
+    'currentCategory' => $currentCategory,
+    'currentCiv' => $currentCiv,
+    'civs' => $civs,
+    'categories' => BuildOrder::CATEGORIES,
+    'categoryLabel' => 'Style',
+]) ?>
 
 <?php if (!$builds): ?>
     <p class="text-muted">No build orders match these filters.</p>
@@ -42,12 +41,13 @@ $filterUrl = function ($elo, $category) {
 <div class="kb-grid">
     <?php foreach ($builds as $b): ?>
         <a href="<?= Url::to(['build/view', 'slug' => $b->slug]) ?>" class="admin5-card admin5-card-border kb-card">
-            <div class="kb-card-meta">
-                <span class="kb-elo kb-elo-<?= Html::encode($b->elo) ?>"><?= Elo::label($b->elo) ?></span>
-                <span class="kb-category"><?= Html::encode($b->categoryLabel) ?></span>
-                <span class="kb-difficulty" title="Difficulty"><?= str_repeat('●', (int)$b->difficulty) . str_repeat('○', max(0, 3 - (int)$b->difficulty)) ?></span>
-            </div>
             <h2 class="kb-card-title"><?= Html::encode($b->title) ?></h2>
+            <div class="pill-row">
+                <?= UnitPills::eloPill($b->elo) ?>
+                <?= UnitPills::tagPill($b->category, $b->categoryLabel) ?>
+                <?php foreach ($b->listOf('map_types') as $m): ?><?= UnitPills::mapPill($m) ?><?php endforeach; ?>
+                <?= UnitPills::difficulty($b->difficulty) ?>
+            </div>
             <p class="kb-card-summary"><?= Html::encode($b->summary) ?></p>
             <div class="kb-card-foot">
                 <?php if ($b->ageUpPop): ?>

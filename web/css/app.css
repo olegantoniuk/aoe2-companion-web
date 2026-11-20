@@ -137,8 +137,8 @@
 }
 
 [data-theme="dark"] {
-    /* Surfaces */
-    --color-bg: #1A1A2E;
+    /* Surfaces: the page is darker than the cards so they stand out */
+    --color-bg: #0F0F1C;
     --color-surface: #1A1A2E;
     --color-surface-raised: #16213E;
     --color-surface-muted: #16213E;
@@ -3269,4 +3269,1238 @@ a.kb-category:hover {
     .home-kb-meta {
         display: none;
     }
+}
+
+/* ── Skill band pills: light colours like the age and class pills ── */
+:root,
+[data-theme="light"] {
+    --color-pill-elo-beginner-bg: #E4F2DD;
+    --color-pill-elo-beginner-border: #BCDDAE;
+    --color-pill-elo-beginner-text: #2F5A22;
+    --color-pill-elo-beginner-avatar: #A9CF97;
+    --color-pill-elo-intermediate-bg: #DFEBF7;
+    --color-pill-elo-intermediate-border: #B5CDE8;
+    --color-pill-elo-intermediate-text: #23476E;
+    --color-pill-elo-intermediate-avatar: #9DBDE0;
+    --color-pill-elo-advanced-bg: #FCE9D4;
+    --color-pill-elo-advanced-border: #EDCBA2;
+    --color-pill-elo-advanced-text: #6E4214;
+    --color-pill-elo-advanced-avatar: #E3B781;
+    --color-pill-elo-expert-bg: #F5E0EA;
+    --color-pill-elo-expert-border: #E2BACD;
+    --color-pill-elo-expert-text: #6A2445;
+    --color-pill-elo-expert-avatar: #D59DB8;
+}
+
+[data-theme="dark"] {
+    --color-pill-elo-beginner-bg: #22331F;
+    --color-pill-elo-beginner-border: #3E5A36;
+    --color-pill-elo-beginner-text: #CDEABF;
+    --color-pill-elo-beginner-avatar: #172414;
+    --color-pill-elo-intermediate-bg: #1F2C3D;
+    --color-pill-elo-intermediate-border: #36506F;
+    --color-pill-elo-intermediate-text: #C6DBF2;
+    --color-pill-elo-intermediate-avatar: #141E2B;
+    --color-pill-elo-advanced-bg: #3A2B1C;
+    --color-pill-elo-advanced-border: #6A4C2C;
+    --color-pill-elo-advanced-text: #F5D6B0;
+    --color-pill-elo-advanced-avatar: #261C12;
+    --color-pill-elo-expert-bg: #3A2230;
+    --color-pill-elo-expert-border: #6A3D55;
+    --color-pill-elo-expert-text: #F2C8DC;
+    --color-pill-elo-expert-avatar: #26151F;
+}
+
+.counter-unit-link.pill-elo,
+.counter-unit-text.pill-elo {
+    font-weight: 600;
+}
+
+.pill-elo-beginner { background: var(--color-pill-elo-beginner-bg) !important; border-color: var(--color-pill-elo-beginner-border) !important; color: var(--color-pill-elo-beginner-text) !important; --pill-avatar-bg: var(--color-pill-elo-beginner-avatar); }
+.pill-elo-intermediate { background: var(--color-pill-elo-intermediate-bg) !important; border-color: var(--color-pill-elo-intermediate-border) !important; color: var(--color-pill-elo-intermediate-text) !important; --pill-avatar-bg: var(--color-pill-elo-intermediate-avatar); }
+.pill-elo-advanced { background: var(--color-pill-elo-advanced-bg) !important; border-color: var(--color-pill-elo-advanced-border) !important; color: var(--color-pill-elo-advanced-text) !important; --pill-avatar-bg: var(--color-pill-elo-advanced-avatar); }
+.pill-elo-expert { background: var(--color-pill-elo-expert-bg) !important; border-color: var(--color-pill-elo-expert-border) !important; color: var(--color-pill-elo-expert-text) !important; --pill-avatar-bg: var(--color-pill-elo-expert-avatar); }
+
+a.pill-elo:hover {
+    filter: brightness(0.97);
+}
+
+/* compact version inside cards and lists */
+.kb-card .pill-elo,
+.home-kb-item .pill-elo {
+    min-height: 30px;
+    padding: 2px 12px 2px 3px;
+    font-size: 12px;
+}
+
+.kb-card .pill-elo > .unit-image-xs,
+.home-kb-item .pill-elo > .unit-image-xs {
+    width: 24px;
+    height: 24px;
+}
+
+/* the big one heading each band on the guides page */
+.counter-unit-link.pill-lg,
+.counter-unit-text.pill-lg {
+    min-height: 52px;
+    padding: 4px 22px 4px 5px;
+    gap: 10px;
+    font-size: 18px;
+}
+
+.pill-lg > .unit-image-xs {
+    width: 42px !important;
+    height: 42px !important;
+}
+
+/* chevron after "more" links */
+.chevron-right {
+    display: inline-block;
+    margin-left: 4px;
+    vertical-align: -1px;
+}
+
+/* big icon left of a page title */
+.page-title {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.page-title h1 {
+    margin: 0;
+}
+
+/* header: more air between the menu items */
+@media (min-width: 992px) {
+    .navbar-nav {
+        gap: 6px;
+    }
+
+    .navbar-nav .nav-link {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+}
+
+/* technology icons: square tiles on the avatar colour instead of a transparent background */
+.tech-card-icon,
+.tech-icon,
+.home-tile-icon.is-tech,
+.tech-group-title img.is-tech {
+    background: var(--color-avatar-bg);
+    border-radius: 4px;
+    object-fit: contain;
+}
+
+/* home: icons on the counters and quick links */
+.home-stat-icon {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 6px;
+    object-fit: contain;
+}
+
+.home-quick .btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 6px 12px;
+    text-align: left;
+}
+
+.home-quick .btn img {
+    flex: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--color-avatar-bg);
+}
+
+/* smaller video previews: thumbnail left, title right */
+.kb-videos {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 10px;
+}
+
+.kb-video {
+    flex-direction: row;
+    align-items: center;
+}
+
+.kb-video-thumb {
+    flex: none;
+    width: 128px;
+}
+
+.kb-video-play {
+    width: 30px;
+    height: 22px;
+    margin: -11px 0 0 -15px;
+    border-radius: 6px;
+}
+
+.kb-video-play::after {
+    left: 12px;
+    top: 6px;
+    border-left-width: 9px;
+    border-top-width: 5px;
+    border-bottom-width: 5px;
+}
+
+.kb-video-text {
+    padding: 8px 12px;
+    font-size: 0.875rem;
+}
+
+/* ladder histogram next to a skill band */
+.elo-hist {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.elo-hist svg {
+    display: block;
+}
+
+.elo-bar {
+    fill: var(--color-border);
+}
+
+.elo-hist-beginner .elo-bar.is-in { fill: var(--color-pill-elo-beginner-avatar); }
+.elo-hist-intermediate .elo-bar.is-in { fill: var(--color-pill-elo-intermediate-avatar); }
+.elo-hist-advanced .elo-bar.is-in { fill: var(--color-pill-elo-advanced-avatar); }
+.elo-hist-expert .elo-bar.is-in { fill: var(--color-pill-elo-expert-avatar); }
+
+[data-theme="dark"] .elo-hist-beginner .elo-bar.is-in { fill: #6FA85C; }
+[data-theme="dark"] .elo-hist-intermediate .elo-bar.is-in { fill: #5F8FC4; }
+[data-theme="dark"] .elo-hist-advanced .elo-bar.is-in { fill: #C9935A; }
+[data-theme="dark"] .elo-hist-expert .elo-bar.is-in { fill: #B86F92; }
+
+.elo-hist-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+}
+
+.elo-hist-label strong {
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+/* guide page header */
+.kb-article-head {
+    margin-bottom: 20px;
+}
+
+.kb-article-head .kb-article-title {
+    margin: 0;
+}
+
+.kb-article-level {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 18px;
+    margin-top: 14px;
+}
+
+.kb-article-meta {
+    display: inline-flex;
+    gap: 12px;
+    font-size: 0.875rem;
+}
+
+/* guides list: big band pill with the ladder histogram, avatars in the cards */
+.kb-band-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 24px;
+    margin-bottom: 14px;
+}
+
+.kb-card-title-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.kb-card-avatar {
+    flex: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--color-avatar-bg);
+    box-shadow: 0 0 0 1px var(--color-border);
+}
+
+.kb-chip-elo img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.kb-filter-label {
+    width: 86px;
+}
+
+.kb-civ-select {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.kb-civ-select img {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+}
+
+.kb-civ-select .form-select {
+    min-width: 220px;
+}
+
+.home-kb-avatar {
+    flex: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--color-avatar-bg);
+}
+
+.home-kb-item .pill-elo {
+    flex: none;
+    min-width: 128px;
+}
+
+/* difficulty: three equal circles, filled ones coloured by level */
+.difficulty {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.difficulty circle.is-off {
+    fill: none;
+    stroke: var(--color-border);
+    stroke-width: 1.5;
+}
+
+.difficulty-1 circle.is-on { fill: #5A9E4B; }
+.difficulty-2 circle.is-on { fill: #D9902B; }
+.difficulty-3 circle.is-on { fill: #C8402F; }
+
+/* video cards: one compact row, the thumbnail fills the card height */
+.kb-videos {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 8px;
+}
+
+.kb-video {
+    align-items: stretch;
+    min-height: 0;
+}
+
+.kb-video-thumb {
+    width: 112px;
+    aspect-ratio: 16 / 9;
+    align-self: center;
+}
+
+.kb-video-text {
+    justify-content: center;
+    gap: 0;
+    padding: 4px 10px;
+    min-width: 0;
+}
+
+.kb-video-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 0.8125rem;
+    line-height: 1.3;
+}
+
+.kb-video-channel {
+    font-size: 0.75rem;
+    line-height: 1.3;
+}
+
+/* guides: the progression section above the bands */
+.kb-section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    font-size: 1.375rem;
+    font-weight: 700;
+}
+
+.kb-section-title .page-title-icon {
+    width: 48px;
+    height: 48px;
+}
+
+.kb-section-note {
+    margin: 0;
+    color: var(--color-text-muted);
+}
+
+.kb-progression {
+    padding-bottom: 8px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+/* build order: visual steps drawn from game sprites */
+.build-step-tabs {
+    margin-top: 0;
+}
+
+.build-scenes {
+    list-style: none;
+    margin: 0;
+    padding: 8px 0;
+}
+
+.build-scene-step {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 10px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.build-scene-step:last-child {
+    border-bottom: 0;
+}
+
+.build-scene-step .build-step-pop {
+    padding-top: 6px;
+}
+
+.build-scene-text {
+    margin: 6px 0 0;
+    font-size: 0.9375rem;
+    line-height: 1.45;
+}
+
+.scene {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 6px 28px;
+    min-height: 120px;
+    padding: 14px 18px 22px;
+    border-radius: 4px;
+    /* game grass at the scale of the sprites: 512 px tile x 0.62 */
+    background: url(/images/scene/ground_grass.jpg) repeat left top / 317px;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+}
+
+.scene-group {
+    position: relative;
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.scene-crowd {
+    position: relative;
+    display: inline-flex;
+    align-items: flex-end;
+}
+
+.scene-crowd .scene-vil + .scene-vil {
+    margin-left: -46px;
+}
+
+.scene-sprite {
+    display: block;
+    max-width: none;
+    height: auto;
+}
+
+.scene-count {
+    position: absolute;
+    left: 0;
+    top: -6px;
+    padding: 1px 8px;
+    border-radius: 999px;
+    background: rgba(20, 20, 30, 0.78);
+    color: #fff;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.scene-group > .scene-count {
+    left: auto;
+    right: -4px;
+}
+
+.scene-arrow {
+    align-self: center;
+    color: #fff;
+    opacity: 0.85;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
+}
+
+.scene-unit {
+    display: block;
+    height: 110px;
+    width: auto;
+}
+
+.scene-badge {
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 14px 6px 6px;
+    border-radius: 6px;
+    background: rgba(250, 245, 235, 0.92);
+    color: #2E2A24;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.scene-badge img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+.scene-badge-tech img {
+    background: var(--color-avatar-bg);
+}
+
+.scene {
+    display: block;
+}
+
+.scene-inner {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    gap: 28px;
+}
+
+.scene-inner > * {
+    flex: none;
+}
+
+/* neutral beige tag pill: topics, build styles, map types (same size as the compact level pill) */
+.counter-unit-link.pill-tag,
+.counter-unit-text.pill-tag {
+    font-weight: 500;
+}
+
+.kb-card .pill-row,
+.home-kb-item .pill-row,
+.kb-article-level .pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+}
+
+.kb-card .pill-tag,
+.home-kb-item .pill-tag {
+    min-height: 30px;
+    padding: 2px 12px 2px 3px;
+    font-size: 12px;
+}
+
+.kb-card .pill-tag > .unit-image-xs,
+.home-kb-item .pill-tag > .unit-image-xs {
+    width: 24px;
+    height: 24px;
+}
+
+/* pills follow their text: no fixed width */
+.home-kb-item .pill-elo {
+    min-width: 0 !important;
+}
+
+/* home lists: picture left, title on top, pills below */
+.home-kb-item {
+    align-items: flex-start;
+}
+
+.home-kb-main {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.home-kb-item .home-kb-avatar {
+    width: 44px;
+    height: 44px;
+}
+
+/* home civilization tiles: bigger emblem, top aligned like the unit cards */
+.home-tile-civ {
+    align-items: flex-start;
+}
+
+.home-civ-emblem {
+    flex: none;
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+}
+
+/* building icons get the avatar colour like the technology icons */
+.home-tile-icon.is-tech,
+.building-card-icon img,
+.building-title-icon,
+.tech-group-title img,
+.kb-chip img[src*="/buildings/"] {
+    background: var(--color-avatar-bg);
+    border-radius: 4px;
+}
+
+.yt-icon {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* build steps: numbered, with a tick box and big round avatars */
+.build-steps-tools {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 8px 16px 0;
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+}
+
+.build-steps-tools .btn-link {
+    padding: 0;
+    font-size: 0.8125rem;
+}
+
+.build-step {
+    grid-template-columns: 78px 34px auto 1fr;
+    gap: 12px;
+    padding: 9px 16px;
+}
+
+.build-step-check {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.build-step-check input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent-color);
+    cursor: pointer;
+}
+
+.build-step-num {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+}
+
+.build-step .build-step-pop {
+    font-size: 1rem;
+    text-align: center;
+}
+
+.build-step-icons {
+    display: inline-flex;
+    gap: 4px;
+}
+
+.build-step-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--color-avatar-bg);
+    box-shadow: 0 0 0 1px var(--color-border);
+}
+
+.build-step-avatar.is-building,
+.build-step-avatar.is-tech {
+    border-radius: 6px;
+    object-fit: contain;
+}
+
+.build-step-avatar.is-age {
+    background: transparent;
+    box-shadow: none;
+    object-fit: contain;
+}
+
+.build-step.is-done {
+    opacity: 0.5;
+}
+
+.build-step.is-done .build-step-text {
+    text-decoration: line-through;
+}
+
+/* visual steps: label above each scene */
+.build-scene-step {
+    display: block;
+}
+
+.build-scene-head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.build-scene-head .build-step-num {
+    font-size: 0.875rem;
+    color: var(--color-text-strong);
+}
+
+.build-scene-pop {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+}
+
+@media (max-width: 575px) {
+    .build-step {
+        grid-template-columns: 70px 28px 1fr;
+    }
+
+    .build-step-icons {
+        display: none;
+    }
+}
+
+/* building page: the building on a patch of game grass above the stats */
+.building-stage {
+    position: relative;
+    margin-bottom: 18px;
+    overflow: hidden;
+}
+
+.building-stage img {
+    position: absolute;
+    z-index: 1;
+    max-width: none;
+    height: auto;
+}
+
+.building-ground {
+    position: absolute;
+    left: 50%;
+    width: 380px;
+    height: 150px;
+    transform: translateX(-50%);
+    background: url(/images/scene/ground_grass.jpg) repeat center;
+    -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+    mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+    z-index: 0;
+}
+
+.building-trains {
+    margin-top: 20px;
+}
+
+.guides-top {
+    margin-bottom: 28px;
+}
+
+.guides-top .kb-filter-row {
+    row-gap: 8px;
+}
+
+/* filters: the label above its choices */
+.kb-filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.kb-filter-group .kb-filter-label {
+    width: auto;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.kb-filter-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.kb-filters {
+    gap: 14px;
+}
+
+/* ── Matchup pages ── */
+:root {
+    --color-btn-disabled-bg: #5F5A54;    /* dark grey for a button that cannot be used yet */
+    --color-btn-disabled-text: #E4DED4;
+}
+
+[data-theme="dark"] {
+    --color-btn-disabled-bg: #3A3A48;
+    --color-btn-disabled-text: #9A9AAE;
+}
+
+/* Compare stays dark grey until both civilizations are picked */
+.matchup-compare-btn:disabled,
+.matchup-compare-btn.disabled {
+    --bs-btn-disabled-bg: var(--color-btn-disabled-bg);
+    --bs-btn-disabled-border-color: var(--color-btn-disabled-bg);
+    --bs-btn-disabled-color: var(--color-btn-disabled-text);
+    --bs-btn-disabled-opacity: 1;
+    background-color: var(--color-btn-disabled-bg);
+    color: var(--color-btn-disabled-text);
+    opacity: 1;
+}
+
+/* title: both emblems around "Franks vs Britons" */
+.matchup-title {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.matchup-title h1 {
+    margin: 0;
+    line-height: 1.15;
+}
+
+.matchup-title h1 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.matchup-title h1 a:hover {
+    color: var(--color-link-hover);
+}
+
+.matchup-vs {
+    color: var(--color-text-muted);
+    font-weight: 400;
+}
+
+.matchup-emblem-link {
+    display: inline-flex;
+    flex-shrink: 0;
+}
+
+/* age tabs with the age shield */
+.matchup-tabs .nav-tabs .nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.matchup-tab-age-icon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+/* enemy units: big round avatar, name or upgrade line, pills under it */
+.matchup-table td {
+    vertical-align: middle;
+}
+
+.matchup-table th.matchup-avatar-col {
+    width: 72px;
+}
+
+.matchup-table .unit-avatar {
+    width: 48px;
+    height: 48px;
+    box-shadow: 0 0 0 2px var(--color-border);
+}
+
+.matchup-enemy {
+    min-width: 180px;
+}
+
+.matchup-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 2px;
+}
+
+.matchup-line-step {
+    display: inline-flex;
+    color: var(--color-text-muted);
+}
+
+.matchup-line-step .chevron-right {
+    margin: 0 2px;
+    vertical-align: 0;
+}
+
+.matchup-enemy-pills {
+    margin-top: 6px;
+    gap: 4px;
+}
+
+.matchup-enemy-pills .counter-unit-link,
+.matchup-enemy-pills .counter-unit-text {
+    min-height: 28px;
+    padding: 2px 10px;
+    gap: 4px;
+    font-size: 12px;
+}
+
+.matchup-enemy-pills .counter-unit-link:has(> img),
+.matchup-enemy-pills .counter-unit-text:has(> img) {
+    padding-left: 3px;
+}
+
+.matchup-enemy-pills .counter-unit-link:has(> .pill-plain-icon),
+.matchup-enemy-pills .counter-unit-text:has(> .pill-plain-icon) {
+    padding-left: 6px;
+}
+
+.matchup-enemy-pills .counter-unit-link > .unit-image-xs,
+.matchup-enemy-pills .counter-unit-text > .unit-image-xs {
+    width: 22px;
+    height: 22px;
+}
+
+.matchup-enemy-pills .pill-plain-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.matchup-counters {
+    gap: 6px;
+}
+
+/* attack bonus of a counter: a round pill at the end of the counter pill */
+.counter-unit-link:has(> .counter-bonus-badge) {
+    padding-right: 5px;
+}
+
+.counter-bonus-badge,
+.counter-unit-link.counter-has-bonus:hover .counter-bonus-badge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    padding: 1px 9px;
+    margin-left: 2px;
+    border: 1px solid var(--color-bonus-border);
+    border-radius: 999px;
+    background: var(--color-surface-raised);
+    color: var(--color-bonus);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.counter-unit-link.counter-has-bonus:hover .counter-bonus-badge {
+    border-color: var(--color-bonus-border-hover);
+}
+
+/* attack bonuses in the hover card: round pills in the armor class colours */
+.unit-popup-bonuses {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.unit-popup-bonuses .unit-popup-section-title {
+    flex-basis: 100%;
+    margin-bottom: 0;
+}
+
+.unit-popup-bonus {
+    display: inline-flex;
+    align-items: center;
+    min-height: 22px;
+    margin: 0;
+    padding: 1px 9px;
+    border: 1px solid var(--color-pill-class-border);
+    border-radius: 999px;
+    background: var(--color-pill-class-bg);
+    color: var(--color-pill-class-text);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+/* ── One hover for every clickable card and pill: a higher lift, a soft shadow, a border only a little darker ── */
+:root,
+[data-theme="light"] {
+    --color-hover-border: #CDBE9F;
+    --shadow-hover: 0 8px 22px rgba(60, 45, 20, 0.12), 0 2px 6px rgba(60, 45, 20, 0.08);
+    --shadow-hover-pill: 0 4px 12px rgba(60, 45, 20, 0.14);
+}
+
+[data-theme="dark"] {
+    --color-hover-border: #43436A;
+    --shadow-hover: 0 8px 22px rgba(0, 0, 0, 0.45), 0 2px 6px rgba(0, 0, 0, 0.3);
+    --shadow-hover-pill: 0 4px 12px rgba(0, 0, 0, 0.45);
+}
+
+.kb-card,
+.home-kb-item,
+.home-tile,
+.home-stat,
+.building-card,
+.civ-row,
+.kb-video {
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.kb-card:hover,
+.home-kb-item:hover,
+.home-tile:hover,
+.home-stat:hover,
+.building-card:hover,
+.kb-video:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-hover-border) !important;
+    box-shadow: var(--shadow-hover);
+}
+
+.kb-chip,
+a.counter-unit-link {
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.kb-chip:hover,
+a.counter-unit-link:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-hover-border);
+    box-shadow: var(--shadow-hover-pill);
+}
+
+/* the active chip keeps its dark fill */
+.kb-chip.is-active:hover {
+    border-color: var(--color-text-strong);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .kb-card:hover,
+    .home-kb-item:hover,
+    .home-tile:hover,
+    .home-stat:hover,
+    .building-card:hover,
+    .kb-video:hover,
+    .kb-chip:hover,
+    a.counter-unit-link:hover {
+        transform: none;
+    }
+}
+
+/* lighter text in the cards */
+.kb-card-title {
+    font-weight: 600;
+}
+
+.home-kb-title,
+.home-tile-name,
+.building-card-name {
+    font-weight: 500;
+}
+
+.kb-card-summary {
+    font-weight: 400;
+}
+
+/* header pinned to the top: slides away while scrolling down, back on the way up */
+nav.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+nav.navbar.is-hidden {
+    transform: translateY(-100%);
+}
+
+/* anchors land below the pinned header */
+html {
+    scroll-padding-top: 80px;
+}
+
+/* round back to top button in the bottom right corner */
+.back-to-top {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 1040;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    background: var(--color-surface);
+    color: var(--color-text-strong);
+    box-shadow: var(--shadow-hover-pill);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s, box-shadow 0.15s ease;
+    cursor: pointer;
+}
+
+.back-to-top.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    box-shadow: var(--shadow-hover);
+    border-color: var(--color-hover-border);
+}
+
+.back-to-top:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    nav.navbar,
+    .back-to-top {
+        transition: none;
+    }
+}
+
+@media (max-width: 575px) {
+    .back-to-top {
+        right: 16px;
+        bottom: 16px;
+    }
+}
+
+/* soft shadow under the header, a little deeper once the page has scrolled */
+:root,
+[data-theme="light"] {
+    --shadow-header: 0 1px 2px rgba(60, 45, 20, 0.06), 0 4px 14px rgba(60, 45, 20, 0.07);
+    --shadow-header-scrolled: 0 2px 4px rgba(60, 45, 20, 0.07), 0 8px 24px rgba(60, 45, 20, 0.12);
+}
+
+[data-theme="dark"] {
+    --shadow-header: 0 1px 2px rgba(0, 0, 0, 0.35), 0 4px 14px rgba(0, 0, 0, 0.3);
+    --shadow-header-scrolled: 0 2px 4px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+nav.navbar {
+    box-shadow: var(--shadow-header);
+}
+
+nav.navbar.is-scrolled {
+    box-shadow: var(--shadow-header-scrolled);
+}
+
+/* home: the wordmark writes itself once, glyph by glyph, then stays */
+.home-title {
+    margin: 0 0 18px;
+    line-height: 0;
+    color: var(--color-text-strong);
+}
+
+.hero-wordmark {
+    display: block;
+    width: 100%;
+    max-width: 520px;
+    height: auto;
+    overflow: visible;
+}
+
+.hero-wordmark path {
+    fill: currentColor;
+}
+
+/* while the pen writes, a canvas sits over the SVG; the SVG keeps the space and comes back at the end */
+.home-title {
+    position: relative;
+}
+
+.home-title.is-writing .hero-wordmark {
+    visibility: hidden;
+}
+
+.hero-wordmark-pen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    max-width: 520px;
+    height: auto;
+}
+
+/* illuminated initial at the start of the home text */
+.home-initial {
+    float: left;
+    width: 56px;
+    height: 56px;
+    margin: 2px 6px 0 -3px;
+    opacity: 0;
+    transform: scale(0.94);
+    animation: initial-in 0.9s ease 0.4s forwards;
+}
+
+@keyframes initial-in {
+    to { opacity: 1; transform: none; }
+}
+
+.home-lead::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .home-initial {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@media (max-width: 575px) {
+    .home-initial {
+        width: 52px;
+        height: 52px;
+    }
+}
+
+/* hero overlay: waving flags and chimney smoke drawn over the diorama */
+.home-hero-art {
+    position: relative;
+}
+
+.hero-fx {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
 }

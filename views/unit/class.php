@@ -1,10 +1,12 @@
 <?php
 
 use yii\helpers\Html;
+use app\components\Seo;
 use yii\helpers\Url;
 use app\components\UnitPills;
 
 $this->title = $classDef['name'];
+Seo::page($this, $classDef['name'] . ': Units in This Class', ($classDef['description'] ?? '') ?: ('All ' . $classDef['name'] . ' units in Age of Empires II with their stats and costs.'));
 
 // Build reverse map: armor class name → class slug (for badge links)
 $armorToSlug = [];

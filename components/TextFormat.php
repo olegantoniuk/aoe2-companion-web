@@ -21,7 +21,7 @@ class TextFormat
             $list = [];
             $flushPara = function () use (&$para, &$html, $selfSlug) {
                 if ($para) {
-                    $html .= '<p>' . UnitPills::linkify(Html::encode(implode(' ', $para)), $selfSlug) . '</p>';
+                    $html .= '<p>' . self::buildLinks(UnitPills::linkify(Html::encode(implode(' ', $para)), $selfSlug)) . '</p>';
                     $para = [];
                 }
             };
@@ -29,7 +29,7 @@ class TextFormat
                 if ($list) {
                     $html .= '<ul>';
                     foreach ($list as $item) {
-                        $html .= '<li>' . UnitPills::linkify(Html::encode($item), $selfSlug) . '</li>';
+                        $html .= '<li>' . self::buildLinks(UnitPills::linkify(Html::encode($item), $selfSlug)) . '</li>';
                     }
                     $html .= '</ul>';
                     $list = [];
@@ -53,6 +53,24 @@ class TextFormat
             $flushList();
         }
         return $html;
+    }
+
+    /**
+     * A build order named by its slug in brackets, "(civ-bengalis-scouts)", becomes a link to that build.
+     * Unknown slugs are just dropped.
+     */
+    public static function buildLinks($html)
+    {
+        static $titles = null;
+        if (!preg_match('/\((civ-[a-z0-9-]+)\)/', $html)) return $html;
+        if ($titles === null) {
+            $titles = \app\models\BuildOrder::find()->select(['title', 'slug'])->indexBy('slug')->column();
+        }
+        return preg_replace_callback('/\s*\((civ-[a-z0-9-]+)\)/', function ($m) use ($titles) {
+            if (!isset($titles[$m[1]])) return '';
+            return ' (<a href="' . \yii\helpers\Url::to(['build/view', 'slug' => $m[1]]) . '" class="text-link">build order'
+                . UnitPills::chevron() . '</a>)';
+        }, $html);
     }
 
     /** "https://www.youtube.com/watch?v=abc" -> "abc", for an embedded player; null for other links. */

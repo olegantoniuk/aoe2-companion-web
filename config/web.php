@@ -43,6 +43,7 @@ $config = [
             'rules' => [
                 '' => 'site/index',
                 'login' => 'site/login',
+                'sitemap.xml' => 'sitemap/index',
                 'logout' => 'site/logout',
                 'civilizations' => 'civilization/index',
                 'civilizations/<slug:[a-z0-9_-]+>' => 'civilization/view',

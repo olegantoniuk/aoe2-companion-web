@@ -14,7 +14,7 @@ $sources = array_values(array_filter($sources ?? [], function ($s) { return !emp
     <div class="kb-videos">
         <?php foreach ($videos as $v): ?>
             <?php $id = TextFormat::youtubeId($v['url']); ?>
-            <a href="<?= Html::encode($v['url']) ?>" class="admin5-card admin5-card-border kb-video" target="_blank" rel="noopener">
+            <a href="<?= Html::encode($v['url']) ?>" class="admin5-card admin5-card-border kb-video" target="_blank" rel="nofollow noopener">
                 <?php if ($id): ?>
                     <span class="kb-video-thumb">
                         <img src="https://i.ytimg.com/vi/<?= Html::encode($id) ?>/mqdefault.jpg" alt="" loading="lazy">
@@ -38,7 +38,7 @@ $sources = array_values(array_filter($sources ?? [], function ($s) { return !emp
         <?php foreach ($sources as $s): ?>
             <li>
                 <span class="kb-source-type"><?= Html::encode(ucfirst($s['type'] ?? 'link')) ?></span>
-                <a href="<?= Html::encode($s['url']) ?>" target="_blank" rel="noopener"><?= Html::encode($s['title'] ?? $s['url']) ?></a>
+                <a href="<?= Html::encode($s['url']) ?>" target="_blank" rel="nofollow noopener"><?= Html::encode($s['title'] ?? $s['url']) ?></a>
                 <span class="kb-source-host"><?= Html::encode(TextFormat::host($s['url'])) ?></span>
             </li>
         <?php endforeach; ?>

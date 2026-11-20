@@ -44,6 +44,25 @@ class Building extends ActiveRecord
         return ['all', []];
     }
 
+    /**
+     * Big picture for the building page: its own preview sprite, else the smaller scene sprite of the same building.
+     * Returns [url, width, height] or null.
+     */
+    public function getPreview()
+    {
+        $root = \Yii::getAlias('@webroot');
+        $files = ['/images/buildings-preview/' . $this->slug . '.png'];
+        $key = \app\components\BuildScene::BUILDINGS[$this->name] ?? null;
+        if ($key) $files[] = '/images/scene/bld_' . $key . '.png';
+        foreach ($files as $f) {
+            if (is_file($root . $f)) {
+                [$w, $h] = getimagesize($root . $f);
+                return [$f . '?v=' . filemtime($root . $f), $w, $h];
+            }
+        }
+        return null;
+    }
+
     public function getCategoryLabel()
     {
         return self::CATEGORIES[$this->category] ?? ucfirst((string)$this->category);
