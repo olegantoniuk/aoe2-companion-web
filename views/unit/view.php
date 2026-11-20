@@ -320,12 +320,14 @@ foreach ($techGroups as $techName => $items) {
                         $rest = substr($rest, strlen($found));
                     }
                     ?>
+                    <?php $buildingSlugs = $buildingNames ? \app\models\Building::find()->select(['slug', 'name'])->indexBy('name')->column() : []; ?>
                     <tr><th>Trained at</th><td>
                         <?php if ($buildingNames): ?>
                             <div class="pill-row">
                                 <?php foreach ($buildingNames as $b): ?>
                                     <?php $bName = trim(preg_replace('/(?<!^)([A-Z])/', ' $1', $b)); ?>
                                     <?= $pill($bName, [
+                                        'href' => isset($buildingSlugs[$bName]) ? Url::to(['building/view', 'slug' => $buildingSlugs[$bName]]) : null,
                                         'variant' => 'building',
                                         'icon' => $buildingIcon($b),
                                         'tip' => isset($tipTexts['building:' . $bName])
