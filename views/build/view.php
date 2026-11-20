@@ -23,6 +23,21 @@ $stepIcon = function ($type) use ($stepIcons) {
     $f = $stepIcons[$type] ?? null;
     return $f && is_file(Yii::getAlias('@webroot') . $f) ? $f : null;
 };
+
+// villagers on each resource after a step, shown when the reader turns the columns on
+$vills = function ($s) {
+    $v = $s['vills'] ?? null;
+    if (!is_array($v)) return '';
+    $approx = !empty($v['approx']);
+    $h = '<span class="build-step-vills' . ($approx ? ' is-approx' : '') . '"'
+        . ($approx ? ' title="An estimate: the step does not give exact numbers"' : '') . '>';
+    foreach (['food' => 'Food', 'wood' => 'Wood', 'gold' => 'Gold', 'stone' => 'Stone'] as $k => $res) {
+        $n = (int)($v[$k] ?? 0);
+        $h .= '<span class="build-vill' . ($n ? '' : ' is-zero') . '" aria-label="' . $n . ' on ' . strtolower($res) . '">'
+            . '<img src="/images/resources/' . $res . '.png" alt="" class="res-icon">' . $n . '</span>';
+    }
+    return $h . '</span>';
+};
 ?>
 
 <nav aria-label="breadcrumb" class="mb-3">
@@ -52,9 +67,13 @@ $stepIcon = function ($type) use ($stepIcons) {
     </div>
 </div>
 
-<div class="row g-4">
-    <div class="col-lg-7">
-        <?php $steps = $build->listOf('steps'); $hasScenes = (bool)array_filter($steps, function ($s) { return !empty($s['scene']['actions']); }); ?>
+<?php
+$steps = $build->listOf('steps');
+$hasScenes = (bool)array_filter($steps, function ($s) { return !empty($s['scene']['actions']); });
+$hasVills = (bool)array_filter($steps, function ($s) { return !empty($s['vills']); });
+?>
+<div class="row g-4 build-layout">
+    <div class="col-lg-7 build-main">
         <div class="unit-tabs build-step-tabs">
             <ul class="nav nav-tabs mb-0" role="tablist">
                 <li class="nav-item" role="presentation">
@@ -65,13 +84,21 @@ $stepIcon = function ($type) use ($stepIcons) {
                         <button class="nav-link" data-bs-toggle="tab" data-bs-target="#steps-visual" type="button" role="tab">Visual</button>
                     </li>
                 <?php endif; ?>
+                <?php if ($hasVills): ?>
+                    <li class="build-vills-toggle">
+                        <label class="build-step-check" title="Show how many villagers work on food, wood, gold and stone after each step">
+                            <input type="checkbox" id="build-vills-toggle">
+                            <span>Villagers on each resource</span>
+                        </label>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
         <div class="tab-content">
             <div class="tab-pane fade show active" id="steps-short" role="tabpanel">
                 <div class="admin5-card admin5-card-border admin5-card-attached">
                     <div class="build-steps-tools">
-                        <span>Tick the steps as you play them.</span>
+                        <span>Tick the steps as you play them.<span class="build-vills-note"> Villagers are counted after each step.</span></span>
                         <button type="button" class="btn btn-link btn-sm build-steps-reset">Clear the ticks</button>
                     </div>
                     <ol class="build-steps">
@@ -89,6 +116,7 @@ $stepIcon = function ($type) use ($stepIcons) {
                                     <?php endforeach; ?>
                                 </span>
                                 <span class="build-step-text"><?= UnitPills::linkify(Html::encode($s['text'] ?? ''), 'villager') ?></span>
+                                <?= $vills($s) ?>
                             </li>
                         <?php endforeach; ?>
                     </ol>
@@ -97,15 +125,23 @@ $stepIcon = function ($type) use ($stepIcons) {
             <?php if ($hasScenes): ?>
                 <div class="tab-pane fade" id="steps-visual" role="tabpanel">
                     <div class="admin5-card admin5-card-border admin5-card-attached">
+                        <div class="build-steps-tools">
+                            <span>Tick the steps as you play them.<span class="build-vills-note"> Villagers are counted after each step.</span></span>
+                            <button type="button" class="btn btn-link btn-sm build-steps-reset">Clear the ticks</button>
+                        </div>
                         <ol class="build-scenes">
                             <?php foreach ($steps as $i => $s): ?>
                                 <?php $scene = BuildScene::render($s, $i === 0); ?>
                                 <li class="build-scene-step build-step-<?= Html::encode($s['type'] ?? 'note') ?>">
                                     <div class="build-scene-head">
-                                        <span class="build-step-num">Step <?= $i + 1 ?></span>
+                                        <label class="build-step-check" title="Done">
+                                            <input type="checkbox" data-step="<?= $i ?>">
+                                            <span class="build-step-num">Step <?= $i + 1 ?></span>
+                                        </label>
                                         <?php if (isset($s['pop']) && $s['pop'] !== null): ?>
                                             <span class="build-scene-pop"><?= (int)$s['pop'] ?> pop</span>
                                         <?php endif; ?>
+                                        <?= $vills($s) ?>
                                     </div>
                                     <?= $scene ?>
                                     <p class="build-scene-text"><?= UnitPills::linkify(Html::encode($s['text'] ?? ''), 'villager') ?></p>
@@ -117,7 +153,7 @@ $stepIcon = function ($type) use ($stepIcons) {
             <?php endif; ?>
         </div>
     </div>
-    <div class="col-lg-5">
+    <div class="col-lg-5 build-side">
         <div class="kb-prose">
             <?= TextFormat::render($build->description, null, 'h3') ?>
         </div>
@@ -171,24 +207,56 @@ $stepIcon = function ($type) use ($stepIcons) {
 
 <script>
 (function () {
+    // ticks: each step has a box in Steps and one in Visual, both show the same state
     var key = 'build-ticks:<?= Html::encode($build->slug) ?>';
-    var boxes = document.querySelectorAll('.build-step-check input');
+    var boxes = [].slice.call(document.querySelectorAll('.build-step-check input[data-step]'));
+    var rowOf = function (b) { return b.closest('.build-step, .build-scene-step'); };
+    var mark = function (step, on) {
+        boxes.forEach(function (b) {
+            if (+b.dataset.step !== step) return;
+            b.checked = on;
+            rowOf(b).classList.toggle('is-done', on);
+        });
+    };
+    var save = function () {
+        var done = [];
+        boxes.forEach(function (b) { if (b.checked && done.indexOf(+b.dataset.step) === -1) done.push(+b.dataset.step); });
+        try { localStorage.setItem(key, JSON.stringify(done)); } catch (e) {}
+    };
     var saved = [];
     try { saved = JSON.parse(localStorage.getItem(key) || '[]'); } catch (e) {}
+    saved.forEach(function (step) { mark(step, true); });
     boxes.forEach(function (b) {
-        var li = b.closest('.build-step');
-        if (saved.indexOf(+b.dataset.step) !== -1) { b.checked = true; li.classList.add('is-done'); }
-        b.addEventListener('change', function () {
-            li.classList.toggle('is-done', b.checked);
-            var done = [];
-            boxes.forEach(function (x) { if (x.checked) done.push(+x.dataset.step); });
-            try { localStorage.setItem(key, JSON.stringify(done)); } catch (e) {}
+        b.addEventListener('change', function () { mark(+b.dataset.step, b.checked); save(); });
+        // a click anywhere on the row ticks it too, except on links and on the box itself
+        rowOf(b).addEventListener('click', function (e) {
+            if (e.target.closest('a, label, input, button')) return;
+            if (window.getSelection && String(window.getSelection())) return;
+            mark(+b.dataset.step, !b.checked);
+            save();
         });
     });
-    var reset = document.querySelector('.build-steps-reset');
-    if (reset) reset.addEventListener('click', function () {
-        boxes.forEach(function (b) { b.checked = false; b.closest('.build-step').classList.remove('is-done'); });
-        try { localStorage.removeItem(key); } catch (e) {}
+    document.querySelectorAll('.build-steps-reset').forEach(function (reset) {
+        reset.addEventListener('click', function () {
+            boxes.forEach(function (b) { mark(+b.dataset.step, false); });
+            try { localStorage.removeItem(key); } catch (e) {}
+        });
     });
+
+    // villager columns: the steps take the whole width and the text on the right is hidden
+    var toggle = document.getElementById('build-vills-toggle');
+    var layout = document.querySelector('.build-layout');
+    if (toggle && layout) {
+        var vkey = 'build-vills';
+        var set = function (on) {
+            layout.classList.toggle('is-vills', on);
+            toggle.checked = on;
+        };
+        try { set(localStorage.getItem(vkey) === '1'); } catch (e) {}
+        toggle.addEventListener('change', function () {
+            set(toggle.checked);
+            try { localStorage.setItem(vkey, toggle.checked ? '1' : '0'); } catch (e) {}
+        });
+    }
 })();
 </script>
