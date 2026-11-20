@@ -41,7 +41,7 @@ $filterUrl = function ($elo, $category, $civ = null) use ($currentCiv) {
 <div class="kb-grid">
     <?php foreach ($builds as $b): ?>
         <a href="<?= Url::to(['build/view', 'slug' => $b->slug]) ?>" class="admin5-card admin5-card-border kb-card">
-            <h2 class="kb-card-title"><?= Html::encode($b->title) ?></h2>
+            <h2 class="kb-card-title"><?= Html::encode($b->shortTitle) ?></h2>
             <div class="pill-row">
                 <?= UnitPills::eloPill($b->elo) ?>
                 <?= UnitPills::tagPill($b->category, $b->categoryLabel) ?>

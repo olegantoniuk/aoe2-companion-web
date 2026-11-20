@@ -470,7 +470,7 @@ class UnitPills
     }
 
     /**
-     * The cells of one unit row: avatar, name (with the civilization of a unique unit), a third column,
+     * The cells of one unit row: avatar, name (with the civilizations it belongs to, see Unit::getOwnerCivs), a third column,
      * age, stats with their icons, cost. $third: 'class' (main class), 'classes' (every armor class) or 'building'.
      */
     public static function unitRowCells(Unit $unit, $third = 'class', $skip = [])
@@ -480,8 +480,8 @@ class UnitPills
             . self::avatar($unit->iconUrl) . '</a></td>';
 
         $h .= '<td><a href="' . $url . '" class="unit-list-name">' . Html::encode($unit->name) . '</a>';
-        if ($unit->is_unique && $unit->civilization) {
-            $h .= '<div class="unit-list-civ-row">' . self::civPill($unit->civilization) . '</div>';
+        if ($civs = $unit->ownerCivs) {
+            $h .= '<div class="unit-list-civ-row">' . implode('', array_map([self::class, 'civPill'], $civs)) . '</div>';
         }
         $h .= '</td>';
 

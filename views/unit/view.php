@@ -219,15 +219,9 @@ foreach ($techGroups as $techName => $items) {
         <div class="unit-title-text">
             <h1><?= Html::encode($unit->name) ?></h1>
             <?php
-            // a unique unit shared by a few civilizations (Winged Hussar) shows all of them
-            $titleCivs = [];
-            if ($unit->is_unique) {
-                foreach ($availability as $a) {
-                    if ($a->available) $titleCivs[$a->civilization->id] = $a->civilization;
-                }
-                if (count($titleCivs) > 3) $titleCivs = [];
-                if ($unit->civilization) $titleCivs[$unit->civilization->id] = $unit->civilization;
-            }
+            // a unique unit shared by a few civilizations (Winged Hussar) shows all of them,
+            // a unit only one civilization trains (Imperial Skirmisher) shows that one
+            $titleCivs = $unit->ownerCivs;
             ?>
             <?php if ($titleCivs): ?>
                 <span class="unit-title-civ">
@@ -341,8 +335,9 @@ foreach ($techGroups as $techName => $items) {
                         <?php endif; ?>
                     </td></tr>
                 <?php endif; ?>
-                <?php if ($unit->civilization): ?>
-                    <tr><th>Civilization</th><td><?= UnitPills::civPill($unit->civilization) ?></td></tr>
+                <?php $statCivs = $unit->civilization ? [$unit->civilization] : $unit->ownerCivs; ?>
+                <?php if ($statCivs): ?>
+                    <tr><th>Civilization</th><td><?= implode(' ', array_map([UnitPills::class, 'civPill'], $statCivs)) ?></td></tr>
                 <?php endif; ?>
                 <?php if ($unit->training_time): ?>
                     <tr><th>Training Time</th><td><img src="/images/stats/time.png" alt="" class="res-icon"> <?= $unit->training_time ?>s</td></tr>

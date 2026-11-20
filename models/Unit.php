@@ -50,6 +50,43 @@ class Unit extends ActiveRecord
         return $ev;
     }
 
+    /** [unit id => civilization ids that can train it], read once per request. */
+    private static $civIdsOf = null;
+
+    /**
+     * The civilizations a unit belongs to, for the pill under its name:
+     * a unique unit with every civilization that can train it (up to three, like the Winged Hussar),
+     * and a unit not marked unique that only one civilization can train (Imperial Skirmisher, Dragon Ship, Houfnice).
+     * Regional units shared by four or more civilizations get none.
+     * @return Civilization[]
+     */
+    public function getOwnerCivs()
+    {
+        if (self::$civIdsOf === null) {
+            self::$civIdsOf = [];
+            foreach ((new \yii\db\Query())->select(['unit_id', 'civilization_id'])->from('unit_availability')
+                         ->where(['available' => 1])->all() as $row) {
+                self::$civIdsOf[$row['unit_id']][] = (int)$row['civilization_id'];
+            }
+        }
+        $ids = self::$civIdsOf[$this->id] ?? [];
+        if ($this->is_unique) {
+            if (count($ids) > 3) $ids = [];
+            if ($this->civilization_id) array_unshift($ids, (int)$this->civilization_id);
+        } elseif (count($ids) !== 1) {
+            return [];
+        }
+        $ids = array_values(array_unique($ids));
+        if (!$ids) return [];
+        $civs = Civilization::find()->where(['id' => $ids])->indexBy('id')->all();
+        // the unit's own civilization first, the others by name
+        $out = [];
+        if ($this->civilization_id && isset($civs[$this->civilization_id])) $out[] = $civs[$this->civilization_id];
+        uasort($civs, function ($a, $b) { return strcmp($a->name, $b->name); });
+        foreach ($civs as $id => $c) if ($id != $this->civilization_id) $out[] = $c;
+        return $out;
+    }
+
     public static function tableName()
     {
         return 'unit';

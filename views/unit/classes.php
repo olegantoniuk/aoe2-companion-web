@@ -32,7 +32,7 @@ uasort($byCount, function ($a, $b) { return $b['unitCount'] - $a['unitCount']; }
         <?= UnitPills::pageIcon('classes') ?>
         <h1>Unit Classes <span class="badge bg-secondary badge-sm"><?= count($classes) ?></span></h1>
     </div>
-    <p class="text-muted">Units classified by their armor classes — the same system the game uses for attack bonuses.</p>
+    <p class="text-muted">Units grouped by armor class, the system the game uses for attack bonuses.</p>
 </div>
 
 <div class="unit-tabs">

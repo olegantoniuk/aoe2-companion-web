@@ -53,4 +53,20 @@ class BuildOrder extends ActiveRecord
         }
         return null;
     }
+
+    /**
+     * Title without the population count, for the cards that show "Click up at N pop" anyway:
+     * "Maya Archers (22 pop)" -> "Maya Archers", "Archers (22 pop, two ranges)" -> "Archers (two ranges)",
+     * "Fast Castle into Knights (28+2)" -> "Fast Castle into Knights". Other notes in brackets stay.
+     */
+    public function getShortTitle()
+    {
+        $t = preg_replace_callback('/\s*\(([^)]*)\)/', function ($m) {
+            $rest = preg_replace('/^\d+(?:\+\d+)*(?:\s*pop)?\s*(?:,\s*|$)/i', '', $m[1]);
+            if ($rest === $m[1]) return $m[0];
+            $rest = preg_replace('/^plus\s+/i', '', $rest);
+            return $rest === '' ? '' : ' (' . $rest . ')';
+        }, (string)$this->title);
+        return trim($t) ?: $this->title;
+    }
 }

@@ -861,9 +861,6 @@ ul.pagination > li.page-item.disabled .page-link {
     color: inherit;
 }
 
-.civ-card-link:hover .admin5-card {
-    border-color: var(--color-border-strong);
-}
 
 /* ============================================
    Breadcrumb
@@ -1273,20 +1270,6 @@ ul.pagination > li.page-item.disabled .page-link {
     height: 14px;
     object-fit: contain;
     vertical-align: middle;
-}
-
-/* ── Class Cards ── */
-.class-card-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-}
-.class-card-link:hover {
-    text-decoration: none;
-    color: inherit;
-}
-.class-card-link:hover .admin5-card {
-    border-color: var(--color-border-strong);
 }
 
 /* ── Tech Icons ── */
@@ -2868,7 +2851,7 @@ a.kb-category:hover {
 .build-steps {
     list-style: none;
     margin: 0;
-    padding: 6px 0;
+    padding: 6px 0 0;
 }
 
 .build-step {
@@ -3666,7 +3649,7 @@ a.pill-elo:hover {
 .build-scenes {
     list-style: none;
     margin: 0;
-    padding: 8px 0;
+    padding: 8px 0 0;
 }
 
 .build-scene-step {
@@ -3692,12 +3675,9 @@ a.pill-elo:hover {
 }
 
 .scene {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    gap: 6px 28px;
-    min-height: 120px;
-    padding: 14px 18px 22px;
+    position: relative;
+    min-height: 150px;
+    padding: 0 18px;
     border-radius: 4px;
     /* game grass at the scale of the sprites: 512 px tile x 0.62 */
     background: url(/images/scene/ground_grass.jpg) repeat left top / 317px;
@@ -3716,10 +3696,6 @@ a.pill-elo:hover {
     position: relative;
     display: inline-flex;
     align-items: flex-end;
-}
-
-.scene-crowd .scene-vil + .scene-vil {
-    margin-left: -46px;
 }
 
 .scene-sprite {
@@ -3748,6 +3724,8 @@ a.pill-elo:hover {
 
 .scene-arrow {
     align-self: center;
+    display: inline-flex;
+    margin: 0 4px;
     color: #fff;
     opacity: 0.85;
     filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
@@ -3783,19 +3761,48 @@ a.pill-elo:hover {
     background: var(--color-avatar-bg);
 }
 
-.scene {
-    display: block;
-}
-
+/* one ground line per row; build-scenes.js sets the zoom, the wrap and the vertical position */
 .scene-inner {
+    position: relative;
     display: flex;
     flex-wrap: nowrap;
     align-items: flex-end;
     gap: 28px;
+    padding-top: 18px;
+}
+
+.scene-inner.is-wrapped {
+    flex-wrap: wrap;
+    row-gap: 34px;
 }
 
 .scene-inner > * {
     flex: none;
+}
+
+/* forest, berry bushes, palisade line: sprites laid out around one ground point */
+.scene-cluster {
+    position: relative;
+    display: block;
+    flex: none;
+}
+
+.scene-cluster .scene-piece {
+    position: absolute;
+    display: block;
+    max-width: none;
+    height: auto;
+}
+
+/* the villagers stand in front of the trees and bushes they work on */
+.scene-work .scene-crowd {
+    z-index: 1;
+}
+
+.scene-arrow svg {
+    width: 18px;
+    height: 18px;
+    margin-right: -6px;
 }
 
 /* neutral beige tag pill: topics, build styles, map types (same size as the compact level pill) */
@@ -4267,7 +4274,8 @@ a.pill-elo:hover {
 .home-stat,
 .building-card,
 .civ-row,
-.kb-video {
+.kb-video,
+.civ-card-link > .admin5-card {
     transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
 }
 
@@ -4276,7 +4284,8 @@ a.pill-elo:hover {
 .home-tile:hover,
 .home-stat:hover,
 .building-card:hover,
-.kb-video:hover {
+.kb-video:hover,
+.civ-card-link:hover > .admin5-card {
     transform: translateY(-4px);
     border-color: var(--color-hover-border) !important;
     box-shadow: var(--shadow-hover);
@@ -4306,6 +4315,7 @@ a.counter-unit-link:hover {
     .home-stat:hover,
     .building-card:hover,
     .kb-video:hover,
+    .civ-card-link:hover > .admin5-card,
     .kb-chip:hover,
     a.counter-unit-link:hover {
         transform: none;
@@ -4503,4 +4513,144 @@ nav.navbar.is-scrolled {
     width: 100%;
     height: 100%;
     pointer-events: none;
+}
+
+/* building page: technologies in the right column, under the trained units */
+.building-techs-title {
+    margin-top: 28px;
+}
+
+.building-techs-title + .tech-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .building-techs-title + .tech-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 575px) {
+    .building-techs-title + .tech-grid { grid-template-columns: 1fr; }
+}
+
+/* unit classes: the same tiles as on the home page, with the description under the name */
+.class-tile {
+    align-items: flex-start;
+}
+
+.class-tile:hover {
+    color: inherit;
+    text-decoration: none;
+}
+
+.class-tile .home-tile-icon {
+    margin-top: 2px;
+}
+
+.class-tile .home-tile-meta {
+    margin-top: 2px;
+    line-height: 1.4;
+}
+
+/* civilization filter of the guides and builds: the searchable list from the matchup page, with links */
+.kb-civ-picker {
+    width: 260px;
+    max-width: 100%;
+}
+
+.kb-civ-picker .searchable-select-trigger {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 34px;
+    padding: 4px 10px;
+    font-size: 0.875rem;
+    text-align: left;
+}
+
+.kb-civ-picker .civ-emblem-sm {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+}
+
+.kb-civ-picker-caret {
+    display: inline-flex;
+    color: var(--color-text-muted);
+    transform: rotate(90deg);
+    transition: transform 0.15s ease;
+}
+
+.kb-civ-picker .searchable-select-trigger[aria-expanded="true"] .kb-civ-picker-caret {
+    transform: rotate(-90deg);
+}
+
+.kb-civ-picker .searchable-select-dropdown {
+    max-height: 340px;
+}
+
+.kb-civ-picker .searchable-select-options {
+    max-height: 300px;
+}
+
+.kb-civ-picker .searchable-select-option {
+    padding: 6px 10px;
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.kb-civ-picker .searchable-select-option[hidden] {
+    display: none;
+}
+
+.kb-civ-picker .searchable-select-option.is-active {
+    background: var(--color-surface-active);
+}
+
+.kb-civ-picker .searchable-select-option.is-selected {
+    font-weight: 600;
+    color: var(--color-text-strong);
+}
+
+.kb-civ-picker-empty {
+    padding: 8px 12px;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+}
+
+.kb-civ-picker .searchable-select-option:hover {
+    color: var(--color-text-strong);
+    text-decoration: none;
+}
+
+/* count pills next to a title grow with it: about half the title size in headings, a step up elsewhere */
+h1 > .badge-sm,
+h2 > .badge-sm,
+h3 > .badge-sm {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.9em;
+    margin-left: 0.25em;
+    padding: 0.3em 0.75em;
+    font-size: 0.5em;
+    font-weight: 600;
+    line-height: 1;
+    vertical-align: 0.3em;
+    font-variant-numeric: tabular-nums;
+}
+
+h2 > .badge-sm,
+h3 > .badge-sm {
+    font-size: 0.6em;
+    vertical-align: 0.2em;
+}
+
+.card-header .badge-sm,
+.unit-group-header .badge-sm,
+.home-tile-name .badge-sm,
+.nav-link .badge-sm {
+    padding: 3px 10px;
+    font-size: 13px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
 }

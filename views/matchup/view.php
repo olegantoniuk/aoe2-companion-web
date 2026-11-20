@@ -141,11 +141,11 @@ $enemyLine = function (array $units) use ($enemyName) {
     return '<div class="matchup-line">' . implode('<span class="matchup-line-step">' . UnitPills::chevron() . '</span>', $parts) . '</div>';
 };
 
-// Civilization pill for a unique unit and the pill of its main armor class
+// Civilization pills of a unique (or single civilization) unit and the pill of its main armor class
 $enemyPills = function ($u) {
     $pills = '';
-    if ($u->is_unique && $u->civilization) {
-        $pills .= UnitPills::civPill($u->civilization);
+    foreach ($u->ownerCivs as $c) {
+        $pills .= UnitPills::civPill($c);
     }
     $main = UnitPills::mainClass($u);
     if ($main) {

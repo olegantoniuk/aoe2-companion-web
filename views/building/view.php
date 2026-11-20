@@ -104,7 +104,7 @@ $civs = $availNames ? Civilization::find()->where(['name' => $availNames])->orde
 
         <?php if ($units): ?>
             <div class="admin5-card admin5-card-border building-trains">
-                <div class="card-header"><strong>Trains</strong> <span class="badge bg-secondary badge-sm"><?= count($units) ?></span></div>
+                <div class="card-header"><span><strong>Trains</strong> <span class="badge bg-secondary badge-sm"><?= count($units) ?></span></span></div>
                 <div class="table-responsive">
                     <table class="table table-striped table-sm mb-0 unit-list-table">
                         <thead><?= UnitPills::unitTableHead('Class') ?></thead>
@@ -117,12 +117,12 @@ $civs = $availNames ? Civilization::find()->where(['name' => $availNames])->orde
                 </div>
             </div>
         <?php endif; ?>
+
+        <?php if ($techs): ?>
+            <h2 class="unit-section-title building-techs-title">Technologies <span class="badge bg-secondary badge-sm"><?= count($techs) ?></span></h2>
+            <?= $this->render('//technology/_cards', ['techs' => $techs]) ?>
+        <?php endif; ?>
     </div>
 </div>
-
-<?php if ($techs): ?>
-    <h2 class="unit-section-title">Technologies <span class="badge bg-secondary badge-sm"><?= count($techs) ?></span></h2>
-    <?= $this->render('//technology/_cards', ['techs' => $techs]) ?>
-<?php endif; ?>
 
 <?php UnitPills::registerTips($this); ?>

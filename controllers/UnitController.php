@@ -156,13 +156,13 @@ class UnitController extends Controller
                 'name' => 'Spearmen',
                 'names' => ['Spearman', 'Pikeman', 'Halberdier'],
                 'icon' => 'halberdier',
-                'description' => 'The Spearman upgrade line — effective counter to cavalry.',
+                'description' => 'The Spearman upgrade line, a counter to cavalry.',
             ],
             'skirmishers' => [
                 'name' => 'Skirmishers',
                 'names' => ['Skirmisher', 'Elite Skirmisher', 'Imperial Skirmisher'],
                 'icon' => 'elite-skirmisher',
-                'description' => 'Ranged trash units — effective counter to archers.',
+                'description' => 'Ranged trash units that counter archers.',
             ],
             'light-cavalry' => [
                 'name' => 'Light Cavalry',
@@ -174,19 +174,19 @@ class UnitController extends Controller
                 'name' => 'Knights',
                 'names' => ['Knight', 'Cavalier', 'Paladin'],
                 'icon' => 'paladin',
-                'description' => 'The Knight upgrade line — heavy cavalry.',
+                'description' => 'The Knight upgrade line of heavy cavalry.',
             ],
             'camels' => [
                 'name' => 'Camel Units',
                 'like' => 'Camel',
                 'icon' => 'heavy-camel-rider',
-                'description' => 'Camel-mounted units — effective counter to cavalry.',
+                'description' => 'Camel riders, a counter to cavalry.',
             ],
             'eagle-warriors' => [
                 'name' => 'Eagle Warriors',
                 'names' => ['Eagle Scout', 'Eagle Warrior', 'Elite Eagle Warrior'],
                 'icon' => 'elite-eagle-warrior',
-                'description' => 'Fast Meso-American infantry — cavalry substitute.',
+                'description' => 'Fast Meso-American infantry that stands in for cavalry.',
             ],
             'battle-elephants' => [
                 'name' => 'Elephants',
@@ -198,7 +198,7 @@ class UnitController extends Controller
                 'name' => 'Rams',
                 'names' => ['Battering Ram', 'Capped Ram', 'Siege Ram'],
                 'icon' => 'siege-ram',
-                'description' => 'Ram units — effective against buildings.',
+                'description' => 'Rams, built to knock down buildings.',
             ],
         ];
     }
@@ -311,7 +311,7 @@ class UnitController extends Controller
             ],
             'shock-infantry' => [
                 'name' => 'Shock Infantry',
-                'description' => 'Fast infantry with high pierce armor — Eagle Scout line.',
+                'description' => 'The Eagle Scout line: fast infantry with high pierce armor.',
                 'armorClasses' => ['Shock infantry'],
                 'icon' => 'elite-eagle-warrior',
                 'isMain' => false,

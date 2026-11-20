@@ -99,7 +99,7 @@ $stepIcon = function ($type) use ($stepIcons) {
                     <div class="admin5-card admin5-card-border admin5-card-attached">
                         <ol class="build-scenes">
                             <?php foreach ($steps as $i => $s): ?>
-                                <?php $scene = BuildScene::render($s); ?>
+                                <?php $scene = BuildScene::render($s, $i === 0); ?>
                                 <li class="build-scene-step build-step-<?= Html::encode($s['type'] ?? 'note') ?>">
                                     <div class="build-scene-head">
                                         <span class="build-step-num">Step <?= $i + 1 ?></span>
@@ -156,14 +156,18 @@ $stepIcon = function ($type) use ($stepIcons) {
         <?php foreach ($related as $b): ?>
             <a href="<?= Url::to(['build/view', 'slug' => $b->slug]) ?>" class="admin5-card admin5-card-border kb-card">
                 <div class="kb-card-meta"><?= UnitPills::eloPill($b->elo) ?></div>
-                <h2 class="kb-card-title"><?= Html::encode($b->title) ?></h2>
+                <h2 class="kb-card-title"><?= Html::encode($b->shortTitle) ?></h2>
                 <p class="kb-card-summary"><?= Html::encode($b->summary) ?></p>
+                <?php if ($b->ageUpPop): ?>
+                    <div class="kb-card-foot"><span class="kb-pop">Click up at <strong><?= $b->ageUpPop ?></strong> pop</span></div>
+                <?php endif; ?>
             </a>
         <?php endforeach; ?>
     </div>
 <?php endif; ?>
 
 <?php UnitPills::registerTips($this); ?>
+<?php if ($hasScenes) $this->registerJsFile('/js/build-scenes.js?v=' . filemtime(Yii::getAlias('@webroot') . '/js/build-scenes.js'), ['defer' => true]); ?>
 
 <script>
 (function () {
