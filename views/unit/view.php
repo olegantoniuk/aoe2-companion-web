@@ -183,6 +183,10 @@ $techTableCivs = [];
 foreach ($availability as $a) {
     if ($a->available) $techTableCivs[] = $a->civilization;
 }
+if (!$techTableCivs) {
+    // a unit nobody trains from its own buildings: the civilizations that can still get it
+    $techTableCivs = $unit->capturedCivs;
+}
 if (!$techTableCivs && $unit->civilization) {
     $techTableCivs[] = $unit->civilization;
 }
@@ -335,7 +339,7 @@ foreach ($techGroups as $techName => $items) {
                         <?php endif; ?>
                     </td></tr>
                 <?php endif; ?>
-                <?php $statCivs = $unit->civilization ? [$unit->civilization] : $unit->ownerCivs; ?>
+                <?php $statCivs = $unit->capturedCivs ?: ($unit->civilization ? [$unit->civilization] : $unit->ownerCivs); ?>
                 <?php if ($statCivs): ?>
                     <tr><th>Civilization</th><td><?= implode(' ', array_map([UnitPills::class, 'civPill'], $statCivs)) ?></td></tr>
                 <?php endif; ?>
@@ -1027,9 +1031,24 @@ JS
         return $a->civilization->name <=> $b->civilization->name;
     });
     ?>
+    <?php
+    // nobody trains it from its own buildings: say how it is obtained instead of a wall of crosses
+    $noneAvailable = !array_filter($sorted, function ($a) { return $a->available; });
+    $captured = \app\models\Unit::CAPTURED_ONLY[$unit->slug] ?? null;
+    ?>
     <div class="admin5-card admin5-card-border unit-avail-card">
         <div class="card-header"><strong>Civilization Availability</strong></div>
         <div class="card-content">
+            <?php if ($noneAvailable): ?>
+                <p class="unit-avail-note"><?= Html::encode($captured['note'] ?? 'No civilization can train it in a standard game.') ?></p>
+                <?php foreach ($captured['groups'] ?? [] as $label => $names): ?>
+                    <?php $groupCivs = \app\models\Civilization::find()->where(['name' => $names])->orderBy(['name' => SORT_ASC])->all(); ?>
+                    <div class="unit-avail-group">
+                        <span class="unit-avail-group-label"><?= Html::encode($label) ?></span>
+                        <span class="pill-row"><?php foreach ($groupCivs as $gc): ?><?= UnitPills::civPill($gc) ?><?php endforeach; ?></span>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
             <div class="civ-avail-grid">
                 <?php foreach ($sorted as $a): ?>
                     <div class="civ-avail-item<?= $a->available ? '' : ' is-no' ?>">
@@ -1045,6 +1064,7 @@ JS
                     </div>
                 <?php endforeach; ?>
             </div>
+            <?php endif; ?>
         </div>
     </div>
 <?php endif; ?>

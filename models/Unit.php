@@ -50,6 +50,28 @@ class Unit extends ActiveRecord
         return $ev;
     }
 
+    /**
+     * Units no civilization trains from a building of its own, so the availability table marks every civilization "no".
+     * Per unit: a short note and the civilizations that can still get it, as [label => civilization names].
+     */
+    const CAPTURED_ONLY = [
+        'xolotl-warrior' => [
+            'note' => 'No civilization trains it from a building of its own. The American civilizations have no Stable, so they get the Xolotl Warrior from a Stable they did not build.',
+            'groups' => [
+                'From an enemy Stable converted with Redemption' => ['Aztecs', 'Inca', 'Muisca', 'Tupi'],
+                'Only from Stables the map or the Scenario Editor places (no Redemption)' => ['Maya', 'Mapuche'],
+            ],
+        ],
+    ];
+
+    /** Civilizations that can get a unit listed in CAPTURED_ONLY, by name; empty for every other unit. */
+    public function getCapturedCivs()
+    {
+        $groups = self::CAPTURED_ONLY[$this->slug]['groups'] ?? [];
+        $names = $groups ? array_merge(...array_values($groups)) : [];
+        return $names ? Civilization::find()->where(['name' => $names])->orderBy(['name' => SORT_ASC])->all() : [];
+    }
+
     /** [unit id => civilization ids that can train it], read once per request. */
     private static $civIdsOf = null;
 
