@@ -26,7 +26,7 @@ class BuildingController extends Controller
     {
         $building = Building::findOne(['slug' => $slug]);
         if (!$building) {
-            throw new NotFoundHttpException('Building not found.');
+            throw new NotFoundHttpException(\Yii::t('app', 'Building not found.'));
         }
 
         return $this->render('view', ['building' => $building]);

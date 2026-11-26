@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use app\components\Tr;
 
 ?>
 <div class="col-md-4 col-lg-3">
@@ -10,7 +11,7 @@ use yii\helpers\Url;
             <img src="<?= Html::encode($iconMap[$cls['icon']]) ?>" alt="" class="home-tile-icon class-tile-icon">
         <?php endif; ?>
         <span>
-            <span class="home-tile-name"><?= Html::encode($cls['name']) ?> <span class="badge bg-secondary badge-sm ms-1"><?= $cls['unitCount'] ?></span></span>
+            <span class="home-tile-name"><?= Tr::nameHtml($cls['name']) ?> <span class="badge bg-secondary badge-sm ms-1"><?= $cls['unitCount'] ?></span></span>
             <span class="home-tile-meta"><?= Html::encode($cls['description']) ?></span>
         </span>
     </a>

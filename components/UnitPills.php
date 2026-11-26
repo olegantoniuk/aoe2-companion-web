@@ -71,9 +71,11 @@ class UnitPills
     private static $icons = null;
     private static $classSlugs = null;
 
+    /** A hover card text in the current language; the classicon: keys are data and stay as they are. */
     public static function text($key)
     {
-        return self::TEXTS[$key] ?? null;
+        $t = self::TEXTS[$key] ?? null;
+        return $t === null || strpos($key, 'classicon:') === 0 ? $t : Yii::t('app', $t);
     }
 
     /** Icon of a unit by slug, one query for all units. */
@@ -194,7 +196,7 @@ class UnitPills
         $t = trim($t, " .,;");
         // a lone closing or opening bracket left from a split list
         if (substr_count($t, '(') !== substr_count($t, ')')) $t = trim(str_replace(['(', ')'], '', $t));
-        return $t === '' ? null : ucfirst($t);
+        return $t === '' ? null : mb_strtoupper(mb_substr($t, 0, 1)) . mb_substr($t, 1);
     }
 
     /** A round avatar image on the beige backdrop. */
@@ -205,7 +207,8 @@ class UnitPills
 
     /**
      * One pill: optional avatar, label, optional link and hover card.
-     * $o: href, icon, iconClass, variant (class|age|building), unitId, tip [title, subtitle, icon, iconPlain, text]
+     * $o: href, icon, iconClass, variant (class|age|building), unitId, tip [title, subtitle, icon, iconPlain, text],
+     * labelHtml (the label as ready HTML such as Tr::nameHtml(), used instead of the encoded $label)
      */
     public static function pill($label, array $o = [])
     {
@@ -223,7 +226,7 @@ class UnitPills
             ? '<img src="' . Html::encode($o['icon']) . '" alt="" class="' . ($o['iconClass'] ?? 'unit-image-xs') . '">'
             : '';
         $tag = !empty($o['href']) ? 'a' : 'span';
-        return "<$tag$attrs>$img" . Html::encode($label) . "</$tag>";
+        return "<$tag$attrs>$img" . ($o['labelHtml'] ?? Html::encode($label)) . "</$tag>";
     }
 
     private static function classSlug($className)
@@ -286,16 +289,17 @@ class UnitPills
     public static function mapPill($type, $href = null)
     {
         $key = in_array($type, ['hybrid', 'water'], true) ? $type . '-map' : $type;
-        return self::tagPill($key, ucfirst($type) . ' maps', $href);
+        return self::tagPill($key, Yii::t('app', ucfirst($type) . ' maps'), $href);
     }
 
     /** Difficulty of a build as three equal circles; the filled ones take the colour of the level. */
     public static function difficulty($level)
     {
         $level = max(0, min(3, (int)$level));
-        $names = [1 => 'Easy', 2 => 'Medium', 3 => 'Hard'];
-        $svg = '<svg class="difficulty difficulty-' . $level . '" viewBox="0 0 44 12" width="44" height="12" role="img" aria-label="Difficulty: '
-            . ($names[$level] ?? 'unknown') . '"><title>Difficulty: ' . ($names[$level] ?? 'unknown') . '</title>';
+        $names = [1 => Yii::t('app', 'Easy'), 2 => Yii::t('app', 'Medium'), 3 => Yii::t('app', 'Hard')];
+        $label = Html::encode(Yii::t('app', 'Difficulty: {level}', ['level' => $names[$level] ?? Yii::t('app', 'unknown')]));
+        $svg = '<svg class="difficulty difficulty-' . $level . '" viewBox="0 0 44 12" width="44" height="12" role="img" aria-label="'
+            . $label . '"><title>' . $label . '</title>';
         for ($i = 0; $i < 3; $i++) {
             $svg .= '<circle cx="' . (6 + $i * 16) . '" cy="6" r="4.5" class="' . ($i < $level ? 'is-on' : 'is-off') . '"/>';
         }
@@ -358,7 +362,8 @@ class UnitPills
             'variant' => 'class',
             'href' => $slug ? Url::to(['unit/class', 'slug' => $slug]) : null,
             'icon' => $icon,
-            'tip' => $text ? ['title' => $title, 'subtitle' => 'Armor class', 'icon' => $icon, 'text' => $text] : null,
+            'labelHtml' => $label === null ? Tr::nameHtml($title) : null,
+            'tip' => $text ? ['title' => Tr::name($title), 'subtitle' => Yii::t('app', 'Armor class'), 'icon' => $icon, 'text' => $text] : null,
         ]);
     }
 
@@ -367,6 +372,7 @@ class UnitPills
     {
         if (!$civ) return '';
         return self::pill($civ->name, [
+            'labelHtml' => Tr::nameHtml($civ->name),
             'variant' => 'civ',
             'href' => Url::to(['civilization/view', 'slug' => $civ->slug]),
             'icon' => $civ->emblemUrl,
@@ -380,34 +386,93 @@ class UnitPills
      */
     public static function linkify($html, $selfSlug = null)
     {
-        static $targets = null, $regex = null;
+        static $targets = null, $alt = null;
         if ($targets === null) {
             $targets = [];
+            // form => [route, slug, the English name the form belongs to]
             foreach (Unit::find()->select(['id', 'name', 'slug'])->all() as $u) {
                 $forms = [$u->name, $u->name . 's', $u->name . 'es'];
                 if (substr($u->name, -3) === 'man') $forms[] = substr($u->name, 0, -3) . 'men';
                 foreach ($forms as $f) {
-                    $targets[strtolower($f)] = ['unit/view', $u->slug];
+                    $targets[strtolower($f)] = ['unit/view', $u->slug, $u->name];
                 }
             }
-            $targets['leiciai'] = ['unit/view', 'leitis'];
+            $targets['leiciai'] = ['unit/view', 'leitis', 'Leitis'];
             foreach (\app\models\Civilization::find()->select(['id', 'name', 'slug'])->all() as $c) {
-                $targets[strtolower($c->name)] = ['civilization/view', $c->slug];
+                $targets[strtolower($c->name)] = ['civilization/view', $c->slug, $c->name];
                 // "Sicilians" -> "Sicilian"
-                if (substr($c->name, -1) === 's') $targets[strtolower(substr($c->name, 0, -1))] = ['civilization/view', $c->slug];
+                if (substr($c->name, -1) === 's') $targets[strtolower(substr($c->name, 0, -1))] = ['civilization/view', $c->slug, $c->name];
             }
             $names = array_keys($targets);
             usort($names, function ($a, $b) { return strlen($b) - strlen($a); });
-            $regex = '/(?<![\w-])(' . implode('|', array_map(function ($n) { return preg_quote(Html::encode($n), '/'); }, $names)) . ')(?![\w-])/i';
+            $alt = implode('|', array_map(function ($n) { return preg_quote(Html::encode($n), '/'); }, $names));
         }
         $seen = [];
-        return preg_replace_callback($regex, function ($m) use ($targets, $selfSlug, &$seen) {
-            $t = $targets[strtolower(html_entity_decode($m[1], ENT_QUOTES))] ?? null;
-            if (!$t || $t[1] === $selfSlug || isset($seen[$t[0] . $t[1]])) {
-                return $m[1];
-            }
+        $link = function ($t, $inner) {
+            return '<a href="' . Url::to([$t[0], 'slug' => $t[1]]) . '" class="text-link">' . $inner . '</a>';
+        };
+        // true for a name that stays plain: unknown, the page's own one, or one already linked
+        $skip = function ($t) use ($selfSlug, &$seen) {
+            if (!$t || $t[1] === $selfSlug || isset($seen[$t[0] . $t[1]])) return true;
             $seen[$t[0] . $t[1]] = true;
-            return '<a href="' . Url::to([$t[0], 'slug' => $t[1]]) . '" class="text-link">' . $m[1] . '</a>';
+            return false;
+        };
+        $target = function ($name) use ($targets) {
+            return $targets[strtolower(html_entity_decode($name, ENT_QUOTES))] ?? null;
+        };
+
+        if (Tr::isEnglish()) {
+            return preg_replace_callback('/(?<![\w-])(' . $alt . ')(?![\w-])/i', function ($m) use ($link, $skip, $target) {
+                $t = $target($m[1]);
+                return $skip($t) ? $m[1] : $link($t, $m[1]);
+            }, $html);
+        }
+
+        // Translated texts write a name as "Арбалетники (Arbalesters)": up to three words, then the English name in
+        // brackets. Words and brackets become one link when the words start like the translated name of that unit or
+        // civilization (Tr::short), word for word, with the last letters of each word left free for the case ending.
+        // Otherwise only the English name inside the brackets is linked. English names outside brackets link as in English.
+        $w = '[\p{L}\p{N}_-]';
+        $regex = '/(?<pre>(?:[^\s()<>]+\s+){1,3})\((?<b>' . $alt . ')\)|(?<!' . $w . ')(?<n>' . $alt . ')(?!' . $w . ')/iu';
+        return preg_replace_callback($regex, function ($m) use ($link, $skip, $target) {
+            if (($m['n'] ?? '') !== '') {
+                $t = $target($m['n']);
+                return $skip($t) ? $m['n'] : $link($t, $m['n']);
+            }
+            $t = $target($m['b']);
+            if ($skip($t)) return $m[0];
+            $pre = rtrim($m['pre']);
+            $space = substr($m['pre'], strlen($pre));
+            $words = preg_split('/(\s+)/u', $pre, -1, PREG_SPLIT_DELIM_CAPTURE);
+            $short = trim(Tr::short($t[2]));
+            $own = preg_split('/\s+/u', $short);
+            $n = count($own);
+            if ($short !== '' && $short !== $t[2] && 2 * $n - 1 <= count($words)) {
+                // the last $n words; punctuation or entities in front of the first one stay outside the link
+                $start = count($words) - (2 * $n - 1);
+                preg_match('/^((?:&[#\w]+;|[^\p{L}\p{N}&])*)(.*)$/su', $words[$start], $fm);
+                $span = array_slice($words, $start);
+                $span[0] = $fm[2];
+                $ok = $fm[2] !== '';
+                foreach ($own as $i => $word) {
+                    // each part of a hyphenated word on its own: "Воїн-орел" fits "Воїни-орли"
+                    $parts = explode('-', mb_strtolower($word));
+                    $textParts = explode('-', mb_strtolower(html_entity_decode($span[2 * $i], ENT_QUOTES, 'UTF-8')));
+                    if (count($parts) !== count($textParts)) $ok = false;
+                    foreach ($parts as $k => $part) {
+                        if (!$ok) break;
+                        $len = mb_strlen($part);
+                        $stem = mb_substr($part, 0, $len >= 4 ? $len - 2 : max(1, $len - 1));
+                        if ($stem === '' || mb_strpos($textParts[$k], $stem) !== 0) $ok = false;
+                    }
+                    if (!$ok) break;
+                }
+                if ($ok) {
+                    return implode('', array_slice($words, 0, $start)) . $fm[1]
+                        . $link($t, implode('', $span) . $space . '(' . $m['b'] . ')');
+                }
+            }
+            return $m['pre'] . '(' . $link($t, $m['b']) . ')';
         }, $html);
     }
 
@@ -416,25 +481,29 @@ class UnitPills
     {
         $text = null;
         if ($u->description) {
-            $first = trim(preg_split('/\n\s*\n/', trim($u->description))[0]);
+            // the whole description is the translation key: translate first, then cut
+            $first = trim(preg_split('/\n\s*\n/', trim((string)Tr::text($u->description, 'units')))[0]);
             // the first two sentences are enough for a hover card
-            $parts = preg_split('/(?<=[.!?])\s+(?=[A-Z])/', $first);
+            $parts = preg_split('/(?<=[.!?])\s+(?=\p{Lu})/u', $first);
             $text = implode(' ', array_slice($parts, 0, 2));
         }
         $atkIcon = $u->melee_attack !== null ? 'melee_attack' : 'pierce_attack';
         $stats = [
-            ['hit_points', $u->hit_points, 'Hit points'],
-            [$atkIcon, $u->melee_attack ?? $u->pierce_attack, 'Attack'],
-            ['melee_armor', ($u->melee_armor ?? 0) . '/' . ($u->pierce_armor ?? 0), 'Armor'],
-            [$u->range_val ? 'range' : 'movement_speed', $u->range_val ?: $u->speed, $u->range_val ? 'Range' : 'Speed'],
+            ['hit_points', $u->hit_points, Yii::t('app', 'Hit points')],
+            [$atkIcon, $u->melee_attack ?? $u->pierce_attack, Yii::t('app', 'Attack')],
+            ['melee_armor', ($u->melee_armor ?? 0) . '/' . ($u->pierce_armor ?? 0), Yii::t('app', 'Armor')],
+            [$u->range_val ? 'range' : 'movement_speed', $u->range_val ?: $u->speed, $u->range_val ? Yii::t('app', 'Range') : Yii::t('app', 'Speed')],
         ];
         $cost = [];
         foreach (['Food' => $u->cost_food, 'Wood' => $u->cost_wood, 'Gold' => $u->cost_gold, 'Stone' => $u->cost_stone] as $res => $n) {
-            if ($n) $cost[] = [$res, (int)$n];
+            // outside English a third item carries the translated name for the alt text (see registerTips)
+            if ($n) $cost[] = Tr::isEnglish() ? [$res, (int)$n] : [$res, (int)$n, Tr::name($res)];
         }
+        $building = $u->training_building ? preg_replace('/requires.*|since.*|\(.*\)|\*/i', '', $u->training_building) : '';
+        if (!Tr::isEnglish() && trim($building) !== '') $building = Tr::name(trim($building));
         return [
-            'title' => $u->name,
-            'subtitle' => trim(($u->age ? $u->age . ' · ' : '') . ($u->training_building ? preg_replace('/requires.*|since.*|\(.*\)|\*/i', '', $u->training_building) : ''), ' ·'),
+            'title' => Tr::name($u->name),
+            'subtitle' => trim(($u->age ? Tr::name($u->age) . ' · ' : '') . $building, ' ·'),
             'icon' => $u->iconUrl,
             'text' => $text,
             'stats' => array_values(array_filter($stats, function ($s) { return $s[1] !== null && $s[1] !== ''; })),
@@ -447,7 +516,7 @@ class UnitPills
     {
         $key = 't' . count(self::$tips);
         self::$tips[$key] = self::unitTip($u);
-        return '<a href="' . Url::to(['unit/view', 'slug' => $u->slug]) . '" class="unit-avatar-link" data-tip="' . $key . '" aria-label="' . Html::encode($u->name) . '">'
+        return '<a href="' . Url::to(['unit/view', 'slug' => $u->slug]) . '" class="unit-avatar-link" data-tip="' . $key . '" aria-label="' . Html::encode(Tr::name($u->name)) . '">'
             . '<img src="' . Html::encode($u->iconUrl) . '" alt="" class="unit-avatar"></a>';
     }
 
@@ -457,10 +526,11 @@ class UnitPills
     /** Header cells of a unit table; $third is the label of the third column (Class, Classes, Building). */
     public static function unitTableHead($third = 'Class', $skip = [])
     {
-        return '<tr><th class="unit-list-avatar-col"></th><th>Name</th>'
-            . (in_array('third', $skip, true) ? '' : '<th>' . Html::encode($third) . '</th>')
-            . (in_array('age', $skip, true) ? '' : '<th>Age</th>')
-            . '<th>HP</th><th>Attack</th><th>Armor</th><th>Speed</th><th>Cost</th></tr>';
+        return '<tr><th class="unit-list-avatar-col"></th><th>' . Yii::t('app', 'Name') . '</th>'
+            . (in_array('third', $skip, true) ? '' : '<th>' . Html::encode(Yii::t('app', $third)) . '</th>')
+            . (in_array('age', $skip, true) ? '' : '<th>' . Yii::t('app', 'Age') . '</th>')
+            . '<th>' . Yii::t('app', 'HP') . '</th><th>' . Yii::t('app', 'Attack') . '</th><th>' . Yii::t('app', 'Armor') . '</th>'
+            . '<th>' . Yii::t('app', 'Speed') . '</th><th>' . Yii::t('app', 'Cost') . '</th></tr>';
     }
 
     /** Column count of a unit table with some columns left out. */
@@ -476,10 +546,10 @@ class UnitPills
     public static function unitRowCells(Unit $unit, $third = 'class', $skip = [])
     {
         $url = Url::to(['unit/view', 'slug' => $unit->slug]);
-        $h = '<td><a href="' . $url . '" class="unit-avatar-link" aria-label="' . Html::encode($unit->name) . '">'
+        $h = '<td><a href="' . $url . '" class="unit-avatar-link" aria-label="' . Html::encode(Tr::name($unit->name)) . '">'
             . self::avatar($unit->iconUrl) . '</a></td>';
 
-        $h .= '<td><a href="' . $url . '" class="unit-list-name">' . Html::encode($unit->name) . '</a>';
+        $h .= '<td><a href="' . $url . '" class="unit-list-name">' . Tr::nameHtml($unit->name) . '</a>';
         if ($civs = $unit->ownerCivs) {
             $h .= '<div class="unit-list-civ-row">' . implode('', array_map([self::class, 'civPill'], $civs)) . '</div>';
         }
@@ -490,7 +560,7 @@ class UnitPills
         if ($third === 'building') {
             $b = trim(preg_replace('/\s*\([^)]*\)|requires.*$|since.*$|before .*$|\*/i', '', (string)$unit->buildingGroup));
             if ($b !== '') {
-                $h .= self::pill($b, ['variant' => 'building', 'icon' => self::buildingIcon($b)]);
+                $h .= self::pill($b, ['variant' => 'building', 'icon' => self::buildingIcon($b), 'labelHtml' => Tr::nameHtml($b)]);
             }
         } elseif ($third === 'classes') {
             $h .= '<div class="pill-row">';
@@ -501,7 +571,7 @@ class UnitPills
             $h .= '</div>';
         } else {
             $main = self::mainClass($unit);
-            $h .= $main ? self::classPill($main) : self::pill('Other', ['variant' => 'class']);
+            $h .= $main ? self::classPill($main) : self::pill(Yii::t('app', 'Other'), ['variant' => 'class']);
         }
         $h .= '</td>';
         }
@@ -529,10 +599,11 @@ class UnitPills
         $icon = self::ageIcon($age);
         $text = self::text('age:' . $age);
         return self::pill($age, [
+            'labelHtml' => Tr::nameHtml($age),
             'variant' => 'age',
             'icon' => $icon,
             'iconClass' => 'pill-plain-icon',
-            'tip' => $text ? ['title' => $age, 'icon' => $icon, 'iconPlain' => true, 'text' => $text] : null,
+            'tip' => $text ? ['title' => Tr::name($age), 'icon' => $icon, 'iconPlain' => true, 'text' => $text] : null,
         ]);
     }
 
@@ -551,6 +622,8 @@ class UnitPills
     {
         if (!self::$tips) return;
         $tipJson = Json::encode(self::$tips);
+        // alt of a resource icon: the English name, or the translated one unitTip() adds as a third item
+        $resAlt = Tr::isEnglish() ? 'c[0]' : 'c[2] || c[0]';
         $view->registerJs(<<<JS
 (function() {
     var tips = $tipJson;
@@ -583,7 +656,7 @@ class UnitPills
         if (t.cost && t.cost.length) {
             body += '<div class="pill-popup-stats">';
             t.cost.forEach(function (c) {
-                body += '<span><img src="/images/resources/' + esc(c[0]) + '.png" alt="' + esc(c[0]) + '" class="res-icon"> ' + esc(c[1]) + '</span>';
+                body += '<span><img src="/images/resources/' + esc(c[0]) + '.png" alt="' + esc($resAlt) + '" class="res-icon"> ' + esc(c[1]) + '</span>';
             });
             body += '</div>';
         }

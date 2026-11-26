@@ -7,6 +7,8 @@ use yii\helpers\Html;
 /**
  * Turns the plain text format of the knowledge base into HTML: blank lines separate blocks,
  * "## " starts a heading, "- " starts a list item. Unit and civilization names become links.
+ * Callers translate first: TextFormat::render(Tr::text($model->body, 'guides')). The patterns are UTF-8 aware,
+ * so a translated text renders the same way, and "(civ-...)" build slugs kept in a translation still become links.
  */
 class TextFormat
 {
@@ -15,7 +17,7 @@ class TextFormat
         $html = '';
         $text = trim(str_replace("\r", '', (string)$text));
         if ($text === '') return '';
-        foreach (preg_split('/\n\s*\n/', $text) as $block) {
+        foreach (preg_split('/\n\s*\n/u', $text) ?: [$text] as $block) {
             $lines = explode("\n", trim($block));
             $para = [];
             $list = [];
@@ -41,7 +43,7 @@ class TextFormat
                     $flushPara();
                     $flushList();
                     $html .= '<' . $headingTag . '>' . Html::encode(substr($line, 3)) . '</' . $headingTag . '>';
-                } elseif (preg_match('/^[-*] (.*)$/', $line, $m)) {
+                } elseif (preg_match('/^[-*] (.*)$/u', $line, $m)) {
                     $flushPara();
                     $list[] = $m[1];
                 } elseif ($line !== '') {
@@ -66,9 +68,9 @@ class TextFormat
         if ($titles === null) {
             $titles = \app\models\BuildOrder::find()->select(['title', 'slug'])->indexBy('slug')->column();
         }
-        return preg_replace_callback('/\s*\((civ-[a-z0-9-]+)\)/', function ($m) use ($titles) {
+        return preg_replace_callback('/\s*\((civ-[a-z0-9-]+)\)/u', function ($m) use ($titles) {
             if (!isset($titles[$m[1]])) return '';
-            return ' (<a href="' . \yii\helpers\Url::to(['build/view', 'slug' => $m[1]]) . '" class="text-link">build order'
+            return ' (<a href="' . \yii\helpers\Url::to(['build/view', 'slug' => $m[1]]) . '" class="text-link">' . \Yii::t('app', 'build order')
                 . UnitPills::chevron() . '</a>)';
         }, $html);
     }

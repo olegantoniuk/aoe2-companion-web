@@ -4,9 +4,10 @@ use yii\helpers\Html;
 use app\components\Seo;
 use yii\helpers\Url;
 use app\components\UnitPills;
+use app\components\Tr;
 
-$this->title = $classDef['name'];
-Seo::page($this, $classDef['name'] . ': Units in This Class', ($classDef['description'] ?? '') ?: ('All ' . $classDef['name'] . ' units in Age of Empires II with their stats and costs.'));
+$this->title = Tr::name($classDef['name']);
+Seo::page($this, Yii::t('app', '{name}: Units in This Class', ['name' => Tr::name($classDef['name'])]), ($classDef['description'] ?? '') ?: Yii::t('app', 'All {name} units in Age of Empires II with their stats and costs.', ['name' => Tr::name($classDef['name'])]));
 
 // Build reverse map: armor class name → class slug (for badge links)
 $armorToSlug = [];
@@ -20,16 +21,16 @@ foreach ($allClasses as $s => $def) {
 $currentArmorNames = $classDef['armorClasses'];
 ?>
 
-<nav aria-label="breadcrumb" class="mb-3">
+<nav aria-label="<?= Html::encode(Yii::t('app', 'breadcrumb')) ?>" class="mb-3">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><?= Html::a('Units', ['unit/index']) ?></li>
-        <li class="breadcrumb-item"><?= Html::a('Classes', ['unit/classes']) ?></li>
-        <li class="breadcrumb-item active"><?= Html::encode($classDef['name']) ?></li>
+        <li class="breadcrumb-item"><?= Html::a(Yii::t('app', 'Units'), ['unit/index']) ?></li>
+        <li class="breadcrumb-item"><?= Html::a(Yii::t('app', 'Classes'), ['unit/classes']) ?></li>
+        <li class="breadcrumb-item active"><?= Tr::nameHtml($classDef['name']) ?></li>
     </ol>
 </nav>
 
 <div class="admin5-page-header">
-    <h1><?= Html::encode($classDef['name']) ?> <span class="badge bg-secondary badge-sm"><?= count($units) ?></span></h1>
+    <h1><?= Tr::nameHtml($classDef['name']) ?> <span class="badge bg-secondary badge-sm"><?= count($units) ?></span></h1>
     <?php if ($classDef['description']): ?>
         <p class="text-muted"><?= Html::encode($classDef['description']) ?></p>
     <?php endif; ?>
@@ -38,7 +39,7 @@ $currentArmorNames = $classDef['armorClasses'];
 <div class="admin5-card admin5-card-border">
     <div class="table-responsive">
         <table class="table table-striped table-sm mb-0 unit-list-table">
-            <thead><?= UnitPills::unitTableHead('Classes') ?></thead>
+            <thead><?= UnitPills::unitTableHead(Yii::t('app', 'Classes')) ?></thead>
             <tbody>
                 <?php foreach ($units as $unit): ?>
                     <tr><?= UnitPills::unitRowCells($unit, 'classes') ?></tr>

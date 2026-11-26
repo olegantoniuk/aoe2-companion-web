@@ -7,8 +7,9 @@ $config = [
     'id' => 'aoe2-companion',
     'name' => 'AoE2 Companion',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log', 'app\components\Lang'],
     'language' => 'en',
+    'sourceLanguage' => 'en',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset',
@@ -37,7 +38,25 @@ $config = [
             ],
         ],
         'db' => $db,
+        'i18n' => [
+            'translations' => [
+                // interface strings (app) and game names (names), keyed by the English text; see components/Tr.php
+                '*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@app/messages',
+                    'sourceLanguage' => 'en',
+                ] + (YII_ENV_DEV ? [
+                    // dev: collect what a page asked for and did not find, for the translators
+                    'on missingTranslation' => function ($e) {
+                        $dir = Yii::getAlias('@runtime/i18n-missing/' . $e->language);
+                        if (!is_dir($dir)) mkdir($dir, 0777, true);
+                        file_put_contents("$dir/{$e->category}.jsonl", json_encode($e->message, JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND | LOCK_EX);
+                    },
+                ] : []),
+            ],
+        ],
         'urlManager' => [
+            'class' => 'app\components\LangUrlManager',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
@@ -74,6 +93,9 @@ $config = [
         ],
     ],
     'params' => $params,
+    'on afterRequest' => function () {
+        \app\components\Tr::flushMissing();
+    },
 ];
 
 if (YII_ENV_DEV) {

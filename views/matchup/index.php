@@ -2,41 +2,42 @@
 
 use yii\helpers\Html;
 use app\components\Seo;
+use app\components\Tr;
 use app\components\UnitPills;
 use yii\helpers\Url;
 
-$this->title = 'Matchup Analyzer';
-Seo::page($this, 'Matchup Analyzer: Counter Any Civilization', 'Pick your civilization and your opponent to see which of your units answer each unit they can build, age by age, with attack bonuses.', '/images/icons/matchup.png');
+$this->title = Yii::t('app', 'Matchup Analyzer');
+Seo::page($this, Yii::t('app', 'Matchup Analyzer: Counter Any Civilization'), Yii::t('app', 'Pick your civilization and your opponent to see which of your units answer each unit they can build, age by age, with attack bonuses.'), '/images/icons/matchup.png');
 ?>
 
 <div class="admin5-page-header">
     <div class="page-title">
         <?= UnitPills::pageIcon('matchup') ?>
-        <h1>Matchup Analyzer</h1>
+        <h1><?= Yii::t('app', 'Matchup Analyzer') ?></h1>
     </div>
 </div>
 
 <div class="admin5-card admin5-card-border" style="max-width: 640px;">
     <div class="card-content">
-        <p class="text-muted mb-3">Select two civilizations to see which of your units counter the enemy's units.</p>
+        <p class="text-muted mb-3"><?= Yii::t('app', 'Select two civilizations to see which of your units counter the enemy\'s units.') ?></p>
 
         <div class="row g-3 align-items-end">
             <div class="col-sm-5">
-                <label class="form-label fw-semibold">Your Civilization</label>
+                <label class="form-label fw-semibold"><?= Yii::t('app', 'Your Civilization') ?></label>
                 <div class="searchable-select" data-target="yourCiv">
                     <input type="hidden" id="yourCiv" value="">
                     <div class="searchable-select-trigger" tabindex="0">
-                        <span class="searchable-select-label">Select</span>
+                        <span class="searchable-select-label"><?= Yii::t('app', 'Select') ?></span>
                     </div>
                     <div class="searchable-select-dropdown">
-                        <input type="text" class="searchable-select-search" placeholder="Search..." autocomplete="off">
+                        <input type="text" class="searchable-select-search" placeholder="<?= Html::encode(Yii::t('app', 'Search...')) ?>" autocomplete="off">
                         <div class="searchable-select-options">
                             <?php foreach ($civs as $civ): ?>
                                 <div class="searchable-select-option" data-value="<?= Html::encode($civ->slug) ?>">
                                     <?php if ($civ->emblemUrl): ?>
                                         <img src="<?= Html::encode($civ->emblemUrl) ?>" alt="" class="civ-emblem-sm">
                                     <?php endif; ?>
-                                    <?= Html::encode($civ->name) ?>
+                                    <?= Tr::nameHtml($civ->name) ?>
                                 </div>
                             <?php endforeach; ?>
                         </div>
@@ -45,25 +46,26 @@ Seo::page($this, 'Matchup Analyzer: Counter Any Civilization', 'Pick your civili
             </div>
 
             <div class="col-sm-2 text-center" style="font-weight: 700; font-size: 1.25rem; color: var(--color-text-muted); padding-bottom: 6px;">
-                vs
+                <?= Yii::t('app', 'vs') ?>
+
             </div>
 
             <div class="col-sm-5">
-                <label class="form-label fw-semibold">Enemy Civilization</label>
+                <label class="form-label fw-semibold"><?= Yii::t('app', 'Enemy Civilization') ?></label>
                 <div class="searchable-select" data-target="enemyCiv">
                     <input type="hidden" id="enemyCiv" value="">
                     <div class="searchable-select-trigger" tabindex="0">
-                        <span class="searchable-select-label">Select</span>
+                        <span class="searchable-select-label"><?= Yii::t('app', 'Select') ?></span>
                     </div>
                     <div class="searchable-select-dropdown">
-                        <input type="text" class="searchable-select-search" placeholder="Search..." autocomplete="off">
+                        <input type="text" class="searchable-select-search" placeholder="<?= Html::encode(Yii::t('app', 'Search...')) ?>" autocomplete="off">
                         <div class="searchable-select-options">
                             <?php foreach ($civs as $civ): ?>
                                 <div class="searchable-select-option" data-value="<?= Html::encode($civ->slug) ?>">
                                     <?php if ($civ->emblemUrl): ?>
                                         <img src="<?= Html::encode($civ->emblemUrl) ?>" alt="" class="civ-emblem-sm">
                                     <?php endif; ?>
-                                    <?= Html::encode($civ->name) ?>
+                                    <?= Tr::nameHtml($civ->name) ?>
                                 </div>
                             <?php endforeach; ?>
                         </div>
@@ -73,7 +75,7 @@ Seo::page($this, 'Matchup Analyzer: Counter Any Civilization', 'Pick your civili
         </div>
 
         <div class="mt-4">
-            <button id="compareBtn" class="btn btn-primary matchup-compare-btn" disabled>Compare</button>
+            <button id="compareBtn" class="btn btn-primary matchup-compare-btn" disabled><?= Yii::t('app', 'Compare') ?></button>
         </div>
     </div>
 </div>

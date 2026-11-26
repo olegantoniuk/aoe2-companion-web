@@ -65,7 +65,7 @@ class Building extends ActiveRecord
 
     public function getCategoryLabel()
     {
-        return self::CATEGORIES[$this->category] ?? ucfirst((string)$this->category);
+        return isset(self::CATEGORIES[$this->category]) ? \Yii::t('app', self::CATEGORIES[$this->category]) : ucfirst((string)$this->category);
     }
 
     public function getCostHtml()
@@ -73,10 +73,10 @@ class Building extends ActiveRecord
         $parts = [];
         foreach (['Food' => $this->cost_food, 'Wood' => $this->cost_wood, 'Gold' => $this->cost_gold, 'Stone' => $this->cost_stone] as $res => $n) {
             if ($n) {
-                $parts[] = '<span class="cost-part"><img src="/images/resources/' . $res . '.png" alt="' . $res . '" class="resource-icon"> ' . (int)$n . '</span>';
+                $parts[] = '<span class="cost-part"><img src="/images/resources/' . $res . '.png" alt="' . \yii\helpers\Html::encode(\app\components\Tr::name($res)) . '" class="resource-icon"> ' . (int)$n . '</span>';
             }
         }
-        return $parts ? implode(' ', $parts) : 'Free';
+        return $parts ? implode(' ', $parts) : \Yii::t('app', 'Free');
     }
 
     /** Units it trains, as models, in the data order. */

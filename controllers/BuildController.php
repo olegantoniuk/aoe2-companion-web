@@ -40,7 +40,7 @@ class BuildController extends Controller
     {
         $build = BuildOrder::findOne(['slug' => $slug]);
         if (!$build) {
-            throw new NotFoundHttpException('Build order not found.');
+            throw new NotFoundHttpException(Yii::t('app', 'Build order not found.'));
         }
         $related = BuildOrder::find()
             ->where(['category' => $build->category])

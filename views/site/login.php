@@ -3,14 +3,14 @@
 use yii\helpers\Html;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'Login';
+$this->title = Yii::t('app', 'Login');
 ?>
 
 <div class="row justify-content-center">
     <div class="col-md-5">
         <div class="card">
             <div class="card-header">
-                <h4 class="mb-0">Login</h4>
+                <h4 class="mb-0"><?= Yii::t('app', 'Login') ?></h4>
             </div>
             <div class="card-body">
                 <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
@@ -20,7 +20,7 @@ $this->title = 'Login';
                 <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
                 <div class="d-grid">
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                    <?= Html::submitButton(Yii::t('app', 'Login'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
                 </div>
 
                 <?php ActiveForm::end(); ?>

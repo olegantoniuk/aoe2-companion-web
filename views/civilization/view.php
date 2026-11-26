@@ -4,27 +4,37 @@ use yii\helpers\Html;
 use app\components\Seo;
 use yii\helpers\Url;
 use app\components\UnitPills;
+use app\components\Tr;
 
-$this->title = $civ->name;
-Seo::page($this, $civ->name . ': Bonuses, Unique Units and How to Play', ($civ->intro ?: $civ->summary) ?: ($civ->name . ' in Age of Empires II: civilization bonuses, team bonus, unique units and technologies.'), $civ->emblemUrl);
+$this->title = Tr::name($civ->name);
+$intro = Tr::text($civ->intro, 'civs');
+Seo::page($this, Yii::t('app', '{name}: Bonuses, Unique Units and How to Play', ['name' => Tr::name($civ->name)]), ($intro ?: Tr::text($civ->summary, 'civs')) ?: Yii::t('app', '{name} in Age of Empires II: civilization bonuses, team bonus, unique units and technologies.', ['name' => Tr::name($civ->name)]), $civ->emblemUrl);
+// a unit group: a class or a building name, or "Other"
+$groupLabel = function ($group) {
+    return $group === 'Other' ? Html::encode(Yii::t('app', 'Other')) : Tr::nameHtml($group);
+};
+// the search box matches the English name and, in another language, the translated one
+$searchName = function ($name) {
+    return strtolower($name) . (Tr::isEnglish() ? '' : ' ' . mb_strtolower(Tr::short($name)));
+};
 ?>
 
-<nav aria-label="breadcrumb" class="mb-3">
+<nav aria-label="<?= Html::encode(Yii::t('app', 'breadcrumb')) ?>" class="mb-3">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><?= Html::a('Civilizations', ['civilization/index']) ?></li>
-        <li class="breadcrumb-item active"><?= Html::encode($civ->name) ?></li>
+        <li class="breadcrumb-item"><?= Html::a(Yii::t('app', 'Civilizations'), ['civilization/index']) ?></li>
+        <li class="breadcrumb-item active"><?= Tr::nameHtml($civ->name) ?></li>
     </ol>
 </nav>
 
 <div class="admin5-page-header">
     <div class="d-flex align-items-center gap-3">
         <?php if ($civ->emblemUrl): ?>
-            <img src="<?= Html::encode($civ->emblemUrl) ?>" alt="<?= Html::encode($civ->name) ?>" class="civ-emblem-lg">
+            <img src="<?= Html::encode($civ->emblemUrl) ?>" alt="<?= Html::encode(Tr::name($civ->name)) ?>" class="civ-emblem-lg">
         <?php endif; ?>
-        <h1 style="margin: 0;"><?= Html::encode($civ->name) ?></h1>
+        <h1 style="margin: 0;"><?= Tr::nameHtml($civ->name) ?></h1>
     </div>
     <?php if ($civ->hasAttribute('intro') && $civ->intro): ?>
-        <div class="civ-intro-wrap"><p class="civ-intro"><?= UnitPills::linkify(Html::encode($civ->intro), $civ->slug) ?></p></div>
+        <div class="civ-intro-wrap"><p class="civ-intro"><?= UnitPills::linkify(Html::encode($intro), $civ->slug) ?></p></div>
     <?php endif; ?>
 </div>
 
@@ -32,16 +42,16 @@ Seo::page($this, $civ->name . ': Bonuses, Unique Units and How to Play', ($civ->
     <!-- Civ info -->
     <div class="col-lg-4 mb-4">
         <div class="admin5-card admin5-card-border">
-            <div class="card-header"><strong>Overview</strong></div>
+            <div class="card-header"><strong><?= Yii::t('app', 'Overview') ?></strong></div>
             <table class="table table-sm stat-table mb-0">
                 <?php if ($civ->focus): ?>
-                    <tr><th>Focus</th><td><?= Html::encode(implode(", ", $civ->focusList)) ?></td></tr>
+                    <tr><th><?= Yii::t('app', 'Focus') ?></th><td><?= implode(', ', array_map([Tr::class, 'nameHtml'], $civ->focusList)) ?></td></tr>
                 <?php endif; ?>
                 <?php if ($civ->architecture_set): ?>
-                    <tr><th>Architecture</th><td><?= Html::encode($civ->architecture_set) ?></td></tr>
+                    <tr><th><?= Yii::t('app', 'Architecture') ?></th><td><?= Tr::nameHtml($civ->architecture_set) ?></td></tr>
                 <?php endif; ?>
                 <?php if ($civ->continent): ?>
-                    <tr><th>Continent</th><td><?= Html::encode($civ->continent) ?></td></tr>
+                    <tr><th><?= Yii::t('app', 'Continent') ?></th><td><?= Html::encode(Tr::text($civ->continent, 'civs')) ?></td></tr>
                 <?php endif; ?>
             </table>
         </div>
@@ -50,11 +60,11 @@ Seo::page($this, $civ->name . ': Bonuses, Unique Units and How to Play', ($civ->
         <?php $bonuses = $civ->bonuses; ?>
         <?php if ($bonuses): ?>
             <div class="admin5-card admin5-card-border">
-                <div class="card-header"><strong>Civilization Bonuses</strong></div>
+                <div class="card-header"><strong><?= Yii::t('app', 'Civilization Bonuses') ?></strong></div>
                 <div class="card-content">
                     <ul class="mb-0 ps-3">
                         <?php foreach ($bonuses as $bonus): ?>
-                            <li><?= Html::encode($bonus->bonus_text) ?></li>
+                            <li><?= Html::encode(Tr::text($bonus->bonus_text, 'civs')) ?></li>
                         <?php endforeach; ?>
                     </ul>
                 </div>
@@ -64,9 +74,9 @@ Seo::page($this, $civ->name . ': Bonuses, Unique Units and How to Play', ($civ->
         <!-- Team Bonus -->
         <?php if ($civ->team_bonus): ?>
             <div class="admin5-card admin5-card-border">
-                <div class="card-header"><strong>Team Bonus</strong></div>
+                <div class="card-header"><strong><?= Yii::t('app', 'Team Bonus') ?></strong></div>
                 <div class="card-content">
-                    <?= Html::encode($civ->team_bonus) ?>
+                    <?= Html::encode(Tr::text($civ->team_bonus, 'civs')) ?>
                 </div>
             </div>
         <?php endif; ?>
@@ -75,7 +85,7 @@ Seo::page($this, $civ->name . ': Bonuses, Unique Units and How to Play', ($civ->
         <?php $techs = $civ->technologies; ?>
         <?php if ($techs): ?>
             <div class="admin5-card admin5-card-border">
-                <div class="card-header"><strong>Unique Technologies</strong></div>
+                <div class="card-header"><strong><?= Yii::t('app', 'Unique Technologies') ?></strong></div>
                 <div class="card-content">
                     <?php foreach ($techs as $tech): ?>
                         <div class="mb-2 d-flex align-items-start gap-2">
@@ -86,9 +96,9 @@ Seo::page($this, $civ->name . ': Bonuses, Unique Units and How to Play', ($civ->
                             ?>
                             <img src="<?= Html::encode($techSrc) ?>" alt="" class="tech-icon tech-icon-bg" style="flex-shrink: 0;">
                             <div>
-                                <strong><?= Html::encode($tech->name) ?></strong>
+                                <strong><?= Tr::nameHtml($tech->name) ?></strong>
                                 <?php if ($tech->description): ?>
-                                    <br><small class="text-muted"><?= Html::encode($tech->description) ?></small>
+                                    <br><small class="text-muted"><?= Html::encode(Tr::text($tech->description, 'civs')) ?></small>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -103,7 +113,7 @@ Seo::page($this, $civ->name . ': Bonuses, Unique Units and How to Play', ($civ->
         <!-- Unique Units -->
         <?php if ($uniqueUnits): ?>
             <div class="admin5-page-header" style="margin-bottom: 16px;">
-                <h3 style="margin: 0;">Unique Units</h3>
+                <h3 style="margin: 0;"><?= Yii::t('app', 'Unique Units') ?></h3>
             </div>
             <div class="row g-3 mb-4">
                 <?php
@@ -144,9 +154,9 @@ Seo::page($this, $civ->name . ': Bonuses, Unique Units and How to Play', ($civ->
                                         <div class="d-flex align-items-center gap-2">
                                             <?= UnitPills::avatar($c['icon']) ?>
                                             <span>
-                                                <span class="unit-list-name"><?= Html::encode($c['name']) ?></span>
+                                                <span class="unit-list-name"><?= Tr::nameHtml($c['name']) ?></span>
                                                 <?php if ($c['elite']): ?>
-                                                    <span class="unique-card-upgrade">Upgrade of <?= Html::encode($c['unit']->name) ?></span>
+                                                    <span class="unique-card-upgrade"><?= Yii::t('app', 'Upgrade of {unit}', ['unit' => Tr::nameHtml($c['unit']->name)]) ?></span>
                                                 <?php endif; ?>
                                             </span>
                                         </div>
@@ -158,7 +168,7 @@ Seo::page($this, $civ->name . ': Bonuses, Unique Units and How to Play', ($civ->
                                         <span><img src="/images/stats/melee_armor.png" alt="" class="stat-icon"><?= (int)$c['marmor'] ?>/<?= (int)$c['parmor'] ?></span>
                                         <?php if ($c['speed']): ?><span><img src="/images/stats/movement_speed.png" alt="" class="stat-icon"><?= $c['speed'] ?></span><?php endif; ?>
                                         <?php if ($c['elite']): ?>
-                                            <span class="unit-list-cost" title="Elite upgrade cost"><?= $c['unit']->upgradeCostHtml ?></span>
+                                            <span class="unit-list-cost" title="<?= Html::encode(Yii::t('app', 'Elite upgrade cost')) ?>"><?= $c['unit']->upgradeCostHtml ?></span>
                                         <?php else: ?>
                                             <span class="unit-list-cost"><?= $c['unit']->costHtml ?></span>
                                         <?php endif; ?>
@@ -174,20 +184,20 @@ Seo::page($this, $civ->name . ': Bonuses, Unique Units and How to Play', ($civ->
         <!-- how to play it: the guide and the civilization's own build orders -->
         <?php if ($guide || $civBuilds): ?>
             <div class="admin5-page-header" style="margin-bottom: 16px;">
-                <h3 style="margin: 0;">Guide and Build Orders</h3>
+                <h3 style="margin: 0;"><?= Yii::t('app', 'Guide and Build Orders') ?></h3>
             </div>
             <div class="home-kb-list civ-kb-list mb-4">
                 <?php if ($guide): ?>
                     <a href="<?= Url::to(['guide/view', 'slug' => $guide->slug]) ?>" class="admin5-card admin5-card-border home-kb-item">
                         <img src="<?= Html::encode(UnitPills::pageIconUrl('guides')) ?>" alt="" class="home-kb-avatar">
-                        <span class="home-kb-title"><?= Html::encode($guide->title) ?></span>
+                        <span class="home-kb-title"><?= Html::encode(Tr::text($guide->title, 'guides')) ?></span>
                         <?= UnitPills::eloPill($guide->elo) ?>
                     </a>
                 <?php endif; ?>
                 <?php foreach ($civBuilds as $b): ?>
                     <a href="<?= Url::to(['build/view', 'slug' => $b->slug]) ?>" class="admin5-card admin5-card-border home-kb-item">
                         <img src="<?= Html::encode(UnitPills::pageIconUrl('builds')) ?>" alt="" class="home-kb-avatar">
-                        <span class="home-kb-title"><?= Html::encode($b->title) ?></span>
+                        <span class="home-kb-title"><?= Html::encode(Tr::text($b->title, 'builds')) ?></span>
                         <?= UnitPills::eloPill($b->elo) ?>
                     </a>
                 <?php endforeach; ?>
@@ -321,24 +331,24 @@ Seo::page($this, $civ->name . ': Bonuses, Unique Units and How to Play', ($civ->
             ?>
 
             <div class="admin5-page-header" style="margin-bottom: 16px;">
-                <h3 style="margin: 0;">Available Units <span class="badge bg-secondary badge-sm"><?= count($availableUnits) ?></span></h3>
+                <h3 style="margin: 0;"><?= Yii::t('app', 'Available Units') ?> <span class="badge bg-secondary badge-sm"><?= count($availableUnits) ?></span></h3>
             </div>
 
-            <input type="text" class="unit-search-input mb-3" id="unitSearch" placeholder="Search units..." autocomplete="off">
+            <input type="text" class="unit-search-input mb-3" id="unitSearch" placeholder="<?= Html::encode(Yii::t('app', 'Search units...')) ?>" autocomplete="off">
 
             <div class="unit-tabs">
                 <ul class="nav nav-tabs mb-0" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-class" type="button" role="tab">By Class</button>
+                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-class" type="button" role="tab"><?= Yii::t('app', 'By Class') ?></button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-building" type="button" role="tab">By Building</button>
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-building" type="button" role="tab"><?= Yii::t('app', 'By Building') ?></button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-age" type="button" role="tab">By Age</button>
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-age" type="button" role="tab"><?= Yii::t('app', 'By Age') ?></button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-az" type="button" role="tab">A-Z</button>
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-az" type="button" role="tab"><?= Yii::t('app', 'A-Z') ?></button>
                     </li>
                 </ul>
 
@@ -348,14 +358,14 @@ Seo::page($this, $civ->name . ': Bonuses, Unique Units and How to Play', ($civ->
                         <div class="admin5-card admin5-card-border admin5-card-attached">
                             <div class="table-responsive">
                                 <table class="table table-sm mb-0 unit-list-table">
-                                    <thead><?= UnitPills::unitTableHead('Class', ['third']) ?></thead>
+                                    <thead><?= UnitPills::unitTableHead(Yii::t('app', 'Class'), ['third']) ?></thead>
                                     <?php foreach ($byType as $group => $units): ?>
                                         <tbody class="unit-group" data-group="<?= Html::encode($group) ?>">
                                             <tr class="unit-group-row">
-                                                <td colspan="<?= UnitPills::tableCols(['third']) ?>" class="unit-group-header"><span class="unit-group-name"><?= Html::encode($group) ?></span> <span class="badge bg-secondary badge-sm group-count"><?= count($units) ?></span></td>
+                                                <td colspan="<?= UnitPills::tableCols(['third']) ?>" class="unit-group-header"><span class="unit-group-name"><?= $groupLabel($group) ?></span> <span class="badge bg-secondary badge-sm group-count"><?= count($units) ?></span></td>
                                             </tr>
                                             <?php foreach ($units as $unit): ?>
-                                                <tr class="unit-row" data-name="<?= Html::encode(strtolower($unit->name)) ?>"><?= UnitPills::unitRowCells($unit, 'class', ['third']) ?></tr>
+                                                <tr class="unit-row" data-name="<?= Html::encode($searchName($unit->name)) ?>"><?= UnitPills::unitRowCells($unit, 'class', ['third']) ?></tr>
                                             <?php endforeach; ?>
                                         </tbody>
                                     <?php endforeach; ?>
@@ -369,7 +379,7 @@ Seo::page($this, $civ->name . ': Bonuses, Unique Units and How to Play', ($civ->
                         <div class="admin5-card admin5-card-border admin5-card-attached">
                             <div class="table-responsive">
                                 <table class="table table-sm mb-0 unit-list-table">
-                                    <thead><?= UnitPills::unitTableHead('Building', ['third']) ?></thead>
+                                    <thead><?= UnitPills::unitTableHead(Yii::t('app', 'Building'), ['third']) ?></thead>
                                     <?php foreach ($byBuilding as $group => $units): ?>
                                         <tbody class="unit-group" data-group="<?= Html::encode($group) ?>">
                                             <tr class="unit-group-row">
@@ -377,11 +387,11 @@ Seo::page($this, $civ->name . ': Bonuses, Unique Units and How to Play', ($civ->
                                                     <?php if (isset($buildingIcons[$group])): ?>
                                                         <img src="<?= Html::encode($buildingIcons[$group]) ?>" alt="" class="unit-image-xs" style="margin-right: 4px;">
                                                     <?php endif; ?>
-                                                    <span class="unit-group-name"><?= Html::encode($group) ?></span> <span class="badge bg-secondary badge-sm group-count"><?= count($units) ?></span>
+                                                    <span class="unit-group-name"><?= $groupLabel($group) ?></span> <span class="badge bg-secondary badge-sm group-count"><?= count($units) ?></span>
                                                 </td>
                                             </tr>
                                             <?php foreach ($units as $unit): ?>
-                                                <tr class="unit-row" data-name="<?= Html::encode(strtolower($unit->name)) ?>"><?= UnitPills::unitRowCells($unit, 'building', ['third']) ?></tr>
+                                                <tr class="unit-row" data-name="<?= Html::encode($searchName($unit->name)) ?>"><?= UnitPills::unitRowCells($unit, 'building', ['third']) ?></tr>
                                             <?php endforeach; ?>
                                         </tbody>
                                     <?php endforeach; ?>
@@ -395,7 +405,7 @@ Seo::page($this, $civ->name . ': Bonuses, Unique Units and How to Play', ($civ->
                         <div class="admin5-card admin5-card-border admin5-card-attached">
                             <div class="table-responsive">
                                 <table class="table table-sm mb-0 unit-list-table">
-                                    <thead><?= UnitPills::unitTableHead('Class', ['age']) ?></thead>
+                                    <thead><?= UnitPills::unitTableHead(Yii::t('app', 'Class'), ['age']) ?></thead>
                                     <?php foreach ($byAge as $group => $units): ?>
                                         <tbody class="unit-group" data-group="<?= Html::encode($group) ?>">
                                             <tr class="unit-group-row">
@@ -405,7 +415,7 @@ Seo::page($this, $civ->name . ': Bonuses, Unique Units and How to Play', ($civ->
                                                 </td>
                                             </tr>
                                             <?php foreach ($units as $unit): ?>
-                                                <tr class="unit-row" data-name="<?= Html::encode(strtolower($unit->name)) ?>"><?= UnitPills::unitRowCells($unit, 'class', ['age']) ?></tr>
+                                                <tr class="unit-row" data-name="<?= Html::encode($searchName($unit->name)) ?>"><?= UnitPills::unitRowCells($unit, 'class', ['age']) ?></tr>
                                             <?php endforeach; ?>
                                         </tbody>
                                     <?php endforeach; ?>
@@ -419,10 +429,10 @@ Seo::page($this, $civ->name . ': Bonuses, Unique Units and How to Play', ($civ->
                         <div class="admin5-card admin5-card-border admin5-card-attached">
                             <div class="table-responsive">
                                 <table class="table table-striped table-sm mb-0 unit-list-table">
-                                    <thead><?= UnitPills::unitTableHead('Class') ?></thead>
+                                    <thead><?= UnitPills::unitTableHead(Yii::t('app', 'Class')) ?></thead>
                                     <tbody>
                                         <?php foreach ($alphabetical as $unit): ?>
-                                            <tr class="unit-row" data-name="<?= Html::encode(strtolower($unit->name)) ?>"><?= UnitPills::unitRowCells($unit) ?></tr>
+                                            <tr class="unit-row" data-name="<?= Html::encode($searchName($unit->name)) ?>"><?= UnitPills::unitRowCells($unit) ?></tr>
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
@@ -437,7 +447,7 @@ Seo::page($this, $civ->name . ': Bonuses, Unique Units and How to Play', ($civ->
         <?php if ($unavailableUnits): ?>
             <details class="mt-3">
                 <summary class="text-muted mb-2" style="cursor: pointer; font-weight: 600;">
-                    Unavailable Units (<?= count($unavailableUnits) ?>)
+                    <?= Yii::t('app', 'Unavailable Units ({count})', ['count' => count($unavailableUnits)]) ?>
                 </summary>
                 <div class="admin5-card admin5-card-border">
                     <div class="table-responsive">
@@ -447,10 +457,10 @@ Seo::page($this, $civ->name . ': Bonuses, Unique Units and How to Play', ($civ->
                                     <tr class="text-muted">
                                         <td class="unit-unavailable-name">
                                             <a href="<?= Url::to(['unit/view', 'slug' => $unit->slug]) ?>" class="unit-avatar-link"><?= UnitPills::avatar($unit->iconUrl) ?></a>
-                                            <?= Html::a(Html::encode($unit->name), ['unit/view', 'slug' => $unit->slug], ['class' => 'text-muted']) ?>
+                                            <?= Html::a(Tr::nameHtml($unit->name), ['unit/view', 'slug' => $unit->slug], ['class' => 'text-muted']) ?>
                                         </td>
                                         <td><?php $mc = UnitPills::mainClass($unit); ?><?= $mc ? UnitPills::classPill($mc) : '' ?></td>
-                                        <td><span class="avail-no">Unavailable</span></td>
+                                        <td><span class="avail-no"><?= Yii::t('app', 'Unavailable') ?></span></td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>

@@ -60,11 +60,15 @@ class Civilization extends ActiveRecord
 
     /**
      * Groups for the civilization list: by region, the Three Kingdoms states on their own.
-     * Each is [title, note, civilization slugs, icon file under /images/regions/].
+     * Each is [title, note, civilization slugs, icon file under /images/regions/]; title and note in the current language.
      */
     public static function regions()
     {
-        return [
+        return array_map(function ($r) {
+            $r[0] = \Yii::t('app', $r[0]);
+            $r[1] = \Yii::t('app', $r[1]);
+            return $r;
+        }, [
             ['Western Europe', 'Knights, castles and longbows. The Britons outshoot everyone, the Franks and Burgundians build the heaviest cavalry, and the Portuguese and Spanish take gunpowder out onto the ocean.',
                 ['britons', 'burgundians', 'celts', 'franks', 'italians', 'portuguese', 'saxons', 'sicilians', 'spanish'], 'western-europe'],
             ['Central and Northern Europe', 'Raiders from the fjords and stubborn defenders of the German lands. Vikings, Danes and Goths flood the map with infantry, while Teutons and Bohemians dig in behind tough walls and Hussite Wagons.',
@@ -87,7 +91,7 @@ class Civilization extends ActiveRecord
                 ['burmese', 'khmer', 'malay', 'vietnamese'], 'southeast-asia'],
             ['The Americas', 'Most of these civilizations have no horses and use Eagle Warriors for the scouting and raiding that cavalry does elsewhere. The Aztecs, Maya and Inca are the original three; the Mapuche, Muisca and Tupi joined later with new units of their own.',
                 ['aztecs', 'inca', 'maya', 'mapuche', 'muisca', 'tupi'], 'americas'],
-        ];
+        ]);
     }
 
     /** URL of a region emblem, or null while the file is missing. */

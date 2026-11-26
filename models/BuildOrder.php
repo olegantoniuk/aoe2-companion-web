@@ -30,7 +30,7 @@ class BuildOrder extends ActiveRecord
 
     public function getCategoryLabel()
     {
-        return self::CATEGORIES[$this->category] ?? ucfirst((string)$this->category);
+        return isset(self::CATEGORIES[$this->category]) ? \Yii::t('app', self::CATEGORIES[$this->category]) : ucfirst((string)$this->category);
     }
 
     /** Civilizations the build suits, as models, in the order the data lists them. */
@@ -58,15 +58,17 @@ class BuildOrder extends ActiveRecord
      * Title without the population count, for the cards that show "Click up at N pop" anyway:
      * "Maya Archers (22 pop)" -> "Maya Archers", "Archers (22 pop, two ranges)" -> "Archers (two ranges)",
      * "Fast Castle into Knights (28+2)" -> "Fast Castle into Knights". Other notes in brackets stay.
+     * The title is translated first; a translation may write the population as "22 нас." or "22 населення".
      */
     public function getShortTitle()
     {
-        $t = preg_replace_callback('/\s*\(([^)]*)\)/', function ($m) {
-            $rest = preg_replace('/^\d+(?:\+\d+)*(?:\s*pop)?\s*(?:,\s*|$)/i', '', $m[1]);
+        $title = (string)\app\components\Tr::text($this->title, 'builds');
+        $t = preg_replace_callback('/\s*\(([^)]*)\)/u', function ($m) {
+            $rest = preg_replace('/^\d+(?:\+\d+)*(?:\s*(?:pop|нас\.|населення))?\s*(?:,\s*|$)/iu', '', $m[1]);
             if ($rest === $m[1]) return $m[0];
-            $rest = preg_replace('/^plus\s+/i', '', $rest);
+            $rest = preg_replace('/^(?:plus|плюс)\s+/iu', '', $rest);
             return $rest === '' ? '' : ' (' . $rest . ')';
-        }, (string)$this->title);
-        return trim($t) ?: $this->title;
+        }, $title);
+        return trim($t) ?: $title;
     }
 }

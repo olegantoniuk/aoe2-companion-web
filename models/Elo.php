@@ -16,7 +16,7 @@ class Elo
 
     public static function label($key)
     {
-        return self::BANDS[$key][0] ?? ucfirst((string)$key);
+        return isset(self::BANDS[$key]) ? \Yii::t('app', self::BANDS[$key][0]) : ucfirst((string)$key);
     }
 
     public static function range($key)

@@ -199,9 +199,11 @@ class BuildScene
         return self::sprite($kind === 'obj' ? 'objects' : 'buildings', $key, 'scene-target');
     }
 
-    private static function badge($img, $label, $class = '')
+    /** $title: the full label for a tooltip when $label is a shortened one (the translated name without the original). */
+    private static function badge($img, $label, $class = '', $title = null)
     {
-        return '<span class="scene-badge ' . $class . '">' . ($img ? '<img src="' . Html::encode($img) . '" alt="">' : '')
+        $title = $title !== null && $title !== $label ? ' title="' . Html::encode($title) . '"' : '';
+        return '<span class="scene-badge ' . $class . '"' . $title . '>' . ($img ? '<img src="' . Html::encode($img) . '" alt="">' : '')
             . '<span>' . Html::encode($label) . '</span></span>';
     }
 
@@ -253,7 +255,10 @@ class BuildScene
                 $key = self::BUILDINGS[$a['building'] ?? ''] ?? null;
                 $count = (int)($a['count'] ?? 1);
                 if ($key) self::$drawn[] = $key;
-                $bld = $key ? self::target('bld:' . $key) : self::badge(UnitPills::buildingIcon($a['building'] ?? ''), $a['building'] ?? 'Building');
+                $bname = $a['building'] ?? null;
+                $bld = $key ? self::target('bld:' . $key) : ($bname !== null
+                    ? self::badge(UnitPills::buildingIcon($bname), Tr::short($bname), '', Tr::name($bname))
+                    : self::badge(UnitPills::buildingIcon(''), \Yii::t('app', 'Building')));
                 return '<span class="scene-group">' . self::villagers('build', $a['villagers'] ?? 1) . $bld
                     . ($count > 1 ? '<span class="scene-count">×' . $count . '</span>' : '') . '</span>';
             case 'research':
@@ -265,15 +270,18 @@ class BuildScene
                 if ($where && in_array($where, self::$drawn, true)) $where = null;
                 elseif ($where) self::$drawn[] = $where;
                 return '<span class="scene-group">' . ($where ? self::target('bld:' . $where) : '')
-                    . self::badge($icon, $name, 'scene-badge-tech') . '</span>';
+                    . self::badge($icon, Tr::short($name), 'scene-badge-tech', Tr::name($name)) . '</span>';
             case 'age':
                 $age = $a['age'] ?? 'Feudal Age';
                 $click = ($a['event'] ?? 'click') !== 'arrive';
-                $label = ($click ? 'Click up to the ' : 'Reach the ') . $age;
+                $label = $click ? \Yii::t('app', 'Click up to the {age}', ['age' => Tr::short($age)])
+                    : \Yii::t('app', 'Reach the {age}', ['age' => Tr::short($age)]);
+                $full = $click ? \Yii::t('app', 'Click up to the {age}', ['age' => Tr::name($age)])
+                    : \Yii::t('app', 'Reach the {age}', ['age' => Tr::name($age)]);
                 // the Town Center that does the age up; it keeps its Dark Age look while Feudal is researched
                 if (!$click || $age !== 'Feudal Age') self::$dark = false;
                 return '<span class="scene-group">' . self::sprite('buildings', self::look('town_center'), 'scene-target')
-                    . self::badge('/images/ages/' . str_replace(' ', '', $age) . '.png', $label, 'scene-badge-age') . '</span>';
+                    . self::badge('/images/ages/' . str_replace(' ', '', $age) . '.png', $label, 'scene-badge-age', $full) . '</span>';
             case 'train':
             case 'scout':
                 $unit = \app\models\Unit::findOne(['name' => $a['unit'] ?? '']);
@@ -282,7 +290,7 @@ class BuildScene
                 if ($sprite) {
                     $html .= '<img src="' . Html::encode($sprite) . '" alt="" class="scene-unit" loading="lazy">';
                 } elseif ($unit && $unit->iconUrl) {
-                    $html .= self::badge($unit->iconUrl, $unit->name);
+                    $html .= self::badge($unit->iconUrl, Tr::short($unit->name), '', Tr::name($unit->name));
                 }
                 if (!empty($a['count']) && (int)$a['count'] > 1) $html .= '<span class="scene-count">×' . (int)$a['count'] . '</span>';
                 return $html . '</span>';

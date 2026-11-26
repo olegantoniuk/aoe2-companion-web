@@ -2,6 +2,7 @@
 
 namespace app\components;
 
+use Yii;
 use yii\helpers\Html;
 
 /**
@@ -71,17 +72,22 @@ class EloHistogram
             $x = round($i * ($bw + $gap), 2);
             $inBand = $from >= $lo && $from < $hi;
             $svg .= '<rect x="' . $x . '" y="' . ($h - $bh) . '" width="' . round($bw, 2) . '" height="' . $bh . '" rx="1" class="'
-                . ($inBand ? 'elo-bar is-in' : 'elo-bar') . '"><title>' . $from . ($from >= self::MAX ? '+' : '') . ' Elo: '
-                . number_format($count) . ' players</title></rect>';
+                . ($inBand ? 'elo-bar is-in' : 'elo-bar') . '"><title>' . Html::encode(Yii::t('app', '{from} Elo: {count} {players}', [
+                    'from' => $from . ($from >= self::MAX ? '+' : ''),
+                    'count' => number_format($count, 0, '.', Tr::isEnglish() ? ',' : "\u{00A0}"),
+                    'players' => Tr::plural($count, 'player|players'),
+                ])) . '</title></rect>';
             $i++;
         }
         $share = round(self::share($band) * 100);
-        $title = Html::encode(\app\models\Elo::range($band) . ': ' . $share . '% of ranked 1v1 players');
+        $title = Html::encode(Yii::t('app', '{range}: {share}% of ranked 1v1 players', ['range' => \app\models\Elo::range($band), 'share' => $share]));
         $html = '<span class="elo-hist elo-hist-' . Html::encode($band) . '" title="' . $title . '">'
             . '<svg viewBox="0 0 ' . $w . ' ' . $h . '" width="' . $w . '" height="' . $h . '" role="img" aria-label="' . $title . '">' . $svg . '</svg>';
         if ($o['label'] ?? true) {
-            $html .= '<span class="elo-hist-label"><strong>' . Html::encode(\app\models\Elo::range($band)) . '</strong>, '
-                . $share . '% of ranked 1v1 players</span>';
+            $html .= '<span class="elo-hist-label">' . Yii::t('app', '{range}, {share}% of ranked 1v1 players', [
+                'range' => '<strong>' . Html::encode(\app\models\Elo::range($band)) . '</strong>',
+                'share' => $share,
+            ]) . '</span>';
         }
         return $html . '</span>';
     }

@@ -10,7 +10,7 @@ $sources = array_values(array_filter($sources ?? [], function ($s) { return !emp
 ?>
 
 <?php if ($videos): ?>
-    <h2 class="unit-section-title">Videos</h2>
+    <h2 class="unit-section-title"><?= Yii::t('app', 'Videos') ?></h2>
     <div class="kb-videos">
         <?php foreach ($videos as $v): ?>
             <?php $id = TextFormat::youtubeId($v['url']); ?>
@@ -22,7 +22,7 @@ $sources = array_values(array_filter($sources ?? [], function ($s) { return !emp
                     </span>
                 <?php endif; ?>
                 <span class="kb-video-text">
-                    <span class="kb-video-title"><?= Html::encode($v['title'] ?? 'Video') ?></span>
+                    <span class="kb-video-title"><?= Html::encode($v['title'] ?? Yii::t('app', 'Video')) ?></span>
                     <?php if (!empty($v['channel'])): ?>
                         <span class="kb-video-channel"><?= Html::encode($v['channel']) ?></span>
                     <?php endif; ?>
@@ -33,11 +33,11 @@ $sources = array_values(array_filter($sources ?? [], function ($s) { return !emp
 <?php endif; ?>
 
 <?php if ($sources): ?>
-    <h2 class="unit-section-title">Sources and further reading</h2>
+    <h2 class="unit-section-title"><?= Yii::t('app', 'Sources and further reading') ?></h2>
     <ul class="kb-sources">
         <?php foreach ($sources as $s): ?>
             <li>
-                <span class="kb-source-type"><?= Html::encode(ucfirst($s['type'] ?? 'link')) ?></span>
+                <span class="kb-source-type"><?= Html::encode(Yii::t('app', ucfirst($s['type'] ?? 'link'))) ?></span>
                 <a href="<?= Html::encode($s['url']) ?>" target="_blank" rel="nofollow noopener"><?= Html::encode($s['title'] ?? $s['url']) ?></a>
                 <span class="kb-source-host"><?= Html::encode(TextFormat::host($s['url'])) ?></span>
             </li>

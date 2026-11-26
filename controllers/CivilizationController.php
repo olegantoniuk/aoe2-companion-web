@@ -26,7 +26,7 @@ class CivilizationController extends Controller
     {
         $civ = Civilization::find()->where(['slug' => $slug])->one();
         if (!$civ) {
-            throw new NotFoundHttpException('Civilization not found.');
+            throw new NotFoundHttpException(\Yii::t('app', 'Civilization not found.'));
         }
 
         // its own units: unique ones, units shared by a few civilizations, upgrades only it has (Houfnice)

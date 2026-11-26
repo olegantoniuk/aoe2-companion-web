@@ -5,9 +5,11 @@ use app\components\Seo;
 use yii\helpers\Url;
 use yii\helpers\Json;
 use app\components\UnitPills;
+use app\components\Tr;
 
-$this->title = $yourCiv->name . ' vs ' . $enemyCiv->name;
-Seo::page($this, $yourCiv->name . ' vs ' . $enemyCiv->name . ': Matchup and Counters', 'How ' . $yourCiv->name . ' answer every ' . $enemyCiv->name . ' unit in Age of Empires II, age by age: the best counter units from your tech tree and their attack bonuses.', $yourCiv->emblemUrl);
+$civNames = ['your' => Tr::name($yourCiv->name), 'enemy' => Tr::name($enemyCiv->name)];
+$this->title = Yii::t('app', '{your} vs {enemy}', $civNames);
+Seo::page($this, Yii::t('app', '{your} vs {enemy}: Matchup and Counters', $civNames), Yii::t('app', 'How {your} answer every {enemy} unit in Age of Empires II, age by age: the best counter units from your tech tree and their attack bonuses.', $civNames), $yourCiv->emblemUrl);
 
 // Count land lines for All tab
 $allLandCount = 0;
@@ -39,19 +41,19 @@ $collectCounters = function ($counterList) use (&$popupUnits, $formatType) {
             if ($cu->cost_wood) $cost['Wood'] = (int)$cu->cost_wood;
             if ($cu->cost_gold) $cost['Gold'] = (int)$cu->cost_gold;
             if ($cu->cost_stone) $cost['Stone'] = (int)$cu->cost_stone;
-            $strong = $cu->strong_against ? json_decode($cu->strong_against, true) : [];
-            $weak = $cu->weak_against ? json_decode($cu->weak_against, true) : [];
+            $strong = $cu->strong_against ? Tr::texts(json_decode($cu->strong_against, true), 'units') : [];
+            $weak = $cu->weak_against ? Tr::texts(json_decode($cu->weak_against, true), 'units') : [];
             // Attack bonuses
             $bonuses = [];
             foreach ($cu->attackBonuses as $ab) {
                 if ((int)$ab->bonus > 0) {
-                    $bonuses[] = ['vs' => $ab->vs, 'bonus' => (int)$ab->bonus];
+                    $bonuses[] = ['vs' => Tr::name($ab->vs), 'bonus' => (int)$ab->bonus];
                 }
             }
             usort($bonuses, function ($a, $b) { return $b['bonus'] - $a['bonus']; });
             $popupUnits[$cu->id] = [
-                'name' => $cu->name,
-                'type' => $cu->armorClassGroup,
+                'name' => Tr::name($cu->name),
+                'type' => Yii::t('app', $cu->armorClassGroup),
                 'icon' => $cu->iconUrl,
                 'hp' => (int)$cu->hit_points,
                 'attack' => (int)($cu->melee_attack ?: $cu->pierce_attack),
@@ -98,14 +100,14 @@ $renderCounterLink = function ($cu, $enemyIds = [], $counterBonuses = []) use ($
     foreach ($enemyIds as $eid) {
         if (isset($counterBonuses[$eid][$cu->id])) {
             $b = $counterBonuses[$eid][$cu->id];
-            $bonusBadge = $bonusPill('+' . $b['bonus'] . ' vs ' . $b['vs']);
+            $bonusBadge = $bonusPill(Yii::t('app', '+{bonus} vs {class}', ['bonus' => $b['bonus'], 'class' => Tr::name($b['vs'])]));
             $extraClass = ' counter-has-bonus';
             break;
         }
     }
     $navalClass = ($cu->isNaval) ? ' counter-naval' : '';
     return '<a href="' . Url::to(['unit/view', 'slug' => $cu->slug]) . '" class="counter-unit-link' . $extraClass . $navalClass . '" data-unit-id="' . $cu->id . '">'
-        . $icon . Html::encode($cu->name) . $bonusBadge . '</a>';
+        . $icon . Tr::nameHtml($cu->name) . $bonusBadge . '</a>';
 };
 
 // Helper to render building counter link
@@ -120,19 +122,19 @@ $renderBuildingCounterLink = function ($cu) use ($buildingCounters, $bonusPill) 
     }
     $navalClass = ($cu->isNaval) ? ' counter-naval' : '';
     return '<a href="' . Url::to(['unit/view', 'slug' => $cu->slug]) . '" class="counter-unit-link' . $extraClass . $navalClass . '" data-unit-id="' . $cu->id . '">'
-        . $icon . Html::encode($cu->name) . $bonusBadge . '</a>';
+        . $icon . Tr::nameHtml($cu->name) . $bonusBadge . '</a>';
 };
 
 // Enemy unit: round avatar on the beige backdrop, as in the unit list
 $enemyAvatar = function ($u) {
     if (!$u->iconUrl) return '';
-    return '<a href="' . Url::to(['unit/view', 'slug' => $u->slug]) . '" class="unit-avatar-link enemy-unit-hover" data-unit-id="' . $u->id . '" aria-label="' . Html::encode($u->name) . '">'
+    return '<a href="' . Url::to(['unit/view', 'slug' => $u->slug]) . '" class="unit-avatar-link enemy-unit-hover" data-unit-id="' . $u->id . '" aria-label="' . Html::encode(Tr::name($u->name)) . '">'
         . UnitPills::avatar($u->iconUrl) . '</a>';
 };
 
 $enemyName = function ($u) {
     return '<a href="' . Url::to(['unit/view', 'slug' => $u->slug]) . '" class="unit-list-name enemy-unit-hover" data-unit-id="' . $u->id . '">'
-        . Html::encode($u->name) . '</a>';
+        . Tr::nameHtml($u->name) . '</a>';
 };
 
 // Upgrade line: names joined by a chevron (Spearman > Pikeman > Halberdier)
@@ -177,13 +179,13 @@ $enemyRow = function (array $units, array $counterList, $naval = false) use ($en
     return $h . '</td></tr>';
 };
 
-$tableHead = '<thead><tr><th class="matchup-avatar-col"></th><th>Enemy Unit</th><th>Your Counters</th></tr></thead>';
+$tableHead = '<thead><tr><th class="matchup-avatar-col"></th><th>' . Yii::t('app', 'Enemy Unit') . '</th><th>' . Yii::t('app', 'Your Counters') . '</th></tr></thead>';
 ?>
 
-<nav aria-label="breadcrumb" class="mb-3">
+<nav aria-label="<?= Html::encode(Yii::t('app', 'breadcrumb')) ?>" class="mb-3">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="<?= Url::to(['matchup/index']) ?>">Matchup</a></li>
-        <li class="breadcrumb-item active"><?= Html::encode($yourCiv->name) ?> vs <?= Html::encode($enemyCiv->name) ?></li>
+        <li class="breadcrumb-item"><a href="<?= Url::to(['matchup/index']) ?>"><?= Yii::t('app', 'Matchup') ?></a></li>
+        <li class="breadcrumb-item active"><?= Yii::t('app', '{your} vs {enemy}', ['your' => Tr::nameHtml($yourCiv->name), 'enemy' => Tr::nameHtml($enemyCiv->name)]) ?></li>
     </ol>
 </nav>
 
@@ -191,20 +193,20 @@ $tableHead = '<thead><tr><th class="matchup-avatar-col"></th><th>Enemy Unit</th>
 <div class="admin5-page-header">
     <div class="matchup-title">
         <?php if ($yourCiv->emblemUrl): ?>
-            <a href="<?= Url::to(['civilization/view', 'slug' => $yourCiv->slug]) ?>" class="matchup-emblem-link" aria-label="<?= Html::encode($yourCiv->name) ?>">
+            <a href="<?= Url::to(['civilization/view', 'slug' => $yourCiv->slug]) ?>" class="matchup-emblem-link" aria-label="<?= Html::encode(Tr::name($yourCiv->name)) ?>">
                 <img src="<?= Html::encode($yourCiv->emblemUrl) ?>" alt="" class="civ-emblem-lg">
             </a>
         <?php endif; ?>
         <div class="matchup-title-text">
             <h1>
-                <a href="<?= Url::to(['civilization/view', 'slug' => $yourCiv->slug]) ?>"><?= Html::encode($yourCiv->name) ?></a>
-                <span class="matchup-vs">vs</span>
-                <a href="<?= Url::to(['civilization/view', 'slug' => $enemyCiv->slug]) ?>"><?= Html::encode($enemyCiv->name) ?></a>
+                <a href="<?= Url::to(['civilization/view', 'slug' => $yourCiv->slug]) ?>"><?= Tr::nameHtml($yourCiv->name) ?></a>
+                <span class="matchup-vs"><?= Yii::t('app', 'vs') ?></span>
+                <a href="<?= Url::to(['civilization/view', 'slug' => $enemyCiv->slug]) ?>"><?= Tr::nameHtml($enemyCiv->name) ?></a>
             </h1>
-            <p class="text-muted mb-0">Your counters against enemy units</p>
+            <p class="text-muted mb-0"><?= Yii::t('app', 'Your counters against enemy units') ?></p>
         </div>
         <?php if ($enemyCiv->emblemUrl): ?>
-            <a href="<?= Url::to(['civilization/view', 'slug' => $enemyCiv->slug]) ?>" class="matchup-emblem-link" aria-label="<?= Html::encode($enemyCiv->name) ?>">
+            <a href="<?= Url::to(['civilization/view', 'slug' => $enemyCiv->slug]) ?>" class="matchup-emblem-link" aria-label="<?= Html::encode(Tr::name($enemyCiv->name)) ?>">
                 <img src="<?= Html::encode($enemyCiv->emblemUrl) ?>" alt="" class="civ-emblem-lg">
             </a>
         <?php endif; ?>
@@ -216,21 +218,22 @@ $tableHead = '<thead><tr><th class="matchup-avatar-col"></th><th>Enemy Unit</th>
     <div class="card-content">
         <div class="row g-3 align-items-end">
             <div class="col-sm-5">
-                <label class="form-label fw-semibold" for="yourCivSel">Your Civilization</label>
+                <label class="form-label fw-semibold" for="yourCivSel"><?= Yii::t('app', 'Your Civilization') ?></label>
                 <select id="yourCivSel" class="form-select">
                     <?php foreach ($civs as $civ): ?>
-                        <option value="<?= Html::encode($civ->slug) ?>" <?= $civ->slug === $yourCiv->slug ? 'selected' : '' ?>><?= Html::encode($civ->name) ?></option>
+                        <option value="<?= Html::encode($civ->slug) ?>" <?= $civ->slug === $yourCiv->slug ? 'selected' : '' ?>><?= Html::encode(Tr::name($civ->name)) ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
             <div class="col-sm-2 text-center" style="font-weight: 700; font-size: 1.25rem; color: var(--color-text-muted); padding-bottom: 6px;">
-                vs
+                <?= Yii::t('app', 'vs') ?>
+
             </div>
             <div class="col-sm-5">
-                <label class="form-label fw-semibold" for="enemyCivSel">Enemy Civilization</label>
+                <label class="form-label fw-semibold" for="enemyCivSel"><?= Yii::t('app', 'Enemy Civilization') ?></label>
                 <select id="enemyCivSel" class="form-select">
                     <?php foreach ($civs as $civ): ?>
-                        <option value="<?= Html::encode($civ->slug) ?>" <?= $civ->slug === $enemyCiv->slug ? 'selected' : '' ?>><?= Html::encode($civ->name) ?></option>
+                        <option value="<?= Html::encode($civ->slug) ?>" <?= $civ->slug === $enemyCiv->slug ? 'selected' : '' ?>><?= Html::encode(Tr::name($civ->name)) ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -242,7 +245,8 @@ $tableHead = '<thead><tr><th class="matchup-avatar-col"></th><th>Enemy Unit</th>
 <div class="mb-3">
     <label class="form-check-label" style="cursor: pointer; font-size: 14px; font-weight: 500; color: var(--color-text-muted);">
         <input type="checkbox" id="showNaval" class="form-check-input" style="cursor: pointer;">
-        Show Naval Units
+        <?= Yii::t('app', 'Show Naval Units') ?>
+
     </label>
 </div>
 
@@ -251,7 +255,8 @@ $tableHead = '<thead><tr><th class="matchup-avatar-col"></th><th>Enemy Unit</th>
     <ul class="nav nav-tabs mb-0" id="ageTabs" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link active" id="tab-all" data-bs-toggle="tab" data-bs-target="#pane-all" type="button" role="tab">
-                All
+                <?= Yii::t('app', 'All') ?>
+
                 <span class="badge badge-sm bg-secondary" id="allCount"><?= $allLandCount ?></span>
             </button>
         </li>
@@ -268,7 +273,7 @@ $tableHead = '<thead><tr><th class="matchup-avatar-col"></th><th>Enemy Unit</th>
                     <?php if ($ageIcon): ?>
                         <img src="<?= Html::encode($ageIcon) ?>" alt="" class="matchup-tab-age-icon">
                     <?php endif; ?>
-                    <?= Html::encode($age) ?>
+                    <?= Tr::nameHtml($age) ?>
                     <span class="badge badge-sm bg-secondary age-count"><?= count($units) ?></span>
                 </button>
             </li>
@@ -294,11 +299,11 @@ $tableHead = '<thead><tr><th class="matchup-avatar-col"></th><th>Enemy Unit</th>
                         <tr>
                             <td><?= UnitPills::avatar($houseIcon) ?></td>
                             <td class="matchup-enemy">
-                                <span class="unit-list-name">Buildings</span>
+                                <span class="unit-list-name"><?= Yii::t('app', 'Buildings') ?></span>
                                 <div class="pill-row matchup-enemy-pills">
-                                    <?= UnitPills::pill('Structures', [
+                                    <?= UnitPills::pill(Yii::t('app', 'Structures'), [
                                         'variant' => 'building',
-                                        'tip' => ['title' => 'Buildings', 'icon' => $houseIcon, 'text' => UnitPills::text('building:Buildings')],
+                                        'tip' => ['title' => Yii::t('app', 'Buildings'), 'icon' => $houseIcon, 'text' => UnitPills::text('building:Buildings')],
                                     ]) ?>
                                 </div>
                             </td>
@@ -359,6 +364,15 @@ $baseUrl = Url::to(['matchup/view', 'yourCiv' => '__YOUR__', 'enemyCiv' => '__EN
 $allLandCountJs = $allLandCount;
 $allNavalCountJs = $allNavalCount;
 $popupDataJson = Json::encode($popupUnits);
+// popup labels; outside English the attack letter and the bonus line come from translated templates
+$T = [];
+foreach (['HP', 'Atk', 'Armor', 'Range', 'Speed', 'Attack Bonuses', 'Strong:', 'Weak:'] as $s) $T[$s] = Html::encode(Yii::t('app', $s));
+$jsStr = function ($s) { return json_encode(Html::encode($s), JSON_UNESCAPED_UNICODE); };
+$atkLetterJs = Tr::isEnglish() ? 'u.attackType[0]'
+    : "(u.attackType === 'Melee' ? " . $jsStr(Yii::t('app', 'M (melee attack)')) . ' : ' . $jsStr(Yii::t('app', 'P (pierce attack)')) . ')';
+$bonusJs = Tr::isEnglish() ? "'<span class=\"unit-popup-bonus\">+' + u.bonuses[i].bonus + ' vs ' + u.bonuses[i].vs + '</span>'"
+    : "'<span class=\"unit-popup-bonus\">' + " . $jsStr(Yii::t('app', '+{bonus} vs {class}'))
+        . ".replace('{bonus}', u.bonuses[i].bonus).replace('{class}', u.bonuses[i].vs) + '</span>'";
 $this->registerJs(<<<JS
 (function() {
     // Civ selector
@@ -424,18 +438,18 @@ $this->registerJs(<<<JS
         // Stats grid (2 columns)
         h += '<div class="unit-popup-body">';
         h += '<div class="unit-popup-stats-grid">';
-        h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/hit_points.png" alt="" class="stat-icon"> HP</span><span class="stat-value">' + u.hp + '</span></div>';
-        h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/' + (u.attackType === 'Melee' ? 'melee_attack' : 'pierce_attack') + '.png" alt="" class="stat-icon"> Atk</span><span class="stat-value">' + u.attack + ' <small>' + u.attackType[0] + '</small></span></div>';
-        h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/melee_armor.png" alt="" class="stat-icon"> Armor</span><span class="stat-value">' + u.meleeArmor + '/' + u.pierceArmor + '</span></div>';
-        if (u.range) h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/range.png" alt="" class="stat-icon"> Range</span><span class="stat-value">' + u.range + '</span></div>';
-        else if (u.speed) h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/movement_speed.png" alt="" class="stat-icon"> Speed</span><span class="stat-value">' + u.speed + '</span></div>';
+        h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/hit_points.png" alt="" class="stat-icon"> {$T['HP']}</span><span class="stat-value">' + u.hp + '</span></div>';
+        h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/' + (u.attackType === 'Melee' ? 'melee_attack' : 'pierce_attack') + '.png" alt="" class="stat-icon"> {$T['Atk']}</span><span class="stat-value">' + u.attack + ' <small>' + $atkLetterJs + '</small></span></div>';
+        h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/melee_armor.png" alt="" class="stat-icon"> {$T['Armor']}</span><span class="stat-value">' + u.meleeArmor + '/' + u.pierceArmor + '</span></div>';
+        if (u.range) h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/range.png" alt="" class="stat-icon"> {$T['Range']}</span><span class="stat-value">' + u.range + '</span></div>';
+        else if (u.speed) h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/movement_speed.png" alt="" class="stat-icon"> {$T['Speed']}</span><span class="stat-value">' + u.speed + '</span></div>';
         h += '</div>';
         // Attack bonuses
         if (u.bonuses && u.bonuses.length) {
             h += '<div class="unit-popup-bonuses">';
-            h += '<div class="unit-popup-section-title">Attack Bonuses</div>';
+            h += '<div class="unit-popup-section-title">{$T['Attack Bonuses']}</div>';
             for (var i = 0; i < u.bonuses.length; i++) {
-                h += '<span class="unit-popup-bonus">+' + u.bonuses[i].bonus + ' vs ' + u.bonuses[i].vs + '</span>';
+                h += $bonusJs;
             }
             h += '</div>';
         }
@@ -443,10 +457,10 @@ $this->registerJs(<<<JS
         if ((u.strong && u.strong.length) || (u.weak && u.weak.length)) {
             h += '<div class="unit-popup-matchups">';
             if (u.strong && u.strong.length) {
-                h += '<div class="unit-popup-matchup"><span class="matchup-good">Strong:</span> ' + u.strong.join(', ') + '</div>';
+                h += '<div class="unit-popup-matchup"><span class="matchup-good">{$T['Strong:']}</span> ' + u.strong.join(', ') + '</div>';
             }
             if (u.weak && u.weak.length) {
-                h += '<div class="unit-popup-matchup"><span class="matchup-bad">Weak:</span> ' + u.weak.join(', ') + '</div>';
+                h += '<div class="unit-popup-matchup"><span class="matchup-bad">{$T['Weak:']}</span> ' + u.weak.join(', ') + '</div>';
             }
             h += '</div>';
         }

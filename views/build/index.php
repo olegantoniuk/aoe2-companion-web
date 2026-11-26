@@ -6,9 +6,10 @@ use yii\helpers\Url;
 use app\models\BuildOrder;
 use app\models\Elo;
 use app\components\UnitPills;
+use app\components\Tr;
 
-$this->title = 'Build Orders';
-Seo::page($this, 'Build Orders for Every Level and Civilization', 'Step by step Age of Empires II build orders from the first villager to the age up: scouts, archers, fast castle, drush and the signature openings of every civilization.', '/images/icons/builds.png');
+$this->title = Yii::t('app', 'Build Orders');
+Seo::page($this, Yii::t('app', 'Build Orders for Every Level and Civilization'), Yii::t('app', 'Step by step Age of Empires II build orders from the first villager to the age up: scouts, archers, fast castle, drush and the signature openings of every civilization.'), '/images/icons/builds.png');
 
 $filterUrl = function ($elo, $category, $civ = null) use ($currentCiv) {
     $civ = $civ === false ? null : ($civ ?? ($currentCiv ? $currentCiv->slug : null));
@@ -19,10 +20,10 @@ $filterUrl = function ($elo, $category, $civ = null) use ($currentCiv) {
 <div class="admin5-page-header">
     <div class="page-title">
         <?= UnitPills::pageIcon('builds') ?>
-        <h1>Build Orders <span class="badge bg-secondary badge-sm"><?= count($builds) ?></span></h1>
+        <h1><?= Yii::t('app', 'Build Orders') ?> <span class="badge bg-secondary badge-sm"><?= count($builds) ?></span></h1>
     </div>
 </div>
-<p class="kb-lead">The openings most players use on the ladder, step by step from the first villager to the age up, plus the signature builds of each civilization. Pick one that fits your level, learn it until it runs without thinking, then add the next.</p>
+<p class="kb-lead"><?= Yii::t('app', 'The openings most players use on the ladder, step by step from the first villager to the age up, plus the signature builds of each civilization. Pick one that fits your level, learn it until it runs without thinking, then add the next.') ?></p>
 
 <?= $this->render('_filters', [
     'filterUrl' => $filterUrl,
@@ -31,11 +32,11 @@ $filterUrl = function ($elo, $category, $civ = null) use ($currentCiv) {
     'currentCiv' => $currentCiv,
     'civs' => $civs,
     'categories' => BuildOrder::CATEGORIES,
-    'categoryLabel' => 'Style',
+    'categoryLabel' => Yii::t('app', 'Style'),
 ]) ?>
 
 <?php if (!$builds): ?>
-    <p class="text-muted">No build orders match these filters.</p>
+    <p class="text-muted"><?= Yii::t('app', 'No build orders match these filters.') ?></p>
 <?php endif; ?>
 
 <div class="kb-grid">
@@ -44,18 +45,18 @@ $filterUrl = function ($elo, $category, $civ = null) use ($currentCiv) {
             <h2 class="kb-card-title"><?= Html::encode($b->shortTitle) ?></h2>
             <div class="pill-row">
                 <?= UnitPills::eloPill($b->elo) ?>
-                <?= UnitPills::tagPill($b->category, $b->categoryLabel) ?>
+                <?= UnitPills::tagPill($b->category, Yii::t('app', $b->categoryLabel)) ?>
                 <?php foreach ($b->listOf('map_types') as $m): ?><?= UnitPills::mapPill($m) ?><?php endforeach; ?>
                 <?= UnitPills::difficulty($b->difficulty) ?>
             </div>
-            <p class="kb-card-summary"><?= Html::encode($b->summary) ?></p>
+            <p class="kb-card-summary"><?= Html::encode(Tr::text($b->summary, 'builds')) ?></p>
             <div class="kb-card-foot">
                 <?php if ($b->ageUpPop): ?>
-                    <span class="kb-pop">Click up at <strong><?= $b->ageUpPop ?></strong> pop</span>
+                    <span class="kb-pop"><?= Yii::t('app', 'Click up at {pop} pop', ['pop' => '<strong>' . $b->ageUpPop . '</strong>']) ?></span>
                 <?php endif; ?>
                 <span class="kb-civs">
                     <?php foreach (array_slice($b->civModels, 0, 5) as $civ): ?>
-                        <?php if ($civ->emblemUrl): ?><img src="<?= Html::encode($civ->emblemUrl) ?>" alt="<?= Html::encode($civ->name) ?>" title="<?= Html::encode($civ->name) ?>"><?php endif; ?>
+                        <?php if ($civ->emblemUrl): ?><img src="<?= Html::encode($civ->emblemUrl) ?>" alt="<?= Html::encode(Tr::name($civ->name)) ?>" title="<?= Html::encode(Tr::name($civ->name)) ?>"><?php endif; ?>
                     <?php endforeach; ?>
                 </span>
             </div>

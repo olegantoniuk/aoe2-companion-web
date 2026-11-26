@@ -5,9 +5,10 @@ use app\components\Seo;
 use yii\helpers\Url;
 use yii\helpers\Json;
 use app\components\UnitPills;
+use app\components\Tr;
 
-$this->title = $unit->name;
-Seo::page($this, $unit->name . ': Stats, Counters and Upgrades', $unit->description ?: ($unit->name . ' in Age of Empires II: stats in every age, upgrades, counters and the civilizations that can train it.'), $unit->iconUrl);
+$this->title = Tr::name($unit->name);
+Seo::page($this, Yii::t('app', '{name}: Stats, Counters and Upgrades', ['name' => Tr::name($unit->name)]), Tr::text($unit->description, 'units') ?: Yii::t('app', '{name} in Age of Empires II: stats in every age, upgrades, counters and the civilizations that can train it.', ['name' => Tr::name($unit->name)]), $unit->iconUrl);
 
 $attackBonuses = $unit->attackBonuses;
 $armorClasses = $unit->armorClasses;
@@ -116,7 +117,6 @@ $techIcon = function ($name) {
 };
 
 // Pills with a round avatar and a hover card: see app\components\UnitPills
-$tipTexts = UnitPills::TEXTS;
 $iconForSlug = [UnitPills::class, 'iconForSlug'];
 $buildingIcon = [UnitPills::class, 'buildingIcon'];
 $pill = [UnitPills::class, 'pill'];
@@ -126,22 +126,36 @@ $classPill = [UnitPills::class, 'classPill'];
 // Effects limited to one civ ("only") go after the general ones,
 // and technologies whose every effect is civ-limited go last.
 $techStatLabels = [
-    'hp' => ['Hit Points', 'hp'],
-    'attack' => ['Attack', 'melee_attack'],
-    'armor' => ['Armor', 'melee_armor'],
-    'range' => ['Range', 'range'],
-    'speed' => ['Speed', 'speed'],
-    'rof' => ['Rate of Fire', 'reload_time'],
-    'accuracy' => ['Accuracy', 'accuracy'],
-    'los' => ['Line of Sight', 'line_of_sight'],
-    'conversion' => ['Conversion Resistance', null],
-    'creation' => ['Training Speed', null],
-    'population' => ['Population', null],
-    'projectile' => ['Projectiles', null],
-    'work' => ['Work Rate', null],
-    'resists' => ['Damage Resistance', null],
-    'resistance' => ['Damage Resistance', null],
+    'hp' => [Yii::t('app', 'Hit Points'), 'hp'],
+    'attack' => [Yii::t('app', 'Attack'), 'melee_attack'],
+    'armor' => [Yii::t('app', 'Armor'), 'melee_armor'],
+    'range' => [Yii::t('app', 'Range'), 'range'],
+    'speed' => [Yii::t('app', 'Speed'), 'speed'],
+    'rof' => [Yii::t('app', 'Rate of Fire'), 'reload_time'],
+    'accuracy' => [Yii::t('app', 'Accuracy'), 'accuracy'],
+    'los' => [Yii::t('app', 'Line of Sight'), 'line_of_sight'],
+    'conversion' => [Yii::t('app', 'Conversion Resistance'), null],
+    'creation' => [Yii::t('app', 'Training Speed'), null],
+    'population' => [Yii::t('app', 'Population'), null],
+    'projectile' => [Yii::t('app', 'Projectiles'), null],
+    'work' => [Yii::t('app', 'Work Rate'), null],
+    'resists' => [Yii::t('app', 'Damage Resistance'), null],
+    'resistance' => [Yii::t('app', 'Damage Resistance'), null],
 ];
+// The short stat key of a civilization boost ("hp", "rof") is shown as it is in English, as a word in other languages
+$boostStatLabel = function ($stat) use ($techStatLabels) {
+    if (Tr::isEnglish()) return $stat;
+    $more = [
+        'cost' => Yii::t('app', 'Cost'), 'upgrade' => Yii::t('app', 'Upgrade'), 'other' => Yii::t('app', 'Other'),
+        'regeneration' => Yii::t('app', 'Regeneration'), 'repair' => Yii::t('app', 'Repair'), 'ability' => Yii::t('app', 'Ability'),
+        'resources' => Yii::t('app', 'Resources'), 'healing' => Yii::t('app', 'Healing'),
+    ];
+    return $techStatLabels[$stat][0] ?? $more[$stat] ?? $stat;
+};
+// The short age label over the stat columns ("Feudal") in English, the age name in other languages
+$ageLabel = function ($age, $short) {
+    return Tr::isEnglish() ? $short : Tr::short($age);
+};
 $isCivLimited = function ($effect) {
     // "+5, only for the Aztecs" or "+4 min, +4 max, Sicilians only"
     return (bool)preg_match('/only for the |\bonly$/i', $effect);
@@ -172,9 +186,9 @@ $technologies = $techGroups ? \app\models\Technology::find()
 $techCostHtml = function ($tech) use ($resIcons) {
     $parts = [];
     foreach (['Food' => $tech->cost_food, 'Wood' => $tech->cost_wood, 'Gold' => $tech->cost_gold, 'Stone' => $tech->cost_stone] as $res => $amount) {
-        if ($amount) $parts[] = '<img src="' . $resIcons[$res] . '" alt="' . $res . '" class="res-icon"> ' . $amount;
+        if ($amount) $parts[] = '<img src="' . $resIcons[$res] . '" alt="' . Html::encode(Tr::name($res)) . '" class="res-icon"> ' . $amount;
     }
-    return $parts ? implode(' &nbsp; ', $parts) : 'Free';
+    return $parts ? implode(' &nbsp; ', $parts) : Yii::t('app', 'Free');
 };
 
 // Technology availability table: rows are civs that can train this unit,
@@ -208,10 +222,10 @@ foreach ($techGroups as $techName => $items) {
 }
 ?>
 
-<nav aria-label="breadcrumb" class="mb-3">
+<nav aria-label="<?= Html::encode(Yii::t('app', 'breadcrumb')) ?>" class="mb-3">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><?= Html::a('Units', ['unit/index']) ?></li>
-        <li class="breadcrumb-item active"><?= Html::encode($unit->name) ?></li>
+        <li class="breadcrumb-item"><?= Html::a(Yii::t('app', 'Units'), ['unit/index']) ?></li>
+        <li class="breadcrumb-item active"><?= Tr::nameHtml($unit->name) ?></li>
     </ol>
 </nav>
 
@@ -221,7 +235,7 @@ foreach ($techGroups as $techName => $items) {
             <img src="<?= Html::encode($unit->iconUrl) ?>" alt="" class="unit-title-icon">
         <?php endif; ?>
         <div class="unit-title-text">
-            <h1><?= Html::encode($unit->name) ?></h1>
+            <h1><?= Tr::nameHtml($unit->name) ?></h1>
             <?php
             // a unique unit shared by a few civilizations (Winged Hussar) shows all of them,
             // a unit only one civilization trains (Imperial Skirmisher) shows that one
@@ -234,7 +248,7 @@ foreach ($techGroups as $techName => $items) {
                     <?php endforeach; ?>
                 </span>
             <?php elseif ($unit->is_unique): ?>
-                <span class="badge bg-warning">Unique</span>
+                <span class="badge bg-warning"><?= Tr::isEnglish() ? 'Unique' : Yii::t('app', 'Unique unit') ?></span>
             <?php endif; ?>
         </div>
     </div>
@@ -265,7 +279,7 @@ foreach ($techGroups as $techName => $items) {
                         <?php if ($groundUrl): ?>
                             <span class="unit-ground" style="background-image: url('<?= Html::encode($groundUrl) ?>')"></span>
                         <?php endif; ?>
-                        <img src="<?= Html::encode($unit->transparentSpriteUrl) ?>" alt="<?= Html::encode($unit->name) ?>"
+                        <img src="<?= Html::encode($unit->transparentSpriteUrl) ?>" alt="<?= Html::encode(Tr::name($unit->name)) ?>"
                              width="<?= round($spriteW * $spriteScale) ?>" height="<?= round($spriteH * $spriteScale) ?>">
                     </span>
                 </div>
@@ -273,14 +287,14 @@ foreach ($techGroups as $techName => $items) {
         <?php elseif ($unit->iconUrl): ?>
             <div class="text-center mb-4">
                 <div class="unit-portrait-card">
-                    <img src="<?= Html::encode($unit->iconUrl) ?>" alt="<?= Html::encode($unit->name) ?>" class="unit-image-lg">
+                    <img src="<?= Html::encode($unit->iconUrl) ?>" alt="<?= Html::encode(Tr::name($unit->name)) ?>" class="unit-image-lg">
                 </div>
             </div>
         <?php endif; ?>
 
         <!-- Main Stats -->
         <div class="admin5-card admin5-card-border">
-            <div class="card-header"><strong>General</strong></div>
+            <div class="card-header"><strong><?= Yii::t('app', 'General') ?></strong></div>
             <table class="table table-sm stat-table mb-0">
                 <?php
                 $classDefs = \app\controllers\UnitController::getClassDefinitions();
@@ -291,7 +305,7 @@ foreach ($techGroups as $techName => $items) {
                 $armorToSlugLc = array_change_key_case($armorToSlug, CASE_LOWER);
                 $displayAC = $unit->displayArmorClasses;
                 if ($displayAC): ?>
-                    <tr><th>Classes</th><td>
+                    <tr><th><?= Yii::t('app', 'Classes') ?></th><td>
                         <div class="pill-row">
                             <?php foreach ($displayAC as $ac): ?>
                                 <?= $classPill($ac->name) ?>
@@ -300,7 +314,7 @@ foreach ($techGroups as $techName => $items) {
                     </td></tr>
                 <?php endif; ?>
                 <?php if ($unit->age): ?>
-                    <tr><th>Age</th><td><?= UnitPills::agePill($unit->age) ?></td></tr>
+                    <tr><th><?= Yii::t('app', 'Age') ?></th><td><?= UnitPills::agePill($unit->age) ?></td></tr>
                 <?php endif; ?>
                 <?php if ($unit->training_building): ?>
                     <?php
@@ -321,41 +335,41 @@ foreach ($techGroups as $techName => $items) {
                     }
                     ?>
                     <?php $buildingSlugs = $buildingNames ? \app\models\Building::find()->select(['slug', 'name'])->indexBy('name')->column() : []; ?>
-                    <tr><th>Trained at</th><td>
+                    <tr><th><?= Yii::t('app', 'Trained at') ?></th><td>
                         <?php if ($buildingNames): ?>
                             <div class="pill-row">
                                 <?php foreach ($buildingNames as $b): ?>
                                     <?php $bName = trim(preg_replace('/(?<!^)([A-Z])/', ' $1', $b)); ?>
-                                    <?= $pill($bName, [
+                                    <?= $pill(Tr::name($bName), [
                                         'href' => isset($buildingSlugs[$bName]) ? Url::to(['building/view', 'slug' => $buildingSlugs[$bName]]) : null,
                                         'variant' => 'building',
                                         'icon' => $buildingIcon($b),
-                                        'tip' => isset($tipTexts['building:' . $bName])
-                                            ? ['title' => $bName, 'subtitle' => 'Building', 'icon' => $buildingIcon($b), 'text' => $tipTexts['building:' . $bName]]
+                                        'tip' => UnitPills::text('building:' . $bName) !== null
+                                            ? ['title' => Tr::name($bName), 'subtitle' => Yii::t('app', 'Building'), 'icon' => $buildingIcon($b), 'text' => UnitPills::text('building:' . $bName)]
                                             : null,
                                     ]) ?>
                                 <?php endforeach; ?>
                             </div>
                         <?php else: ?>
-                            <?= Html::encode($unit->training_building) ?>
+                            <?= Html::encode(Tr::text($unit->training_building, 'units')) ?>
                         <?php endif; ?>
                     </td></tr>
                 <?php endif; ?>
                 <?php $statCivs = $unit->capturedCivs ?: ($unit->civilization ? [$unit->civilization] : $unit->ownerCivs); ?>
                 <?php if ($statCivs): ?>
-                    <tr><th>Civilization</th><td><?= implode(' ', array_map([UnitPills::class, 'civPill'], $statCivs)) ?></td></tr>
+                    <tr><th><?= Yii::t('app', 'Civilization') ?></th><td><?= implode(' ', array_map([UnitPills::class, 'civPill'], $statCivs)) ?></td></tr>
                 <?php endif; ?>
                 <?php if ($unit->training_time): ?>
-                    <tr><th>Training Time</th><td><img src="/images/stats/time.png" alt="" class="res-icon"> <?= $unit->training_time ?>s</td></tr>
+                    <tr><th><?= Yii::t('app', 'Training Time') ?></th><td><img src="/images/stats/time.png" alt="" class="res-icon"> <?= Yii::t('app', '{n}s', ['n' => $unit->training_time]) ?></td></tr>
                 <?php endif; ?>
-                <tr><th>Cost</th><td>
+                <tr><th><?= Yii::t('app', 'Cost') ?></th><td>
                     <?php
                     $costParts = [];
-                    if ($unit->cost_food) $costParts[] = '<img src="' . $resIcons['Food'] . '" alt="Food" class="res-icon"> ' . $unit->cost_food;
-                    if ($unit->cost_wood) $costParts[] = '<img src="' . $resIcons['Wood'] . '" alt="Wood" class="res-icon"> ' . $unit->cost_wood;
-                    if ($unit->cost_gold) $costParts[] = '<img src="' . $resIcons['Gold'] . '" alt="Gold" class="res-icon"> ' . $unit->cost_gold;
-                    if ($unit->cost_stone) $costParts[] = '<img src="' . $resIcons['Stone'] . '" alt="Stone" class="res-icon"> ' . $unit->cost_stone;
-                    echo $costParts ? implode(' &nbsp; ', $costParts) : 'Free';
+                    if ($unit->cost_food) $costParts[] = '<img src="' . $resIcons['Food'] . '" alt="' . Html::encode(Tr::name('Food')) . '" class="res-icon"> ' . $unit->cost_food;
+                    if ($unit->cost_wood) $costParts[] = '<img src="' . $resIcons['Wood'] . '" alt="' . Html::encode(Tr::name('Wood')) . '" class="res-icon"> ' . $unit->cost_wood;
+                    if ($unit->cost_gold) $costParts[] = '<img src="' . $resIcons['Gold'] . '" alt="' . Html::encode(Tr::name('Gold')) . '" class="res-icon"> ' . $unit->cost_gold;
+                    if ($unit->cost_stone) $costParts[] = '<img src="' . $resIcons['Stone'] . '" alt="' . Html::encode(Tr::name('Stone')) . '" class="res-icon"> ' . $unit->cost_stone;
+                    echo $costParts ? implode(' &nbsp; ', $costParts) : Yii::t('app', 'Free');
                     ?>
                 </td></tr>
             </table>
@@ -364,7 +378,7 @@ foreach ($techGroups as $techName => $items) {
         <!-- Attack Bonuses -->
         <?php if ($attackBonuses): ?>
             <div class="admin5-card admin5-card-border">
-                <div class="card-header"><strong>Attack Bonuses</strong></div>
+                <div class="card-header"><strong><?= Yii::t('app', 'Attack Bonuses') ?></strong></div>
                 <div class="card-content">
                     <div class="pill-row">
                         <?php
@@ -376,11 +390,11 @@ foreach ($techGroups as $techName => $items) {
                         ?>
                         <?php foreach ($attackBonuses as $ab): ?>
                             <?php
-                            $label = '+' . $ab->bonus;
                             $eb = $eliteBonus[strtolower($ab->vs)] ?? null;
-                            if ($eb !== null && $eb != $ab->bonus) $label .= ' (Elite +' . $eb . ')';
-                            elseif ($ab->variant) $label .= ' (' . $ab->variant . ')';
-                            $label .= ' vs ' . $ab->vs;
+                            $vs = Tr::name($ab->vs);
+                            if ($eb !== null && $eb != $ab->bonus) $label = Yii::t('app', '+{bonus} (Elite +{elite}) vs {class}', ['bonus' => $ab->bonus, 'elite' => $eb, 'class' => $vs]);
+                            elseif ($ab->variant) $label = Yii::t('app', '+{bonus} ({variant}) vs {class}', ['bonus' => $ab->bonus, 'variant' => Tr::text($ab->variant, 'units'), 'class' => $vs]);
+                            else $label = Yii::t('app', '+{bonus} vs {class}', ['bonus' => $ab->bonus, 'class' => $vs]);
                             ?>
                             <?= $classPill($ab->vs, $label) ?>
                         <?php endforeach; ?>
@@ -392,11 +406,11 @@ foreach ($techGroups as $techName => $items) {
         <!-- Armor Classes -->
         <?php if ($armorClasses): ?>
             <div class="admin5-card admin5-card-border">
-                <div class="card-header"><strong>Armor Classes</strong></div>
+                <div class="card-header"><strong><?= Yii::t('app', 'Armor Classes') ?></strong></div>
                 <div class="card-content">
                     <div class="pill-row">
                     <?php foreach ($armorClasses as $ac): ?>
-                        <?= $classPill($ac->name, $ac->name . ($ac->modifier ? ' (' . ($ac->modifier > 0 ? '+' : '') . $ac->modifier . ')' : '')) ?>
+                        <?= $classPill($ac->name, Tr::name($ac->name) . ($ac->modifier ? ' (' . ($ac->modifier > 0 ? '+' : '') . $ac->modifier . ')' : '')) ?>
                     <?php endforeach; ?>
                     </div>
                 </div>
@@ -406,30 +420,30 @@ foreach ($techGroups as $techName => $items) {
         <!-- Upgrade Path -->
         <?php if ($unit->upgrades_to || $unit->upgrades_from): ?>
             <div class="admin5-card admin5-card-border">
-                <div class="card-header"><strong>Upgrade Path</strong></div>
+                <div class="card-header"><strong><?= Yii::t('app', 'Upgrade Path') ?></strong></div>
                 <div class="card-content">
                     <?php if ($unit->upgrades_from): ?>
                         <div class="mb-2">
-                            <small class="text-muted">Upgrades from:</small>
+                            <small class="text-muted"><?= Yii::t('app', 'Upgrades from:') ?></small>
                             <?= UnitPills::avatar(UnitPills::iconForName($unit->upgrades_from)) ?>
-                            <strong><?= Html::encode($unit->upgrades_from) ?></strong>
+                            <strong><?= Tr::nameHtml($unit->upgrades_from) ?></strong>
                         </div>
                     <?php endif; ?>
                     <?php if ($unit->upgrades_to): ?>
                         <div>
-                            <small class="text-muted">Upgrades to:</small>
+                            <small class="text-muted"><?= Yii::t('app', 'Upgrades to:') ?></small>
                             <?= UnitPills::avatar(UnitPills::iconForName($unit->upgrades_to)) ?>
-                            <strong><?= Html::encode($unit->upgrades_to) ?></strong>
+                            <strong><?= Tr::nameHtml($unit->upgrades_to) ?></strong>
                             <?php if ($unit->upgrade_cost_food || $unit->upgrade_cost_wood || $unit->upgrade_cost_gold): ?>
                                 <br><small class="text-muted">
-                                    Cost: <?php
+                                    <?= Yii::t('app', 'Cost:') ?> <?php
                                     $parts = [];
-                                    if ($unit->upgrade_cost_food) $parts[] = '<img src="' . $resIcons['Food'] . '" alt="Food" class="res-icon"> ' . $unit->upgrade_cost_food;
-                                    if ($unit->upgrade_cost_wood) $parts[] = '<img src="' . $resIcons['Wood'] . '" alt="Wood" class="res-icon"> ' . $unit->upgrade_cost_wood;
-                                    if ($unit->upgrade_cost_gold) $parts[] = '<img src="' . $resIcons['Gold'] . '" alt="Gold" class="res-icon"> ' . $unit->upgrade_cost_gold;
+                                    if ($unit->upgrade_cost_food) $parts[] = '<img src="' . $resIcons['Food'] . '" alt="' . Html::encode(Tr::name('Food')) . '" class="res-icon"> ' . $unit->upgrade_cost_food;
+                                    if ($unit->upgrade_cost_wood) $parts[] = '<img src="' . $resIcons['Wood'] . '" alt="' . Html::encode(Tr::name('Wood')) . '" class="res-icon"> ' . $unit->upgrade_cost_wood;
+                                    if ($unit->upgrade_cost_gold) $parts[] = '<img src="' . $resIcons['Gold'] . '" alt="' . Html::encode(Tr::name('Gold')) . '" class="res-icon"> ' . $unit->upgrade_cost_gold;
                                     echo implode(' &nbsp; ', $parts);
                                     ?>
-                                    <?php if ($unit->upgrade_time): ?> &nbsp;<img src="/images/stats/time.png" alt="Time" title="Time" class="res-icon"> <?= $unit->upgrade_time ?>s<?php endif; ?>
+                                    <?php if ($unit->upgrade_time): ?> &nbsp;<img src="/images/stats/time.png" alt="<?= Html::encode(Yii::t('app', 'Time')) ?>" title="<?= Html::encode(Yii::t('app', 'Time')) ?>" class="res-icon"> <?= Yii::t('app', '{n}s', ['n' => $unit->upgrade_time]) ?><?php endif; ?>
                                 </small>
                             <?php endif; ?>
                         </div>
@@ -460,8 +474,8 @@ foreach ($techGroups as $techName => $items) {
             return $html;
         };
         $textTabs = array_filter([
-            'overview' => $unit->description ? ['Overview', $unit->description] : null,
-            'tactics' => $unit->tactics ? ['Tactics', $unit->tactics] : null,
+            'overview' => $unit->description ? [Yii::t('app', 'Overview'), Tr::text($unit->description, 'units')] : null,
+            'tactics' => $unit->tactics ? [Yii::t('app', 'Tactics'), Tr::text($unit->tactics, 'units')] : null,
         ]);
         ?>
         <?php if ($textTabs): ?>
@@ -469,7 +483,7 @@ foreach ($techGroups as $techName => $items) {
                 <ul class="nav nav-tabs mb-0" role="tablist">
                     <?php $first = true; foreach ($textTabs as $id => [$title]): ?>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link<?= $first ? ' active' : '' ?>" data-bs-toggle="tab" data-bs-target="#text-<?= $id ?>" type="button" role="tab" aria-controls="text-<?= $id ?>" aria-selected="<?= $first ? 'true' : 'false' ?>"><?= $title ?></button>
+                            <button class="nav-link<?= $first ? ' active' : '' ?>" data-bs-toggle="tab" data-bs-target="#text-<?= $id ?>" type="button" role="tab" aria-controls="text-<?= $id ?>" aria-selected="<?= $first ? 'true' : 'false' ?>"><?= Html::encode($title) ?></button>
                         </li>
                     <?php $first = false; endforeach; ?>
                 </ul>
@@ -502,22 +516,22 @@ foreach ($techGroups as $techName => $items) {
         }
         ?>
         <div class="admin5-card admin5-card-border">
-            <div class="card-header" id="combat-stats"><strong>Combat Stats</strong></div>
+            <div class="card-header" id="combat-stats"><strong><?= Yii::t('app', 'Combat Stats') ?></strong></div>
             <?php if ($lineCols): ?>
                 <?php
                 $lineRows = [
-                    ['hit_points', 'hp', 'Hit Points', ''],
-                    ['melee_attack', 'melee_attack', 'Melee Attack', ''],
-                    ['pierce_attack', 'pierce_attack', 'Pierce Attack', ''],
-                    ['melee_armor', 'melee_armor', 'Melee Armor', ''],
-                    ['pierce_armor', 'pierce_armor', 'Pierce Armor', ''],
-                    ['range_val', 'range', 'Range', ''],
-                    ['min_range', 'range', 'Min Range', ''],
-                    ['blast_radius', 'blast_radius', 'Blast Radius', ''],
-                    ['accuracy', 'accuracy', 'Accuracy', '%'],
-                    ['rate_of_fire', 'reload_time', 'Rate of Fire', ''],
-                    ['speed', 'speed', 'Speed', ''],
-                    ['line_of_sight', 'line_of_sight', 'Line of Sight', ''],
+                    ['hit_points', 'hp', Yii::t('app', 'Hit Points'), ''],
+                    ['melee_attack', 'melee_attack', Yii::t('app', 'Melee Attack'), ''],
+                    ['pierce_attack', 'pierce_attack', Yii::t('app', 'Pierce Attack'), ''],
+                    ['melee_armor', 'melee_armor', Yii::t('app', 'Melee Armor'), ''],
+                    ['pierce_armor', 'pierce_armor', Yii::t('app', 'Pierce Armor'), ''],
+                    ['range_val', 'range', Yii::t('app', 'Range'), ''],
+                    ['min_range', 'range', Yii::t('app', 'Min Range'), ''],
+                    ['blast_radius', 'blast_radius', Yii::t('app', 'Blast Radius'), ''],
+                    ['accuracy', 'accuracy', Yii::t('app', 'Accuracy'), '%'],
+                    ['rate_of_fire', 'reload_time', Yii::t('app', 'Rate of Fire'), ''],
+                    ['speed', 'speed', Yii::t('app', 'Speed'), ''],
+                    ['line_of_sight', 'line_of_sight', Yii::t('app', 'Line of Sight'), ''],
                 ];
                 // a row shows when any unit of the line has the stat
                 $lineRows = array_values(array_filter($lineRows, function ($r) use ($lineCols) {
@@ -551,8 +565,8 @@ foreach ($techGroups as $techName => $items) {
                             <?php foreach ($lineCols as $c): ?>
                                 <th class="age-stat-col age-stat-age<?= $c['current'] ? ' is-current' : '' ?>">
                                     <?php if ($c['age'] !== $prevAge): ?>
-                                        <img src="/images/ages/<?= str_replace(' ', '', $c['age']) ?>.png" alt="" class="age-stat-icon" title="<?= Html::encode($c['age']) ?>">
-                                        <span><?= Html::encode(explode(' ', $c['age'])[0]) ?></span>
+                                        <img src="/images/ages/<?= str_replace(' ', '', $c['age']) ?>.png" alt="" class="age-stat-icon" title="<?= Html::encode(Tr::name($c['age'])) ?>">
+                                        <span><?= Html::encode($ageLabel($c['age'], explode(' ', $c['age'])[0])) ?></span>
                                     <?php endif; ?>
                                 </th>
                                 <?php $prevAge = $c['age']; ?>
@@ -564,11 +578,11 @@ foreach ($techGroups as $techName => $items) {
                                 $upParts = [];
                                 if ($c['upgrade']) {
                                     foreach (['Food', 'Wood', 'Gold'] as $k => $res) {
-                                        if (!empty($c['upgrade'][$k])) $upParts[] = '<span class="age-stat-tip-res"><img src="' . $resIcons[$res] . '" alt="' . $res . '" class="res-icon"> ' . (int)$c['upgrade'][$k] . '</span>';
+                                        if (!empty($c['upgrade'][$k])) $upParts[] = '<span class="age-stat-tip-res"><img src="' . $resIcons[$res] . '" alt="' . Html::encode(Tr::name($res)) . '" class="res-icon"> ' . (int)$c['upgrade'][$k] . '</span>';
                                     }
                                 }
                                 $hasTip = $upParts || !empty($c['upgrade'][3]);
-                                $head = UnitPills::avatar($c['icon']) . '<span>' . Html::encode($c['name']) . '</span>';
+                                $head = UnitPills::avatar($c['icon']) . '<span>' . Tr::nameHtml($c['name']) . '</span>';
                                 ?>
                                 <th class="age-stat-col age-stat-unit line-stat-unit<?= $c['current'] ? ' is-current' : '' ?><?= $hasTip ? ' age-stat-has-tip' : '' ?>"<?= $hasTip ? ' tabindex="0"' : '' ?>>
                                     <?php if ($c['slug'] && !$c['current']): ?>
@@ -578,12 +592,12 @@ foreach ($techGroups as $techName => $items) {
                                     <?php endif; ?>
                                     <?php if ($hasTip): ?>
                                         <span class="age-stat-tip" role="tooltip">
-                                            <span class="age-stat-tip-title"><?= Html::encode($c['name']) ?> Upgrade</span>
+                                            <span class="age-stat-tip-title"><?= Html::encode(Yii::t('app', '{name} Upgrade', ['name' => Tr::name($c['name'])])) ?></span>
                                             <?php if ($upParts): ?>
                                                 <span class="age-stat-tip-row"><?= implode(' ', $upParts) ?></span>
                                             <?php endif; ?>
                                             <?php if (!empty($c['upgrade'][3])): ?>
-                                                <span class="age-stat-tip-row"><img src="/images/stats/time.png" alt="Time" class="age-stat-tip-icon"> <?= $c['upgrade'][3] + 0 ?>s</span>
+                                                <span class="age-stat-tip-row"><img src="/images/stats/time.png" alt="<?= Html::encode(Yii::t('app', 'Time')) ?>" class="age-stat-tip-icon"> <?= Yii::t('app', '{n}s', ['n' => $c['upgrade'][3] + 0]) ?></span>
                                             <?php endif; ?>
                                         </span>
                                     <?php endif; ?>
@@ -594,7 +608,7 @@ foreach ($techGroups as $techName => $items) {
                     <tbody>
                         <?php foreach ($lineRows as [$attr, $icon, $label, $suffix]): ?>
                             <tr>
-                                <th><?= $label ?></th>
+                                <th><?= Html::encode($label) ?></th>
                                 <?php foreach ($lineCols as $c): ?>
                                     <?php
                                     $v = $c['stats'][$attr];
@@ -619,18 +633,18 @@ foreach ($techGroups as $techName => $items) {
                 <?php
                 // [column, icon key, label, value suffix, shown when the unit has the stat]
                 $combatRows = [
-                    ['hit_points', 'hp', 'Hit Points', '', true],
-                    ['melee_attack', 'melee_attack', 'Melee Attack', '', $unit->melee_attack !== null],
-                    ['pierce_attack', 'pierce_attack', 'Pierce Attack', '', $unit->pierce_attack !== null],
-                    ['melee_armor', 'melee_armor', 'Melee Armor', '', true],
-                    ['pierce_armor', 'pierce_armor', 'Pierce Armor', '', true],
-                    ['range_val', 'range', 'Range', '', (bool)$unit->range_val],
-                    ['min_range', 'range', 'Min Range', '', (bool)$unit->min_range],
-                    ['blast_radius', 'blast_radius', 'Blast Radius', '', (bool)$unit->blast_radius],
-                    ['accuracy', 'accuracy', 'Accuracy', '%', (bool)$unit->accuracy],
-                    ['rate_of_fire', 'reload_time', 'Rate of Fire', '', true],
-                    ['speed', 'speed', 'Speed', '', true],
-                    ['line_of_sight', 'line_of_sight', 'Line of Sight', '', (bool)$unit->line_of_sight],
+                    ['hit_points', 'hp', Yii::t('app', 'Hit Points'), '', true],
+                    ['melee_attack', 'melee_attack', Yii::t('app', 'Melee Attack'), '', $unit->melee_attack !== null],
+                    ['pierce_attack', 'pierce_attack', Yii::t('app', 'Pierce Attack'), '', $unit->pierce_attack !== null],
+                    ['melee_armor', 'melee_armor', Yii::t('app', 'Melee Armor'), '', true],
+                    ['pierce_armor', 'pierce_armor', Yii::t('app', 'Pierce Armor'), '', true],
+                    ['range_val', 'range', Yii::t('app', 'Range'), '', (bool)$unit->range_val],
+                    ['min_range', 'range', Yii::t('app', 'Min Range'), '', (bool)$unit->min_range],
+                    ['blast_radius', 'blast_radius', Yii::t('app', 'Blast Radius'), '', (bool)$unit->blast_radius],
+                    ['accuracy', 'accuracy', Yii::t('app', 'Accuracy'), '%', (bool)$unit->accuracy],
+                    ['rate_of_fire', 'reload_time', Yii::t('app', 'Rate of Fire'), '', true],
+                    ['speed', 'speed', Yii::t('app', 'Speed'), '', true],
+                    ['line_of_sight', 'line_of_sight', Yii::t('app', 'Line of Sight'), '', (bool)$unit->line_of_sight],
                 ];
                 $fmtDelta = function ($d) {
                     $d = round($d, 2);
@@ -680,15 +694,15 @@ foreach ($techGroups as $techName => $items) {
                             <th rowspan="2"></th>
                             <?php foreach ($ageColumns as $i => $col): ?>
                                 <th class="age-stat-col age-stat-age"<?= $i === $eliteColumn && !$hideRegular ? ' colspan="2"' : '' ?>>
-                                    <img src="/images/ages/<?= Html::encode($col['icon']) ?>.png" alt="" class="age-stat-icon" title="<?= Html::encode($col['age']) ?>">
-                                    <span><?= Html::encode($col['label']) ?></span>
+                                    <img src="/images/ages/<?= Html::encode($col['icon']) ?>.png" alt="" class="age-stat-icon" title="<?= Html::encode(Tr::name($col['age'])) ?>">
+                                    <span><?= Html::encode($ageLabel($col['age'], $col['label'])) ?></span>
                                 </th>
                             <?php endforeach; ?>
                         </tr>
                         <tr>
                             <?php foreach ($ageColumns as $i => $col): ?>
                                 <?php if (!($i === $eliteColumn && $hideRegular)): ?>
-                                    <th class="age-stat-col age-stat-unit"><?= $unitHead($unit->iconUrl, $unit->name) ?></th>
+                                    <th class="age-stat-col age-stat-unit"><?= $unitHead($unit->iconUrl, Tr::name($unit->name)) ?></th>
                                 <?php endif; ?>
                                 <?php if ($i === $eliteColumn): ?>
                                     <?php
@@ -696,16 +710,16 @@ foreach ($techGroups as $techName => $items) {
                                     $upParts = [];
                                     foreach (['Food' => $unit->upgrade_cost_food, 'Wood' => $unit->upgrade_cost_wood, 'Gold' => $unit->upgrade_cost_gold, 'Stone' => $unit->upgrade_cost_stone] as $res => $amount) {
                                         if ($amount) {
-                                            $upParts[] = '<span class="age-stat-tip-res"><img src="' . $resIcons[$res] . '" alt="' . $res . '" class="res-icon"> ' . $amount . '</span>';
+                                            $upParts[] = '<span class="age-stat-tip-res"><img src="' . $resIcons[$res] . '" alt="' . Html::encode(Tr::name($res)) . '" class="res-icon"> ' . $amount . '</span>';
                                         }
                                     }
                                     $hasTip = $upParts || $unit->upgrade_time;
                                     ?>
                                     <th class="age-stat-col age-stat-unit<?= $hasTip ? ' age-stat-has-tip' : '' ?>"<?= $hasTip ? ' tabindex="0"' : '' ?>>
-                                        <?= $unitHead($eliteIconUrl ?: $unit->iconUrl, 'Elite') ?>
+                                        <?= $unitHead($eliteIconUrl ?: $unit->iconUrl, Yii::t('app', 'Elite')) ?>
                                         <?php if ($hasTip): ?>
                                             <span class="age-stat-tip" role="tooltip">
-                                                <span class="age-stat-tip-title"><?= Html::encode($eliteVariant['name'] ?? $unit->upgrades_to ?? 'Elite') ?> Upgrade</span>
+                                                <span class="age-stat-tip-title"><?= Html::encode(Yii::t('app', '{name} Upgrade', ['name' => isset($eliteVariant['name']) || isset($unit->upgrades_to) ? Tr::name($eliteVariant['name'] ?? $unit->upgrades_to) : Yii::t('app', 'Elite')])) ?></span>
                                                 <?php if ($upParts): ?>
                                                     <span class="age-stat-tip-row">
                                                         <?= implode(' ', $upParts) ?>
@@ -713,8 +727,8 @@ foreach ($techGroups as $techName => $items) {
                                                 <?php endif; ?>
                                                 <?php if ($unit->upgrade_time): ?>
                                                     <span class="age-stat-tip-row">
-                                                        <img src="/images/stats/time.png" alt="Time" title="Time" class="age-stat-tip-icon">
-                                                        <?= $unit->upgrade_time ?>s
+                                                        <img src="/images/stats/time.png" alt="<?= Html::encode(Yii::t('app', 'Time')) ?>" title="<?= Html::encode(Yii::t('app', 'Time')) ?>" class="age-stat-tip-icon">
+                                                        <?= Yii::t('app', '{n}s', ['n' => $unit->upgrade_time]) ?>
                                                     </span>
                                                 <?php endif; ?>
                                             </span>
@@ -728,7 +742,7 @@ foreach ($techGroups as $techName => $items) {
                         <?php foreach ($combatRows as [$attr, $icon, $label, $suffix, $show]): ?>
                             <?php if (!$show) continue; ?>
                             <tr>
-                                <th><?= $label ?></th>
+                                <th><?= Html::encode($label) ?></th>
                                 <?php $prev = null; ?>
                                 <?php foreach ($ageColumns as $i => $col): ?>
                                     <?php
@@ -764,31 +778,31 @@ foreach ($techGroups as $techName => $items) {
                 </table>
             <?php else: ?>
             <table class="table table-sm stat-table mb-0">
-                <tr><th>Hit Points</th><td><?= $si('hp') ?><?= $unit->hit_points ?? '-' ?></td></tr>
+                <tr><th><?= Yii::t('app', 'Hit Points') ?></th><td><?= $si('hp') ?><?= $unit->hit_points ?? '-' ?></td></tr>
                 <?php if ($unit->melee_attack !== null): ?>
-                    <tr><th>Melee Attack</th><td><?= $si('melee_attack') ?><?= $unit->melee_attack ?></td></tr>
+                    <tr><th><?= Yii::t('app', 'Melee Attack') ?></th><td><?= $si('melee_attack') ?><?= $unit->melee_attack ?></td></tr>
                 <?php endif; ?>
                 <?php if ($unit->pierce_attack !== null): ?>
-                    <tr><th>Pierce Attack</th><td><?= $si('pierce_attack') ?><?= $unit->pierce_attack ?></td></tr>
+                    <tr><th><?= Yii::t('app', 'Pierce Attack') ?></th><td><?= $si('pierce_attack') ?><?= $unit->pierce_attack ?></td></tr>
                 <?php endif; ?>
-                <tr><th>Melee Armor</th><td><?= $si('melee_armor') ?><?= $unit->melee_armor ?? 0 ?></td></tr>
-                <tr><th>Pierce Armor</th><td><?= $si('pierce_armor') ?><?= $unit->pierce_armor ?? 0 ?></td></tr>
+                <tr><th><?= Yii::t('app', 'Melee Armor') ?></th><td><?= $si('melee_armor') ?><?= $unit->melee_armor ?? 0 ?></td></tr>
+                <tr><th><?= Yii::t('app', 'Pierce Armor') ?></th><td><?= $si('pierce_armor') ?><?= $unit->pierce_armor ?? 0 ?></td></tr>
                 <?php if ($unit->range_val): ?>
-                    <tr><th>Range</th><td><?= $si('range') ?><?= $unit->range_val ?></td></tr>
+                    <tr><th><?= Yii::t('app', 'Range') ?></th><td><?= $si('range') ?><?= $unit->range_val ?></td></tr>
                 <?php endif; ?>
                 <?php if ($unit->accuracy): ?>
-                    <tr><th>Accuracy</th><td><?= $si('accuracy') ?><?= $unit->accuracy ?>%</td></tr>
+                    <tr><th><?= Yii::t('app', 'Accuracy') ?></th><td><?= $si('accuracy') ?><?= $unit->accuracy ?>%</td></tr>
                 <?php endif; ?>
-                <tr><th>Rate of Fire</th><td><?= $si('reload_time') ?><?= $unit->rate_of_fire ?? '-' ?></td></tr>
-                <tr><th>Speed</th><td><?= $si('speed') ?><?= $unit->speed ?? '-' ?></td></tr>
+                <tr><th><?= Yii::t('app', 'Rate of Fire') ?></th><td><?= $si('reload_time') ?><?= $unit->rate_of_fire ?? '-' ?></td></tr>
+                <tr><th><?= Yii::t('app', 'Speed') ?></th><td><?= $si('speed') ?><?= $unit->speed ?? '-' ?></td></tr>
                 <?php if ($unit->line_of_sight): ?>
-                    <tr><th>Line of Sight</th><td><?= $si('line_of_sight') ?><?= $unit->line_of_sight ?></td></tr>
+                    <tr><th><?= Yii::t('app', 'Line of Sight') ?></th><td><?= $si('line_of_sight') ?><?= $unit->line_of_sight ?></td></tr>
                 <?php endif; ?>
                 <?php if ($unit->min_range): ?>
-                    <tr><th>Min Range</th><td><?= $si('range') ?><?= $unit->min_range + 0 ?></td></tr>
+                    <tr><th><?= Yii::t('app', 'Min Range') ?></th><td><?= $si('range') ?><?= $unit->min_range + 0 ?></td></tr>
                 <?php endif; ?>
                 <?php if ($unit->blast_radius): ?>
-                    <tr><th>Blast Radius</th><td><?= $si('blast_radius') ?><?= $unit->blast_radius + 0 ?></td></tr>
+                    <tr><th><?= Yii::t('app', 'Blast Radius') ?></th><td><?= $si('blast_radius') ?><?= $unit->blast_radius + 0 ?></td></tr>
                 <?php endif; ?>
             </table>
             <?php endif; ?>
@@ -825,14 +839,14 @@ foreach ($techGroups as $techName => $items) {
                 $bonuses = [];
                 foreach ($cu->attackBonuses as $ab) {
                     if ((int)$ab->bonus > 0) {
-                        $bonuses[] = ['vs' => $ab->vs, 'bonus' => (int)$ab->bonus];
+                        $bonuses[] = ['vs' => Tr::name($ab->vs), 'bonus' => (int)$ab->bonus];
                     }
                 }
                 usort($bonuses, function ($a, $b) { return $b['bonus'] - $a['bonus']; });
                 $strong = $cu->strong_against ? json_decode($cu->strong_against, true) : [];
                 $weak = $cu->weak_against ? json_decode($cu->weak_against, true) : [];
                 $popupUnits[$cu->id] = [
-                    'name' => $cu->name,
+                    'name' => Tr::name($cu->name),
                     'type' => $cu->armorClassGroup,
                     'icon' => $cu->iconUrl,
                     'hp' => (int)$cu->hit_points,
@@ -843,8 +857,8 @@ foreach ($techGroups as $techName => $items) {
                     'speed' => $cu->speed ? round((float)$cu->speed, 2) : null,
                     'range' => $cu->range_val ? (int)$cu->range_val : null,
                     'cost' => $cost,
-                    'strong' => $strong ? array_slice($strong, 0, 4) : [],
-                    'weak' => $weak ? array_slice($weak, 0, 4) : [],
+                    'strong' => $strong ? Tr::texts(array_slice($strong, 0, 4), 'units') : [],
+                    'weak' => $weak ? Tr::texts(array_slice($weak, 0, 4), 'units') : [],
                     'bonuses' => array_slice($bonuses, 0, 6),
                 ];
             }
@@ -853,7 +867,12 @@ foreach ($techGroups as $techName => $items) {
             // Plurals the s/men rules above do not catch
             $irregularPlurals = ['leiciai' => 'leitis'];
             $seenCounters = [];
-            $renderCounter = function ($name) use (&$counterUnits, &$popupUnits, &$seenCounters, $counterCategoryMap, $categoryDefs, $categoryIcons, $irregularPlurals, $pill, $tipTexts, $buildingIcon) {
+            // a counter phrase shown as text: its translation (one key per strong_against / weak_against item), else the cleaned English
+            $phrase = function ($orig, $name) {
+                $t = Tr::text($orig, 'units');
+                return $t === $orig ? ucfirst($name) : (UnitPills::cleanPhrase($t) ?? $t);
+            };
+            $renderCounter = function ($name) use (&$counterUnits, &$popupUnits, &$seenCounters, $counterCategoryMap, $categoryDefs, $categoryIcons, $irregularPlurals, $pill, $buildingIcon, $phrase) {
                 // wiki leftovers: templates, "And …", "Especially …", notes about old versions
                 $orig = $name;
                 $name = UnitPills::cleanPhrase($name);
@@ -867,7 +886,7 @@ foreach ($techGroups as $techName => $items) {
                 if ($key === 'buildings') {
                     if (!$once('buildings')) return '';
                     $icon = $buildingIcon('House');
-                    return $pill('Buildings', ['icon' => $icon, 'tip' => ['title' => 'Buildings', 'icon' => $icon, 'text' => $tipTexts['building:Buildings']]]);
+                    return $pill(Yii::t('app', 'Buildings'), ['icon' => $icon, 'tip' => ['title' => Yii::t('app', 'Buildings'), 'icon' => $icon, 'text' => UnitPills::text('building:Buildings')]]);
                 }
                 // Level 1: category match
                 // "infantry with less melee armor" belongs to the infantry group
@@ -875,14 +894,16 @@ foreach ($techGroups as $techName => $items) {
                 if (isset($counterCategoryMap[$mapKey])) {
                     $catSlug = $counterCategoryMap[$mapKey];
                     // a qualified name ("infantry with less melee armor") keeps its own wording
-                    $catName = isset($categoryDefs[$catSlug]) && strpos($key, ' with ') === false ? $categoryDefs[$catSlug]['name'] : ucfirst($name);
+                    $isGroup = isset($categoryDefs[$catSlug]) && strpos($key, ' with ') === false;
+                    $catName = $isGroup ? $categoryDefs[$catSlug]['name'] : ucfirst($name);
                     if (!$once('cat:' . $catSlug . ':' . $catName)) return '';
+                    $catLabel = $isGroup ? Tr::name($catName) : $phrase($orig, $name);
                     $icon = $categoryIcons[$catSlug] ?? null;
-                    $text = $tipTexts['cat:' . $catSlug] ?? ($categoryDefs[$catSlug]['description'] ?? null);
-                    return $pill($catName, [
+                    $text = UnitPills::text('cat:' . $catSlug) ?? ($categoryDefs[$catSlug]['description'] ?? null);
+                    return $pill($catLabel, [
                         'href' => Url::to(['unit/category', 'slug' => $catSlug]),
                         'icon' => $icon,
-                        'tip' => $text ? ['title' => $catName, 'subtitle' => 'Unit group', 'icon' => $icon, 'text' => $text] : null,
+                        'tip' => $text ? ['title' => $catLabel, 'subtitle' => Yii::t('app', 'Unit group'), 'icon' => $icon, 'text' => $text] : null,
                     ]);
                 }
                 // Level 2: exact or plural unit match
@@ -898,7 +919,7 @@ foreach ($techGroups as $techName => $items) {
                 }
                 if ($cu) {
                     if (!$once('unit:' . $cu->id)) return '';
-                    return $pill($cu->name, [
+                    return $pill(Tr::name($cu->name), [
                         'href' => Url::to(['unit/view', 'slug' => $cu->slug]),
                         'icon' => $cu->iconUrl,
                         'unitId' => $cu->id,
@@ -906,15 +927,15 @@ foreach ($techGroups as $techName => $items) {
                 }
                 // Level 3: plain text
                 if (!$once('text:' . $key)) return '';
-                return $pill(ucfirst($name), ['icon' => UnitPills::guessIcon($name)]);
+                return $pill($phrase($orig, $name), ['icon' => UnitPills::guessIcon($name)]);
             };
             ?>
             <div class="admin5-card admin5-card-border">
-                <div class="card-header"><strong>Counters</strong></div>
+                <div class="card-header"><strong><?= Yii::t('app', 'Counters') ?></strong></div>
                 <div class="card-content">
                     <?php if ($strongAgainst): ?>
                         <div class="mb-3">
-                            <div class="counters-label counters-label-good">Strong against</div>
+                            <div class="counters-label counters-label-good"><?= Yii::t('app', 'Strong against') ?></div>
                             <div class="d-flex flex-wrap gap-2">
                                 <?php foreach ($strongAgainst as $name): ?>
                                     <?= $renderCounter($name) ?>
@@ -924,7 +945,7 @@ foreach ($techGroups as $techName => $items) {
                     <?php endif; ?>
                     <?php if ($weakAgainst): ?>
                         <div>
-                            <div class="counters-label counters-label-bad">Weak against</div>
+                            <div class="counters-label counters-label-bad"><?= Yii::t('app', 'Weak against') ?></div>
                             <div class="d-flex flex-wrap gap-2">
                                 <?php foreach ($weakAgainst as $name): ?>
                                     <?= $renderCounter($name) ?>
@@ -940,6 +961,16 @@ foreach ($techGroups as $techName => $items) {
 
             <?php
             $popupDataJson = Json::encode($popupUnits);
+            // interface words of the popup, written into single-quoted JS strings (the English script stays as it was)
+            $jsq = function ($s) { return str_replace(['\\', "'", '</'], ['\\\\', "\\'", '<\\/'], $s); };
+            $jt = array_map($jsq, [
+                'hp' => Yii::t('app', 'HP'), 'atk' => Yii::t('app', 'Atk'), 'armor' => Yii::t('app', 'Armor'), 'range' => Yii::t('app', 'Range'),
+                'speed' => Yii::t('app', 'Speed'), 'bonuses' => Yii::t('app', 'Attack Bonuses'), 'strong' => Yii::t('app', 'Strong:'), 'weak' => Yii::t('app', 'Weak:'),
+            ]);
+            $jt['bonus'] = strtr($jsq(Yii::t('app', '+{bonus} vs {class}')), ['{bonus}' => "' + u.bonuses[i].bonus + '", '{class}' => "' + u.bonuses[i].vs + '"]);
+            // the letter after the attack value: M or P in English
+            $jt['atkLetter'] = Tr::isEnglish() ? 'u.attackType[0]'
+                : "(u.attackType === 'Melee' ? '" . $jsq(Yii::t('app', 'M (melee attack, one letter)')) . "' : '" . $jsq(Yii::t('app', 'P (pierce attack, one letter)')) . "')";
             $this->registerJs(<<<JS
 (function() {
     var popupData = $popupDataJson;
@@ -961,21 +992,21 @@ foreach ($techGroups as $techName => $items) {
         }
         h += '</div></div><div class="unit-popup-body">';
         h += '<div class="unit-popup-stats-grid">';
-        h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/hit_points.png" alt="" class="stat-icon"> HP</span><span class="stat-value">' + u.hp + '</span></div>';
-        h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/' + (u.attackType === 'Melee' ? 'melee_attack' : 'pierce_attack') + '.png" alt="" class="stat-icon"> Atk</span><span class="stat-value">' + u.attack + ' <small>' + u.attackType[0] + '</small></span></div>';
-        h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/melee_armor.png" alt="" class="stat-icon"> Armor</span><span class="stat-value">' + u.meleeArmor + '/' + u.pierceArmor + '</span></div>';
-        if (u.range) h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/range.png" alt="" class="stat-icon"> Range</span><span class="stat-value">' + u.range + '</span></div>';
-        else if (u.speed) h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/movement_speed.png" alt="" class="stat-icon"> Speed</span><span class="stat-value">' + u.speed + '</span></div>';
+        h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/hit_points.png" alt="" class="stat-icon"> {$jt['hp']}</span><span class="stat-value">' + u.hp + '</span></div>';
+        h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/' + (u.attackType === 'Melee' ? 'melee_attack' : 'pierce_attack') + '.png" alt="" class="stat-icon"> {$jt['atk']}</span><span class="stat-value">' + u.attack + ' <small>' + {$jt['atkLetter']} + '</small></span></div>';
+        h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/melee_armor.png" alt="" class="stat-icon"> {$jt['armor']}</span><span class="stat-value">' + u.meleeArmor + '/' + u.pierceArmor + '</span></div>';
+        if (u.range) h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/range.png" alt="" class="stat-icon"> {$jt['range']}</span><span class="stat-value">' + u.range + '</span></div>';
+        else if (u.speed) h += '<div class="unit-popup-stat"><span class="stat-label"><img src="/images/stats/movement_speed.png" alt="" class="stat-icon"> {$jt['speed']}</span><span class="stat-value">' + u.speed + '</span></div>';
         h += '</div>';
         if (u.bonuses && u.bonuses.length) {
-            h += '<div class="unit-popup-bonuses"><div class="unit-popup-section-title">Attack Bonuses</div>';
-            for (var i = 0; i < u.bonuses.length; i++) h += '<span class="unit-popup-bonus">+' + u.bonuses[i].bonus + ' vs ' + u.bonuses[i].vs + '</span>';
+            h += '<div class="unit-popup-bonuses"><div class="unit-popup-section-title">{$jt['bonuses']}</div>';
+            for (var i = 0; i < u.bonuses.length; i++) h += '<span class="unit-popup-bonus">{$jt['bonus']}</span>';
             h += '</div>';
         }
         if ((u.strong && u.strong.length) || (u.weak && u.weak.length)) {
             h += '<div class="unit-popup-matchups">';
-            if (u.strong && u.strong.length) h += '<div class="unit-popup-matchup"><span class="matchup-good">Strong:</span> ' + u.strong.join(', ') + '</div>';
-            if (u.weak && u.weak.length) h += '<div class="unit-popup-matchup"><span class="matchup-bad">Weak:</span> ' + u.weak.join(', ') + '</div>';
+            if (u.strong && u.strong.length) h += '<div class="unit-popup-matchup"><span class="matchup-good">{$jt['strong']}</span> ' + u.strong.join(', ') + '</div>';
+            if (u.weak && u.weak.length) h += '<div class="unit-popup-matchup"><span class="matchup-bad">{$jt['weak']}</span> ' + u.weak.join(', ') + '</div>';
             h += '</div>';
         }
         h += '</div>';
@@ -1039,14 +1070,14 @@ JS
     $captured = \app\models\Unit::CAPTURED_ONLY[$unit->slug] ?? null;
     ?>
     <div class="admin5-card admin5-card-border unit-avail-card">
-        <div class="card-header"><strong>Civilization Availability</strong></div>
+        <div class="card-header"><strong><?= Yii::t('app', 'Civilization Availability') ?></strong></div>
         <div class="card-content">
             <?php if ($noneAvailable): ?>
-                <p class="unit-avail-note"><?= Html::encode($captured['note'] ?? 'No civilization can train it in a standard game.') ?></p>
+                <p class="unit-avail-note"><?= Html::encode(isset($captured['note']) ? Yii::t('app', $captured['note']) : Yii::t('app', 'No civilization can train it in a standard game.')) ?></p>
                 <?php foreach ($captured['groups'] ?? [] as $label => $names): ?>
                     <?php $groupCivs = \app\models\Civilization::find()->where(['name' => $names])->orderBy(['name' => SORT_ASC])->all(); ?>
                     <div class="unit-avail-group">
-                        <span class="unit-avail-group-label"><?= Html::encode($label) ?></span>
+                        <span class="unit-avail-group-label"><?= Html::encode(Yii::t('app', $label)) ?></span>
                         <span class="pill-row"><?php foreach ($groupCivs as $gc): ?><?= UnitPills::civPill($gc) ?><?php endforeach; ?></span>
                     </div>
                 <?php endforeach; ?>
@@ -1062,7 +1093,7 @@ JS
                         <?php if ($a->civilization->emblemUrl): ?>
                             <img src="<?= Html::encode($a->civilization->emblemUrl) ?>" alt="">
                         <?php endif; ?>
-                        <?= Html::a(Html::encode($a->civilization->name), ['civilization/view', 'slug' => $a->civilization->slug], ['class' => $a->available ? '' : 'text-muted']) ?>
+                        <?= Html::a(Tr::nameHtml($a->civilization->name), ['civilization/view', 'slug' => $a->civilization->slug], ['class' => $a->available ? '' : 'text-muted']) ?>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -1073,7 +1104,7 @@ JS
 
 <!-- Technologies -->
 <?php if ($techGroups): ?>
-    <h2 class="unit-section-title">Technologies</h2>
+    <h2 class="unit-section-title"><?= Yii::t('app', 'Technologies') ?></h2>
     <div class="tech-grid">
         <?php foreach ($techGroups as $techName => $items): ?>
             <?php $tech = $technologies[$techName] ?? null; ?>
@@ -1084,7 +1115,7 @@ JS
                         <img src="<?= Html::encode($techIcon($techName)) ?>" alt="" class="tech-card-icon">
                         <div class="tech-card-head-text">
                             <div class="tech-card-name">
-                                <?= Html::encode($techName) ?>
+                                <?= Tr::nameHtml($techName) ?>
                                 <?php if ($tech && $tech->civilization): ?>
                                     <?= UnitPills::civPill($tech->civilization) ?>
                                 <?php endif; ?>
@@ -1093,7 +1124,7 @@ JS
                                 <div class="tech-card-cost">
                                     <?= $techCostHtml($tech) ?>
                                     <?php if ($tech->research_time): ?>
-                                        &nbsp;<img src="/images/stats/time.png" alt="Time" title="Research time" class="res-icon"> <?= (int)$tech->research_time ?>s
+                                        &nbsp;<img src="/images/stats/time.png" alt="<?= Html::encode(Yii::t('app', 'Time')) ?>" title="<?= Html::encode(Yii::t('app', 'Research time')) ?>" class="res-icon"> <?= Yii::t('app', '{n}s', ['n' => (int)$tech->research_time]) ?>
                                     <?php endif; ?>
                                 </div>
                             <?php endif; ?>
@@ -1101,7 +1132,7 @@ JS
                     </div>
                     <div class="tech-card-body">
                         <?php if ($tech && $tech->description): ?>
-                            <div class="tech-card-desc"><?= nl2br(Html::encode($tech->description)) ?></div>
+                            <div class="tech-card-desc"><?= nl2br(Html::encode(Tr::text($tech->description, 'techs'))) ?></div>
                         <?php endif; ?>
                         <?php
                         $inline = count($items) <= 2 && array_sum(array_map(function ($b) { return strlen($b->effect); }, $items)) <= 24;
@@ -1109,12 +1140,12 @@ JS
                         <ul class="tech-card-effects<?= $inline ? ' is-inline' : '' ?>">
                             <?php foreach ($items as $b): ?>
                                 <?php
-                                $label = $techStatLabels[$b->stat] ?? [ucfirst($b->stat), null];
+                                $label = $techStatLabels[$b->stat] ?? [Yii::t('app', ucfirst($b->stat)), null];
                                 $iconKey = $label[1] ?? null;
                                 ?>
                                 <li>
                                     <span class="tech-card-stat"><?= $iconKey ? $si($iconKey) . ' ' : '' ?><?= Html::encode($label[0]) ?></span>
-                                    <span><?= Html::encode(str_replace('|', ', ', $b->effect)) ?></span>
+                                    <span><?= Html::encode(str_replace('|', ', ', Tr::text($b->effect, 'units'))) ?></span>
                                 </li>
                             <?php endforeach; ?>
                         </ul>
@@ -1138,10 +1169,10 @@ $bottomCol = $civBoosts && $hasTechAvail ? 'col-lg-6' : 'col-12';
         <!-- Civilization Boosts -->
         <?php if ($civBoosts): ?>
             <div class="admin5-card admin5-card-border">
-                <div class="card-header"><strong>Civilization Boosts</strong></div>
+                <div class="card-header"><strong><?= Yii::t('app', 'Civilization Boosts') ?></strong></div>
                 <table class="table table-striped table-sm mb-0">
                     <thead>
-                        <tr><th>Civilization</th><th>Stat</th><th>Effect</th></tr>
+                        <tr><th><?= Yii::t('app', 'Civilization') ?></th><th><?= Yii::t('app', 'Stat') ?></th><th><?= Yii::t('app', 'Effect') ?></th></tr>
                     </thead>
                     <tbody>
                         <?php foreach ($civBoosts as $b): ?>
@@ -1149,11 +1180,11 @@ $bottomCol = $civBoosts && $hasTechAvail ? 'col-lg-6' : 'col-12';
                                 <td>
                                     <div class="d-flex align-items-center gap-2">
                                         <img src="<?= Html::encode($civIcon($b->name)) ?>" alt="" class="tech-icon">
-                                        <?= Html::encode($b->name) ?>
+                                        <?= Tr::nameHtml($b->name) ?>
                                     </div>
                                 </td>
-                                <td><small class="text-muted"><?= Html::encode($b->stat) ?></small></td>
-                                <td><?= Html::encode($b->effect) ?></td>
+                                <td><small class="text-muted"><?= Html::encode($boostStatLabel($b->stat)) ?></small></td>
+                                <td><?= Html::encode(Tr::text($b->effect, 'units')) ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -1168,19 +1199,19 @@ $bottomCol = $civBoosts && $hasTechAvail ? 'col-lg-6' : 'col-12';
         <!-- Technology Availability -->
         <?php if ($techTableCivs && ($techTableShared || $techTableUnique)): ?>
             <div class="admin5-card admin5-card-border">
-                <div class="card-header"><strong>Technology Availability</strong></div>
+                <div class="card-header"><strong><?= Yii::t('app', 'Technology Availability') ?></strong></div>
                 <div class="table-responsive">
                     <table class="table table-striped table-sm mb-0 tech-avail-table">
                         <thead>
                             <tr>
-                                <th>Civilization</th>
+                                <th><?= Yii::t('app', 'Civilization') ?></th>
                                 <?php foreach ($techTableShared as $tech): ?>
-                                    <th class="text-center" title="<?= Html::encode($tech->name) ?>">
-                                        <img src="<?= Html::encode($techIcon($tech->name)) ?>" alt="<?= Html::encode($tech->name) ?>" class="tech-icon tech-icon-bg">
+                                    <th class="text-center" title="<?= Html::encode(Tr::name($tech->name)) ?>">
+                                        <img src="<?= Html::encode($techIcon($tech->name)) ?>" alt="<?= Html::encode(Tr::name($tech->name)) ?>" class="tech-icon tech-icon-bg">
                                     </th>
                                 <?php endforeach; ?>
                                 <?php if ($techTableUnique): ?>
-                                    <th>Unique</th>
+                                    <th><?= Yii::t('app', 'Unique') ?></th>
                                 <?php endif; ?>
                             </tr>
                         </thead>
@@ -1192,11 +1223,11 @@ $bottomCol = $civBoosts && $hasTechAvail ? 'col-lg-6' : 'col-12';
                                             <?php if ($civ->emblemUrl): ?>
                                                 <img src="<?= Html::encode($civ->emblemUrl) ?>" alt="" class="civ-emblem-sm">
                                             <?php endif; ?>
-                                            <?= Html::a(Html::encode($civ->name), ['civilization/view', 'slug' => $civ->slug]) ?>
+                                            <?= Html::a(Tr::nameHtml($civ->name), ['civilization/view', 'slug' => $civ->slug]) ?>
                                         </div>
                                     </td>
                                     <?php foreach ($techTableShared as $tech): ?>
-                                        <td class="text-center" title="<?= Html::encode($tech->name) ?>">
+                                        <td class="text-center" title="<?= Html::encode(Tr::name($tech->name)) ?>">
                                             <?php if (isset($techCivIds[$tech->name][$civ->id])): ?>
                                                 <span class="avail-yes">&#10003;</span>
                                             <?php else: ?>
@@ -1208,8 +1239,8 @@ $bottomCol = $civBoosts && $hasTechAvail ? 'col-lg-6' : 'col-12';
                                         <td class="text-nowrap">
                                             <?php foreach ($techTableUnique[$civ->id] ?? [] as $tech): ?>
                                                 <small class="d-flex align-items-center gap-1">
-                                                    <img src="<?= Html::encode($techIcon($tech->name)) ?>" alt="" class="tech-icon tech-icon-bg" title="<?= Html::encode($tech->name) ?>">
-                                                    <span class="tech-unique-name"><?= Html::encode($tech->name) ?></span>
+                                                    <img src="<?= Html::encode($techIcon($tech->name)) ?>" alt="" class="tech-icon tech-icon-bg" title="<?= Html::encode(Tr::name($tech->name)) ?>">
+                                                    <span class="tech-unique-name"><?= Tr::nameHtml($tech->name) ?></span>
                                                 </small>
                                             <?php endforeach; ?>
                                         </td>

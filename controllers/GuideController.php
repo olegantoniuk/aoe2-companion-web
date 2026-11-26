@@ -56,7 +56,7 @@ class GuideController extends Controller
     {
         $article = Article::findOne(['slug' => $slug]);
         if (!$article) {
-            throw new NotFoundHttpException('Guide not found.');
+            throw new NotFoundHttpException(Yii::t('app', 'Guide not found.'));
         }
         $more = Article::find()
             ->where(['elo' => $article->elo])

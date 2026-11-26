@@ -1491,6 +1491,47 @@ ul.pagination > li.page-item.disabled .page-link {
 [data-theme="dark"] .theme-toggle .icon-moon { display: block; }
 [data-theme="dark"] .theme-toggle .icon-sun { display: none; }
 
+/* ── Language menu ── */
+.lang-switch { flex-shrink: 0; }
+.lang-toggle {
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 10px 0 9px;
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
+    color: var(--color-text);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+}
+.lang-toggle:hover,
+.lang-toggle[aria-expanded="true"] {
+    background: var(--color-surface-hover);
+    border-color: var(--color-border-strong);
+}
+.lang-toggle svg { width: 17px; height: 17px; }
+.lang-toggle .lang-caret { width: 12px; height: 12px; opacity: 0.6; transition: transform 0.15s; }
+.lang-toggle[aria-expanded="true"] .lang-caret { transform: rotate(180deg); }
+.lang-switch .dropdown-menu { min-width: 11rem; }
+.lang-switch .dropdown-item { display: flex; align-items: center; gap: 10px; }
+.lang-switch .lang-code {
+    min-width: 1.75rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    opacity: 0.6;
+}
+@media (prefers-reduced-motion: reduce) {
+    .lang-toggle .lang-caret { transition: none; }
+}
+
+/* the original English name after a translated one: "Арбалетник (Arbalester)" */
+.name-orig { font-weight: 400; opacity: 0.65; }
+
 /* ── Unit Popup ── */
 .unit-popup {
     position: absolute;

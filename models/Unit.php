@@ -179,7 +179,7 @@ class Unit extends ActiveRecord
     {
         $parts = [];
         $icon = function ($res) {
-            return '<img src="/images/resources/' . $res . '.png" alt="' . $res . '" class="resource-icon">';
+            return '<img src="/images/resources/' . $res . '.png" alt="' . \yii\helpers\Html::encode(\app\components\Tr::name($res)) . '" class="resource-icon">';
         };
         // each resource stays whole when a narrow column wraps the cost
         $part = function ($res, $value) use ($icon) {
@@ -189,7 +189,7 @@ class Unit extends ActiveRecord
         if ($this->cost_wood) $parts[] = $part('Wood', $this->cost_wood);
         if ($this->cost_gold) $parts[] = $part('Gold', $this->cost_gold);
         if ($this->cost_stone) $parts[] = $part('Stone', $this->cost_stone);
-        return $parts ? implode(' ', $parts) : 'Free';
+        return $parts ? implode(' ', $parts) : \Yii::t('app', 'Free');
     }
 
     /** Cost and time of the elite upgrade, with icons; empty when unknown. */
@@ -197,10 +197,11 @@ class Unit extends ActiveRecord
     {
         $parts = [];
         foreach (['Food' => $this->upgrade_cost_food, 'Wood' => $this->upgrade_cost_wood, 'Gold' => $this->upgrade_cost_gold, 'Stone' => $this->upgrade_cost_stone] as $res => $n) {
-            if ($n) $parts[] = '<span class="cost-part"><img src="/images/resources/' . $res . '.png" alt="' . $res . '" class="resource-icon"> ' . (int)$n . '</span>';
+            if ($n) $parts[] = '<span class="cost-part"><img src="/images/resources/' . $res . '.png" alt="' . \yii\helpers\Html::encode(\app\components\Tr::name($res)) . '" class="resource-icon"> ' . (int)$n . '</span>';
         }
         if ($this->upgrade_time) {
-            $parts[] = '<span class="cost-part"><img src="/images/stats/time.png" alt="Time" class="resource-icon"> ' . (int)$this->upgrade_time . 's</span>';
+            $parts[] = '<span class="cost-part"><img src="/images/stats/time.png" alt="' . \Yii::t('app', 'Time') . '" class="resource-icon"> '
+                . \Yii::t('app', '{n}s', ['n' => (int)$this->upgrade_time]) . '</span>';
         }
         return implode(' ', $parts);
     }

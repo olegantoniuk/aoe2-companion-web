@@ -5,9 +5,10 @@ use app\components\Seo;
 use yii\helpers\Url;
 use app\models\Civilization;
 use app\components\UnitPills;
+use app\components\Tr;
 
-$this->title = 'Civilizations';
-Seo::page($this, 'All ' . count($civs) . ' Civilizations of Age of Empires II', 'Every Age of Empires II civilization with its bonuses, team bonus, unique units and a short summary, listed A to Z or grouped by region.', '/images/icons/civilizations.png');
+$this->title = Yii::t('app', 'Civilizations');
+Seo::page($this, Yii::t('app', 'All {count} Civilizations of Age of Empires II', ['count' => count($civs)]), Yii::t('app', 'Every Age of Empires II civilization with its bonuses, team bonus, unique units and a short summary, listed A to Z or grouped by region.'), '/images/icons/civilizations.png');
 
 $bySlug = [];
 foreach ($civs as $civ) {
@@ -29,26 +30,30 @@ foreach (Civilization::regions() as [$title, $note, $slugs, $icon]) {
     if ($members) $groups[] = [$title, $note, $members, Civilization::regionIcon($icon)];
 }
 $rest = array_values(array_filter($civs, function ($c) use ($placed) { return !isset($placed[$c->slug]); }));
-if ($rest) $groups[] = ['Other', '', $rest, null];
+if ($rest) $groups[] = [Yii::t('app', 'Other'), '', $rest, null];
 
 $uniquesOf = function ($civ) use ($uniqueByCiv) {
     return array_filter($uniqueByCiv[$civ->id] ?? [], function ($u) { return $u->iconUrl; });
+};
+// the focus list ("Infantry, Naval") holds categories: shown as names
+$focusHtml = function ($civ) {
+    return implode(', ', array_map([Tr::class, 'nameHtml'], $civ->focusList));
 };
 ?>
 
 <div class="admin5-page-header">
     <div class="page-title">
         <?= UnitPills::pageIcon('civilizations') ?>
-        <h1>Civilizations <span class="badge bg-secondary badge-sm"><?= count($civs) ?></span></h1>
+        <h1><?= Yii::t('app', 'Civilizations') ?> <span class="badge bg-secondary badge-sm"><?= count($civs) ?></span></h1>
     </div>
 </div>
 
 <ul class="nav nav-tabs civ-list-tabs" role="tablist">
     <li class="nav-item" role="presentation">
-        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#civ-tab-az" type="button" role="tab">A–Z</button>
+        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#civ-tab-az" type="button" role="tab"><?= Yii::t('app', 'A–Z') ?></button>
     </li>
     <li class="nav-item" role="presentation">
-        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#civ-tab-regions" type="button" role="tab">By Region</button>
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#civ-tab-regions" type="button" role="tab"><?= Yii::t('app', 'By Region') ?></button>
     </li>
 </ul>
 
@@ -56,7 +61,7 @@ $uniquesOf = function ($civ) use ($uniqueByCiv) {
     <!-- every civilization, one card per row, filtered as you type -->
     <div class="tab-pane fade show active" id="civ-tab-az" role="tabpanel">
         <div class="civ-search">
-            <input type="search" id="civSearch" class="form-control" placeholder="Find a civilization, a unique unit or a focus" autocomplete="off">
+            <input type="search" id="civSearch" class="form-control" placeholder="<?= Html::encode(Yii::t('app', 'Find a civilization, a unique unit or a focus')) ?>" autocomplete="off">
         </div>
         <div class="civ-rows">
             <?php foreach ($civs as $civ): ?>
@@ -68,17 +73,25 @@ $uniquesOf = function ($civ) use ($uniqueByCiv) {
                     $civ->focusList,
                     array_map(function ($u) { return $u->name; }, $uniques)
                 )));
+                // in another language the box finds the translated names as well
+                if (!Tr::isEnglish()) {
+                    $haystack .= ' ' . mb_strtolower(implode(' ', array_map([Tr::class, 'short'], array_merge(
+                        [$civ->name],
+                        $civ->focusList,
+                        array_map(function ($u) { return $u->name; }, $uniques)
+                    ))));
+                }
                 $url = Url::to(['civilization/view', 'slug' => $civ->slug]);
                 ?>
                 <div class="admin5-card admin5-card-border civ-row" data-search="<?= Html::encode($haystack) ?>">
-                    <a href="<?= $url ?>" class="civ-row-emblem" aria-label="<?= Html::encode($civ->name) ?>">
+                    <a href="<?= $url ?>" class="civ-row-emblem" aria-label="<?= Html::encode(Tr::name($civ->name)) ?>">
                         <?php if ($civ->emblemUrl): ?>
                             <img src="<?= Html::encode($civ->emblemUrl) ?>" alt="" class="civ-emblem-md">
                         <?php endif; ?>
                     </a>
                     <div class="civ-row-main">
                         <div class="civ-row-title">
-                            <a href="<?= $url ?>" class="civ-card-name"><?= Html::encode($civ->name) ?></a>
+                            <a href="<?= $url ?>" class="civ-card-name"><?= Tr::nameHtml($civ->name) ?></a>
                             <?php if ($region): ?>
                                 <span class="civ-row-region">
                                     <?php if ($region[1]): ?><img src="<?= Html::encode($region[1]) ?>" alt=""><?php endif; ?>
@@ -87,10 +100,10 @@ $uniquesOf = function ($civ) use ($uniqueByCiv) {
                             <?php endif; ?>
                         </div>
                         <?php if ($civ->focusList): ?>
-                            <div class="civ-card-focus"><?= Html::encode(implode(', ', $civ->focusList)) ?></div>
+                            <div class="civ-card-focus"><?= $focusHtml($civ) ?></div>
                         <?php endif; ?>
                         <?php if ($civ->hasAttribute('summary') && $civ->summary): ?>
-                            <p class="civ-row-summary"><?= Html::encode($civ->summary) ?></p>
+                            <p class="civ-row-summary"><?= Html::encode(Tr::text($civ->summary, 'civs')) ?></p>
                         <?php endif; ?>
                     </div>
                     <?php if ($uniques): ?>
@@ -102,7 +115,7 @@ $uniquesOf = function ($civ) use ($uniqueByCiv) {
                     <?php endif; ?>
                 </div>
             <?php endforeach; ?>
-            <p class="civ-search-empty text-muted" hidden>No civilization matches.</p>
+            <p class="civ-search-empty text-muted" hidden><?= Yii::t('app', 'No civilization matches.') ?></p>
         </div>
     </div>
 
@@ -131,14 +144,14 @@ $uniquesOf = function ($civ) use ($uniqueByCiv) {
                                             <img src="<?= Html::encode($civ->emblemUrl) ?>" alt="" class="civ-emblem-md">
                                         <?php endif; ?>
                                         <div>
-                                            <div class="civ-card-name"><?= Html::encode($civ->name) ?></div>
+                                            <div class="civ-card-name"><?= Tr::nameHtml($civ->name) ?></div>
                                             <?php if ($civ->focusList): ?>
-                                                <div class="civ-card-focus"><?= Html::encode(implode(', ', $civ->focusList)) ?></div>
+                                                <div class="civ-card-focus"><?= $focusHtml($civ) ?></div>
                                             <?php endif; ?>
                                         </div>
                                     </a>
                                     <?php if ($civ->hasAttribute('summary') && $civ->summary): ?>
-                                        <p class="civ-card-summary"><?= Html::encode($civ->summary) ?></p>
+                                        <p class="civ-card-summary"><?= Html::encode(Tr::text($civ->summary, 'civs')) ?></p>
                                     <?php endif; ?>
                                     <?php $uniques = $uniquesOf($civ); ?>
                                     <?php if ($uniques): ?>

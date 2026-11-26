@@ -43,15 +43,17 @@ class Seo
     public static function title($view)
     {
         $t = $view->params['seo']['title'] ?? $view->title;
-        if (!$t || $t === 'Home') return self::SITE . ': Age of Empires II Civilizations, Units, Build Orders and Guides';
+        if (!$t || $t === 'Home' || $t === Yii::t('app', 'Home')) {
+            return self::SITE . ': ' . Yii::t('app', 'Age of Empires II Civilizations, Units, Build Orders and Guides');
+        }
         return $t . ' | ' . self::SITE;
     }
 
-    /** Meta description, canonical address and Open Graph / Twitter tags. */
+    /** Meta description, canonical address, the page in the other languages and Open Graph / Twitter tags. */
     public static function head($view)
     {
         $seo = $view->params['seo'] ?? [];
-        $desc = $seo['description'] ?? self::DEFAULT_DESCRIPTION;
+        $desc = $seo['description'] ?? Yii::t('app', self::DEFAULT_DESCRIPTION);
         $title = self::title($view);
         $req = Yii::$app->request;
         // canonical: the address without filters that only reorder or narrow a list
@@ -70,7 +72,13 @@ class Seo
             '<meta name="twitter:card" content="summary_large_image">',
             '<meta name="twitter:title" content="' . Html::encode($title) . '">',
             '<meta name="twitter:description" content="' . Html::encode($desc) . '">',
+            '<meta property="og:locale" content="' . (Lang::current() === 'uk' ? 'uk_UA' : 'en_US') . '">',
         ];
+        // the same page in every language; English is the default for everyone else
+        foreach (array_keys(Lang::LANGS) as $code) {
+            $tags[] = '<link rel="alternate" hreflang="' . $code . '" href="' . Html::encode($req->hostInfo . strtok(Lang::switchUrl($code), '?')) . '">';
+        }
+        $tags[] = '<link rel="alternate" hreflang="x-default" href="' . Html::encode($req->hostInfo . strtok(Lang::switchUrl(Lang::DEFAULT), '?')) . '">';
         return implode("\n    ", $tags);
     }
 }

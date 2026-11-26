@@ -46,6 +46,6 @@ class Article extends ActiveRecord
 
     public function getCategoryLabel()
     {
-        return self::CATEGORIES[$this->category] ?? ucfirst((string)$this->category);
+        return isset(self::CATEGORIES[$this->category]) ? \Yii::t('app', self::CATEGORIES[$this->category]) : ucfirst((string)$this->category);
     }
 }

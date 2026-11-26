@@ -53,7 +53,7 @@ class UnitController extends Controller
     {
         $unit = Unit::find()->where(['slug' => $slug])->one();
         if (!$unit) {
-            throw new NotFoundHttpException('Unit not found.');
+            throw new NotFoundHttpException(Yii::t('app', 'Unit not found.'));
         }
 
         return $this->render('view', [
@@ -69,7 +69,7 @@ class UnitController extends Controller
         $categories = self::getCategoryDefinitions();
 
         if (!isset($categories[$slug])) {
-            throw new NotFoundHttpException('Category not found.');
+            throw new NotFoundHttpException(Yii::t('app', 'Category not found.'));
         }
 
         $cat = $categories[$slug];
@@ -104,6 +104,7 @@ class UnitController extends Controller
 
     /**
      * Category definitions used by actionCategory and counter linking.
+     * 'name' stays English (it is a lookup key): show it with Tr::name(). 'description' is translated here.
      */
     public static function getCategoryDefinitions()
     {
@@ -113,98 +114,99 @@ class UnitController extends Controller
                 'name' => 'Archers',
                 'armorClassNames' => ['Archers'],
                 'icon' => 'arbalester',
-                'description' => 'Foot archer units including Crossbowmen, Arbalests, and ranged infantry.',
+                'description' => Yii::t('app', 'Foot archer units including Crossbowmen, Arbalests, and ranged infantry.'),
             ],
             'infantry' => [
                 'name' => 'Infantry',
                 'armorClassNames' => ['Infantry'],
                 'icon' => 'champion',
-                'description' => 'Melee and ranged infantry units trained primarily at the Barracks.',
+                'description' => Yii::t('app', 'Melee and ranged infantry units trained primarily at the Barracks.'),
             ],
             'cavalry' => [
                 'name' => 'Cavalry',
                 'armorClassNames' => ['Cavalry'],
                 'icon' => 'paladin',
-                'description' => 'Mounted units including Knights, Light Cavalry, and Cavalry Archers.',
+                'description' => Yii::t('app', 'Mounted units including Knights, Light Cavalry, and Cavalry Archers.'),
             ],
             'siege-weapons' => [
                 'name' => 'Siege Weapons',
                 'armorClassNames' => ['Siege Weapons'],
                 'icon' => 'siege-onager',
-                'description' => 'Siege units built at the Siege Workshop.',
+                'description' => Yii::t('app', 'Siege units built at the Siege Workshop.'),
             ],
             'naval' => [
                 'name' => 'Naval Units',
                 'armorClassNames' => ['Ship', 'Ships', 'Long-range warship'],
                 'icon' => 'galleon',
-                'description' => 'Ships and naval vessels built at the Dock.',
+                'description' => Yii::t('app', 'Ships and naval vessels built at the Dock.'),
             ],
             'monks' => [
                 'name' => 'Monks',
                 'armorClassNames' => ['Monks'],
                 'icon' => 'monk',
-                'description' => 'Religious units that can heal and convert.',
+                'description' => Yii::t('app', 'Religious units that can heal and convert.'),
             ],
             'gunpowder' => [
                 'name' => 'Gunpowder Units',
                 'armorClassNames' => ['Gunpowder Units'],
                 'icon' => 'hand-cannoneer',
-                'description' => 'Units using gunpowder technology.',
+                'description' => Yii::t('app', 'Units using gunpowder technology.'),
             ],
             // Narrow categories (specific unit lines)
             'spearmen' => [
                 'name' => 'Spearmen',
                 'names' => ['Spearman', 'Pikeman', 'Halberdier'],
                 'icon' => 'halberdier',
-                'description' => 'The Spearman upgrade line, a counter to cavalry.',
+                'description' => Yii::t('app', 'The Spearman upgrade line, a counter to cavalry.'),
             ],
             'skirmishers' => [
                 'name' => 'Skirmishers',
                 'names' => ['Skirmisher', 'Elite Skirmisher', 'Imperial Skirmisher'],
                 'icon' => 'elite-skirmisher',
-                'description' => 'Ranged trash units that counter archers.',
+                'description' => Yii::t('app', 'Ranged trash units that counter archers.'),
             ],
             'light-cavalry' => [
                 'name' => 'Light Cavalry',
                 'names' => ['Scout Cavalry', 'Light Cavalry', 'Hussar', 'Winged Hussar'],
                 'icon' => 'hussar',
-                'description' => 'Fast, cheap mounted units for raiding and scouting.',
+                'description' => Yii::t('app', 'Fast, cheap mounted units for raiding and scouting.'),
             ],
             'knights' => [
                 'name' => 'Knights',
                 'names' => ['Knight', 'Cavalier', 'Paladin'],
                 'icon' => 'paladin',
-                'description' => 'The Knight upgrade line of heavy cavalry.',
+                'description' => Yii::t('app', 'The Knight upgrade line of heavy cavalry.'),
             ],
             'camels' => [
                 'name' => 'Camel Units',
                 'like' => 'Camel',
                 'icon' => 'heavy-camel-rider',
-                'description' => 'Camel riders, a counter to cavalry.',
+                'description' => Yii::t('app', 'Camel riders, a counter to cavalry.'),
             ],
             'eagle-warriors' => [
                 'name' => 'Eagle Warriors',
                 'names' => ['Eagle Scout', 'Eagle Warrior', 'Elite Eagle Warrior'],
                 'icon' => 'elite-eagle-warrior',
-                'description' => 'Fast Meso-American infantry that stands in for cavalry.',
+                'description' => Yii::t('app', 'Fast Meso-American infantry that stands in for cavalry.'),
             ],
             'battle-elephants' => [
                 'name' => 'Elephants',
                 'like' => 'Elephant',
                 'icon' => 'war-elephant',
-                'description' => 'Powerful elephant-mounted units.',
+                'description' => Yii::t('app', 'Powerful elephant-mounted units.'),
             ],
             'rams' => [
                 'name' => 'Rams',
                 'names' => ['Battering Ram', 'Capped Ram', 'Siege Ram'],
                 'icon' => 'siege-ram',
-                'description' => 'Rams, built to knock down buildings.',
+                'description' => Yii::t('app', 'Rams, built to knock down buildings.'),
             ],
         ];
     }
 
     /**
      * Armor-class-based unit classification definitions.
+     * 'name' stays English (it is a lookup key): show it with Tr::name(). 'description' is translated here.
      */
     public static function getClassDefinitions()
     {
@@ -212,56 +214,56 @@ class UnitController extends Controller
             // Main classes
             'infantry' => [
                 'name' => 'Infantry',
-                'description' => 'Melee foot soldiers that form the backbone of most armies. Countered by archers and siege.',
+                'description' => Yii::t('app', 'Melee foot soldiers that form the backbone of most armies. Countered by archers and siege.'),
                 'armorClasses' => ['Infantry'],
                 'icon' => 'champion',
                 'isMain' => true,
             ],
             'cavalry' => [
                 'name' => 'Cavalry',
-                'description' => 'Mounted melee units with high mobility and power. Countered by spearmen and camels.',
+                'description' => Yii::t('app', 'Mounted melee units with high mobility and power. Countered by spearmen and camels.'),
                 'armorClasses' => ['Cavalry'],
                 'icon' => 'paladin',
                 'isMain' => true,
             ],
             'archers' => [
                 'name' => 'Archers',
-                'description' => 'Ranged units that deal pierce damage from a distance. Countered by skirmishers and siege.',
+                'description' => Yii::t('app', 'Ranged units that deal pierce damage from a distance. Countered by skirmishers and siege.'),
                 'armorClasses' => ['Archers'],
                 'icon' => 'arbalester',
                 'isMain' => true,
             ],
             'cavalry-archers' => [
                 'name' => 'Cavalry Archers',
-                'description' => 'Mounted ranged units combining mobility with ranged firepower. Countered by skirmishers and camels.',
+                'description' => Yii::t('app', 'Mounted ranged units combining mobility with ranged firepower. Countered by skirmishers and camels.'),
                 'armorClasses' => ['Cavalry Archers'],
                 'icon' => 'heavy-cavalry-archer',
                 'isMain' => true,
             ],
             'siege-weapons' => [
                 'name' => 'Siege Weapons',
-                'description' => 'Powerful machines designed to destroy buildings and massed units. Vulnerable to melee cavalry.',
+                'description' => Yii::t('app', 'Powerful machines designed to destroy buildings and massed units. Vulnerable to melee cavalry.'),
                 'armorClasses' => ['Siege Weapons'],
                 'icon' => 'siege-onager',
                 'isMain' => true,
             ],
             'ships' => [
                 'name' => 'Ships',
-                'description' => 'Naval vessels for controlling waterways. Built at the Dock.',
+                'description' => Yii::t('app', 'Naval vessels for controlling waterways. Built at the Dock.'),
                 'armorClasses' => ['Ship', 'Ships', 'Long-range warship'],
                 'icon' => 'galleon',
                 'isMain' => true,
             ],
             'monks' => [
                 'name' => 'Monks',
-                'description' => 'Religious units that can heal allies and convert enemies. Countered by light cavalry.',
+                'description' => Yii::t('app', 'Religious units that can heal allies and convert enemies. Countered by light cavalry.'),
                 'armorClasses' => ['Monks'],
                 'icon' => 'monk',
                 'isMain' => true,
             ],
             'gunpowder-units' => [
                 'name' => 'Gunpowder Units',
-                'description' => 'Units utilizing gunpowder technology for devastating ranged attacks. Available from Imperial Age.',
+                'description' => Yii::t('app', 'Units utilizing gunpowder technology for devastating ranged attacks. Available from Imperial Age.'),
                 'armorClasses' => ['Gunpowder Units'],
                 'icon' => 'hand-cannoneer',
                 'isMain' => true,
@@ -269,49 +271,49 @@ class UnitController extends Controller
             // Sub classes
             'elephant-units' => [
                 'name' => 'Elephant Units',
-                'description' => 'Powerful elephant-mounted units with high HP. Vulnerable to spearmen and monks.',
+                'description' => Yii::t('app', 'Powerful elephant-mounted units with high HP. Vulnerable to spearmen and monks.'),
                 'armorClasses' => ['Elephant Units'],
                 'icon' => 'battle-elephant',
                 'isMain' => false,
             ],
             'camel-units' => [
                 'name' => 'Camel Units',
-                'description' => 'Camel riders effective against cavalry. Vulnerable to infantry.',
+                'description' => Yii::t('app', 'Camel riders effective against cavalry. Vulnerable to infantry.'),
                 'armorClasses' => ['Camel Units'],
                 'icon' => 'heavy-camel-rider',
                 'isMain' => false,
             ],
             'spearmen' => [
                 'name' => 'Spearmen',
-                'description' => 'Anti-cavalry infantry wielding spears, pikes, and halberds.',
+                'description' => Yii::t('app', 'Anti-cavalry infantry wielding spears, pikes, and halberds.'),
                 'armorClasses' => ['Spearmen'],
                 'icon' => 'halberdier',
                 'isMain' => false,
             ],
             'skirmishers' => [
                 'name' => 'Skirmishers',
-                'description' => 'Ranged trash units effective against archers. Weak against infantry and cavalry.',
+                'description' => Yii::t('app', 'Ranged trash units effective against archers. Weak against infantry and cavalry.'),
                 'armorClasses' => ['Skirmishers'],
                 'icon' => 'elite-skirmisher',
                 'isMain' => false,
             ],
             'rams' => [
                 'name' => 'Rams',
-                'description' => 'Siege units specialized in destroying buildings. High pierce armor.',
+                'description' => Yii::t('app', 'Siege units specialized in destroying buildings. High pierce armor.'),
                 'armorClasses' => ['Rams'],
                 'icon' => 'siege-ram',
                 'isMain' => false,
             ],
             'fire-ships' => [
                 'name' => 'Fire Ships',
-                'description' => 'Close-range naval vessels that set enemy ships ablaze.',
+                'description' => Yii::t('app', 'Close-range naval vessels that set enemy ships ablaze.'),
                 'armorClasses' => ['Fire Ships'],
                 'icon' => 'fast-fire-ship',
                 'isMain' => false,
             ],
             'shock-infantry' => [
                 'name' => 'Shock Infantry',
-                'description' => 'The Eagle Scout line: fast infantry with high pierce armor.',
+                'description' => Yii::t('app', 'The Eagle Scout line: fast infantry with high pierce armor.'),
                 'armorClasses' => ['Shock infantry'],
                 'icon' => 'elite-eagle-warrior',
                 'isMain' => false,
@@ -359,7 +361,7 @@ class UnitController extends Controller
     {
         $classes = self::getClassDefinitions();
         if (!isset($classes[$slug])) {
-            throw new NotFoundHttpException('Unit class not found.');
+            throw new NotFoundHttpException(Yii::t('app', 'Unit class not found.'));
         }
 
         $classDef = $classes[$slug];

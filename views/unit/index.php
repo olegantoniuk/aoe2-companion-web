@@ -5,9 +5,10 @@ use app\components\Seo;
 use yii\helpers\Url;
 use yii\widgets\LinkPager;
 use app\components\UnitPills;
+use app\components\Tr;
 
-$this->title = 'Units';
-Seo::page($this, 'All Units in Age of Empires II: Stats and Costs', 'Every unit in Age of Empires II with hit points, attack, armor, speed and cost, filterable by age and by unique or shared units.', '/images/icons/units.png');
+$this->title = Yii::t('app', 'Units');
+Seo::page($this, Yii::t('app', 'All Units in Age of Empires II: Stats and Costs'), Yii::t('app', 'Every unit in Age of Empires II with hit points, attack, armor, speed and cost, filterable by age and by unique or shared units.'), '/images/icons/units.png');
 $models = $dataProvider->getModels();
 $pagination = $dataProvider->getPagination();
 ?>
@@ -15,7 +16,7 @@ $pagination = $dataProvider->getPagination();
 <div class="admin5-page-header">
     <div class="page-title">
         <?= UnitPills::pageIcon('units') ?>
-        <h1>Units <span class="badge bg-secondary badge-sm"><?= $dataProvider->getTotalCount() ?></span></h1>
+        <h1><?= Yii::t('app', 'Units') ?> <span class="badge bg-secondary badge-sm"><?= $dataProvider->getTotalCount() ?></span></h1>
     </div>
 </div>
 
@@ -24,29 +25,29 @@ $pagination = $dataProvider->getPagination();
     <div class="card-content" style="padding: 16px;">
         <form method="get" action="<?= Url::to(['unit/index']) ?>" class="row g-2 align-items-end">
             <div class="col-md-2">
-                <label class="form-label">Search</label>
-                <input type="text" name="q" class="form-control form-control-sm" value="<?= Html::encode($currentSearch) ?>" placeholder="Unit name...">
+                <label class="form-label"><?= Yii::t('app', 'Search') ?></label>
+                <input type="text" name="q" class="form-control form-control-sm" value="<?= Html::encode($currentSearch) ?>" placeholder="<?= Html::encode(Yii::t('app', 'Unit name...')) ?>">
             </div>
             <div class="col-md-2">
-                <label class="form-label">Age</label>
+                <label class="form-label"><?= Yii::t('app', 'Age') ?></label>
                 <select name="age" class="form-select form-select-sm">
-                    <option value="">All ages</option>
+                    <option value=""><?= Yii::t('app', 'All ages') ?></option>
                     <?php foreach ($ages as $a): ?>
-                        <option value="<?= Html::encode($a) ?>" <?= $currentAge === $a ? 'selected' : '' ?>><?= Html::encode($a) ?></option>
+                        <option value="<?= Html::encode($a) ?>" <?= $currentAge === $a ? 'selected' : '' ?>><?= Html::encode(Tr::name($a)) ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
             <div class="col-md-2">
-                <label class="form-label">Category</label>
+                <label class="form-label"><?= Yii::t('app', 'Category') ?></label>
                 <select name="unique" class="form-select form-select-sm">
-                    <option value="">All</option>
-                    <option value="0" <?= $currentUnique === '0' ? 'selected' : '' ?>>Shared</option>
-                    <option value="1" <?= $currentUnique === '1' ? 'selected' : '' ?>>Unique</option>
+                    <option value=""><?= Yii::t('app', 'All') ?></option>
+                    <option value="0" <?= $currentUnique === '0' ? 'selected' : '' ?>><?= Yii::t('app', 'Shared') ?></option>
+                    <option value="1" <?= $currentUnique === '1' ? 'selected' : '' ?>><?= Yii::t('app', 'Unique') ?></option>
                 </select>
             </div>
             <div class="col-md-2 d-flex gap-2">
-                <button type="submit" class="btn btn-primary btn-sm">Filter</button>
-                <?= Html::a('Reset', ['unit/index'], ['class' => 'btn btn-outline-secondary btn-sm']) ?>
+                <button type="submit" class="btn btn-primary btn-sm"><?= Yii::t('app', 'Filter') ?></button>
+                <?= Html::a(Yii::t('app', 'Reset'), ['unit/index'], ['class' => 'btn btn-outline-secondary btn-sm']) ?>
             </div>
         </form>
     </div>

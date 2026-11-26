@@ -12,8 +12,36 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use app\models\Elo;
+use app\components\Tr;
 
-$file = Yii::getAlias('@app/components/data/elo_distribution.json');
+/**
+ * A translated string as a JavaScript expression for the inline script below: Yii::t('app', $en) split on its
+ * {placeholders}, the pieces as single-quoted literals joined with the JS expressions in $params by " + ".
+ * In English this gives back the same source the script had before it was translated.
+ */
+$jt = function ($en, array $params = []) {
+    $parts = preg_split('/(\{\w+\})/u', Yii::t('app', $en), -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+    $out = [];
+    foreach ($parts as $p) {
+        $name = substr($p, 1, -1);
+        if ($p[0] === '{' && isset($params[$name])) {
+            $out[] = $params[$name];
+        } else {
+            $out[] = "'" . str_ireplace('</script', '<\/script', addcslashes($p, "'\\\n\r")) . "'";
+        }
+    }
+    return $out ? implode(' + ', $out) : "''";
+};
+/** The word for the count $expr (a JS expression), "point|points": two forms in English, three in Ukrainian. */
+$jp = function ($expr, $forms) {
+    $f = explode('|', Yii::t('app', $forms));
+    $q = function ($s) { return "'" . addcslashes($s, "'\\") . "'"; };
+    if (count($f) < 3) return '(' . $expr . ' === 1 ? ' . $q($f[0]) . ' : ' . $q($f[1] ?? $f[0]) . ')';
+    return '(function (n) { n = Math.abs(Math.round(n)); var a = n % 10, b = n % 100; return a === 1 && b !== 11 ? '
+        . $q($f[0]) . ' : a >= 2 && a <= 4 && (b < 12 || b > 14) ? ' . $q($f[1]) . ' : ' . $q($f[2]) . '; })(' . $expr . ')';
+};
+
+$file =Yii::getAlias('@app/components/data/elo_distribution.json');
 $data = is_file($file) ? json_decode(file_get_contents($file), true) : null;
 $buckets = $data['buckets'] ?? [];
 if (!$buckets) return;
@@ -25,10 +53,10 @@ $bands = [
     'expert' => [1700, null],
 ];
 $tips = [
-    'beginner' => 'Learn one build order, play it every game and keep your town center making villagers.',
-    'intermediate' => 'Scout early, keep your production buildings busy and spend your resources before they pile up.',
-    'advanced' => 'Watch your own losses back and fix one mistake at a time, because idle time decides games here.',
-    'expert' => 'Prepare plans for each civ and map, and borrow timings from pro games.',
+    'beginner' => Yii::t('app', 'Learn one build order, play it every game and keep your town center making villagers.'),
+    'intermediate' => Yii::t('app', 'Scout early, keep your production buildings busy and spend your resources before they pile up.'),
+    'advanced' => Yii::t('app', 'Watch your own losses back and fix one mistake at a time, because idle time decides games here.'),
+    'expert' => Yii::t('app', 'Prepare plans for each civ and map, and borrow timings from pro games.'),
 ];
 $milestones = [1000, 1200, 1500, 2000];
 
@@ -66,7 +94,7 @@ foreach ($bands as $key => [$lo, $hi]) {
     foreach ($buckets as $b) if ($b['from'] >= $lo && $b['from'] < $hi) $in += $b['players'];
     $bandInfo[$key] = [
         'key' => $key,
-        'label' => Elo::label($key),
+        'label' => Yii::t('app', Elo::label($key)),
         'range' => Elo::range($key),
         'lo' => $lo,
         'hi' => $hi,
@@ -119,7 +147,16 @@ for ($i = 0; $i < $cnt - 1; $i++) {
 $d .= ' L' . $f($x($maxRating)) . ' ' . $f($base) . ' Z';
 
 $uid = 'elox' . substr(md5(uniqid('', true)), 0, 6);
-$fetched = !empty($data['fetched']) ? date('j M Y', strtotime($data['fetched'])) : '';
+// month names in English only; other languages get a numeric date
+$fetched = !empty($data['fetched']) ? date(Tr::isEnglish() ? 'j M Y' : 'd.m.Y', strtotime($data['fetched'])) : '';
+$noteParams = [
+    'count' => number_format($total, 0, '.', Tr::isEnglish() ? ',' : ' '),
+    'link' => '<a href="https://www.aoe2companion.com" target="_blank" rel="noopener">aoe2companion</a>',
+    'date' => Html::encode($fetched),
+];
+$note = $fetched
+    ? Yii::t('app', '{count} active players on the {link} RM 1v1 leaderboard, {date}.', $noteParams)
+    : Yii::t('app', '{count} active players on the {link} RM 1v1 leaderboard.', $noteParams);
 
 $config = [
     'total' => $total,
@@ -136,13 +173,13 @@ $config = [
 <link rel="stylesheet" href="/css/elo-explorer.css">
 <section class="elo-x" id="<?= $uid ?>" aria-labelledby="<?= $uid ?>-title">
     <div class="elo-x-head">
-        <h2 class="elo-x-title" id="<?= $uid ?>-title">Where does your rating put you?</h2>
+        <h2 class="elo-x-title" id="<?= $uid ?>-title"><?= Yii::t('app', 'Where does your rating put you?') ?></h2>
     </div>
 
     <div class="elo-x-chart">
         <svg viewBox="0 0 <?= $W ?> <?= $H ?>" role="img" aria-labelledby="<?= $uid ?>-svgdesc" focusable="false">
-            <desc id="<?= $uid ?>-svgdesc">Players per 50 Elo on the 1v1 Random Map ladder. Half the players are below <?= $median ?>.
-                <?php foreach ($bandInfo as $b): ?><?= Html::encode($b['label'] . ' (' . $b['range'] . '): ' . round($b['share'] * 100) . '% of players. ') ?><?php endforeach; ?></desc>
+            <desc id="<?= $uid ?>-svgdesc"><?= Html::encode(Yii::t('app', 'Players per 50 Elo on the 1v1 Random Map ladder. Half the players are below {median}.', ['median' => $median])) . "\n" ?>
+                <?php foreach ($bandInfo as $b): ?><?= Html::encode(Yii::t('app', '{band} ({range}): {pct}% of players.', ['band' => $b['label'], 'range' => $b['range'], 'pct' => round($b['share'] * 100)]) . ' ') ?><?php endforeach; ?></desc>
             <defs>
                 <path id="<?= $uid ?>-area" d="<?= $d ?>"/>
                 <clipPath id="<?= $uid ?>-you">
@@ -174,7 +211,7 @@ $config = [
 
             <?php foreach ($bandInfo as $b): ?>
                 <rect class="elo-x-hit" data-band="<?= $b['key'] ?>" x="<?= $f($b['lo'] ? $x($b['lo']) : 0) ?>" y="<?= $top - 6 ?>" width="<?= $f(($b['hi'] >= $maxRating ? $W : $x($b['hi'])) - ($b['lo'] ? $x($b['lo']) : 0)) ?>" height="<?= $base - $top + 6 ?>">
-                    <title><?= Html::encode($b['label'] . ', ' . $b['range'] . ': ' . round($b['share'] * 100) . '% of players. Click to jump to ' . $b['mid'] . '.') ?></title>
+                    <title><?= Html::encode(Yii::t('app', '{band}, {range}: {pct}% of players. Click to jump to {mid}.', ['band' => $b['label'], 'range' => $b['range'], 'pct' => round($b['share'] * 100), 'mid' => $b['mid']])) ?></title>
                 </rect>
             <?php endforeach; ?>
 
@@ -190,13 +227,13 @@ $config = [
     </div>
 
     <div class="elo-x-control">
-        <label class="elo-x-label" for="<?= $uid ?>-range">Your rating</label>
-        <input type="number" class="elo-x-number form-control form-control-sm" id="<?= $uid ?>-num" min="0" max="<?= $maxRating ?>" step="1" value="<?= $median ?>" inputmode="numeric" aria-label="Your rating, exact value">
+        <label class="elo-x-label" for="<?= $uid ?>-range"><?= Yii::t('app', 'Your rating') ?></label>
+        <input type="number" class="elo-x-number form-control form-control-sm" id="<?= $uid ?>-num" min="0" max="<?= $maxRating ?>" step="1" value="<?= $median ?>" inputmode="numeric" aria-label="<?= Html::encode(Yii::t('app', 'Your rating, exact value')) ?>">
     </div>
     <input type="range" class="elo-x-range" id="<?= $uid ?>-range" min="0" max="<?= $maxRating ?>" step="10" value="<?= $median ?>"
         style="--s1: <?= round(900 / $maxRating, 4) ?>; --s2: <?= round(1300 / $maxRating, 4) ?>; --s3: <?= round(1700 / $maxRating, 4) ?>">
 
-    <div class="elo-x-chips" role="group" aria-label="Jump to a skill band">
+    <div class="elo-x-chips" role="group" aria-label="<?= Html::encode(Yii::t('app', 'Jump to a skill band')) ?>">
         <?php foreach ($bandInfo as $b): ?>
             <button type="button" class="elo-x-chip elo-x-chip-<?= $b['key'] ?>" data-band="<?= $b['key'] ?>" aria-pressed="false" title="<?= Html::encode($b['range']) ?>">
                 <img src="<?= Html::encode($b['icon']) ?>" alt="" width="24" height="24">
@@ -225,8 +262,8 @@ $config = [
     </div>
 
     <p class="elo-x-note">
-        <?= number_format($total) ?> active players on the <a href="https://www.aoe2companion.com" target="_blank" rel="noopener">aoe2companion</a> RM 1v1 leaderboard<?= $fetched ? ', ' . Html::encode($fetched) : '' ?>.
-        Long inactive accounts are not counted.
+        <?= $note . "\n" ?>
+        <?= Yii::t('app', 'Long inactive accounts are not counted.') . "\n" ?>
     </p>
 
     <script type="application/json" class="elo-x-data"><?= json_encode($config, JSON_HEX_TAG | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE) ?></script>
@@ -284,7 +321,7 @@ $config = [
         return cfg.bands[0];
     }
 
-    function fmt(n) { return Math.round(n).toLocaleString('en-US'); }
+    function fmt(n) { return Math.round(n).toLocaleString('<?= Tr::isEnglish() ? 'en-US' : 'uk-UA' ?>'); }
     function pctText(p) {
         if (p >= 99 && p < 100) return (Math.floor(p * 10) / 10).toFixed(1);
         if (p > 0 && p < 1) return (Math.max(0.1, Math.round(p * 10) / 10)).toFixed(1);
@@ -316,45 +353,45 @@ $config = [
         out.range.textContent = band.range;
 
         if (above < 0.5) {
-            out.pct.innerHTML = 'Higher than <strong>every</strong> ranked 1v1 player';
+            out.pct.innerHTML = <?= $jt('Higher than <strong>every</strong> ranked 1v1 player') ?>;
             out.aboveN.textContent = '0';
-            out.aboveT.textContent = 'players above you';
+            out.aboveT.textContent = <?= $jt('players above you') ?>;
         } else {
             out.pct.innerHTML = b < 0.5
-                ? 'At the very bottom of the ladder'
-                : 'Better than <strong>' + pctText(p) + '%</strong> of ranked 1v1 players';
+                ? <?= $jt('At the very bottom of the ladder') . "\n" ?>
+                : <?= $jt('Better than <strong>{pct}%</strong> of ranked 1v1 players', ['pct' => 'pctText(p)']) ?>;
             var n = Math.max(1, Math.round(above));
             var rough = n < 50 || TOTAL - n < 50 ? fmt(n) : '≈' + roughCount(n);
             out.aboveN.textContent = rough;
-            out.aboveT.textContent = (n === 1 ? 'player' : 'players') + ' above you'
-                + (top < 99.5 ? ', the top ' + pctText(top) + '%' : '');
+            out.aboveT.textContent = <?= $jt('{players} above you', ['players' => $jp('n', 'player|players')]) . "\n" ?>
+                + (top < 99.5 ? <?= $jt(', the top {pct}%', ['pct' => 'pctText(top)']) ?> : '');
         }
 
         var idx = cfg.bands.indexOf(band);
         var next = cfg.bands[idx + 1];
         if (next) {
             out.bandN.textContent = fmt(next.lo - r);
-            out.bandT.textContent = (next.lo - r === 1 ? 'point' : 'points') + ' to ' + next.label + ' (' + next.lo + ')';
+            out.bandT.textContent = <?= $jt('{points} to {band} ({elo})', ['points' => $jp('next.lo - r', 'point|points'), 'band' => 'next.label', 'elo' => 'next.lo']) ?>;
         } else {
             out.bandN.textContent = band.label;
-            out.bandT.textContent = 'is the top band';
+            out.bandT.textContent = <?= $jt('is the top band') ?>;
         }
 
         var m = cfg.milestones.filter(function (v) { return v > r; })[0];
         var lastM = cfg.milestones[cfg.milestones.length - 1];
         if (m) {
             out.mileN.textContent = fmt(m - r);
-            out.mileT.textContent = (m - r === 1 ? 'point' : 'points') + ' to the ' + m + ' mark';
+            out.mileT.textContent = <?= $jt('{points} to the {mark} mark', ['points' => $jp('m - r', 'point|points'), 'mark' => 'm']) ?>;
         } else {
             out.mileN.textContent = lastM + '+';
-            out.mileT.textContent = 'past the last milestone';
+            out.mileT.textContent = <?= $jt('past the last milestone') ?>;
         }
 
         out.tip.textContent = band.tip;
         out.link.href = band.url;
-        out.link.textContent = band.label + ' guides';
+        out.link.textContent = <?= $jt('{band} guides', ['band' => 'band.label']) ?>;
 
-        range.setAttribute('aria-valuetext', r + ' Elo, ' + band.label);
+        range.setAttribute('aria-valuetext', <?= $jt('{elo} Elo, {band}', ['elo' => 'r', 'band' => 'band.label']) ?>);
         return r;
     }
 

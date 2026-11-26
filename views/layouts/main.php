@@ -34,6 +34,7 @@ NavBar::begin([
         . '<img src="/images/logo/001-wordmark-black.png" alt="AoE2 Companion" class="brand-logo brand-logo-light">'
         . '<img src="/images/logo/001-wordmark-white.png" alt="AoE2 Companion" class="brand-logo brand-logo-dark">',
     'brandUrl' => Yii::$app->homeUrl,
+    'screenReaderToggleText' => Yii::t('app', 'Toggle navigation'),
     'options' => [
         'class' => 'navbar navbar-expand-lg navbar-light',
     ],
@@ -42,37 +43,37 @@ NavBar::begin([
 // the knowledge base first; the reference pages follow in a row on wide screens
 // and fold into one "Database" menu when the header runs out of room
 $referenceItems = [
-    ['label' => 'Civilizations', 'url' => ['/civilization/index']],
-    ['label' => 'Units', 'url' => ['/unit/index']],
-    ['label' => 'Buildings', 'url' => ['/building/index']],
-    ['label' => 'Technologies', 'url' => ['/technology/index']],
-    ['label' => 'Classes', 'url' => ['/unit/classes']],
+    ['label' => Yii::t('app', 'Civilizations'), 'url' => ['/civilization/index']],
+    ['label' => Yii::t('app', 'Units'), 'url' => ['/unit/index']],
+    ['label' => Yii::t('app', 'Buildings'), 'url' => ['/building/index']],
+    ['label' => Yii::t('app', 'Technologies'), 'url' => ['/technology/index']],
+    ['label' => Yii::t('app', 'Classes'), 'url' => ['/unit/classes']],
 ];
 $route = Yii::$app->controller->id;
 $inReference = in_array($route, ['civilization', 'unit', 'building', 'technology'], true);
 $menuItems = [
-    ['label' => 'Builds', 'url' => ['/build/index']],
-    ['label' => 'Guides', 'url' => ['/guide/index']],
-    ['label' => 'Matchup', 'url' => ['/matchup/index']],
+    ['label' => Yii::t('app', 'Builds'), 'url' => ['/build/index']],
+    ['label' => Yii::t('app', 'Guides'), 'url' => ['/guide/index']],
+    ['label' => Yii::t('app', 'Matchup'), 'url' => ['/matchup/index']],
 ];
 foreach ($referenceItems as $i => $item) {
     // shown in a row from 1400 px, and in the collapsed mobile menu
     $menuItems[] = $item + ['options' => ['class' => 'nav-item d-lg-none d-xxl-block' . ($i === 0 ? ' nav-item-ref-first' : '')]];
 }
 $menuItems[] = [
-    'label' => 'Database',
+    'label' => Yii::t('app', 'Database'),
     'items' => $referenceItems,
     'active' => $inReference,
     'options' => ['class' => 'nav-item dropdown d-none d-lg-block d-xxl-none'],
 ];
 
 if (Yii::$app->user->isGuest) {
-    $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+    $menuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
 } else {
     $menuItems[] = '<li class="nav-item">'
         . Html::beginForm(['/site/logout'], 'post', ['class' => 'd-flex'])
         . Html::submitButton(
-            'Logout (' . Yii::$app->user->identity->username . ')',
+            Yii::t('app', 'Logout ({username})', ['username' => Yii::$app->user->identity->username]),
             ['class' => 'btn btn-link nav-link']
         )
         . Html::endForm()
@@ -84,8 +85,27 @@ echo Nav::widget([
     'items' => $menuItems,
 ]);
 
+// Language menu: the same page in each language
+$langNow = \app\components\Lang::current();
+$langItems = '';
+foreach (\app\components\Lang::LANGS as $code => [$langName, $langShort]) {
+    $langItems .= '<li><a class="dropdown-item' . ($code === $langNow ? ' active" aria-current="true' : '') . '"'
+        . ' href="' . Html::encode(\app\components\Lang::switchUrl($code)) . '" hreflang="' . $code . '" lang="' . $code . '">'
+        . '<span class="lang-code">' . $langShort . '</span> ' . Html::encode($langName) . '</a></li>';
+}
+echo '<div class="dropdown lang-switch ms-2">'
+    . '<button class="lang-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"'
+    . ' aria-label="' . Html::encode(Yii::t('app', 'Language')) . ': ' . Html::encode(\app\components\Lang::LANGS[$langNow][0]) . '"'
+    . ' title="' . Html::encode(Yii::t('app', 'Language')) . '">'
+    . '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>'
+    . '<span>' . \app\components\Lang::LANGS[$langNow][1] . '</span>'
+    . '<svg class="lang-caret" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    . '</button>'
+    . '<ul class="dropdown-menu dropdown-menu-end">' . $langItems . '</ul>'
+    . '</div>';
+
 // Theme toggle button
-echo '<button class="theme-toggle ms-2" id="themeToggle" type="button" title="Toggle theme">'
+echo '<button class="theme-toggle ms-2" id="themeToggle" type="button" title="' . Html::encode(Yii::t('app', 'Toggle theme')) . '">'
     . '<svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
     . '<svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>'
     . '</button>';
@@ -117,7 +137,7 @@ NavBar::end();
     </div>
 </footer>
 
-<button type="button" class="back-to-top" id="backToTop" aria-label="Back to top" title="Back to top">
+<button type="button" class="back-to-top" id="backToTop" aria-label="<?= Html::encode(Yii::t('app', 'Back to top')) ?>" title="<?= Html::encode(Yii::t('app', 'Back to top')) ?>">
     <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true"><path d="M3 10l5-5 5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </button>
 

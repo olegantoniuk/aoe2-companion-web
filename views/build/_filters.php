@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use app\models\Elo;
 use app\components\UnitPills;
+use app\components\Tr;
 
 /**
  * Level, category and civilization filters shared by the build and guide lists.
@@ -11,12 +12,12 @@ use app\components\UnitPills;
 ?>
 <div class="kb-filters">
     <div class="kb-filter-group">
-        <span class="kb-filter-label">Level</span>
+        <span class="kb-filter-label"><?= Yii::t('app', 'Level') ?></span>
         <div class="kb-filter-chips">
-        <a href="<?= $filterUrl(null, $currentCategory) ?>" class="kb-chip<?= !$currentElo ? ' is-active' : '' ?>">All</a>
+        <a href="<?= $filterUrl(null, $currentCategory) ?>" class="kb-chip<?= !$currentElo ? ' is-active' : '' ?>"><?= Yii::t('app', 'All') ?></a>
         <?php foreach (Elo::BANDS as $key => [$label, $range]): ?>
             <a href="<?= $filterUrl($key, $currentCategory) ?>" class="kb-chip kb-chip-elo<?= $currentElo === $key ? ' is-active' : '' ?>">
-                <img src="/images/icons/<?= $key ?>.png" alt=""><?= $label ?> <small><?= Html::encode($range) ?></small>
+                <img src="/images/icons/<?= $key ?>.png" alt=""><?= Html::encode(Yii::t('app', $label)) ?> <small><?= Html::encode($range) ?></small>
             </a>
         <?php endforeach; ?>
         </div>
@@ -24,43 +25,44 @@ use app\components\UnitPills;
     <div class="kb-filter-group">
         <span class="kb-filter-label"><?= Html::encode($categoryLabel) ?></span>
         <div class="kb-filter-chips">
-        <a href="<?= $filterUrl($currentElo, null) ?>" class="kb-chip<?= !$currentCategory ? ' is-active' : '' ?>">All</a>
+        <a href="<?= $filterUrl($currentElo, null) ?>" class="kb-chip<?= !$currentCategory ? ' is-active' : '' ?>"><?= Yii::t('app', 'All') ?></a>
         <?php foreach ($categories as $key => $label): ?>
-            <a href="<?= $filterUrl($currentElo, $key) ?>" class="kb-chip<?= $currentCategory === $key ? ' is-active' : '' ?>"><?= $label ?></a>
+            <a href="<?= $filterUrl($currentElo, $key) ?>" class="kb-chip<?= $currentCategory === $key ? ' is-active' : '' ?>"><?= Html::encode(Yii::t('app', $label)) ?></a>
         <?php endforeach; ?>
         </div>
     </div>
     <div class="kb-filter-row">
-        <span class="kb-filter-label">Civilization</span>
+        <span class="kb-filter-label"><?= Yii::t('app', 'Civilization') ?></span>
         <!-- civilization picker: emblems and a search box in the list; every option is a link -->
         <div class="searchable-select kb-civ-picker">
             <button type="button" class="searchable-select-trigger" aria-haspopup="listbox" aria-expanded="false">
                 <span class="searchable-select-label has-value">
                     <?php if ($currentCiv): ?>
                         <?php if ($currentCiv->emblemUrl): ?><img src="<?= Html::encode($currentCiv->emblemUrl) ?>" alt="" class="civ-emblem-sm"><?php endif; ?>
-                        <?= Html::encode($currentCiv->name) ?>
+                        <?= Tr::nameHtml($currentCiv->name) ?>
                     <?php else: ?>
-                        All civilizations
+                        <?= Yii::t('app', 'All civilizations') ?>
+
                     <?php endif; ?>
                 </span>
                 <span class="kb-civ-picker-caret"><?= UnitPills::chevron() ?></span>
             </button>
             <div class="searchable-select-dropdown">
-                <input type="text" class="searchable-select-search" placeholder="Search civilizations" autocomplete="off" aria-label="Search civilizations">
+                <input type="text" class="searchable-select-search" placeholder="<?= Html::encode(Yii::t('app', 'Search civilizations')) ?>" autocomplete="off" aria-label="<?= Html::encode(Yii::t('app', 'Search civilizations')) ?>">
                 <div class="searchable-select-options" role="listbox">
-                    <a href="<?= $filterUrl($currentElo, $currentCategory, false) ?>" class="searchable-select-option<?= !$currentCiv ? ' is-selected' : '' ?>" role="option">All civilizations</a>
+                    <a href="<?= $filterUrl($currentElo, $currentCategory, false) ?>" class="searchable-select-option<?= !$currentCiv ? ' is-selected' : '' ?>" role="option"><?= Yii::t('app', 'All civilizations') ?></a>
                     <?php foreach ($civs as $c): ?>
                         <a href="<?= $filterUrl($currentElo, $currentCategory, $c->slug) ?>" class="searchable-select-option<?= $currentCiv && $currentCiv->id === $c->id ? ' is-selected' : '' ?>" role="option">
                             <?php if ($c->emblemUrl): ?><img src="<?= Html::encode($c->emblemUrl) ?>" alt="" class="civ-emblem-sm" loading="lazy"><?php endif; ?>
-                            <?= Html::encode($c->name) ?>
+                            <?= Tr::nameHtml($c->name) ?>
                         </a>
                     <?php endforeach; ?>
-                    <div class="kb-civ-picker-empty" hidden>No civilization found</div>
+                    <div class="kb-civ-picker-empty" hidden><?= Yii::t('app', 'No civilization found') ?></div>
                 </div>
             </div>
         </div>
         <?php if ($currentCiv): ?>
-            <a href="<?= $filterUrl($currentElo, $currentCategory, false) ?>" class="kb-chip">Clear</a>
+            <a href="<?= $filterUrl($currentElo, $currentCategory, false) ?>" class="kb-chip"><?= Yii::t('app', 'Clear') ?></a>
         <?php endif; ?>
     </div>
 </div>

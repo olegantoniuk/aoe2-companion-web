@@ -5,21 +5,22 @@ use app\components\Seo;
 use yii\helpers\Url;
 use app\models\Building;
 use app\components\UnitPills;
+use app\components\Tr;
 
-$this->title = 'Buildings';
-Seo::page($this, 'All Buildings in Age of Empires II', 'Every building in Age of Empires II with its cost, hit points, armor, the units it trains and the technologies researched there.', '/images/icons/buildings.png');
+$this->title = Yii::t('app', 'Buildings');
+Seo::page($this, Yii::t('app', 'All Buildings in Age of Empires II'), Yii::t('app', 'Every building in Age of Empires II with its cost, hit points, armor, the units it trains and the technologies researched there.'), '/images/icons/buildings.png');
 ?>
 
 <div class="admin5-page-header">
     <div class="page-title">
         <?= UnitPills::pageIcon('buildings') ?>
-        <h1>Buildings <span class="badge bg-secondary badge-sm"><?= $total ?></span></h1>
+        <h1><?= Yii::t('app', 'Buildings') ?> <span class="badge bg-secondary badge-sm"><?= $total ?></span></h1>
     </div>
 </div>
 
 <?php foreach ($byCategory as $cat => $buildings): ?>
     <section class="civ-group">
-        <h2 class="civ-group-title"><?= Html::encode(Building::CATEGORIES[$cat] ?? ucfirst($cat)) ?></h2>
+        <h2 class="civ-group-title"><?= Html::encode(Yii::t('app', Building::CATEGORIES[$cat] ?? ucfirst($cat))) ?></h2>
         <div class="building-grid">
             <?php foreach ($buildings as $b): ?>
                 <a href="<?= Url::to(['building/view', 'slug' => $b->slug]) ?>" class="admin5-card admin5-card-border building-card">
@@ -27,16 +28,17 @@ Seo::page($this, 'All Buildings in Age of Empires II', 'Every building in Age of
                         <?php if ($b->iconUrl): ?><img src="<?= Html::encode($b->iconUrl) ?>" alt=""><?php endif; ?>
                     </span>
                     <span class="building-card-text">
-                        <span class="building-card-name"><?= Html::encode($b->name) ?></span>
+                        <span class="building-card-name"><?= Tr::nameHtml($b->name) ?></span>
                         <span class="building-card-meta">
                             <?php if ($b->age): ?><?= UnitPills::agePill($b->age) ?><?php endif; ?>
                             <span class="unit-list-cost"><?= $b->costHtml ?></span>
                         </span>
                         <?php [$mode, $names] = $b->availabilityNote; ?>
+                        <?php $civList = implode(', ', array_map([Tr::class, 'name'], (array)$names)); ?>
                         <?php if ($mode === 'only'): ?>
-                            <span class="building-card-civs"><?= Html::encode(count($names) > 4 ? count($names) . ' civilizations' : implode(', ', $names) . ' only') ?></span>
+                            <span class="building-card-civs"><?= Html::encode(count($names) > 4 ? count($names) . ' ' . Tr::plural(count($names), 'civilization|civilizations') : Yii::t('app', '{civs} only', ['civs' => $civList])) ?></span>
                         <?php elseif ($mode === 'except'): ?>
-                            <span class="building-card-civs">All except <?= Html::encode(count($names) > 4 ? count($names) . ' civilizations' : implode(', ', $names)) ?></span>
+                            <span class="building-card-civs"><?= Html::encode(count($names) > 4 ? Yii::t('app', 'All except {n} civilizations', ['n' => count($names)]) : Yii::t('app', 'All except {civs}', ['civs' => $civList])) ?></span>
                         <?php endif; ?>
                     </span>
                 </a>
