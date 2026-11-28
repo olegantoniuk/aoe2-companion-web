@@ -4945,3 +4945,76 @@ h3 > .badge-sm {
 .live-filter-clear[hidden] {
     display: none;
 }
+
+/* ── Age: its shield and its name as plain text (UnitPills::ageLabel) ── */
+.age-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-text);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.age-label-icon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.age-label[data-tip]:hover > span,
+.age-label[data-tip]:focus-visible > span {
+    text-decoration: underline dotted;
+    text-underline-offset: 3px;
+}
+
+.unit-list-table .age-label-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* unique unit cards: a long name wraps inside the card, the age moves under it when there is no room */
+.unique-card .card-content > .d-flex > .d-flex {
+    min-width: 0;
+}
+
+.unique-card .unit-list-name {
+    white-space: normal;
+}
+
+/* ── Combat Stats of a unit with an elite step: the columns of the page shown are highlighted,
+   the other step's headers link to its page (/units/war-wagon <-> /units/elite-war-wagon) ── */
+.admin5-card .age-stat-table .is-current {
+    background-color: var(--color-pill-civ-bg) !important;
+}
+
+.admin5-card .age-stat-table tbody tr:hover > td.is-current {
+    background-color: var(--color-pill-civ-bg-hover) !important;
+}
+
+.age-stat-link {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* the age over a column, as a link: shield above the name, like the plain header */
+.age-stat-age-link {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.age-stat-table thead .age-stat-age-link > span {
+    display: block;
+    margin-top: 2px;
+}
+
+.age-stat-link:hover span,
+.age-stat-link:focus-visible span {
+    color: var(--color-link-hover);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}

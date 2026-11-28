@@ -37,7 +37,7 @@ $civs = $availNames ? Civilization::find()->where(['name' => $availNames])->orde
     <div class="unit-title-text">
         <h1><?= Tr::nameHtml($building->name) ?></h1>
         <div class="pill-row">
-            <?php if ($building->age): ?><?= UnitPills::agePill($building->age) ?><?php endif; ?>
+            <?php if ($building->age): ?><?= UnitPills::ageLabel($building->age) ?><?php endif; ?>
             <?php if ($availMode === 'only' && count($civs) <= 6): ?>
                 <?php foreach ($civs as $c): ?><?= UnitPills::civPill($c) ?><?php endforeach; ?>
             <?php endif; ?>

@@ -30,7 +30,11 @@ class SitemapController extends Controller
             $add([$r], '0.8');
         }
         foreach (Civilization::find()->select('slug')->column() as $s) $add(['civilization/view', 'slug' => $s], '0.7');
-        foreach (Unit::find()->select('slug')->column() as $s) $add(['unit/view', 'slug' => $s]);
+        foreach (Unit::find()->all() as $u) {
+            $add(['unit/view', 'slug' => $u->slug]);
+            // the elite step of a unique unit has its own page (/units/elite-war-wagon)
+            if ($u->eliteVariantData) $add(['unit/view', 'slug' => $u->eliteSlug]);
+        }
         foreach (Building::find()->select('slug')->column() as $s) $add(['building/view', 'slug' => $s]);
         foreach (BuildOrder::find()->select('slug')->column() as $s) $add(['build/view', 'slug' => $s], '0.7');
         foreach (Article::find()->select('slug')->column() as $s) $add(['guide/view', 'slug' => $s], '0.7');

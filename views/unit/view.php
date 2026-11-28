@@ -7,8 +7,15 @@ use yii\helpers\Json;
 use app\components\UnitPills;
 use app\components\Tr;
 
-$this->title = Tr::name($unit->name);
-Seo::page($this, Yii::t('app', '{name}: Stats, Counters and Upgrades', ['name' => Tr::name($unit->name)]), Tr::text($unit->description, 'units') ?: Yii::t('app', '{name} in Age of Empires II: stats in every age, upgrades, counters and the civilizations that can train it.', ['name' => Tr::name($unit->name)]), $unit->iconUrl);
+// $elite: the page of the elite step (/units/elite-war-wagon), the same page with the elite column active
+$elite = !empty($elite);
+$pageName = $elite ? $unit->eliteName : $unit->name;
+$pageIcon = $elite ? $unit->eliteIconUrl : $unit->iconUrl;
+$pageSprite = $elite ? $unit->eliteSpriteUrl : $unit->transparentSpriteUrl;
+$baseUrl = Url::to(['unit/view', 'slug' => $unit->slug]);
+$eliteUrl = Url::to(['unit/view', 'slug' => $unit->eliteSlug]);
+$this->title = Tr::name($pageName);
+Seo::page($this, Yii::t('app', '{name}: Stats, Counters and Upgrades', ['name' => Tr::name($pageName)]), Tr::text($unit->description, 'units') ?: Yii::t('app', '{name} in Age of Empires II: stats in every age, upgrades, counters and the civilizations that can train it.', ['name' => Tr::name($pageName)]), $pageIcon);
 
 $attackBonuses = $unit->attackBonuses;
 $armorClasses = $unit->armorClasses;
@@ -16,7 +23,7 @@ $techBoosts = $unit->technologyBoosts;
 $civBoosts = $unit->civilizationBoosts;
 $teamBoosts = $unit->teamBoosts;
 $availability = $unit->availability;
-$eliteVariant = $unit->elite_variant ? json_decode($unit->elite_variant, true) : null;
+$eliteVariant = $unit->eliteVariantData;
 $strongAgainst = $unit->strong_against ? json_decode($unit->strong_against, true) : [];
 $weakAgainst = $unit->weak_against ? json_decode($unit->weak_against, true) : [];
 
@@ -225,17 +232,20 @@ foreach ($techGroups as $techName => $items) {
 <nav aria-label="<?= Html::encode(Yii::t('app', 'breadcrumb')) ?>" class="mb-3">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><?= Html::a(Yii::t('app', 'Units'), ['unit/index']) ?></li>
-        <li class="breadcrumb-item active"><?= Tr::nameHtml($unit->name) ?></li>
+        <?php if ($elite): ?>
+            <li class="breadcrumb-item"><a href="<?= $baseUrl ?>"><?= Tr::nameHtml($unit->name) ?></a></li>
+        <?php endif; ?>
+        <li class="breadcrumb-item active"><?= Tr::nameHtml($pageName) ?></li>
     </ol>
 </nav>
 
 <div class="admin5-page-header">
     <div class="unit-title">
-        <?php if ($unit->iconUrl): ?>
-            <img src="<?= Html::encode($unit->iconUrl) ?>" alt="" class="unit-title-icon">
+        <?php if ($pageIcon): ?>
+            <img src="<?= Html::encode($pageIcon) ?>" alt="" class="unit-title-icon">
         <?php endif; ?>
         <div class="unit-title-text">
-            <h1><?= Tr::nameHtml($unit->name) ?></h1>
+            <h1><?= Tr::nameHtml($pageName) ?></h1>
             <?php
             // a unique unit shared by a few civilizations (Winged Hussar) shows all of them,
             // a unit only one civilization trains (Imperial Skirmisher) shows that one
@@ -258,16 +268,16 @@ foreach ($techGroups as $techName => $items) {
     <!-- Left Column -->
     <div class="col-lg-5 mb-4">
         <!-- Unit Image -->
-        <?php if ($unit->transparentSpriteUrl): ?>
+        <?php if ($pageSprite): ?>
             <?php
             // Sprites are small (70–500px); scale up to 2x but keep within the portrait area
-            [$spriteW, $spriteH] = getimagesize(Yii::getAlias('@webroot') . strtok($unit->transparentSpriteUrl, '?'));
+            [$spriteW, $spriteH] = getimagesize(Yii::getAlias('@webroot') . strtok($pageSprite, '?'));
             $spriteScale = min(2, 200 / $spriteH, 320 / $spriteW);
             ?>
             <?php
             // Animated game sprites stand on a patch of game grass; ships do not
             $groundUrl = null;
-            if (substr(strtok($unit->transparentSpriteUrl, '?'), -5) === '.webp' && !$unit->isNaval) {
+            if (substr(strtok($pageSprite, '?'), -5) === '.webp' && !$unit->isNaval) {
                 $groundFile = '/images/ground/grass.png';
                 $groundMtime = @filemtime(Yii::getAlias('@webroot') . $groundFile);
                 $groundUrl = $groundMtime ? "$groundFile?v=$groundMtime" : null;
@@ -279,15 +289,15 @@ foreach ($techGroups as $techName => $items) {
                         <?php if ($groundUrl): ?>
                             <span class="unit-ground" style="background-image: url('<?= Html::encode($groundUrl) ?>')"></span>
                         <?php endif; ?>
-                        <img src="<?= Html::encode($unit->transparentSpriteUrl) ?>" alt="<?= Html::encode(Tr::name($unit->name)) ?>"
+                        <img src="<?= Html::encode($pageSprite) ?>" alt="<?= Html::encode(Tr::name($pageName)) ?>"
                              width="<?= round($spriteW * $spriteScale) ?>" height="<?= round($spriteH * $spriteScale) ?>">
                     </span>
                 </div>
             </div>
-        <?php elseif ($unit->iconUrl): ?>
+        <?php elseif ($pageIcon): ?>
             <div class="text-center mb-4">
                 <div class="unit-portrait-card">
-                    <img src="<?= Html::encode($unit->iconUrl) ?>" alt="<?= Html::encode(Tr::name($unit->name)) ?>" class="unit-image-lg">
+                    <img src="<?= Html::encode($pageIcon) ?>" alt="<?= Html::encode(Tr::name($pageName)) ?>" class="unit-image-lg">
                 </div>
             </div>
         <?php endif; ?>
@@ -314,7 +324,7 @@ foreach ($techGroups as $techName => $items) {
                     </td></tr>
                 <?php endif; ?>
                 <?php if ($unit->age): ?>
-                    <tr><th><?= Yii::t('app', 'Age') ?></th><td><?= UnitPills::agePill($unit->age) ?></td></tr>
+                    <tr><th><?= Yii::t('app', 'Age') ?></th><td><?= UnitPills::ageLabel($elite ? 'Imperial Age' : $unit->age) ?></td></tr>
                 <?php endif; ?>
                 <?php if ($unit->training_building): ?>
                     <?php
@@ -505,6 +515,16 @@ foreach ($techGroups as $techName => $items) {
         $ageColumns = $ageStats['columns'] ?? [];
         // Units in an upgrade line (Archer, Crossbowman, Arbalester): one column for every unit of the line
         $lineCols = $ageColumns ? [] : \app\components\UnitLine::columns($unit);
+        // the elite step of a unit in the line has no row of its own: its column opens /units/elite-<slug>,
+        // and on that page it is the current column
+        foreach ($lineCols as $k => $c) {
+            if ($c['unit'] === null && $c['parent'] !== null && ($pu = $lineCols[$c['parent']]['unit'])) {
+                $lineCols[$k]['slug'] = $pu->eliteSlug;
+                $lineCols[$k]['current'] = $elite && $pu->id === $unit->id;
+            } elseif ($elite && $c['unit'] && $c['unit']->id === $unit->id) {
+                $lineCols[$k]['current'] = false;
+            }
+        }
         // Units without their own age data but with an elite upgrade: the age they come in, then the Imperial Age
         if (!$ageColumns && !$lineCols && $eliteVariant && $unit->age) {
             $ages = array_values(array_unique([$unit->age, 'Imperial Age']));
@@ -565,8 +585,16 @@ foreach ($techGroups as $techName => $items) {
                             <?php foreach ($lineCols as $c): ?>
                                 <th class="age-stat-col age-stat-age<?= $c['current'] ? ' is-current' : '' ?>">
                                     <?php if ($c['age'] !== $prevAge): ?>
-                                        <img src="/images/ages/<?= str_replace(' ', '', $c['age']) ?>.png" alt="" class="age-stat-icon" title="<?= Html::encode(Tr::name($c['age'])) ?>">
-                                        <span><?= Html::encode($ageLabel($c['age'], explode(' ', $c['age'])[0])) ?></span>
+                                        <?php
+                                        // the age over a column opens that unit's page, like the unit's own header below it
+                                        $ageHead = '<img src="/images/ages/' . str_replace(' ', '', $c['age']) . '.png" alt="" class="age-stat-icon" title="' . Html::encode(Tr::name($c['age'])) . '">'
+                                            . '<span>' . Html::encode($ageLabel($c['age'], explode(' ', $c['age'])[0])) . '</span>';
+                                        ?>
+                                        <?php if ($c['slug'] && !$c['current']): ?>
+                                            <a href="<?= Url::to(['unit/view', 'slug' => $c['slug']]) ?>" class="age-stat-age-link age-stat-link"><?= $ageHead ?></a>
+                                        <?php else: ?>
+                                            <?= $ageHead ?>
+                                        <?php endif; ?>
                                     <?php endif; ?>
                                 </th>
                                 <?php $prevAge = $c['age']; ?>
@@ -664,16 +692,18 @@ foreach ($techGroups as $techName => $items) {
                     }
                 }
                 $eliteKeys = ['range_val' => 'range'];
-                // Elite icon sits next to the regular one: "Elite Serjeant" -> /images/units/elite_serjeant_icon.png
-                $eliteIconUrl = null;
-                if ($eliteColumn !== null && !empty($eliteVariant['name'])) {
-                    $file = '/images/units/' . strtolower(preg_replace('/[^A-Za-z0-9]+/', '_', $eliteVariant['name'])) . '_icon.png';
-                    $mtime = @filemtime(Yii::getAlias('@webroot') . $file);
-                    $eliteIconUrl = $mtime ? "$file?v=$mtime" : null;
-                }
-                $unitHead = function ($iconUrl, $label) {
+                $eliteIconUrl = $eliteColumn !== null ? $unit->eliteIconUrl : null;
+                // a column belongs to the regular unit or to its elite step; the page shown has its columns highlighted,
+                // the other one's headers link to its page (/units/war-wagon <-> /units/elite-war-wagon)
+                $unitHead = function ($iconUrl, $label, $link = null) {
                     $img = $iconUrl ? '<img src="' . Html::encode($iconUrl) . '" alt="" class="age-stat-avatar">' : '';
-                    return '<span class="age-stat-unit-head">' . $img . '<span>' . Html::encode($label) . '</span></span>';
+                    $inner = $img . '<span>' . Html::encode($label) . '</span>';
+                    return $link
+                        ? '<a href="' . Html::encode($link) . '" class="age-stat-unit-head age-stat-link">' . $inner . '</a>'
+                        : '<span class="age-stat-unit-head">' . $inner . '</span>';
+                };
+                $currentClass = function ($isEliteCol) use ($elite, $eliteColumn) {
+                    return $eliteColumn !== null && $isEliteCol === $elite ? ' is-current' : '';
                 };
                 // The regular unit in the elite age is left out when it only repeats the age before
                 $hideRegular = false;
@@ -693,16 +723,27 @@ foreach ($techGroups as $techName => $items) {
                         <tr>
                             <th rowspan="2"></th>
                             <?php foreach ($ageColumns as $i => $col): ?>
-                                <th class="age-stat-col age-stat-age"<?= $i === $eliteColumn && !$hideRegular ? ' colspan="2"' : '' ?>>
-                                    <img src="/images/ages/<?= Html::encode($col['icon']) ?>.png" alt="" class="age-stat-icon" title="<?= Html::encode(Tr::name($col['age'])) ?>">
-                                    <span><?= Html::encode($ageLabel($col['age'], $col['label'])) ?></span>
+                                <?php
+                                // the age of the elite column opens the elite page; over a regular column, the regular page
+                                $isEliteHead = $i === $eliteColumn;
+                                $headCurrent = $isEliteHead ? ($hideRegular ? $currentClass(true) : '') : $currentClass(false);
+                                $headLink = $isEliteHead ? (!$elite ? $eliteUrl : null) : ($elite ? $baseUrl : null);
+                                $ageHead = '<img src="/images/ages/' . Html::encode($col['icon']) . '.png" alt="" class="age-stat-icon" title="' . Html::encode(Tr::name($col['age'])) . '">'
+                                    . '<span>' . Html::encode($ageLabel($col['age'], $col['label'])) . '</span>';
+                                ?>
+                                <th class="age-stat-col age-stat-age<?= $headCurrent ?>"<?= $isEliteHead && !$hideRegular ? ' colspan="2"' : '' ?>>
+                                    <?php if ($headLink): ?>
+                                        <a href="<?= Html::encode($headLink) ?>" class="age-stat-age-link age-stat-link"><?= $ageHead ?></a>
+                                    <?php else: ?>
+                                        <?= $ageHead ?>
+                                    <?php endif; ?>
                                 </th>
                             <?php endforeach; ?>
                         </tr>
                         <tr>
                             <?php foreach ($ageColumns as $i => $col): ?>
                                 <?php if (!($i === $eliteColumn && $hideRegular)): ?>
-                                    <th class="age-stat-col age-stat-unit"><?= $unitHead($unit->iconUrl, Tr::name($unit->name)) ?></th>
+                                    <th class="age-stat-col age-stat-unit<?= $currentClass(false) ?>"><?= $unitHead($unit->iconUrl, Tr::name($unit->name), $elite ? $baseUrl : null) ?></th>
                                 <?php endif; ?>
                                 <?php if ($i === $eliteColumn): ?>
                                     <?php
@@ -715,8 +756,8 @@ foreach ($techGroups as $techName => $items) {
                                     }
                                     $hasTip = $upParts || $unit->upgrade_time;
                                     ?>
-                                    <th class="age-stat-col age-stat-unit<?= $hasTip ? ' age-stat-has-tip' : '' ?>"<?= $hasTip ? ' tabindex="0"' : '' ?>>
-                                        <?= $unitHead($eliteIconUrl ?: $unit->iconUrl, Yii::t('app', 'Elite')) ?>
+                                    <th class="age-stat-col age-stat-unit<?= $currentClass(true) ?><?= $hasTip ? ' age-stat-has-tip' : '' ?>"<?= $hasTip ? ' tabindex="0"' : '' ?>>
+                                        <?= $unitHead($eliteIconUrl, Yii::t('app', 'Elite'), $elite ? null : $eliteUrl) ?>
                                         <?php if ($hasTip): ?>
                                             <span class="age-stat-tip" role="tooltip">
                                                 <span class="age-stat-tip-title"><?= Html::encode(Yii::t('app', '{name} Upgrade', ['name' => isset($eliteVariant['name']) || isset($unit->upgrades_to) ? Tr::name($eliteVariant['name'] ?? $unit->upgrades_to) : Yii::t('app', 'Elite')])) ?></span>
@@ -751,7 +792,7 @@ foreach ($techGroups as $techName => $items) {
                                     $prev = $value;
                                     ?>
                                     <?php if (!($i === $eliteColumn && $hideRegular)): ?>
-                                        <td class="age-stat-col">
+                                        <td class="age-stat-col<?= $currentClass(false) ?>">
                                             <?= $si($icon) ?><?= $value !== null ? $value . $suffix : '-' ?>
                                             <?php if ($delta !== null): ?>
                                                 <?= $deltaHtml($delta, $suffix) ?>
@@ -761,11 +802,11 @@ foreach ($techGroups as $techName => $items) {
                                     <?php if ($i === $eliteColumn): ?>
                                         <?php
                                         // Elite column: the upgraded unit in the age it is researched, change against the regular unit
-                                        $elite = $eliteVariant[$eliteKeys[$attr] ?? $attr] ?? $value;
-                                        $eliteDelta = ($value !== null && $elite !== null && $elite != $value) ? $elite - $value : null;
+                                        $eliteValue = $eliteVariant[$eliteKeys[$attr] ?? $attr] ?? $value;
+                                        $eliteDelta = ($value !== null && $eliteValue !== null && $eliteValue != $value) ? $eliteValue - $value : null;
                                         ?>
-                                        <td class="age-stat-col age-stat-elite-col">
-                                            <?= $si($icon) ?><?= $elite !== null ? $elite . $suffix : '-' ?>
+                                        <td class="age-stat-col age-stat-elite-col<?= $elite ? ' is-current' : '' ?>">
+                                            <?= $si($icon) ?><?= $eliteValue !== null ? $eliteValue . $suffix : '-' ?>
                                             <?php if ($eliteDelta !== null): ?>
                                                 <?= $deltaHtml($eliteDelta, $suffix) ?>
                                             <?php endif; ?>

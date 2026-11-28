@@ -577,7 +577,7 @@ class UnitPills
         }
 
         if (!in_array('age', $skip, true)) {
-            $h .= '<td>' . ($unit->age ? self::agePill($unit->age) : '') . '</td>';
+            $h .= '<td>' . ($unit->age ? self::ageLabel($unit->age) : '') . '</td>';
         }
 
         $atkIcon = $unit->melee_attack !== null ? 'melee_attack' : 'pierce_attack';
@@ -592,19 +592,23 @@ class UnitPills
         return $h;
     }
 
-    /** Red pill for an age with its shield. */
-    public static function agePill($age)
+    /**
+     * An age as plain text: its shield and its name, no pill around them. Hovering it shows what the age opens.
+     * Every page shows ages through this one method, so their look changes in one place (CSS .age-label).
+     */
+    public static function ageLabel($age)
     {
         $age = UnitLine::age($age);
         $icon = self::ageIcon($age);
         $text = self::text('age:' . $age);
-        return self::pill($age, [
-            'labelHtml' => Tr::nameHtml($age),
-            'variant' => 'age',
-            'icon' => $icon,
-            'iconClass' => 'pill-plain-icon',
-            'tip' => $text ? ['title' => Tr::name($age), 'icon' => $icon, 'iconPlain' => true, 'text' => $text] : null,
-        ]);
+        $attrs = ' class="age-label"';
+        if ($text) {
+            $key = 't' . count(self::$tips);
+            self::$tips[$key] = ['title' => Tr::name($age), 'icon' => $icon, 'iconPlain' => true, 'text' => $text];
+            $attrs .= ' data-tip="' . $key . '" tabindex="0"';
+        }
+        $img = $icon ? '<img src="' . Html::encode($icon) . '" alt="" class="age-label-icon">' : '';
+        return "<span$attrs>$img<span>" . Tr::nameHtml($age) . '</span></span>';
     }
 
     /** The armor class that best names what the unit is (Infantry, Cavalry, Ships ...), or null. */

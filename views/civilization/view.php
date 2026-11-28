@@ -150,7 +150,7 @@ $searchName = function ($name) {
                         <a href="<?= $c['url'] ?>" class="civ-card-link">
                             <div class="admin5-card admin5-card-border unique-card<?= $c['elite'] ? ' is-elite' : '' ?>" style="margin-bottom: 0;">
                                 <div class="card-content">
-                                    <div class="d-flex justify-content-between align-items-center gap-2 mb-2">
+                                    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-2">
                                         <div class="d-flex align-items-center gap-2">
                                             <?= UnitPills::avatar($c['icon']) ?>
                                             <span>
@@ -160,7 +160,7 @@ $searchName = function ($name) {
                                                 <?php endif; ?>
                                             </span>
                                         </div>
-                                        <?php if ($c['age']): ?><?= UnitPills::agePill($c['age']) ?><?php endif; ?>
+                                        <?php if ($c['age']): ?><?= UnitPills::ageLabel($c['age']) ?><?php endif; ?>
                                     </div>
                                     <div class="unique-card-stats">
                                         <span><img src="/images/stats/hit_points.png" alt="" class="stat-icon"><?= $c['hp'] ?? '?' ?></span>
@@ -410,7 +410,7 @@ $searchName = function ($name) {
                                         <tbody class="unit-group" data-group="<?= Html::encode($group) ?>">
                                             <tr class="unit-group-row">
                                                 <td colspan="<?= UnitPills::tableCols(['age']) ?>" class="unit-group-header">
-                                                    <?= UnitPills::agePill($group) ?>
+                                                    <?= UnitPills::ageLabel($group) ?>
                                                     <span class="badge bg-secondary badge-sm group-count"><?= count($units) ?></span>
                                                 </td>
                                             </tr>

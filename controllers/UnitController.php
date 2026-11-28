@@ -22,12 +22,21 @@ class UnitController extends Controller
     public function actionView($slug)
     {
         $unit = Unit::find()->where(['slug' => $slug])->one();
+        $elite = false;
+        // the elite step of a unique unit has no row of its own: /units/elite-war-wagon is the War Wagon page
+        // with its elite column active, the elite name, icon and animation
+        if (!$unit && strpos($slug, 'elite-') === 0) {
+            $unit = Unit::find()->where(['slug' => substr($slug, 6)])->one();
+            $elite = $unit && $unit->eliteVariantData;
+            if (!$elite) $unit = null;
+        }
         if (!$unit) {
             throw new NotFoundHttpException(Yii::t('app', 'Unit not found.'));
         }
 
         return $this->render('view', [
             'unit' => $unit,
+            'elite' => $elite,
         ]);
     }
 

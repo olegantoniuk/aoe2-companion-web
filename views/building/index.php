@@ -38,7 +38,7 @@ Seo::page($this, Yii::t('app', 'All Buildings in Age of Empires II'), Yii::t('ap
                     <span class="building-card-text">
                         <span class="building-card-name"><?= Tr::nameHtml($b->name) ?></span>
                         <span class="building-card-meta">
-                            <?php if ($b->age): ?><?= UnitPills::agePill($b->age) ?><?php endif; ?>
+                            <?php if ($b->age): ?><?= UnitPills::ageLabel($b->age) ?><?php endif; ?>
                             <span class="unit-list-cost"><?= $b->costHtml ?></span>
                         </span>
                         <?php [$mode, $names] = $b->availabilityNote; ?>

@@ -38,7 +38,7 @@ $cost = function ($t) {
                 </div>
                 <div class="tech-card-body">
                     <?php if ($t->age): ?>
-                        <div class="tech-card-age"><?= UnitPills::agePill($t->age) ?></div>
+                        <div class="tech-card-age"><?= UnitPills::ageLabel($t->age) ?></div>
                     <?php endif; ?>
                     <?php if ($t->description): ?>
                         <div class="tech-card-desc"><?= nl2br(Html::encode(Tr::text($t->description, 'techs'))) ?></div>

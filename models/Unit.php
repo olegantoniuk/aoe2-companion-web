@@ -235,15 +235,55 @@ class Unit extends ActiveRecord
      */
     public function getTransparentSpriteUrl()
     {
-        foreach (['webp', 'png'] as $ext) {
-            // same cache busting as getIconUrl(): a redrawn sprite gets a new address
-            $url = '/images/sprites/' . $this->slug . '.' . $ext;
+        return self::fileUrl('/images/sprites/' . $this->slug, ['webp', 'png']);
+    }
+
+    /** The first file that exists, with its modification time for cache busting (nginx caches images as immutable). */
+    private static function fileUrl($base, array $exts)
+    {
+        foreach ($exts as $ext) {
+            $url = $base . '.' . $ext;
             $mtime = @filemtime(\Yii::getAlias('@webroot') . $url);
             if ($mtime) {
                 return "$url?v=$mtime";
             }
         }
         return null;
+    }
+
+    /**
+     * The elite step of a unique unit (stats that change and its name), or null. Older rows hold it encoded twice.
+     * It has no row of its own: its page is /units/elite-<slug> (UnitController::actionView).
+     */
+    public function getEliteVariantData()
+    {
+        $ev = $this->elite_variant;
+        if (is_string($ev)) $ev = json_decode($ev, true);
+        if (is_string($ev)) $ev = json_decode($ev, true);
+        return is_array($ev) && $ev ? $ev : null;
+    }
+
+    public function getEliteName()
+    {
+        return $this->eliteVariantData['name'] ?? 'Elite ' . $this->name;
+    }
+
+    public function getEliteSlug()
+    {
+        return 'elite-' . $this->slug;
+    }
+
+    /** Elite icon next to the regular one: "Elite War Wagon" -> /images/units/elite_war_wagon_icon.png */
+    public function getEliteIconUrl()
+    {
+        return self::fileUrl('/images/units/' . strtolower(preg_replace('/[^A-Za-z0-9]+/', '_', $this->eliteName)) . '_icon', ['png'])
+            ?: $this->iconUrl;
+    }
+
+    /** The elite idle animation (web/images/sprites/elite-<slug>.webp), or the regular one when there is none. */
+    public function getEliteSpriteUrl()
+    {
+        return self::fileUrl('/images/sprites/' . $this->eliteSlug, ['webp', 'png']) ?: $this->transparentSpriteUrl;
     }
 
     /**
