@@ -343,6 +343,7 @@ return [
     'No buildings found.' => 'Будівель не знайдено.',
     'No technologies found.' => 'Технологій не знайдено.',
     'Loading' => 'Завантаження',
+    'Clear search' => 'Очистити пошук',
     'All ages' => 'Усі епохи',
     'Category' => 'Категорія',
     'Shared' => 'Спільні',

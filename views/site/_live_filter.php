@@ -24,6 +24,9 @@ $this->registerJsFile('/js/live-filter.js?v=' . filemtime(Yii::getAlias('@webroo
                 <div class="live-filter-search">
                     <input type="text" id="live-q" name="q" class="form-control form-control-sm" value="<?= Html::encode($q) ?>" placeholder="<?= Html::encode($placeholder) ?>" autocomplete="off">
                     <span class="live-filter-spinner spinner-border spinner-border-sm" role="status" aria-label="<?= Html::encode(Yii::t('app', 'Loading')) ?>" hidden></span>
+                    <button type="button" class="live-filter-clear" aria-label="<?= Html::encode(Yii::t('app', 'Clear search')) ?>" title="<?= Html::encode(Yii::t('app', 'Clear search')) ?>" hidden>
+                        <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+                    </button>
                 </div>
             </div>
             <div class="col-md-2">

@@ -4916,3 +4916,32 @@ h3 > .badge-sm {
 .building-card {
     align-items: flex-start;
 }
+
+/* the cross that empties the search box, in the spinner's place */
+.live-filter-clear {
+    position: absolute;
+    top: 50%;
+    right: 0.35rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.4rem;
+    height: 1.4rem;
+    margin-top: -0.7rem;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--color-text-muted);
+    cursor: pointer;
+}
+
+.live-filter-clear:hover,
+.live-filter-clear:focus-visible {
+    background: var(--color-surface-hover);
+    color: var(--color-text-strong);
+}
+
+.live-filter-clear[hidden] {
+    display: none;
+}

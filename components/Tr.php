@@ -13,7 +13,7 @@ use yii\helpers\Html;
  * the translation with the original in round brackets.
  *
  *   Tr::name('Arbalester')       "Арбалетник (Arbalester)"; plain text: titles, alt, attributes
- *   Tr::nameHtml('Arbalester')   "Арбалетник <span class="name-orig">(Arbalester)</span>", encoded, for HTML
+ *   Tr::nameHtml('Arbalester')   "Арбалетник <span class="name-orig">Arbalester</span>", encoded, for HTML: the muted original needs no brackets
  *   Tr::short('Arbalester')      "Арбалетник", only where the original cannot fit (it stays in a title attribute)
  *
  * Texts from the database (descriptions, tactics, bonuses, build steps, guides) live in
@@ -66,7 +66,7 @@ class Tr
         $name = (string)$name;
         $t = self::short($name);
         if ($t === $name || in_array($name, self::AGES, true)) return Html::encode($t);
-        return Html::encode($t) . ' <span class="name-orig">(' . Html::encode($name) . ')</span>';
+        return Html::encode($t) . ' <span class="name-orig">' . Html::encode($name) . '</span>';
     }
 
     /** A key that sorts names in the current language's alphabetical order: usort by strcmp(sortKey(a), sortKey(b)). */

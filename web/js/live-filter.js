@@ -72,14 +72,38 @@
             history.replaceState(history.state, '', location.pathname + (qs ? '?' + qs : '') + location.hash);
         }
 
+        var search = form.querySelector('input[name="q"]');
+        var clear = form.querySelector('.live-filter-clear');
+
+        // the cross that empties the search shows while there is text and the spinner is not in its place
+        function toggleClear(busy) {
+            if (clear) clear.hidden = busy || !search || search.value === '';
+        }
+
         // a short pause while typing, so the list does not flicker on every key; the spinner shows it is working
         function schedule(delay) {
             if (spinner) spinner.hidden = false;
+            toggleClear(true);
             clearTimeout(timer);
             timer = setTimeout(function () {
                 apply();
                 if (spinner) spinner.hidden = true;
+                toggleClear(false);
             }, delay);
+        }
+
+        if (clear && search) {
+            clear.addEventListener('click', function () {
+                search.value = '';
+                search.focus();
+                schedule(0);
+            });
+            search.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && search.value !== '') {
+                    search.value = '';
+                    schedule(0);
+                }
+            });
         }
 
         fields.forEach(function (f) {
@@ -100,5 +124,6 @@
         });
 
         apply();
+        toggleClear(false);
     });
 })();
