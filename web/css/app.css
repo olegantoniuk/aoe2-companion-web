@@ -4837,3 +4837,82 @@ h3 > .badge-sm {
         transition: none;
     }
 }
+
+/* ── Pagination hover: Bootstrap's light hover fill hid the text in the dark theme ── */
+.page-link:hover,
+.page-link:focus {
+    background: var(--color-surface-hover);
+    border-color: var(--color-border);
+    color: var(--accent-color);
+    box-shadow: none;
+}
+
+.active > .page-link:hover,
+.page-link.active:hover {
+    background: var(--color-btn-primary-bg);
+    color: var(--color-on-accent);
+}
+
+/* ── Scrollbars follow the theme ── */
+[data-theme="dark"] {
+    color-scheme: dark;
+    scrollbar-color: #34345A #12121F;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+    background: #12121F;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+    background: #34345A;
+    border: 3px solid #12121F;
+    border-radius: 6px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+    background: #45457A;
+}
+
+/* ── Live filters (web/js/live-filter.js) ── */
+.live-filter-search {
+    position: relative;
+}
+
+.live-filter-search .form-control {
+    padding-right: 2rem;
+}
+
+.live-filter-spinner {
+    position: absolute;
+    top: 50%;
+    right: 0.6rem;
+    width: 0.9rem;
+    height: 0.9rem;
+    margin-top: -0.45rem;
+    border-width: 0.15em;
+    color: var(--color-text-muted);
+}
+
+.live-filter-spinner[hidden],
+[data-filter-item][hidden],
+[data-filter-group][hidden],
+[data-live-empty][hidden],
+.kb-chip[hidden] {
+    display: none !important;
+}
+
+/* rows hidden by the filter would break nth-child striping, so the script marks every other visible row */
+.live-striped > tbody > tr.is-stripe > * {
+    --bs-table-bg-type: var(--bs-table-striped-bg);
+    --bs-table-color-type: var(--bs-table-striped-color);
+}
+
+/* building cards: the icon sits at the top when the text wraps to several lines */
+.building-card {
+    align-items: flex-start;
+}

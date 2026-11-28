@@ -30,6 +30,12 @@ class Tr
     /** Domains of the content files, by the table the text comes from. */
     const DOMAINS = ['civs', 'units', 'techs', 'buildings', 'builds', 'guides'];
 
+    /** The four ages, in order. They are shown without the English original: "Замкова епоха". */
+    const AGES = ['Dark Age', 'Feudal Age', 'Castle Age', 'Imperial Age'];
+
+    /** Ukrainian alphabet order: PHP compares bytes, which puts є, і, ї, ґ after я. */
+    const UK_ALPHABET = 'абвгґдеєжзиіїйклмнопрстуфхцчшщьюя';
+
     private static $content = [];
     private static $missing = [];
 
@@ -51,7 +57,7 @@ class Tr
     {
         $name = (string)$name;
         $t = self::short($name);
-        return $t === $name ? $name : $t . ' (' . $name . ')';
+        return $t === $name || in_array($name, self::AGES, true) ? $t : $t . ' (' . $name . ')';
     }
 
     /** The same as name(), HTML encoded, with the original in a muted span. */
@@ -59,8 +65,33 @@ class Tr
     {
         $name = (string)$name;
         $t = self::short($name);
-        if ($t === $name) return Html::encode($name);
+        if ($t === $name || in_array($name, self::AGES, true)) return Html::encode($t);
         return Html::encode($t) . ' <span class="name-orig">(' . Html::encode($name) . ')</span>';
+    }
+
+    /** A key that sorts names in the current language's alphabetical order: usort by strcmp(sortKey(a), sortKey(b)). */
+    public static function sortKey($name)
+    {
+        $s = mb_strtolower(self::short($name), 'UTF-8');
+        if (self::isEnglish()) return $s;
+        static $map = null;
+        if ($map === null) {
+            $map = [];
+            foreach (preg_split('//u', self::UK_ALPHABET, -1, PREG_SPLIT_NO_EMPTY) as $i => $ch) {
+                $map[$ch] = chr(160 + $i);   // one byte above ASCII per letter, in alphabet order
+            }
+            $map["'"] = '';
+        }
+        return strtr($s, $map);
+    }
+
+    /** Sorts models by their translated name ($attr), in the current language's alphabetical order. */
+    public static function sortByName(array $models, $attr = 'name')
+    {
+        usort($models, function ($a, $b) use ($attr) {
+            return strcmp(self::sortKey($a->$attr), self::sortKey($b->$attr));
+        });
+        return $models;
     }
 
     /** A text from the database in the current language; the English text when there is no translation yet. */

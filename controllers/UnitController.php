@@ -5,48 +5,18 @@ namespace app\controllers;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\data\ActiveDataProvider;
 use app\models\Unit;
 use app\models\Civilization;
+use app\components\Tr;
 
 class UnitController extends Controller
 {
     public function actionIndex()
     {
-        $query = Unit::find();
+        // every unit on one page: the search and the filters work in the browser (web/js/live-filter.js)
+        $units = Unit::find()->with(['armorClasses', 'civilization'])->all();
 
-        $query->with(['armorClasses', 'civilization']);
-
-        // Filters
-        $age = Yii::$app->request->get('age');
-        $unique = Yii::$app->request->get('unique');
-        $search = Yii::$app->request->get('q');
-
-        if ($age) {
-            $query->andWhere(['age' => $age]);
-        }
-        if ($unique !== null && $unique !== '') {
-            $query->andWhere(['is_unique' => (int)$unique]);
-        }
-        if ($search) {
-            $query->andWhere(['like', 'name', $search]);
-        }
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query->orderBy(['name' => SORT_ASC]),
-            'pagination' => ['pageSize' => 50],
-        ]);
-
-        // Get filter options
-        $ages = Unit::find()->select('age')->distinct()->where(['not', ['age' => null]])->column();
-
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-            'ages' => $ages,
-            'currentAge' => $age,
-            'currentUnique' => $unique,
-            'currentSearch' => $search,
-        ]);
+        return $this->render('index', ['units' => Tr::sortByName($units)]);
     }
 
     public function actionView($slug)

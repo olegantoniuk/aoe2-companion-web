@@ -19,7 +19,7 @@ $cost = function ($t) {
 ?>
 <div class="tech-grid">
     <?php foreach ($techs as $t): ?>
-        <div class="admin5-card admin5-card-border tech-card-box" id="tech-<?= Html::encode(preg_replace('/[^a-z0-9]+/', '-', strtolower($t->name))) ?>">
+        <div class="admin5-card admin5-card-border tech-card-box" data-filter-item data-q="<?= Html::encode(Tr::short($t->name) . ' ' . $t->name) ?>" data-age="<?= Html::encode($t->age ? \app\components\UnitLine::age($t->age) : '') ?>" id="tech-<?= Html::encode(preg_replace('/[^a-z0-9]+/', '-', strtolower($t->name))) ?>">
             <div class="tech-card tech-card-stacked">
                 <div class="tech-card-head">
                     <img src="<?= Html::encode($icon($t->name)) ?>" alt="" class="tech-card-icon">

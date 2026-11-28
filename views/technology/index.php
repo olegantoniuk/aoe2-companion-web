@@ -17,15 +17,20 @@ $groupLabel = function ($name) {
 <div class="admin5-page-header">
     <div class="page-title">
         <?= UnitPills::pageIcon('technologies') ?>
-        <h1><?= Yii::t('app', 'Technologies') ?> <span class="badge bg-secondary badge-sm"><?= $total ?></span></h1>
+        <h1><?= Yii::t('app', 'Technologies') ?> <span class="badge bg-secondary badge-sm" data-live-count><?= $total ?></span></h1>
     </div>
 </div>
+
+<?= $this->render('@app/views/site/_live_filter', [
+    'target' => '#tech-list',
+    'placeholder' => Yii::t('app', 'Technology name...'),
+]) ?>
 
 <nav class="kb-filters tech-jump">
     <div class="kb-filter-row">
         <span class="kb-filter-label"><?= Yii::t('app', 'Researched at') ?></span>
         <?php foreach ($groups as $name => $techs): ?>
-            <a href="#at-<?= Html::encode(preg_replace('/[^a-z0-9]+/', '-', strtolower($name))) ?>" class="kb-chip">
+            <a href="#at-<?= Html::encode(preg_replace('/[^a-z0-9]+/', '-', strtolower($name))) ?>" class="kb-chip" data-filter-for="at-<?= Html::encode(preg_replace('/[^a-z0-9]+/', '-', strtolower($name))) ?>">
                 <?php if (isset($buildings[$name]) && $buildings[$name]->iconUrl): ?><img src="<?= Html::encode($buildings[$name]->iconUrl) ?>" alt=""><?php endif; ?>
                 <?= $groupLabel($name) ?> <small><?= count($techs) ?></small>
             </a>
@@ -33,8 +38,9 @@ $groupLabel = function ($name) {
     </div>
 </nav>
 
+<div id="tech-list">
 <?php foreach ($groups as $name => $techs): ?>
-    <section class="tech-group" id="at-<?= Html::encode(preg_replace('/[^a-z0-9]+/', '-', strtolower($name))) ?>">
+    <section data-filter-group class="tech-group" id="at-<?= Html::encode(preg_replace('/[^a-z0-9]+/', '-', strtolower($name))) ?>">
         <h2 class="unit-section-title tech-group-title">
             <?php if (isset($buildings[$name])): ?>
                 <?php if ($buildings[$name]->iconUrl): ?><img src="<?= Html::encode($buildings[$name]->iconUrl) ?>" alt=""><?php endif; ?>
@@ -42,8 +48,10 @@ $groupLabel = function ($name) {
             <?php else: ?>
                 <?= $groupLabel($name) ?>
             <?php endif; ?>
-            <span class="badge bg-secondary badge-sm"><?= count($techs) ?></span>
+            <span class="badge bg-secondary badge-sm" data-group-count><?= count($techs) ?></span>
         </h2>
         <?= $this->render('_cards', ['techs' => $techs]) ?>
     </section>
 <?php endforeach; ?>
+<p class="text-center text-muted py-4" data-live-empty hidden><?= Yii::t('app', 'No technologies found.') ?></p>
+</div>

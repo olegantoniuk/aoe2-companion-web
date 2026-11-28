@@ -6,6 +6,7 @@ use yii\helpers\Url;
 use app\models\Building;
 use app\components\UnitPills;
 use app\components\Tr;
+use app\components\UnitLine;
 
 $this->title = Yii::t('app', 'Buildings');
 Seo::page($this, Yii::t('app', 'All Buildings in Age of Empires II'), Yii::t('app', 'Every building in Age of Empires II with its cost, hit points, armor, the units it trains and the technologies researched there.'), '/images/icons/buildings.png');
@@ -14,16 +15,23 @@ Seo::page($this, Yii::t('app', 'All Buildings in Age of Empires II'), Yii::t('ap
 <div class="admin5-page-header">
     <div class="page-title">
         <?= UnitPills::pageIcon('buildings') ?>
-        <h1><?= Yii::t('app', 'Buildings') ?> <span class="badge bg-secondary badge-sm"><?= $total ?></span></h1>
+        <h1><?= Yii::t('app', 'Buildings') ?> <span class="badge bg-secondary badge-sm" data-live-count><?= $total ?></span></h1>
     </div>
 </div>
 
+<?= $this->render('@app/views/site/_live_filter', [
+    'target' => '#building-list',
+    'placeholder' => Yii::t('app', 'Building name...'),
+]) ?>
+
+<div id="building-list">
+
 <?php foreach ($byCategory as $cat => $buildings): ?>
-    <section class="civ-group">
+    <section class="civ-group" data-filter-group>
         <h2 class="civ-group-title"><?= Html::encode(Yii::t('app', Building::CATEGORIES[$cat] ?? ucfirst($cat))) ?></h2>
         <div class="building-grid">
             <?php foreach ($buildings as $b): ?>
-                <a href="<?= Url::to(['building/view', 'slug' => $b->slug]) ?>" class="admin5-card admin5-card-border building-card">
+                <a href="<?= Url::to(['building/view', 'slug' => $b->slug]) ?>" class="admin5-card admin5-card-border building-card" data-filter-item data-q="<?= Html::encode(Tr::short($b->name) . ' ' . $b->name) ?>" data-age="<?= Html::encode($b->age ? UnitLine::age($b->age) : '') ?>">
                     <span class="building-card-icon">
                         <?php if ($b->iconUrl): ?><img src="<?= Html::encode($b->iconUrl) ?>" alt=""><?php endif; ?>
                     </span>
@@ -46,3 +54,5 @@ Seo::page($this, Yii::t('app', 'All Buildings in Age of Empires II'), Yii::t('ap
         </div>
     </section>
 <?php endforeach; ?>
+<p class="text-center text-muted py-4" data-live-empty hidden><?= Yii::t('app', 'No buildings found.') ?></p>
+</div>
